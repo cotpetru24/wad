@@ -12,10 +12,17 @@
         }
 
         html, body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
             height: 100%;
             margin: 0;
             padding: 0; /* Ensures there are no extra spacings outside the viewport area */
             box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+            background-color: white;
+        }
+        button {
+            font-family: inherit;
+            
         }
         header, footer, p, nav, button {
         margin: 0; 
@@ -28,24 +35,40 @@
             padding-left: 10px;
             padding-right: 10px;
             width: 100%;
-            height: 100px;
-            background-color: #E67E22; /*#94618e;*/
+            height: 200px;
+            background-color: #0C0723;/* #E67E22;*/ /*#94618e;*/
+            border-bottom: 5px solid #9B59B6;
+
         }
 
         footer {
             display: flex;
-            border: 2px solid blue;
             width: 100%;
             height: 100px;
             margin-top: auto;
+           /* background-color: #734060;*/
+           background-color: #0C0723 ;
+           color: white;
         }
         main {
             display: flex;
             flex-direction: row;
-            border: 2px solid brown;
+            /*border: 2px solid brown;*/
             height: 100vh;
 
         }
+
+        
+        nav {
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;   
+         height: 100%;
+         padding-top: 10px;
+         padding-bottom: 10px;
+        }
+
+
         #wrapper {
             display:flex;
             flex-direction: column;
@@ -54,29 +77,21 @@
         #tabsDiv {
             display: flex;
             flex-direction: row;
-            height: 50px;
-            justify-content: space-around;
-            background-color: #8D6E63;
+            justify-content: center;
+            background-color: #0C0723;
+            height: 200px;
+            align-items: flex-end;
+            border-bottom:3px solid #9B59B6;
+
         }
-        #tabsDiv button{
-            background-color: transparent;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+
         #sideDiv {
             border: 2px solid black;
             width: 200px;
 
         }
         #mainDiv {
-            border: 2px solid pink;
+            /*border: 2px solid pink;*/
             flex-grow: 1;
 
         }
@@ -98,20 +113,22 @@
         height: 25px;
         border-radius: 5px;
         }
+
         #nav button {
             background-color: transparent;
             color: white;
             padding: 10px 20px;
             border: none;
             text-align: center;
-            text-decoration: none;
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-weight: bolder;
+            font-family: inherit;
         }
-        button:hover {
-            color: black;
+        #nav button:hover {
+            color: #9B59B6      ;
         }
         #searchDiv button{
             background-color: transparent;
@@ -124,10 +141,62 @@
             margin: 4px 2px;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-family: inherit;
         }
-        button :hover {
-            font-weight: bold;
+
+
+        .tabs {
+            display: flex;
+            background-color: transparent;
+    align-items: center;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            text-align: center;
+            font-size: 16px;
+            margin-left: 2px;
+            
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bolder;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            border-top: 1px solid #9B59B6;
+            border-left: 1px solid #9B59B6;
+            border-right: 1px solid #9B59B6;
+
+
         }
+
+
+
+        /*#tabsDiv button{*/
+
+            .tabs:hover{
+            color: #9B59B6 ;
+            transition: 0.1s;
+
+            /*border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            border: 2px solid #9B59B6;*/
+        }
+
+
+
+        .tabSelected {
+            background-color: #9B59B6;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            transition: 0.2s;
+        }
+        .tabSelected:hover {
+            color: #0C0723;
+            transition: 0.1s;
+
+        }
+
+
+
 
 
 
@@ -136,7 +205,18 @@
 <body>
     <div id="wrapper">
         <header>
-            <img src="./public/logo.png" alt="logo" style=" height: 95px; width: auto; border-radius: 50%;">
+            <img src="./public/logo.jpg" alt="logo" style=" height: 195px; width: auto; border-radius: 50%;">
+            <div class="tabsDiv" id="tabsDiv">
+                <button class="tabs tabSelected"><img src="/public/icons8-star-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto; margin-right: 5px;">Popular</button>
+                <button class="tabs"><img src="/public/icons8-india-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto; margin-right: 5px;">Indian</button>
+                <button class="tabs"><img src="/public/icons8-china-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto; margin-right: 5px;">Chinese</button>
+                <button class="tabs"><img src="/public/icons8-italian-flag-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto; margin-right: 5px;">Italian</button>
+                <button class="tabs"><img src="/public/icons8-french-flag-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto; margin-right: 5px;">French</button>
+                <button class="tabs"><img src="/public/icons8-russian-federation-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto; margin-right: 5px;">Russian</button>
+                <button class="tabs"><img src="/public/icons8-moldova-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto; margin-right: 5px;">Moldovan</button>
+    
+    
+            </div>
             <nav>
                 <div id="nav">            
                     <button><img src="./public/home_icon.png" alt="Home Button" style="height: 17px; width: auto;"></button><!--icon from https://freeicons.io by icon king1/-->
@@ -154,26 +234,16 @@
             </nav>
         </header>
 
-        <div id="tabsDiv">
-            <button><img src="/public/icons8-star-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Popular</button>
-            <button><img src="/public/icons8-india-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Indian Cuisine</button>
-            <button><img src="/public/icons8-china-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Chinese Cuisine</button>
-            <button><img src="/public/icons8-italian-flag-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Italian Cuisine</button>
-            <button><img src="/public/icons8-french-flag-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">French Cuisine</button>
-            <button><img src="/public/icons8-russian-federation-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Russian Cuisine</button>
-            <button><img src="/public/icons8-moldova-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Moldovan Cuisine</button>
 
-
-        </div>
         <main>
-            <div id="sideDiv">
+            <!--<div id="sideDiv">
                 <p>side element</p>
                 <p>side element</p>
                 <p>side element</p>
                 <p>side element</p>
                 <p>side element</p>
                 <p>side element</p>
-            </div>
+            </div>-->
 
             <div id="mainDiv">
                 <p>main list item here</p>
@@ -195,6 +265,18 @@
             input</p>
         </footer>
     </div>
+    <script>
+        const tabButtonArray = document.querySelectorAll('.tabs');
+        tabButtonArray.forEach(tabButton => {
+            tabButton.addEventListener('click', ()=> {
+                document.querySelector('.tabSelected')?.classList.remove('tabSelected')
+                tabButton.classList.add('tabSelected');
+            })
+        })
+
+
+    </script>
     
 </body>
+
 </html>
