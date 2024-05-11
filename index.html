@@ -25,12 +25,13 @@
             flex-direction:row; 
             align-items: center;
             justify-content: space-between;
-            border: 2px solid red;
             padding-left: 10px;
             padding-right: 10px;
             width: 100%;
             height: 100px;
+            background-color: #E67E22; /*#94618e;*/
         }
+
         footer {
             display: flex;
             border: 2px solid blue;
@@ -54,8 +55,20 @@
             display: flex;
             flex-direction: row;
             height: 50px;
-            border: 2px solid green;
             justify-content: space-around;
+            background-color: #8D6E63;
+        }
+        #tabsDiv button{
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
         #sideDiv {
             border: 2px solid black;
@@ -67,8 +80,54 @@
             flex-grow: 1;
 
         }
-
-
+        #searchDiv {
+            display: flex;
+            justify-content: flex-end;
+        }
+        #searchForm{
+            display: flex;
+            width: 370px;
+            padding-right: 30px;
+        }
+        input[type="search"] {
+        flex-grow: 1; /* Allows the input field to grow and fill available space */
+        padding: 0px 10px;
+        border: none; 
+        font-size: 16px; 
+        outline: none; 
+        height: 25px;
+        border-radius: 5px;
+        }
+        #nav button {
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            color: black;
+        }
+        #searchDiv button{
+            background-color: transparent;
+            color: white;
+            padding-left: 10px;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button :hover {
+            font-weight: bold;
+        }
 
 
 
@@ -77,18 +136,33 @@
 <body>
     <div id="wrapper">
         <header>
-            <p>LOGO</p>
-            <nav><button>home</button>
-            <button>register</button>
-            <button>admin login</button>
+            <img src="./public/logo.png" alt="logo" style=" height: 95px; width: auto; border-radius: 50%;">
+            <nav>
+                <div id="nav">            
+                    <button><img src="./public/home_icon.png" alt="Home Button" style="height: 17px; width: auto;"></button><!--icon from https://freeicons.io by icon king1/-->
+                    <button>Register</button>
+                    <button>Login</button>
+                    <button>Admin login</button>
+                </div>
+                <div id="searchDiv">
+                    <form id= "searchForm"action="/search" method="GET">
+                        <input type="search" name="query" id="search-box" placeholder="Search...">
+                        <button type="submit"><img src="/public/search_icon.png" alt="Search Icon" style="height: 17px; width: auto;"></button> <!--icon from https://icons8.com/-->
+                    </form>
+                </div>
+
             </nav>
         </header>
 
         <div id="tabsDiv">
-            <button>indian cuisine</button>
-            <button>chinese cuisine</button>
-            <button>french cuisine</button>
-            <button>italian cuisine</button>
+            <button><img src="/public/icons8-star-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Popular</button>
+            <button><img src="/public/icons8-india-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Indian Cuisine</button>
+            <button><img src="/public/icons8-china-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Chinese Cuisine</button>
+            <button><img src="/public/icons8-italian-flag-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Italian Cuisine</button>
+            <button><img src="/public/icons8-french-flag-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">French Cuisine</button>
+            <button><img src="/public/icons8-russian-federation-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Russian Cuisine</button>
+            <button><img src="/public/icons8-moldova-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto;">Moldovan Cuisine</button>
+
 
         </div>
         <main>
@@ -111,11 +185,14 @@
         </main>
 
         <footer>
-            <a href="#">contact us</a>
-            <p>123 street<br>
-                abc city<br>
-                123
+            <p> logo here Cooking Creation</p>
+            <p>abc@example.com</p>
+            <p>copyright stu124543
             </p>
+            <p>contact us <br>
+            email<br>
+            name<br>
+            input</p>
         </footer>
     </div>
     
