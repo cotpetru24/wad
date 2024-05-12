@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>page name here</title>
+    <link rel="icon" href="/public/tab_logo.png" type="image/png">
+
+    <title>Cookking Creations</title>
     <style>
         * {
             margin: 0;
@@ -41,15 +43,7 @@
 
         }
 
-        footer {
-            display: flex;
-            width: 100%;
-            height: 100px;
-            margin-top: auto;
-           /* background-color: #734060;*/
-           background-color: #0C0723 ;
-           color: white;
-        }
+
         main {
             display: flex;
             flex-direction: row;
@@ -67,6 +61,12 @@
          padding-top: 10px;
          padding-bottom: 10px;
         }
+
+
+
+
+
+
 
 
         #wrapper {
@@ -102,6 +102,7 @@
         #searchForm{
             display: flex;
             width: 370px;
+            align-items: center;
             padding-right: 30px;
         }
         input[type="search"] {
@@ -195,7 +196,200 @@
 
         }
 
+        #homeButton {
+    height: 100%;
+    width: auto;
+    background-image: url(./public/home_icon.png);
+    background-size: 17px 17px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 2px;
+}
 
+#homeButton:hover {
+    background-image: url(./public/icons8-home-26_hover.png);
+}
+
+
+
+#searchButton {
+    height: 26px;
+    width: 26px;
+    background-image: url(./public/search_icon.png);
+    background-size: 17px 17px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+}
+
+#searchButton:hover {
+    background-image: url(./public/icons8-search-26_hover.png);
+}
+
+
+
+#nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* This aligns children vertically center */
+    justify-content: space-between; /* This aligns children horizontally center (optional) */
+    height: 50px; /* Adjust height as needed */
+}
+#nav button {
+    height: 40px;
+    width: auto;
+}
+
+
+footer {
+            display: flex;
+            flex-direction: column;
+            text-align: center;       /* Center-align text */
+            padding: 20px 0;          /* Padding above and below the text */
+    font-size: 14px;          /* Smaller font size */
+    border-top: 4px solid #9B59B6;
+    justify-content: space-between;
+
+
+            width: 100%;
+            min-height: 300px;
+            margin-top: auto;
+           background-color: #0C0723 ;
+           color: white;
+        }
+
+
+        #footerDiv a {
+            color: white; /* Default text color */
+            text-decoration: none; /* Removes underline */
+            font-weight: normal; /* Normal text weight */
+        }
+        #footerDiv a:hover {
+            color: #0056b3; /* Change color on hover */
+        }
+        #getInTouchBtn {
+            background: #9B59B6;
+            color: #0C0723;
+            border: 1px solid #9B59B6;
+            border-radius: 7px;
+            cursor: pointer;
+            padding: 5px;
+            margin-top: 30px;
+        }
+        #emailContact {
+            color:#9B59B6 ;
+            margin-top: 30px;
+            margin-bottom: 5px;
+        }
+
+        #getInTouchBtn:hover{
+            background: #0C0723;
+            color: #9B59B6;
+        }
+        .contactFormDiv {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            visibility: hidden;
+            transition: 200ms ease-in-out;
+            color: #0C0723;
+            border: 2px solid #9B59B6;
+            border-radius: 7px;
+            z-index: 10;
+            background-color: white;
+            width: 500px;
+            max-width: 80%;
+        }
+        .contactFormDiv.active{
+            transform: translate(-50%, -50%);
+            visibility: visible;
+        }
+        .contactFormHeader {
+            padding-right: 10px;
+            padding-left: 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #9B59B6;
+        }
+        .contactFormHeader h2 {
+            font-weight: bold;
+        }
+        .closeButton {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 30px;
+            font-weight: bold;
+            color: #0C0723;
+        }
+
+
+        #overlay {
+            position: fixed;
+            transition: 200ms ease-in-out;
+
+            opacity: 0;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgb(0,0,0, 0.5);
+            pointer-events: none;
+        }
+
+        #overlay.active {
+            pointer-events: all;
+            opacity: 1;
+        }
+
+        .contactForm form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+
+.contactForm label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.contactForm input[type="text"],
+.contactForm input[type="email"],
+.contactForm textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.contactForm button.sendButton {
+    padding: 10px 20px;
+    background-color: #9B59B6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.contactForm button.sendButton:hover {
+    background-color: #0C0723;
+}
+
+/* #contactUsForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+} */
 
 
 
@@ -205,7 +399,7 @@
 <body>
     <div id="wrapper">
         <header>
-            <img src="./public/logo.jpg" alt="logo" style=" height: 195px; width: auto; border-radius: 50%;">
+            <img src="./public/logo.jpg" alt="logo" style=" height: 125px; width: auto; margin: 25px;">
             <div class="tabsDiv" id="tabsDiv">
                 <button class="tabs tabSelected"><img src="/public/icons8-star-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto; margin-right: 5px;">Popular</button>
                 <button class="tabs"><img src="/public/icons8-india-48.png" alt="Moldovian moldova_flag" style="height: 20px; width: auto; margin-right: 5px;">Indian</button>
@@ -219,7 +413,7 @@
             </div>
             <nav>
                 <div id="nav">            
-                    <button><img src="./public/home_icon.png" alt="Home Button" style="height: 17px; width: auto;"></button><!--icon from https://freeicons.io by icon king1/-->
+                    <button id="homeButton"></button>
                     <button>Register</button>
                     <button>Login</button>
                     <button>Admin login</button>
@@ -227,7 +421,7 @@
                 <div id="searchDiv">
                     <form id= "searchForm"action="/search" method="GET">
                         <input type="search" name="query" id="search-box" placeholder="Search...">
-                        <button type="submit"><img src="/public/search_icon.png" alt="Search Icon" style="height: 17px; width: auto;"></button> <!--icon from https://icons8.com/-->
+                        <button id="searchButton" type="submit"></button> <!--icon from https://icons8.com/-->
                     </form>
                 </div>
 
@@ -255,23 +449,67 @@
         </main>
 
         <footer>
-            <p> logo here Cooking Creation</p>
-            <p>abc@example.com</p>
-            <p>copyright stu124543
-            </p>
-            <p>contact us <br>
-            email<br>
-            name<br>
-            input</p>
+            <div id="footerDiv">
+            <img src="public/logo.jpg" alt="logo" style="height: 50px; width: auto;">
+        <p id="emailContact">Email Us</p>
+        <p><a href="mailto:abc@example.com">abc@example.com</a></p>            
+        <button data-getInTouchBtn-target="#contactFormDiv" id="getInTouchBtn"><h2>Get In Touch</h2></button>
+       
+       
+        <div class="contactFormDiv" id="contactFormDiv">
+            <div class="contactFormHeader">
+                <h2>Get In Touch</h2>
+                <button data-close-button class="closeButton" id="closeButton">&times;</button>
+            </div>
+            <div class="contactForm">
+                <form id="contactUsForm" action="#" method="POST"> <!-- Update action as needed -->
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+        
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+        
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+        
+                    <button type="submit" class="sendButton">Send</button>
+                </form>            </div>
+
+        </div>
+        <div  id="overlay"></div>
+        </div>
+            <p id="copyright">&copy; <span id="year"></span> STU124543. All rights reserved.</p>
+
         </footer>
     </div>
     <script>
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+
         const tabButtonArray = document.querySelectorAll('.tabs');
         tabButtonArray.forEach(tabButton => {
             tabButton.addEventListener('click', ()=> {
-                document.querySelector('.tabSelected')?.classList.remove('tabSelected')
+                document.querySelector('.tabSelected')?.classList.remove('tabSelected');
                 tabButton.classList.add('tabSelected');
             })
+        })
+
+
+        const overlay = document.getElementById('overlay');
+        const contactForm = document.getElementById('contactFormDiv');
+        const getInTouchBtn = document.getElementById('getInTouchBtn');
+        const closeContactForm = document.getElementById('closeButton');
+
+
+        getInTouchBtn.addEventListener('click', ()=> {
+            overlay.classList.add('active');
+            contactForm.classList.add('active');
+        })
+
+        closeContactForm.addEventListener('click', ()=> {
+            overlay.classList.remove('active');
+            contactForm.classList.remove('active');
         })
 
 
