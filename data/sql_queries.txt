@@ -1,0 +1,460 @@
+use recipes;
+CREATE TABLE complexity (
+complexity_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+complexity_name varchar(50)
+)
+
+use recipes;
+INSERT INTO complexity (complexity_name) VALUES 
+('very easy'),
+('easy'),
+('medium'),
+('hard'),
+('very hard')
+
+
+
+
+
+
+
+
+use recipes;
+CREATE TABLE origin (
+origin_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+origin_country varchar (50)
+)
+
+use recipes;
+INSERT INTO origin (origin_country) VALUES
+('india'),
+('china'),
+('italia'),
+('france'),
+('russia'),
+('moldova')
+
+
+
+
+use recipes;
+CREATE TABLE category (
+category_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+category_name varchar(50)
+)
+
+use recipes;
+INSERT INTO category (category_name) VALUES 
+('non-vegetarian'),
+('vegetarian')
+
+
+
+
+
+
+USE recipes;
+CREATE TABLE recipes (
+dish_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+dish_name varchar(50) NOT NULL,
+dish_origin_id INT NOT NULL,
+dish_recipe_description TEXT NOT NULL,
+dish_category_id INT NOT NULL,
+dish_ingredients JSON NOT NULL,
+dish_complexity_id INT NOT NULL,
+dish_prep_time INT,
+dish_img LONGBLOB,
+dish_upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+CONSTRAINT pk_from_origin_table FOREIGN KEY(dish_origin_id) REFERENCES origin(origin_id),
+CONSTRAINT pk_from_category_table FOREIGN KEY (dish_category_id) REFERENCES category(category_id),
+CONSTRAINT pk_from_complexity_table FOREIGN KEY (dish_complexity_id) REFERENCES complexity(complexity_id)
+ON UPDATE CASCADE
+);
+
+
+
+
+
+///////////   INDIAN      \\\\\\\\\\\\\\\\\\\\\\
+
+
+
+-------butter chicken -- <a href="https://www.freepik.com/free-photo/top-view-bowl-homemade-stew-pepper_7502679.htm#fromView=search&page=2&position=27&uuid=227ce214-67e7-4651-bd67-8ca444384589">Image by freepik</a>
+
+INSERT INTO recipes (dish_name, dish_origin_id, dish_recipe_description,  dish_category_id, dish_ingredients, dish_complexity_id, dish_prep_time)
+VALUES 
+-- Butter Chicken
+(
+    'Butter Chicken', 
+    1,
+    'Marinate chicken with salt, red chili powder, and lemon juice. Cook in butter until done. Prepare gravy with tomato puree, red chili powder, and salt. Add chicken, cream, and garam masala. Simmer and garnish with coriander.',
+    1,  
+    JSON_ARRAY('chicken', 'butter', 'cream', 'tomato puree', 'ginger-garlic paste', 'red chili powder', 'garam masala', 'salt', 'coriander'),
+    3,
+    60
+    -- LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/top-view-bowl-homemade-stew-pepper.jpg') 
+),
+
+-- Biryani
+(
+    'Biryani',
+    1,
+    'Parboil rice with salt. Marinate chicken with yogurt, biryani masala, ginger-garlic paste, red chili powder, turmeric, and salt. Cook chicken with fried onions. Layer rice and chicken, top with fried onions, mint, and coriander. Cook on low heat.',
+    1,
+    JSON_ARRAY('basmati rice', 'chicken', 'onions', 'yogurt', 'biryani masala', 'ginger-garlic paste', 'red chili powder', 'turmeric', 'ghee', 'salt', 'mint', 'coriander'),
+    4,
+    90
+    -- LOAD_FILE('/path/to/biryani.jpg')
+),
+
+-- Paneer Tikka
+(
+    'Paneer Tikka',
+    1,
+    'Marinate paneer with yogurt, ginger-garlic paste, red chili powder, turmeric, garam masala, lemon juice, and salt. Thread onto skewers and grill or bake until golden brown. Serve with mint chutney.',
+    2,
+    JSON_ARRAY('paneer', 'yogurt', 'ginger-garlic paste', 'red chili powder', 'turmeric', 'garam masala', 'lemon juice', 'salt', 'skewers'),
+    2,
+    45
+    -- LOAD_FILE('/path/to/paneer-tikka.jpg')
+),
+
+-- Chole (Chickpea Curry)
+(
+    'Chole',
+    1,
+    'Pressure cook soaked chickpeas. Prepare gravy with onions, ginger-garlic paste, tomatoes, chole masala, red chili powder, turmeric, and salt. Add chickpeas and simmer. Garnish with coriander.',
+    2,
+    JSON_ARRAY('chickpeas', 'onions', 'tomatoes', 'ginger-garlic paste', 'chole masala', 'red chili powder', 'turmeric', 'salt', 'coriander'),
+    3,
+    60
+    -- LOAD_FILE('/path/to/chole.jpg')
+),
+
+-- Masala Dosa
+(
+    'Masala Dosa',
+    1,
+    'Soak rice, urad dal, and fenugreek seeds overnight. Grind to a smooth batter and ferment for 8 hours. Prepare potato masala with mustard seeds, onions, green chilies, turmeric, potatoes, and salt. Spread dosa batter on a hot griddle, cook, and fill with potato masala. Serve hot.',
+    2,
+    JSON_ARRAY('rice', 'urad dal', 'fenugreek seeds', 'potatoes', 'onion', 'green chilies', 'mustard seeds', 'turmeric', 'salt', 'oil'),
+    4,
+    720
+    -- LOAD_FILE('/path/to/masala-dosa.jpg')
+);
+
+
+
+
+////////////    chinese \\\\\\\\\\\\\\\\\\\\\
+
+
+
+
+INSERT INTO recipes (dish_name, dish_origin_id, dish_recipe_description, dish_category_id, dish_ingredients, dish_complexity_id, dish_prep_time)
+VALUES 
+-- Kung Pao Chicken
+(
+    'Kung Pao Chicken', 
+    2,
+    'Marinate chicken with soy sauce, cornstarch, and sesame oil. Stir-fry chicken with garlic, ginger, and dried red chilies. Add peanuts, green onions, and a sauce made from soy sauce, vinegar, and sugar. Serve hot.',
+    1,
+    JSON_ARRAY('chicken', 'soy sauce', 'cornstarch', 'sesame oil', 'garlic', 'ginger', 'dried red chilies', 'peanuts', 'green onions', 'vinegar', 'sugar'),
+    3,
+    30
+),
+
+-- Sweet and Sour Pork
+(
+    'Sweet and Sour Pork',
+    2,
+    'Marinate pork with soy sauce and cornstarch. Deep-fry pork pieces until golden. Stir-fry bell peppers, pineapple, and onions. Add a sauce made from ketchup, vinegar, sugar, and soy sauce. Toss with fried pork and serve hot.',
+    1,
+    JSON_ARRAY('pork', 'soy sauce', 'cornstarch', 'bell peppers', 'pineapple', 'onions', 'ketchup', 'vinegar', 'sugar'),
+    3,
+    40
+),
+
+-- Mapo Tofu
+(
+    'Mapo Tofu',
+    2,
+    'Cook ground pork with garlic and ginger. Add tofu, fermented black beans, and Sichuan peppercorns. Simmer with a sauce made from soy sauce, doubanjiang (fermented bean paste), and chicken broth. Garnish with green onions and serve hot.',
+    2,
+    JSON_ARRAY('tofu', 'ground pork', 'garlic', 'ginger', 'fermented black beans', 'Sichuan peppercorns', 'soy sauce', 'doubanjiang', 'chicken broth', 'green onions'),
+    4,
+    35
+),
+
+-- Peking Duck
+(
+    'Peking Duck',
+    2,
+    'Clean and dry the duck. Inflate the duck skin and coat with maltose syrup. Hang to dry for several hours. Roast duck until skin is crispy. Serve with pancakes, hoisin sauce, and sliced green onions.',
+    1,
+    JSON_ARRAY('duck', 'maltose syrup', 'pancakes', 'hoisin sauce', 'green onions'),
+    5,
+    300
+),
+
+-- Dumplings (Jiaozi)
+(
+    'Dumplings (Jiaozi)',
+    2,
+    'Mix ground meat with chopped vegetables and seasonings. Place a small amount of filling on each dumpling wrapper. Fold and seal the edges. Boil or steam dumplings until cooked. Serve with dipping sauce.',
+    1,
+    JSON_ARRAY('ground meat', 'chopped vegetables', 'dumpling wrappers', 'soy sauce', 'vinegar', 'sesame oil', 'garlic', 'ginger'),
+    3,
+    60
+);
+
+
+
+
+
+////////////    italian \\\\\\\\\\\\\\\\\\\\\
+
+
+INSERT INTO recipes (dish_name, dish_origin_id, dish_recipe_description, dish_category_id, dish_ingredients, dish_complexity_id, dish_prep_time)
+VALUES 
+-- Spaghetti Carbonara
+(
+    'Spaghetti Carbonara', 
+    3,
+    'Cook spaghetti according to package instructions. Fry pancetta until crispy. Whisk eggs with Parmesan cheese. Combine hot spaghetti, pancetta, and egg mixture, stirring quickly to create a creamy sauce. Serve immediately.',
+    1,
+    JSON_ARRAY('spaghetti', 'pancetta', 'eggs', 'Parmesan cheese', 'black pepper', 'salt'),
+    2,
+    25
+),
+
+-- Margherita Pizza
+(
+    'Margherita Pizza',
+    3,
+    'Prepare pizza dough and let it rise. Spread tomato sauce over the dough. Top with fresh mozzarella cheese and basil leaves. Drizzle with olive oil. Bake in a preheated oven until the crust is golden and the cheese is melted and bubbly.',
+    2,
+    JSON_ARRAY('pizza dough', 'tomato sauce', 'mozzarella cheese', 'basil leaves', 'olive oil', 'salt'),
+    3,
+    60
+),
+
+-- Lasagna
+(
+    'Lasagna',
+    3,
+    'Prepare meat sauce with ground beef, onions, garlic, and tomato sauce. Cook lasagna noodles according to package instructions. Layer noodles, meat sauce, ricotta cheese, mozzarella cheese, and Parmesan cheese in a baking dish. Repeat layers and bake until bubbly and golden.',
+    1,
+    JSON_ARRAY('lasagna noodles', 'ground beef', 'onions', 'garlic', 'tomato sauce', 'ricotta cheese', 'mozzarella cheese', 'Parmesan cheese', 'salt', 'pepper'),
+    4,
+    90
+),
+
+-- Risotto
+(
+    'Risotto',
+    3,
+    'Sauté onions and garlic in olive oil. Add Arborio rice and cook until slightly translucent. Gradually add hot chicken broth, stirring constantly, until the rice is creamy and cooked through. Stir in Parmesan cheese and butter. Serve hot.',
+    2,
+    JSON_ARRAY('Arborio rice', 'onions', 'garlic', 'olive oil', 'chicken broth', 'Parmesan cheese', 'butter', 'salt', 'pepper'),
+    3,
+    40
+),
+
+-- Tiramisu
+(
+    'Tiramisu',
+    3,
+    'Whisk egg yolks and sugar until thick and pale. Fold in mascarpone cheese. Dip ladyfingers in coffee and layer in a dish. Spread mascarpone mixture over the ladyfingers. Repeat layers and chill in the refrigerator for several hours. Dust with cocoa powder before serving.',
+    2,
+    JSON_ARRAY('egg yolks', 'sugar', 'mascarpone cheese', 'ladyfingers', 'coffee', 'cocoa powder'),
+    4,
+    240
+);
+
+
+
+
+////////////    french \\\\\\\\\\\\\\\\\\\\\
+
+
+
+INSERT INTO recipes (dish_name, dish_origin_id, dish_recipe_description, dish_category_id, dish_ingredients, dish_complexity_id, dish_prep_time)
+VALUES 
+(
+    'Coq au Vin', 
+    4,
+    'Marinate chicken in red wine, garlic, and herbs overnight. Cook bacon until crispy, then remove. Brown chicken in the bacon fat. Add onions, carrots, and garlic, and cook until softened. Add mushrooms, wine, chicken broth, and herbs, then simmer until chicken is tender. Serve with bacon on top.',
+    1,
+    JSON_ARRAY('chicken', 'red wine', 'garlic', 'herbs', 'bacon', 'onions', 'carrots', 'mushrooms', 'chicken broth', 'salt', 'pepper'),
+    4,
+    180
+),
+
+(
+    'Ratatouille',
+    4,
+    'Sauté onions and garlic in olive oil. Add sliced eggplant, zucchini, bell peppers, and tomatoes. Season with herbs de Provence, salt, and pepper. Simmer until vegetables are tender. Serve hot as a side dish or main course.',
+    2,
+    JSON_ARRAY('onions', 'garlic', 'olive oil', 'eggplant', 'zucchini', 'bell peppers', 'tomatoes', 'herbs de Provence', 'salt', 'pepper'),
+    3,
+    60
+),
+
+(
+    'Boeuf Bourguignon',
+    4,
+    'Brown beef in a large pot. Remove beef and sauté onions, carrots, and garlic in the same pot. Add beef back to the pot with red wine, beef broth, tomato paste, and herbs. Simmer until beef is tender. Add mushrooms and pearl onions, then cook until tender. Serve with crusty bread.',
+    1,
+    JSON_ARRAY('beef', 'onions', 'carrots', 'garlic', 'red wine', 'beef broth', 'tomato paste', 'herbs', 'mushrooms', 'pearl onions', 'salt', 'pepper'),
+    5,
+    240
+),
+
+(
+    'Quiche Lorraine',
+    4,
+    'Prepare a pie crust and pre-bake until lightly golden. Cook bacon until crispy, then chop. Whisk eggs, cream, and seasonings together. Spread bacon and grated cheese over the pie crust, then pour egg mixture on top. Bake until the filling is set and the top is golden.',
+    1,
+    JSON_ARRAY('pie crust', 'bacon', 'eggs', 'cream', 'cheese', 'salt', 'pepper', 'nutmeg'),
+    3,
+    60
+),
+
+(
+    'Creme Brulee',
+    4,
+    'Heat cream and vanilla in a saucepan until warm. Whisk egg yolks and sugar until pale. Slowly whisk warm cream into egg mixture. Pour into ramekins and bake in a water bath until set. Chill in the refrigerator. Before serving, sprinkle with sugar and caramelize with a kitchen torch.',
+    2,
+    JSON_ARRAY('cream', 'vanilla', 'egg yolks', 'sugar'),
+    4,
+    120
+);
+
+
+
+
+////////////    russian   \\\\\\\\\\\\\\\\\\\\\
+
+
+
+INSERT INTO recipes (dish_name, dish_origin_id, dish_recipe_description, dish_category_id, dish_ingredients, dish_complexity_id, dish_prep_time)
+VALUES 
+(
+    'Borscht', 
+    5,
+    'Cook beets, carrots, and potatoes in beef broth until tender. Sauté onions and garlic, then add to the broth. Add cabbage, tomatoes, and vinegar. Simmer until all vegetables are tender. Season with salt, pepper, and dill. Serve hot with a dollop of sour cream.',
+    2,
+    JSON_ARRAY('beets', 'carrots', 'potatoes', 'beef broth', 'onions', 'garlic', 'cabbage', 'tomatoes', 'vinegar', 'salt', 'pepper', 'dill', 'sour cream'),
+    3,
+    90
+),
+
+(
+    'Beef Stroganoff',
+    5,
+    'Sauté onions and mushrooms in butter until soft. Add strips of beef and cook until browned. Stir in flour, then add beef broth and sour cream. Simmer until sauce thickens and beef is tender. Serve over egg noodles or rice.',
+    1,
+    JSON_ARRAY('onions', 'mushrooms', 'butter', 'beef', 'flour', 'beef broth', 'sour cream', 'egg noodles', 'salt', 'pepper'),
+    3,
+    45
+),
+
+(
+    'Pelmeni',
+    5,
+    'Prepare dough with flour, eggs, and water. Roll out thin and cut into circles. Mix ground meat with onions, garlic, and seasonings. Place a small amount of filling on each dough circle, fold and seal the edges. Boil until cooked through and serve with sour cream or butter.',
+    1,
+    JSON_ARRAY('flour', 'eggs', 'water', 'ground meat', 'onions', 'garlic', 'salt', 'pepper', 'sour cream', 'butter'),
+    4,
+    60
+),
+
+(
+    'Olivier Salad',
+    5,
+    'Boil potatoes, carrots, and eggs until cooked. Dice all ingredients including pickles, boiled chicken, and canned peas. Mix with mayonnaise and season with salt and pepper. Chill before serving.',
+    2,
+    JSON_ARRAY('potatoes', 'carrots', 'eggs', 'pickles', 'boiled chicken', 'canned peas', 'mayonnaise', 'salt', 'pepper'),
+    2,
+    40
+),
+
+(
+    'Blini',
+    5,
+    'Mix flour, milk, eggs, and sugar into a smooth batter. Cook thin pancakes on a hot griddle until golden brown. Serve with various toppings such as sour cream, caviar, smoked salmon, or jam.',
+    2,
+    JSON_ARRAY('flour', 'milk', 'eggs', 'sugar', 'sour cream', 'caviar', 'smoked salmon', 'jam'),
+    2,
+    30
+);
+
+
+
+
+////////////    moldovian   \\\\\\\\\\\\\\\\\\\\\
+
+
+
+INSERT INTO recipes (dish_name, dish_origin_id, dish_recipe_description, dish_category_id, dish_ingredients, dish_complexity_id, dish_prep_time)
+VALUES 
+(
+    'Mămăligă', 
+    6,
+    'Bring water to a boil and add salt. Gradually stir in cornmeal, reduce heat, and cook until thickened, stirring constantly. Serve hot with cheese, sour cream, and sometimes meat or fish.',
+    2,
+    JSON_ARRAY('water', 'salt', 'cornmeal', 'cheese', 'sour cream', 'meat', 'fish'),
+    2,
+    30
+),
+
+(
+    'Sarmale',
+    6,
+    'Mix ground meat with rice, onions, and spices. Blanch cabbage leaves and stuff with the meat mixture. Place in a pot, add tomato sauce, and simmer until tender. Serve with sour cream.',
+    1,
+    JSON_ARRAY('ground meat', 'rice', 'onions', 'spices', 'cabbage leaves', 'tomato sauce', 'sour cream'),
+    4,
+    120
+),
+
+(
+    'Plăcintă',
+    6,
+    'Prepare dough and let it rise. Roll out the dough and fill with various fillings such as cheese, potatoes, or apples. Fold and seal the dough, then bake until golden brown.',
+    2,
+    JSON_ARRAY('dough', 'cheese', 'potatoes', 'apples', 'salt', 'oil'),
+    3,
+    90
+),
+
+(
+    'Zeamă',
+    6,
+    'Boil chicken in water and skim off any foam. Add diced carrots, celery, and potatoes. Cook until vegetables are tender. Add noodles and cook until done. Season with lovage, salt, and pepper. Serve hot with a squeeze of lemon.',
+    1,
+    JSON_ARRAY('chicken', 'carrots', 'celery', 'potatoes', 'noodles', 'lovage', 'salt', 'pepper', 'lemon'),
+    3,
+    60
+),
+
+(
+    'Colțunași',
+    6,
+    'Mix flour, eggs, and water to form dough. Roll out thin and cut into circles. Fill with cheese or mashed potatoes. Fold and seal the edges. Boil until cooked through and serve with butter or sour cream.',
+    2,
+    JSON_ARRAY('flour', 'eggs', 'water', 'cheese', 'potatoes', 'butter', 'sour cream'),
+    3,
+    45
+),
+
+(
+    'Friptura',
+    6,
+    'Season pork chops with salt, pepper, and garlic. Heat oil in a pan and sear the pork chops until browned on both sides. Add white wine and simmer until the pork is cooked through and the sauce is reduced. Serve hot with polenta or potatoes.',
+    1,
+    JSON_ARRAY('pork chops', 'salt', 'pepper', 'garlic', 'olive oil', 'white wine', 'polenta', 'potatoes'),
+    3,
+    45
+);
