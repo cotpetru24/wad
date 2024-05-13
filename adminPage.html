@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<body>
+    <div class="addRecipe" style="margin: 25px;">
+        <!--Hide the below, only show the Add Recipe button, when the button is clicked show the form/div -->
+
+        <h2>Add New Recipe</h2>
+
+        <div style="display: flex; flex-direction: row;">
+        <p>Dish Name :</p>
+        <input type="text" placeholder="dish name here">
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <p>Dish Description :</p>
+        <input type="text" placeholder="dish Description here">
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <p>Dish Ingredients :</p>
+        <input type="text" placeholder="dish Ingredients here">
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <p>Dish Image :</p>
+        <input type="text" placeholder="dish image here">
+    </div>
+    <div style="display: flex; flex-direction: row;">
+
+        <p>Dish Complexity :</p>
+        <input type="text" placeholder="dropdown">
+    </div>
+    <div style="display: flex; flex-direction: row;">
+
+        <p>Dish Prep Time :</p>
+        <input type="text" placeholder="dropdown">
+    </div>
+
+        <button>+ Add Recipe</button>
+    </div>
+    <div class="dishes" style="display: flex; flex-direction: row;">
+        <!--filter by category, complexity, prep time, ingredients-->
+        <div class="filter"><button>Filter</button></div>
+        <div class="dishName" style="border: 2px solid grey; padding: 10px;">Dish name here</div>
+        <div class="dishDescription" style="border: 2px solid grey; padding: 10px;">Description here</div>
+        <div class="dishCategory" style="border: 2px solid grey; padding: 10px;">Category Indian, French... </div>
+        <div class="dishIngredients" style="border: 2px solid grey; padding: 10px;">Ingredients array</div>
+        <div class="dishComplexity" style="border: 2px solid grey; padding: 10px;">Dish Complexity</div>
+        <div class="dishPrepTime" style="border: 2px solid grey; padding: 10px;">Prep Time</div>
+        <div class="dishImage" style="border: 2px solid grey; padding: 10px;">Dish image</div>
+        <div class="actions"style="display: flex; flex-direction: row; border: 2px solid grey;">
+            <!--previes should open a form like get in touch and to show the dish exacly how it would show on the index page-->
+            <div class="previewRecipe" style="padding: 10px;"><button>Preview Recipe</button></div>
+            <div class="editRecipe" style="padding: 10px;"><button>Edit Recipe</button></div>
+            <div class="deleteDish" style="padding: 10px;"><button>Delete Recipe</button></div>
+        </div>    
+    </div>
+
+    <a href="./index.html">home</a>
+    
+</body>
+</html>
