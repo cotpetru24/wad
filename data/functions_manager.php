@@ -1,6 +1,10 @@
 <?php
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require "db_connect.php";
-require "index.php";
 
 
 //function that returns a list of recipes
@@ -28,10 +32,10 @@ function getRecipesList($conn, $filterCriteria = []){
         echo $resultsJSON;
         return $resultsJSON;
     }
-    else{
-        echo '[{"recipe_id" : "0", "dish_name": "No results", "dish_recipe_description" : "No recipes to list", 
-            "dish_ingredients": "No ingredients"}, "dish_complexity_id" : "1", "dish_prep_time" : "0"]';
-    }
+    // else{
+    //     // echo '[{"recipe_id" : "0", "dish_name": "No results", "dish_recipe_description" : "No recipes to list", 
+    //     //     "dish_ingredients": "No ingredients"}, "dish_complexity_id" : "1", "dish_prep_time" : "0"]';
+    // }
 
 }
 
@@ -45,7 +49,7 @@ function removeRecipe($conn, $id){
         echo 'recipe removed successfully';
     }
     else{
-        echo 'Error removing recipe: '.$sql.'.'.$conn->error;
+        echo 'Error removing recipe: '.$sql.'.'.$stmt->error;
     }
 
     $stmt->close();
@@ -63,7 +67,7 @@ function addRecipe($conn, $jsonData){
         echo 'recipe added successfully';
     }
     else{
-        echo 'error adding recipe: '.$sql. "." .$conn->error;
+        echo 'error adding recipe: '.$sql. "." .$stmt->error;
     }
 
     $stmt->close();
@@ -83,7 +87,7 @@ function viewRecipe($conn, $id){
         echo 'recipe viewed successfully';
     }
     else{
-        echo 'error retrieving recipe: '.$sql. "." .$conn->error;
+        echo 'error retrieving recipe: '.$sql. "." .$stmt->error;
     }
 $stmt->close();
 }
@@ -100,7 +104,7 @@ function editRecipe($conn, $id, $json){
         echo 'recipe edited successfully';
     }
     else{
-        echo 'error editing recipe: '.$sql. "." .$conn->error;
+        echo 'error editing recipe: '.$sql. "." .$stmt->error;
     }
 
     $stmt->close();
@@ -109,21 +113,23 @@ function editRecipe($conn, $id, $json){
 
 
 
-function sendMessage($conn, $jsonData){
-    $sql = "INSERT INTO messages (sender_name, sender_email, message_text)
-    VALUES (?, ?, ?)";
+function sendMessage($conn, $data) {
+    $response = array("status" => "", "message" => "");
+    $sql = "INSERT INTO messages (sender_name, sender_email, message_text) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam("sss", $jsonDataGOESHEREeeeeeeeeeeeeeeeeeeeeeeeeeeee);
-    if ($stmt->execute()){
-        echo "message sent successfully";
+    $stmt->bind_param("sss", $data['name'], $data['email'], $data['message']);
+
+    if ($stmt->execute()) {
+        $response["status"] = "success";
+        $response["message"] = "Message sent successfully";
+    } else {
+        $response["status"] = "error";
+        $response["message"] = "Error sending message: " . $stmt->error;
     }
-    else{
-        echo "Error sending message".$sql. "." .$conn->error;
-    }
+
+    $stmt->close();
+    echo json_encode($response);
 }
 
-
-
-$conn->close();
 
 

@@ -225,7 +225,7 @@
         #homeButton {
     height: 100%;
     width: auto;
-    background-image: url(./public/home_icon.png);
+    background-image: url(./public/img/home_icon.png);
     background-size: 17px 17px;
     background-position: center;
     background-repeat: no-repeat;
@@ -235,7 +235,7 @@
 }
 
 #homeButton:hover {
-    background-image: url(./public/icons8-home-26_hover.png);
+    background-image: url(./public/img/icons8-home-26_hover.png);
 }
 
 
@@ -243,7 +243,7 @@
 #searchButton {
     height: 26px;
     width: 26px;
-    background-image: url(./public/search_icon.png);
+    background-image: url(./public/img/search_icon.png);
     background-size: 17px 17px;
     background-position: center;
     background-repeat: no-repeat;
@@ -252,7 +252,7 @@
 }
 
 #searchButton:hover {
-    background-image: url(./public/icons8-search-26_hover.png);
+    background-image: url(./public/img/icons8-search-26_hover.png);
 }
 
 
