@@ -23,14 +23,13 @@ else if ($_SERVER['REQUEST_METHOD']== 'POST'){
                 //edit a recipe stored in db
                 editRecipe($conn, $_POST['recipeID'], $_POST['json data should be passed here//may have to check exactly which attribute was changed and update only that attribute']);
                 break;
-            case 'previewRecipe':
-                //previes a recipe from admin page
-                previewRecipe($conn, $_POST['recipeID']);
+            case 'viewRecipe':
+                //preview a recipe from admin page
+                viewRecipe($conn, $_POST['recipeID']);
                 break;
-            case 'filterRecipes':
-                //returns a list of filtered recipes
-                getFilteredRecipesList($conn, $_POST['based on that to filter']); // getRecipes=> should take an optional arg on which to filter the tasks=> this can be set by delault in the sql questy to filter the tasks by tine DSC
-                break;    
+            case 'sendMessage':
+                sendMessage($conn, $_POST['json data here']);
+                break;
         }
     }
 }
