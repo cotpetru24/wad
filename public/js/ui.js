@@ -1,4 +1,5 @@
 import * as logic from './logic.js';
+import { sendMessage } from './logic.js';
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -18,9 +19,23 @@ const getInTouchBtn = document.getElementById('getInTouchBtn');
 const closeContactForm = document.getElementById('closeButton');
 
 
+
+
+function toggleContactForm(show) {
+    if (show) {
+        overlay.classList.add('active');
+        contactForm.classList.add('active');
+    } else {
+        overlay.classList.remove('active');
+        contactForm.classList.remove('active');
+    }
+}
+
+
+
+
 getInTouchBtn.addEventListener('click', ()=> {
-    overlay.classList.add('active');
-    contactForm.classList.add('active');
+    toggleContactForm(true);
 })
 
 closeContactForm.addEventListener('click', ()=> {
@@ -30,6 +45,24 @@ closeContactForm.addEventListener('click', ()=> {
 
 
 
+const sendMsgBtn = document.getElementById("sentMsgBtn");
+sendMsgBtn.addEventListener("click", (event)=> {
+    event.preventDefault();
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    const jsonData = {
+        name : name,
+        email : email,
+        message : message
+    };
+    
+    logic.sendMessage(jsonData);
+    toggleContactForm(false);
+});
 
 
-getRecipes();
+
+
+// getRecipes();

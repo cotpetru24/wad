@@ -113,12 +113,22 @@ export async function viewRecipe(recipe_ID){
 }
 
 
-export async function sendMessage(data){
+export async function sendMessage(jsonData){
     try{
-        const param = new URLSearchParams({"function":"sendMessage", "jsonData":"jsondata goes hereeeeeeeeeeeee"});
-        const messagData = await fetch("http://localhost/data/index.php", {method: "POST", body: param});
+        jsonData.function = "sendMessage";
+
+        const response = await fetch("http://localhost/data/index.php", 
+        {method: "POST", headers: {'Content-Type' : 'application/json'}, body: JSON.stringify(jsonData)});
+        
+        if (!response.ok){
+            throw new Error(`Network response was not OK! Status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+        console.log(`Message sent successfully:`, responseData)
+        // alert('Message sent successfully!');
     }
     catch(error){
-        console.log("error retrieving data " + error)
+        console.log("Error sending message:", error);
     }
 }

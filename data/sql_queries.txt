@@ -64,7 +64,7 @@ dish_ingredients JSON NOT NULL,
 dish_complexity_id INT NOT NULL,
 dish_prep_time INT,
 dish_img LONGBLOB,
-dish_upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+dish_upload_date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 CONSTRAINT pk_from_origin_table FOREIGN KEY(dish_origin_id) REFERENCES origin(origin_id),
 CONSTRAINT pk_from_category_table FOREIGN KEY (dish_category_id) REFERENCES category(category_id),
 CONSTRAINT pk_from_complexity_table FOREIGN KEY (dish_complexity_id) REFERENCES complexity(complexity_id)
@@ -458,3 +458,16 @@ VALUES
     3,
     45
 );
+
+
+
+use recipes;
+
+Create table messages (
+message_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+sender_name varchar(100) NOT NULL,
+sender_email varchar(100) NOT NULL,
+message_text text NOT NULL,
+message_sent_date_time timestamp default current_timestamp 
+
+)
