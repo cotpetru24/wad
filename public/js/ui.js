@@ -69,4 +69,4 @@ sendMsgBtn.addEventListener("click", (event)=> {
 
 
 
-// getRecipes();
+logic.getRecipes();
