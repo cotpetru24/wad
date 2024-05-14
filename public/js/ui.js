@@ -1,4 +1,4 @@
-import * as logic from '/logic';
+import * as logic from './logic.js';
 
 document.getElementById('year').textContent = new Date().getFullYear();
 

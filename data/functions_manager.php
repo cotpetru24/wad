@@ -107,6 +107,23 @@ function editRecipe($conn, $id, $json){
 }
 
 
+
+
+function sendMessage($conn, $jsonData){
+    $sql = "INSERT INTO messages (sender_name, sender_email, message_text)
+    VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam("sss", $jsonDataGOESHEREeeeeeeeeeeeeeeeeeeeeeeeeeeee);
+    if ($stmt->execute()){
+        echo "message sent successfully";
+    }
+    else{
+        echo "Error sending message".$sql. "." .$conn->error;
+    }
+}
+
+
+
 $conn->close();
 
 

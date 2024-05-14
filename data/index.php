@@ -24,8 +24,11 @@ else if ($_SERVER['REQUEST_METHOD']== 'POST'){
                 editRecipe($conn, $_POST['recipeID'], $_POST['json data should be passed here//may have to check exactly which attribute was changed and update only that attribute']);
                 break;
             case 'viewRecipe':
-                //previes a recipe from admin page
+                //preview a recipe from admin page
                 viewRecipe($conn, $_POST['recipeID']);
+                break;
+            case 'sendMessage':
+                sendMessage($conn, $_POST['json data here']);
                 break;
         }
     }
