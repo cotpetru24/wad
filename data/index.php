@@ -27,10 +27,6 @@ else if ($_SERVER['REQUEST_METHOD']== 'POST'){
                 //previes a recipe from admin page
                 viewRecipe($conn, $_POST['recipeID']);
                 break;
-            case 'filterRecipes':
-                //returns a list of filtered recipes
-                getFilteredRecipesList($conn, $_POST['based on that to filter']); // getRecipes=> should take an optional arg on which to filter the tasks=> this can be set by delault in the sql questy to filter the tasks by tine DSC
-                break;    
         }
     }
 }
