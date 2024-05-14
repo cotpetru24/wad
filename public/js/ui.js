@@ -59,7 +59,11 @@ sendMsgBtn.addEventListener("click", (event)=> {
     };
     
     logic.sendMessage(jsonData);
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('message').value = '';
     toggleContactForm(false);
+
 });
 
 
