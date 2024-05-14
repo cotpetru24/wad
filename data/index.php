@@ -23,9 +23,9 @@ else if ($_SERVER['REQUEST_METHOD']== 'POST'){
                 //edit a recipe stored in db
                 editRecipe($conn, $_POST['recipeID'], $_POST['json data should be passed here//may have to check exactly which attribute was changed and update only that attribute']);
                 break;
-            case 'previewRecipe':
+            case 'viewRecipe':
                 //previes a recipe from admin page
-                previewRecipe($conn, $_POST['recipeID']);
+                viewRecipe($conn, $_POST['recipeID']);
                 break;
             case 'filterRecipes':
                 //returns a list of filtered recipes
