@@ -1,4 +1,4 @@
-const list = document.getElementById("recipeList");
+const list = document.getElementById("recipesList");
 
 
 // function to add tasks using a JSON data source
@@ -18,7 +18,7 @@ function addRecipes(recipesList){
         let recipeIngredientsPar = document.createElement("p")
 
 
-        this.recipeItemDiv.id = "recipe_ID" + recipe.recipe_id;
+        recipeDiv.id = "recipe_ID" + recipe.recipe_id;
 
 
         recipeDiv.classList.add("recipe")
@@ -30,13 +30,20 @@ function addRecipes(recipesList){
         recipeImgDiv.appendChild(recipeImg);
         recipeDetailsDiv.appendChild(recipeDescriptionPar);
         recipeMainIngredientsDiv.appendChild(recipeIngredientsPar);
-        recipeDescriptionDiv.appendChild(recipeDetailsDiv, recipeMainIngredientsDiv)
-        recipeDiv.appendChild(recipeImgDiv, recipeDescriptionDiv)
+        recipeDescriptionDiv.appendChild(recipeDetailsDiv)
+        recipeDescriptionDiv.appendChild(recipeMainIngredientsDiv)
+        recipeDiv.appendChild(recipeImgDiv)
+        recipeDiv.appendChild(recipeDescriptionDiv)
 
 
 
         //setting the values of the new elements
-        recipeImg.innerHTML = recipe.recipe_img;
+        if (recipe.dish_img){
+            recipeImg.src = recipe.dish_img;
+        }
+        // else {
+        //     recipeImg.src = 'default_image_path'; // Optionally set a default image path
+        // }
         recipeDescriptionPar.innerHTML = recipe.dish_recipe_description
         recipeIngredientsPar.innerHTML = recipe.dish_ingredients
 
@@ -63,8 +70,11 @@ function addRecipes(recipesList){
 
 export async function getRecipes(){
     try{
-        const recipesData = await fetch("http://localhost/data/index.php");
-        const recipes = await recipesData.json();
+        const response = await fetch("http://localhost/data/index.php");
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const recipes = await response.json();
         addRecipes(recipes);
     }
     catch(error){

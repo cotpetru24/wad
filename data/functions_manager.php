@@ -10,32 +10,58 @@ require "db_connect.php";
 //function that returns a list of recipes
 function getRecipesList($conn, $filterCriteria = []){
     $sql = "SELECT * FROM recipes WHERE 1=1";
-    $param = [];
+    $paramTypes = '';
+    $paramValues = [];
     if (!empty($filterCriteria)){
         foreach ($filterCriteria as $key => $value){
-            $sql.= "AND $key=?";
-            $param[] = $value;
+            $sql.= " AND $key=?";
+            $paramTypes .= 'i'; ///to modify so that it can handle string and int param types
+            $paramValues[] = $value;
         }
     }
 
     $stmt = $conn->prepare($sql);
-    foreach ($param as $index => $param){
-        $stmt->bindValue($index + 1, $param);
+
+    if(!empty($paramValues)){
+        $stmt->bind_param($paramTypes, ...$paramValues);
     }
 
-    if(($stmt->execute())->num_rows > 0){
+
+    $stmt->execute();
+    $result = $stmt->get_result();       
+
+    if($result->num_rows > 0){
         $results = array();
         while($row = $result->fetch_assoc()){
+
+            if(!empty($row['dish_img'])){
+                // Fetch binary data from the database
+                $dishImgData = $row['dish_img'];
+                // Convert binary image data to base64
+                $base64Image = base64_encode($dishImgData);
+                // Debug: Log the first few characters of the base64 string
+                error_log('Base64 Image: ' . substr($base64Image, 0, 30));
+                $row['dish_img'] = 'data:image/jpeg;base64,' . base64_encode($dishImgData);}//$base64Image;            }
+
             array_push($results, $row);
         }
         $resultsJSON=json_encode($results);
         echo $resultsJSON;
         return $resultsJSON;
     }
-    // else{
-    //     // echo '[{"recipe_id" : "0", "dish_name": "No results", "dish_recipe_description" : "No recipes to list", 
-    //     //     "dish_ingredients": "No ingredients"}, "dish_complexity_id" : "1", "dish_prep_time" : "0"]';
-    // }
+    else {
+        $noResults = [
+            [
+                "recipe_id" => "0",
+                "dish_name" => "No results",
+                "dish_recipe_description" => "No recipes to list",
+                "dish_ingredients" => "No ingredients",
+                "dish_complexity_id" => "1",
+                "dish_prep_time" => "0"
+            ]
+        ];
+        echo json_encode($noResults);
+    }
 
 }
 

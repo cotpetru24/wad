@@ -36,6 +36,9 @@ else if ($_SERVER['REQUEST_METHOD']== 'POST'){
                 //preview a recipe from admin page
                 viewRecipe($conn, $_POST['recipeID']);
                 break;
+
+
+                //done ======>>>>>> to add the option to lists and read messages
             case 'sendMessage':
                 sendMessage($conn, $data);
                 break;
