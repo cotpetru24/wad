@@ -13,22 +13,22 @@ tabButtonArray.forEach(tabButton => {
 
 const overlay = document.getElementById('overlay');
 const contactForm = document.getElementById('contactFormDiv');
-const getInTouchBtn = document.getElementById('getInTouchBtn');
-const closeContactForm = document.getElementById('closeButton');
+                    const getInTouchBtn = document.getElementById('getInTouchBtn');
+                    const closeContactForm = document.getElementById('closeButton');
 
-function toggleContactForm(show) {
-    if (show) {
-        overlay.classList.add('active');
-        contactForm.classList.add('active');
-    } else {
-        overlay.classList.remove('active');
-        contactForm.classList.remove('active');
-    }
+                    function toggleContactForm(show) {
+                        if (show) {
+                            overlay.classList.add('active');
+                            contactForm.classList.add('active');
+                        } else {
+                            overlay.classList.remove('active');
+                            contactForm.classList.remove('active');
+                        }
 }
 
 getInTouchBtn.addEventListener('click', () => {
     toggleContactForm(true);
-});
+            });
 
 closeContactForm.addEventListener('click', () => {
     toggleContactForm(false);

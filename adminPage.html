@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,305 +8,8 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="public/css/style.css">
     <script src="public/js/ui.js" type="module" defer></script>
-    <style>
-        /* Additional styles for the admin page footer */
-        .admin-footer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 5px 0;          /* Adjusted padding for thinner footer */
-            font-size: 14px;
-            border-top: 4px solid #9B59B6;
-            width: 100%;
-            background-color: #0C0723;
-            color: white;
-            height: 50px;            /* Fixed height for a thinner footer */
-        }
-
-        .tabsDiv {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            background-color: #0C0723;
-            height: 50px;
-            align-items: flex-end;
-            border-bottom: 3px solid #9B59B6;
-        }
-
-        .tabs {
-            display: flex;
-            background-color: transparent;
-            align-items: center;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            text-align: center;
-            font-size: 16px;
-            margin-left: 2px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-weight: bolder;
-            border-top-left-radius: 7px;
-            border-top-right-radius: 7px;
-            border-top: 1px solid #9B59B6;
-            border-left: 1px solid #9B59B6;
-            border-right: 1px solid #9B59B6;
-        }
-
-        .tabs:hover {
-            color: #9B59B6;
-            transition: 0.1s;
-        }
-
-        .tabSelected {
-            background-color: #9B59B6;
-            border-top-left-radius: 7px;
-            border-top-right-radius: 7px;
-            transition: 0.2s;
-        }
-
-        .tabSelected:hover {
-            color: #0C0723;
-            transition: 0.1s;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #9B59B6;
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #9B59B6;
-            color: white;
-        }
-
-        td img {
-            max-width: 100px;
-            border-radius: 5px;
-        }
-
-        .actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .actions button {
-            background-color: #9B59B6;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .actions button:hover {
-            background-color: #0C0723;
-            color: #9B59B6;
-        }
-
-        /* Padding adjustments */
-        .container {
-            padding-top: 30px;
-        }
-
-        .contentSection h2 {
-            margin-bottom: 20px;
-        }
-
-        .contentSection .button {
-            margin-bottom: 20px;
-        }
-
-        /* Form styling */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input, 
-        .form-group select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .form-group input[type="file"] {
-            padding: 3px;
-        }
-
-        .addRecipe {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .addRecipe h2 {
-            margin-bottom: 20px;
-        }
-
-        .button {
-            background-color: #9B59B6;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .button:hover {
-            background-color: #0C0723;
-            color: #9B59B6;
-        }
-
-        /* Popup styling */
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            visibility: hidden;
-            transition: 200ms ease-in-out;
-            color: #0C0723;
-            border: 2px solid #9B59B6;
-            border-radius: 7px;
-            z-index: 10;
-            background-color: white;
-            width: 500px;
-            max-width: 80%;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .popup.active {
-            visibility: visible;
-        }
-
-        .popupHeader {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #9B59B6;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .popupHeader h2 {
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .popupHeader .closeButton {
-            cursor: pointer;
-            border: none;
-            outline: none;
-            background: none;
-            font-size: 30px;
-            font-weight: bold;
-            color: #0C0723;
-        }
-
-        .popup .form-group {
-            margin-bottom: 15px;
-        }
-
-        .popup .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .popup .form-group input,
-        .popup .form-group textarea,
-        .popup .form-group select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .popup .form-group textarea {
-            resize: vertical;
-        }
-
-        .popup .button {
-            margin-top: 20px;
-        }
-
-        #overlay {
-            position: fixed;
-            transition: 200ms ease-in-out;
-            opacity: 0;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-            z-index: 9;
-        }
-
-        #overlay.active {
-            pointer-events: all;
-            opacity: 1;
-        }
-
-        /* Search and filter styling */
-        .search-filter {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .search-filter input[type="text"] {
-            width: 70%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .search-filter select {
-            width: 25%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .search-filter .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .search-filter .filter-group select {
-            margin-top: 10px;
-        }
-
-        .flagged-indicator {
-            width: 20px;
-            height: 20px;
-            background-color: red;
-            border-radius: 50%;
-            margin: auto;
-        }
-    </style>
 </head>
+
 <body>
     <div id="wrapper">
         <header>
@@ -644,13 +348,13 @@
         });
 
         // Toggle Add Recipe Form
-        document.getElementById("toggleFormButton").addEventListener("click", function() {
+        document.getElementById("toggleFormButton").addEventListener("click", function () {
             const form = document.getElementById("addRecipeForm");
             form.style.display = form.style.display === "none" ? "block" : "none";
         });
 
         // Toggle Add User Form
-        document.getElementById("toggleUserFormButton").addEventListener("click", function() {
+        document.getElementById("toggleUserFormButton").addEventListener("click", function () {
             const form = document.getElementById("addUserForm");
             form.style.display = form.style.display === "none" ? "block" : "none";
         });
@@ -797,7 +501,7 @@
             const yesButton = document.getElementById('confirmActionYesButton');
 
             confirmMessage.textContent = message;
-            yesButton.onclick = function() {
+            yesButton.onclick = function () {
                 if (action === 'disableUser') {
                     disableUser(id);
                 } else if (action === 'unlockUser') {
@@ -986,86 +690,87 @@
 
 
         document.addEventListener('DOMContentLoaded', () => {
-    const uploadButton = document.getElementById('uploadButton');
-    const fileInput = document.getElementById('imageInput');
-    
-    if (uploadButton && fileInput) {
-        uploadButton.addEventListener('click', () => {
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                insertImage(file);
+            const uploadButton = document.getElementById('uploadButton');
+            const fileInput = document.getElementById('imageInput');
+
+            if (uploadButton && fileInput) {
+                uploadButton.addEventListener('click', () => {
+                    if (fileInput.files.length > 0) {
+                        const file = fileInput.files[0];
+                        insertImage(file);
+                    } else {
+                        alert('Please select a file.');
+                    }
+                });
             } else {
-                alert('Please select a file.');
+                console.error('Upload button or file input not found.');
             }
         });
-    } else {
-        console.error('Upload button or file input not found.');
-    }
-});
 
-async function insertImage(file) {
-    try {
-        const reader = new FileReader();
-
-        reader.onloadend = async function () {
-            const base64Image = reader.result.split(',')[1];
-
-            // Prepare the data to be sent as JSON
-            const data = {
-                "function": "insertImage",
-                "image": base64Image
-            };
-
-            // Send the data to the server
-            const response = await fetch("http://localhost/data/index.php", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            // Check if the response is OK
-            if (!response.ok) {
-                console.error('Error response from server:', response.status, response.statusText);
-                return;
-            }
-
-            const textResponse = await response.text();
-            console.log('Raw server response:', textResponse);
-
-            // Try parsing the response as JSON
-            let jsonResponse;
+        async function insertImage(file) {
             try {
-                jsonResponse = JSON.parse(textResponse);
-            } catch (e) {
-                console.error('Error parsing JSON response:', e);
-                console.error('Received response:', textResponse); // Log the received response
-                return;
+                const reader = new FileReader();
+
+                reader.onloadend = async function () {
+                    const base64Image = reader.result.split(',')[1];
+
+                    // Prepare the data to be sent as JSON
+                    const data = {
+                        "function": "insertImage",
+                        "image": base64Image
+                    };
+
+                    // Send the data to the server
+                    const response = await fetch("http://localhost/data/index.php", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    // Check if the response is OK
+                    if (!response.ok) {
+                        console.error('Error response from server:', response.status, response.statusText);
+                        return;
+                    }
+
+                    const textResponse = await response.text();
+                    console.log('Raw server response:', textResponse);
+
+                    // Try parsing the response as JSON
+                    let jsonResponse;
+                    try {
+                        jsonResponse = JSON.parse(textResponse);
+                    } catch (e) {
+                        console.error('Error parsing JSON response:', e);
+                        console.error('Received response:', textResponse); // Log the received response
+                        return;
+                    }
+
+                    console.log('Parsed JSON response:', jsonResponse);
+
+                    if (jsonResponse.status === "success") {
+                        console.log('Image uploaded successfully:', jsonResponse);
+                    } else {
+                        console.error('Error uploading image:', jsonResponse);
+                    }
+                };
+
+                reader.onerror = function (error) {
+                    console.error('Error reading file:', error);
+                };
+
+                reader.readAsDataURL(file);
+            } catch (error) {
+                console.log("Error uploading image:", error);
             }
-
-            console.log('Parsed JSON response:', jsonResponse);
-
-            if (jsonResponse.status === "success") {
-                console.log('Image uploaded successfully:', jsonResponse);
-            } else {
-                console.error('Error uploading image:', jsonResponse);
-            }
-        };
-
-        reader.onerror = function (error) {
-            console.error('Error reading file:', error);
-        };
-
-        reader.readAsDataURL(file);
-    } catch (error) {
-        console.log("Error uploading image:", error);
-    }
-}
+        }
 
 
 
-        
+
     </script>
 </body>
+
 </html>

@@ -7,7 +7,8 @@ error_reporting(E_ALL);
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-function getRecipesList($conn, $filterCriteria = []) {
+function getRecipesList($conn, $filterCriteria = [])
+{
     $sql = "SELECT * FROM recipes WHERE 1=1";
     $paramTypes = '';
     $paramValues = [];
@@ -55,7 +56,8 @@ function getRecipesList($conn, $filterCriteria = []) {
     $stmt->close();
 }
 
-function removeRecipe($conn, $id) {
+function removeRecipe($conn, $id)
+{
     $sql = 'DELETE FROM recipes WHERE recipe_id = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $id);
@@ -69,16 +71,23 @@ function removeRecipe($conn, $id) {
     $stmt->close();
 }
 
-function addRecipe($conn, $jsonData) {
+function addRecipe($conn, $jsonData)
+{
     $data = json_decode($jsonData, true);
     $sql = 'INSERT INTO recipes (
         dish_name, dish_origin_id, dish_recipe_description, dish_category_id, dish_ingredients, dish_complexity_id, dish_prep_time)
         VALUES (?, ?, ?, ?, ?, ?, ?)';
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('sisssii', 
-        $data['dish_name'], $data['dish_origin_id'], $data['dish_recipe_description'], 
-        $data['dish_category_id'], $data['dish_ingredients'], $data['dish_complexity_id'], 
-        $data['dish_prep_time']);
+    $stmt->bind_param(
+        'sisssii',
+        $data['dish_name'],
+        $data['dish_origin_id'],
+        $data['dish_recipe_description'],
+        $data['dish_category_id'],
+        $data['dish_ingredients'],
+        $data['dish_complexity_id'],
+        $data['dish_prep_time']
+    );
 
     if ($stmt->execute()) {
         echo json_encode(['status' => 'success', 'message' => 'Recipe added successfully']);
@@ -89,7 +98,8 @@ function addRecipe($conn, $jsonData) {
     $stmt->close();
 }
 
-function viewRecipe($conn, $id) {
+function viewRecipe($conn, $id)
+{
     $sql = "SELECT recipe_id, dish_name, dish_recipe_description, dish_ingredients, dish_complexity_id, dish_prep_time FROM recipes
     WHERE recipe_id=?";
     $stmt = $conn->prepare($sql);
@@ -106,13 +116,20 @@ function viewRecipe($conn, $id) {
     $stmt->close();
 }
 
-function editRecipe($conn, $id, $json) {
+function editRecipe($conn, $id, $json)
+{
     $data = json_decode($json, true);
     $sql = "UPDATE recipes SET dish_name=?, dish_recipe_description=?, dish_ingredients=?, dish_complexity_id=?, dish_prep_time=? WHERE recipe_id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('sssiii', 
-        $data['dish_name'], $data['dish_recipe_description'], $data['dish_ingredients'], 
-        $data['dish_complexity_id'], $data['dish_prep_time'], $id);
+    $stmt->bind_param(
+        'sssiii',
+        $data['dish_name'],
+        $data['dish_recipe_description'],
+        $data['dish_ingredients'],
+        $data['dish_complexity_id'],
+        $data['dish_prep_time'],
+        $id
+    );
 
     if ($stmt->execute()) {
         echo json_encode(['status' => 'success', 'message' => 'Recipe edited successfully']);
@@ -123,7 +140,8 @@ function editRecipe($conn, $id, $json) {
     $stmt->close();
 }
 
-function sendMessage($conn, $data) {
+function sendMessage($conn, $data)
+{
     $sql = "INSERT INTO messages (sender_name, sender_email, message_text) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sss", $data['name'], $data['email'], $data['message']);
@@ -137,7 +155,8 @@ function sendMessage($conn, $data) {
     $stmt->close();
 }
 
-function insertImage($conn, $base64Image) {
+function insertImage($conn, $base64Image)
+{
     // Decode the Base64 encoded image
     $binaryData = base64_decode($base64Image);
 
@@ -147,7 +166,7 @@ function insertImage($conn, $base64Image) {
     }
 
     // Prepare the SQL statement to update the image in the database
-    $stmt = $conn->prepare("UPDATE recipes SET dish_img = ? WHERE dish_id = 1");
+    $stmt = $conn->prepare("UPDATE recipes SET dish_img = ? WHERE dish_id = 2");
 
     // Bind the binary data to the prepared statement
     $null = NULL;

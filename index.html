@@ -1,36 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/public/img/tab_logo.png" type="image/png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/public/img/tab_logo.png" type="image/png" />
     <title>Cookking Creations</title>
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/style.css" />
     <script src="public/js/ui.js" type="module" defer></script>
 </head>
+
 <body>
     <div id="wrapper">
         <header>
-            <img src="./public/img/logo.jpg" alt="logo" style="height: 125px; width: auto; margin: 25px;">
+            <img src="./public/img/logo.jpg" alt="logo" style="height: 125px; width: auto; margin: 25px" />
             <div class="tabsDiv" id="tabsDiv">
-                <button class="tabs tabSelected"><img src="/public/img/icons8-star-48.png" alt="Popular" style="height: 20px; width: auto; margin-right: 5px;">Popular</button>
-                <button class="tabs"><img src="/public/img/icons8-india-48.png" alt="Indian" style="height: 20px; width: auto; margin-right: 5px;">Indian</button>
-                <button class="tabs"><img src="/public/img/icons8-china-48.png" alt="Chinese" style="height: 20px; width: auto; margin-right: 5px;">Chinese</button>
-                <button class="tabs"><img src="/public/img/icons8-italian-flag-48.png" alt="Italian" style="height: 20px; width: auto; margin-right: 5px;">Italian</button>
-                <button class="tabs"><img src="/public/img/icons8-french-flag-48.png" alt="French" style="height: 20px; width: auto; margin-right: 5px;">French</button>
-                <button class="tabs"><img src="/public/img/icons8-russian-federation-48.png" alt="Russian" style="height: 20px; width: auto; margin-right: 5px;">Russian</button>
-                <button class="tabs"><img src="/public/img/icons8-moldova-48.png" alt="Moldovan" style="height: 20px; width: auto; margin-right: 5px;">Moldovan</button>  
+                <button class="tabs tabSelected">
+                    <img src="/public/img/icons8-star-48.png" alt="Popular"
+                        style="height: 20px; width: auto; margin-right: 5px" />Popular
+                </button>
+                <button class="tabs">
+                    <img src="/public/img/icons8-india-48.png" alt="Indian"
+                        style="height: 20px; width: auto; margin-right: 5px" />Indian
+                </button>
+                <button class="tabs">
+                    <img src="/public/img/icons8-china-48.png" alt="Chinese"
+                        style="height: 20px; width: auto; margin-right: 5px" />Chinese
+                </button>
+                <button class="tabs">
+                    <img src="/public/img/icons8-italian-flag-48.png" alt="Italian"
+                        style="height: 20px; width: auto; margin-right: 5px" />Italian
+                </button>
+                <button class="tabs">
+                    <img src="/public/img/icons8-french-flag-48.png" alt="French"
+                        style="height: 20px; width: auto; margin-right: 5px" />French
+                </button>
+                <button class="tabs">
+                    <img src="/public/img/icons8-russian-federation-48.png" alt="Russian"
+                        style="height: 20px; width: auto; margin-right: 5px" />Russian
+                </button>
+                <button class="tabs">
+                    <img src="/public/img/icons8-moldova-48.png" alt="Moldovan"
+                        style="height: 20px; width: auto; margin-right: 5px" />Moldovan
+                </button>
             </div>
             <nav>
-                <div id="nav">            
+                <div id="nav">
                     <button id="homeButton"></button>
                     <button>Register</button>
                     <button>Login</button>
-                    <button onclick="location.href='/adminPage.html'">Admin Page</button>
+                    <button onclick="location.href='/adminPage.html'">
+                        Admin Page
+                    </button>
                 </div>
                 <div id="searchDiv">
                     <form id="searchForm" action="/search" method="GET">
-                        <input type="search" name="query" id="search-box" placeholder="Search...">
+                        <input type="search" name="query" id="search-box" placeholder="Search..." />
                         <button id="searchButton" type="submit"></button>
                     </form>
                 </div>
@@ -39,31 +64,40 @@
         <main id="recipesList"></main>
         <footer id="footer">
             <div id="footerDiv">
-                <img src="public/img/logo.jpg" alt="logo" style="height: 50px; width: auto;">
+                <img src="public/img/logo.jpg" alt="logo" style="height: 50px; width: auto" />
                 <p id="emailContact">Email Us</p>
-                <p><a href="mailto:abc@example.com">abc@example.com</a></p>            
-                <button data-getInTouchBtn-target="#contactFormDiv" id="getInTouchBtn"><h2>Get In Touch</h2></button>       
+                <p><a href="mailto:abc@example.com">abc@example.com</a></p>
+                <button data-getInTouchBtn-target="#contactFormDiv" id="getInTouchBtn">
+                    <h2>Get In Touch</h2>
+                </button>
                 <div class="contactFormDiv" id="contactFormDiv">
                     <div class="contactFormHeader">
                         <h2>Get In Touch</h2>
-                        <button data-close-button class="closeButton" id="closeButton">&times;</button>
+                        <button data-close-button class="closeButton" id="closeButton">
+                            &times;
+                        </button>
                     </div>
                     <div class="contactForm">
                         <form id="contactUsForm" action="#" method="POST">
                             <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="name" required />
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" required />
                             <label for="message">Message:</label>
                             <textarea id="message" name="message" rows="4" required></textarea>
-                            <button type="submit" id="sentMsgBtn" class="sendButton">Send</button>
-                        </form>            
+                            <button type="submit" id="sentMsgBtn" class="sendButton">
+                                Send
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <div id="overlay"></div>
-                <p id="copyright">&copy; <span id="year"></span> STU124543. All rights reserved.</p>
+                <p id="copyright">
+                    &copy; <span id="year"></span> STU124543. All rights reserved.
+                </p>
             </div>
         </footer>
-    </div>   
+    </div>
 </body>
+
 </html>
