@@ -620,6 +620,11 @@
             </div>
         </div>
     </div>
+    <div class="contentSection">
+        <h2>Upload Image</h2>
+        <input type="file" id="imageInput" accept="image/*">
+        <button id="uploadButton">Upload Image</button>
+    </div>
     <script>
         // Set current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -650,7 +655,7 @@
             form.style.display = form.style.display === "none" ? "block" : "none";
         });
 
-        // Function to add a recipe row to the table
+        //Function to add a recipe row to the table
         function addRecipeRow(recipe) {
             const recipesList = document.getElementById('recipesList');
             const row = document.createElement('tr');
@@ -665,7 +670,7 @@
                 <td>${recipe.rating}</td>
                 <td><img src="${recipe.image}" alt="Dish Image"></td>
                 <td class="actions">
-                    <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
+                    <button id="todelete" onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
                     <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
                     <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
                 </td>
@@ -972,6 +977,95 @@
             document.getElementById('usersList').innerHTML = '';
             filteredUsers.forEach(addUserRow);
         }
+
+
+        // const todelete= document.getElementById('todelete');
+        // todelete.addEventListener('click', ()=>{
+        //     insertImage();
+        // })
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const uploadButton = document.getElementById('uploadButton');
+    const fileInput = document.getElementById('imageInput');
+    
+    if (uploadButton && fileInput) {
+        uploadButton.addEventListener('click', () => {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                insertImage(file);
+            } else {
+                alert('Please select a file.');
+            }
+        });
+    } else {
+        console.error('Upload button or file input not found.');
+    }
+});
+
+async function insertImage(file) {
+    try {
+        const reader = new FileReader();
+
+        reader.onloadend = async function () {
+            const base64Image = reader.result.split(',')[1];
+
+            // Prepare the data to be sent as JSON
+            const data = {
+                "function": "insertImage",
+                "image": base64Image
+            };
+
+            // Send the data to the server
+            const response = await fetch("http://localhost/data/index.php", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            // Check if the response is OK
+            if (!response.ok) {
+                console.error('Error response from server:', response.status, response.statusText);
+                return;
+            }
+
+            const textResponse = await response.text();
+            console.log('Raw server response:', textResponse);
+
+            // Try parsing the response as JSON
+            let jsonResponse;
+            try {
+                jsonResponse = JSON.parse(textResponse);
+            } catch (e) {
+                console.error('Error parsing JSON response:', e);
+                console.error('Received response:', textResponse); // Log the received response
+                return;
+            }
+
+            console.log('Parsed JSON response:', jsonResponse);
+
+            if (jsonResponse.status === "success") {
+                console.log('Image uploaded successfully:', jsonResponse);
+            } else {
+                console.error('Error uploading image:', jsonResponse);
+            }
+        };
+
+        reader.onerror = function (error) {
+            console.error('Error reading file:', error);
+        };
+
+        reader.readAsDataURL(file);
+    } catch (error) {
+        console.log("Error uploading image:", error);
+    }
+}
+
+
+
+        
     </script>
 </body>
 </html>

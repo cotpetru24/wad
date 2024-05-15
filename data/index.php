@@ -9,42 +9,53 @@ header("Content-Type: application/json");
 require "db_connect.php";
 require_once "functions_manager.php";
 
-
+// Read the input and determine the function to call
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 
-if ($_SERVER['REQUEST_METHOD']=='GET'){
-    getRecipesList($conn);
-} 
-else if ($_SERVER['REQUEST_METHOD']== 'POST'){
+// Log the received data
+error_log(print_r($data, TRUE));
 
-    if (isset($data['function'])){
-        switch ($data['function']){
+$response = [];
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    getRecipesList($conn);
+} else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($data['function'])) {
+        switch ($data['function']) {
             case 'removeRecipe':
-                //remove recipe from db
-                removeRecipe($conn, $_POST['recipeID']);
+                removeRecipe($conn, $data['recipeID']);
                 break;
             case 'addRecipe':
-                //add recipe to db
-                addRecipe($conn, $_POST['json data shoud be passed here']);
+                addRecipe($conn, $data['json']);
                 break;
             case 'editRecipe':
-                //edit a recipe stored in db
-                editRecipe($conn, $_POST['recipeID'], $_POST['json data should be passed here//may have to check exactly which attribute was changed and update only that attribute']);
+                editRecipe($conn, $data['recipeID'], $data['json']);
                 break;
             case 'viewRecipe':
-                //preview a recipe from admin page
-                viewRecipe($conn, $_POST['recipeID']);
+                viewRecipe($conn, $data['recipeID']);
                 break;
-
-
-                //done ======>>>>>> to add the option to lists and read messages
+            case 'insertImage':
+                insertImage($conn, $data['image']);
+                break;
             case 'sendMessage':
                 sendMessage($conn, $data);
                 break;
+            default:
+                $response = ["status" => "error", "message" => "Invalid function"];
+                echo json_encode($response);
+                exit();
         }
+    } else {
+        $response = ["status" => "error", "message" => "Function not specified"];
+        echo json_encode($response);
+        exit();
     }
+} else {
+    $response = ["status" => "error", "message" => "Invalid request method"];
+    echo json_encode($response);
+    exit();
 }
 
-$conn->close()
+$conn->close();
 ?>

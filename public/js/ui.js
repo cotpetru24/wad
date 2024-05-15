@@ -55,4 +55,5 @@ sendMsgBtn.addEventListener("click", (event) => {
     toggleContactForm(false);
 });
 
+
 logic.getRecipes();
