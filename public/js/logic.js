@@ -27,6 +27,16 @@ function addRecipes(recipesList){
         recipeDetailsDiv.classList.add("recipeDetails")
         recipeMainIngredientsDiv.classList.add("recipeMainIngredients")
 
+
+        //setting the values of the new elements
+        if (recipe.dish_img){
+            recipeImg.src = recipe.dish_img;
+            recipeImg.style.height = "350px"; // Set the height to 300px
+        }
+        // else {
+        //     recipeImg.src = 'default_image_path'; // Optionally set a default image path
+        // }
+
         recipeImgDiv.appendChild(recipeImg);
         recipeDetailsDiv.appendChild(recipeDescriptionPar);
         recipeMainIngredientsDiv.appendChild(recipeIngredientsPar);
@@ -37,13 +47,7 @@ function addRecipes(recipesList){
 
 
 
-        //setting the values of the new elements
-        if (recipe.dish_img){
-            recipeImg.src = recipe.dish_img;
-        }
-        // else {
-        //     recipeImg.src = 'default_image_path'; // Optionally set a default image path
-        // }
+
         recipeDescriptionPar.innerHTML = recipe.dish_recipe_description
         recipeIngredientsPar.innerHTML = recipe.dish_ingredients
 
