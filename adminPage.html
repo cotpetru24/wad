@@ -3,62 +3,975 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
+    <link rel="icon" href="/public/img/tab_logo.png" type="image/png">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <script src="public/js/ui.js" type="module" defer></script>
+    <style>
+        /* Additional styles for the admin page footer */
+        .admin-footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 5px 0;          /* Adjusted padding for thinner footer */
+            font-size: 14px;
+            border-top: 4px solid #9B59B6;
+            width: 100%;
+            background-color: #0C0723;
+            color: white;
+            height: 50px;            /* Fixed height for a thinner footer */
+        }
+
+        .tabsDiv {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            background-color: #0C0723;
+            height: 50px;
+            align-items: flex-end;
+            border-bottom: 3px solid #9B59B6;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: transparent;
+            align-items: center;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            text-align: center;
+            font-size: 16px;
+            margin-left: 2px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bolder;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            border-top: 1px solid #9B59B6;
+            border-left: 1px solid #9B59B6;
+            border-right: 1px solid #9B59B6;
+        }
+
+        .tabs:hover {
+            color: #9B59B6;
+            transition: 0.1s;
+        }
+
+        .tabSelected {
+            background-color: #9B59B6;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            transition: 0.2s;
+        }
+
+        .tabSelected:hover {
+            color: #0C0723;
+            transition: 0.1s;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #9B59B6;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #9B59B6;
+            color: white;
+        }
+
+        td img {
+            max-width: 100px;
+            border-radius: 5px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions button {
+            background-color: #9B59B6;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .actions button:hover {
+            background-color: #0C0723;
+            color: #9B59B6;
+        }
+
+        /* Padding adjustments */
+        .container {
+            padding-top: 30px;
+        }
+
+        .contentSection h2 {
+            margin-bottom: 20px;
+        }
+
+        .contentSection .button {
+            margin-bottom: 20px;
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group input[type="file"] {
+            padding: 3px;
+        }
+
+        .addRecipe {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .addRecipe h2 {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #9B59B6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            background-color: #0C0723;
+            color: #9B59B6;
+        }
+
+        /* Popup styling */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            visibility: hidden;
+            transition: 200ms ease-in-out;
+            color: #0C0723;
+            border: 2px solid #9B59B6;
+            border-radius: 7px;
+            z-index: 10;
+            background-color: white;
+            width: 500px;
+            max-width: 80%;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .popup.active {
+            visibility: visible;
+        }
+
+        .popupHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #9B59B6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .popupHeader h2 {
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .popupHeader .closeButton {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 30px;
+            font-weight: bold;
+            color: #0C0723;
+        }
+
+        .popup .form-group {
+            margin-bottom: 15px;
+        }
+
+        .popup .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .popup .form-group input,
+        .popup .form-group textarea,
+        .popup .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .popup .form-group textarea {
+            resize: vertical;
+        }
+
+        .popup .button {
+            margin-top: 20px;
+        }
+
+        #overlay {
+            position: fixed;
+            transition: 200ms ease-in-out;
+            opacity: 0;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            z-index: 9;
+        }
+
+        #overlay.active {
+            pointer-events: all;
+            opacity: 1;
+        }
+
+        /* Search and filter styling */
+        .search-filter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-filter input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-filter select {
+            width: 25%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-filter .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .search-filter .filter-group select {
+            margin-top: 10px;
+        }
+
+        .flagged-indicator {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
-    <div class="addRecipe" style="margin: 25px;">
-        <!--Hide the below, only show the Add Recipe button, when the button is clicked show the form/div -->
+    <div id="wrapper">
+        <header>
+            <img src="./public/img/logo.jpg" alt="logo" style="height: 125px; width: auto; margin: 25px;">
+            <div class="tabsDiv" id="tabsDiv">
+                <button class="tabs tabSelected" id="recipesTab">Recipes</button>
+                <button class="tabs" id="messagesTab">Messages</button>
+                <button class="tabs" id="usersTab">Users</button>
+            </div>
+            <nav>
+                <div id="nav">
+                    <button id="homeButton" onclick="location.href='./index.html'">Home</button>
+                    <button>Register</button>
+                    <button>Login</button>
+                    <button onclick="location.href='/adminPage.html'">Admin Page</button>
+                </div>
+                <div id="searchDiv">
+                    <form id="searchForm" action="/search" method="GET">
+                        <input type="search" name="query" id="search-box" placeholder="Search...">
+                        <button id="searchButton" type="submit"></button>
+                    </form>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div id="recipesSection" class="contentSection">
+                <div class="container">
+                    <div class="search-filter">
+                        <input type="text" id="recipeSearchBox" placeholder="Search recipes...">
+                        <div class="filter-group">
+                            <select id="recipeCategoryFilter">
+                                <option value="">All Categories</option>
+                                <option value="Indian">Indian</option>
+                                <option value="Chinese">Chinese</option>
+                                <option value="Italian">Italian</option>
+                                <option value="French">French</option>
+                                <option value="Russian">Russian</option>
+                                <option value="Moldovan">Moldovan</option>
+                            </select>
+                            <select id="recipeComplexityFilter">
+                                <option value="">All Complexities</option>
+                                <option value="1">Very Easy</option>
+                                <option value="2">Easy</option>
+                                <option value="3">Medium</option>
+                                <option value="4">Hard</option>
+                                <option value="5">Very Hard</option>
+                            </select>
+                            <select id="recipeRatingFilter">
+                                <option value="">All Ratings</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <select id="recipePrepTimeFilter">
+                                <option value="">All Prep Times</option>
+                                <option value="30">Up to 30 mins</option>
+                                <option value="60">Up to 1 hour</option>
+                                <option value="120">Up to 2 hours</option>
+                                <option value="240">Up to 4 hours</option>
+                                <option value="300">Over 4 hours</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="button" id="toggleFormButton">+ Add Recipe</button>
+                    <div class="addRecipe" id="addRecipeForm" style="display: none;">
+                        <h2>Add New Recipe</h2>
+                        <div class="form-group">
+                            <label for="dishName">Dish Name:</label>
+                            <input type="text" id="dishName" placeholder="Dish name here">
+                        </div>
+                        <div class="form-group">
+                            <label for="dishDescription">Dish Description:</label>
+                            <input type="text" id="dishDescription" placeholder="Dish description here">
+                        </div>
+                        <div class="form-group">
+                            <label for="dishIngredients">Dish Ingredients:</label>
+                            <input type="text" id="dishIngredients" placeholder="Dish ingredients here">
+                        </div>
+                        <div class="form-group">
+                            <label for="dishImage">Dish Image:</label>
+                            <input type="file" id="dishImage">
+                        </div>
+                        <div class="form-group">
+                            <label for="dishComplexity">Dish Complexity:</label>
+                            <select id="dishComplexity">
+                                <option value="1">Very Easy</option>
+                                <option value="2">Easy</option>
+                                <option value="3">Medium</option>
+                                <option value="4">Hard</option>
+                                <option value="5">Very Hard</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dishPrepTime">Dish Prep Time:</label>
+                            <input type="text" id="dishPrepTime" placeholder="Prep time here">
+                        </div>
+                        <div class="form-group">
+                            <label for="dishRating">Dish Rating:</label>
+                            <input type="number" id="dishRating" min="1" max="5" step="1" placeholder="Rating (1-5)">
+                        </div>
+                        <button class="button">+ Add Recipe</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Dish Name</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Ingredients</th>
+                                <th>Complexity</th>
+                                <th>Prep Time</th>
+                                <th>Rating</th>
+                                <th>Image</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recipesList">
+                            <!-- Recipe rows go here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="messagesSection" class="contentSection" style="display: none;">
+                <div class="container">
+                    <h2>Messages</h2>
+                    <div class="search-filter">
+                        <input type="text" id="messageSearchBox" placeholder="Search messages...">
+                        <select id="messageReadFilter">
+                            <option value="">All</option>
+                            <option value="read">Read</option>
+                            <option value="unread">Unread</option>
+                        </select>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Flagged</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Message</th>
+                                <th>Date</th>
+                                <th>Read</th>
+                                <th>Flag</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="messagesList">
+                            <!-- Message rows go here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="usersSection" class="contentSection" style="display: none;">
+                <div class="container">
+                    <div class="search-filter">
+                        <input type="text" id="userSearchBox" placeholder="Search users...">
+                        <select id="userRoleFilter">
+                            <option value="">All Roles</option>
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                    <button class="button" id="toggleUserFormButton">+ Add User</button>
+                    <div class="addUser" id="addUserForm" style="display: none;">
+                        <h2>Add New User</h2>
+                        <div class="form-group">
+                            <label for="userName">Name:</label>
+                            <input type="text" id="userName" placeholder="User name here">
+                        </div>
+                        <div class="form-group">
+                            <label for="userEmail">Email:</label>
+                            <input type="email" id="userEmail" placeholder="User email here">
+                        </div>
+                        <div class="form-group">
+                            <label for="userPassword">Password:</label>
+                            <input type="password" id="userPassword" placeholder="User password here">
+                        </div>
+                        <div class="form-group">
+                            <label for="userRole">Role:</label>
+                            <select id="userRole">
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
+                        <button class="button">+ Add User</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersList">
+                            <!-- User rows go here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <footer class="admin-footer">
+            <p id="year">&copy; <span id="year"></span> Your Company. All rights reserved.</p>
+        </footer>
+    </div>
+    <div id="overlay"></div>
+    <div class="popup" id="previewRecipePopup">
+        <div class="popupHeader">
+            <h2>Recipe Preview</h2>
+            <button class="closeButton" id="closePreviewPopup">&times;</button>
+        </div>
+        <div id="previewRecipeContent">
+            <!-- Preview content goes here -->
+        </div>
+    </div>
+    <div class="popup" id="editRecipePopup">
+        <div class="popupHeader">
+            <h2>Edit Recipe</h2>
+            <button class="closeButton" id="closeEditPopup">&times;</button>
+        </div>
+        <div id="editRecipeContent">
+            <!-- Edit form goes here -->
+            <div class="form-group">
+                <label for="editDishName">Dish Name:</label>
+                <input type="text" id="editDishName" placeholder="Dish name here">
+            </div>
+            <div class="form-group">
+                <label for="editDishDescription">Dish Description:</label>
+                <input type="text" id="editDishDescription" placeholder="Dish description here">
+            </div>
+            <div class="form-group">
+                <label for="editDishIngredients">Dish Ingredients:</label>
+                <input type="text" id="editDishIngredients" placeholder="Dish ingredients here">
+            </div>
+            <div class="form-group">
+                <label for="editDishImage">Dish Image:</label>
+                <input type="file" id="editDishImage">
+            </div>
+            <div class="form-group">
+                <label for="editDishComplexity">Dish Complexity:</label>
+                <select id="editDishComplexity">
+                    <option value="1">Very Easy</option>
+                    <option value="2">Easy</option>
+                    <option value="3">Medium</option>
+                    <option value="4">Hard</option>
+                    <option value="5">Very Hard</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="editDishPrepTime">Dish Prep Time:</label>
+                <input type="text" id="editDishPrepTime" placeholder="Prep time here">
+            </div>
+            <div class="form-group">
+                <label for="editDishRating">Dish Rating:</label>
+                <input type="number" id="editDishRating" min="1" max="5" step="1" placeholder="Rating (1-5)">
+            </div>
+            <button class="button" id="saveEditButton">Save Changes</button>
+        </div>
+    </div>
+    <div class="popup" id="viewMessagePopup">
+        <div class="popupHeader">
+            <h2>Message Details</h2>
+            <button class="closeButton" id="closeViewMessagePopup">&times;</button>
+        </div>
+        <div id="viewMessageContent">
+            <!-- Message details go here -->
+        </div>
+    </div>
+    <div class="popup" id="editUserPopup">
+        <div class="popupHeader">
+            <h2>Edit User</h2>
+            <button class="closeButton" id="closeEditUserPopup">&times;</button>
+        </div>
+        <div id="editUserContent">
+            <!-- Edit form goes here -->
+            <div class="form-group">
+                <label for="editUserName">Name:</label>
+                <input type="text" id="editUserName" placeholder="User name here">
+            </div>
+            <div class="form-group">
+                <label for="editUserEmail">Email:</label>
+                <input type="email" id="editUserEmail" placeholder="User email here">
+            </div>
+            <div class="form-group">
+                <label for="editUserPassword">Password:</label>
+                <input type="password" id="editUserPassword" placeholder="User password here">
+            </div>
+            <div class="form-group">
+                <label for="editUserRole">Role:</label>
+                <select id="editUserRole">
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
+            <button class="button" id="saveUserChangesButton">Save Changes</button>
+        </div>
+    </div>
+    <div class="popup" id="confirmActionPopup">
+        <div class="popupHeader">
+            <h2>Confirm Action</h2>
+            <button class="closeButton" id="closeConfirmActionPopup">&times;</button>
+        </div>
+        <div id="confirmActionContent">
+            <!-- Confirmation message goes here -->
+            <p id="confirmActionMessage">Are you sure?</p>
+            <div class="actions">
+                <button id="confirmActionYesButton" class="button">Yes</button>
+                <button id="confirmActionNoButton" class="button">No</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Set current year in the footer
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        <h2>Add New Recipe</h2>
+        // Tabs functionality for Admin Page
+        const tabButtonArray = document.querySelectorAll('.tabs');
+        const contentSections = document.querySelectorAll('.contentSection');
 
-        <div style="display: flex; flex-direction: row;">
-        <p>Dish Name :</p>
-        <input type="text" placeholder="dish name here">
-    </div>
-    <div style="display: flex; flex-direction: row;">
-        <p>Dish Description :</p>
-        <input type="text" placeholder="dish Description here">
-    </div>
-    <div style="display: flex; flex-direction: row;">
-        <p>Dish Ingredients :</p>
-        <input type="text" placeholder="dish Ingredients here">
-    </div>
-    <div style="display: flex; flex-direction: row;">
-        <p>Dish Image :</p>
-        <input type="file" placeholder="dish image here">
-    </div>
-    <div style="display: flex; flex-direction: row;">
+        tabButtonArray.forEach((tabButton, index) => {
+            tabButton.addEventListener('click', () => {
+                document.querySelector('.tabSelected')?.classList.remove('tabSelected');
+                tabButton.classList.add('tabSelected');
+                contentSections.forEach((section, sectionIndex) => {
+                    section.style.display = sectionIndex === index ? 'block' : 'none';
+                });
+            });
+        });
 
-        <p>Dish Complexity :</p>
-        <input type="text" placeholder="dropdown">
-    </div>
-    <div style="display: flex; flex-direction: row;">
+        // Toggle Add Recipe Form
+        document.getElementById("toggleFormButton").addEventListener("click", function() {
+            const form = document.getElementById("addRecipeForm");
+            form.style.display = form.style.display === "none" ? "block" : "none";
+        });
 
-        <p>Dish Prep Time :</p>
-        <input type="text" placeholder="dropdown">
-    </div>
+        // Toggle Add User Form
+        document.getElementById("toggleUserFormButton").addEventListener("click", function() {
+            const form = document.getElementById("addUserForm");
+            form.style.display = form.style.display === "none" ? "block" : "none";
+        });
 
-        <button>+ Add Recipe</button>
-    </div>
-    <div class="dishes" style="display: flex; flex-direction: row;">
-        <!--filter by category, complexity, prep time, ingredients-->
-        <div class="filter"><button>Filter</button></div>
-        <div class="dishName" style="border: 2px solid grey; padding: 10px;">Dish name here</div>
-        <div class="dishDescription" style="border: 2px solid grey; padding: 10px;">Description here</div>
-        <div class="dishCategory" style="border: 2px solid grey; padding: 10px;">Category Indian, French... </div>
-        <div class="dishIngredients" style="border: 2px solid grey; padding: 10px;">Ingredients array</div>
-        <div class="dishComplexity" style="border: 2px solid grey; padding: 10px;">Dish Complexity</div>
-        <div class="dishPrepTime" style="border: 2px solid grey; padding: 10px;">Prep Time</div>
-        <div class="dishImage" style="border: 2px solid grey; padding: 10px;">Dish image</div>
-        <div class="actions"style="display: flex; flex-direction: row; border: 2px solid grey;">
-            <!--previes should open a form like get in touch and to show the dish exacly how it would show on the index page-->
-            <div class="previewRecipe" style="padding: 10px;"><button>Preview Recipe</button></div>
-            <div class="editRecipe" style="padding: 10px;"><button>Edit Recipe</button></div>
-            <div class="deleteDish" style="padding: 10px;"><button>Delete Recipe</button></div>
-        </div>    
-    </div>
+        // Function to add a recipe row to the table
+        function addRecipeRow(recipe) {
+            const recipesList = document.getElementById('recipesList');
+            const row = document.createElement('tr');
 
-    <a href="./index.html">home</a>
-    
+            row.innerHTML = `
+                <td>${recipe.name}</td>
+                <td>${recipe.description}</td>
+                <td>${recipe.category}</td>
+                <td>${recipe.ingredients.join(', ')}</td>
+                <td>${recipe.complexity}</td>
+                <td>${recipe.prepTime}</td>
+                <td>${recipe.rating}</td>
+                <td><img src="${recipe.image}" alt="Dish Image"></td>
+                <td class="actions">
+                    <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
+                    <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
+                    <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
+                </td>
+            `;
+
+            recipesList.appendChild(row);
+        }
+
+        // Function to add a message row to the table
+        function addMessageRow(message) {
+            const messagesList = document.getElementById('messagesList');
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td>${message.flagged ? '<div class="flagged-indicator"></div>' : ''}</td>
+                <td>${message.name}</td>
+                <td>${message.email}</td>
+                <td>${message.content}</td>
+                <td>${message.date}</td>
+                <td>${message.read ? 'Read' : 'Unread'}</td>
+                <td>${message.flagged ? 'Flagged' : 'Not Flagged'}</td>
+                <td class="actions">
+                    <button onclick="viewMessage(${JSON.stringify(message)})">View</button>
+                    <button onclick="toggleFlagMessage(${message.id})">${message.flagged ? 'Unflag' : 'Flag'}</button>
+                    <button onclick="confirmAction('Delete message?', 'deleteMessage', ${message.id})">Delete</button>
+                </td>
+            `;
+
+            messagesList.appendChild(row);
+        }
+
+        // Function to add a user row to the table
+        function addUserRow(user) {
+            const usersList = document.getElementById('usersList');
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.role}</td>
+                <td class="actions">
+                    <button onclick="editUser(${JSON.stringify(user)})">Edit</button>
+                    <button onclick="confirmAction('Reset password?', 'resetPassword', ${user.id})">Reset Password</button>
+                    <button onclick="confirmAction('Disable user?', 'disableUser', ${user.id})">Disable</button>
+                    <button onclick="confirmAction('Unlock user?', 'unlockUser', ${user.id})">Unlock</button>
+                    <button onclick="confirmAction('Delete user?', 'deleteUser', ${user.id})">Delete</button>
+                </td>
+            `;
+
+            usersList.appendChild(row);
+        }
+
+        // Function to preview recipe
+        function previewRecipe(recipe) {
+            const previewPopup = document.getElementById('previewRecipePopup');
+            const overlay = document.getElementById('overlay');
+            const previewContent = document.getElementById('previewRecipeContent');
+
+            previewContent.innerHTML = `
+                <h3>${recipe.name}</h3>
+                <p><strong>Description:</strong> ${recipe.description}</p>
+                <p><strong>Ingredients:</strong> ${recipe.ingredients.join(', ')}</p>
+                <p><strong>Complexity:</strong> ${recipe.complexity}</p>
+                <p><strong>Prep Time:</strong> ${recipe.prepTime}</p>
+                <p><strong>Rating:</strong> ${recipe.rating}</p>
+                <img src="${recipe.image}" alt="Dish Image" style="width: 100%;">
+            `;
+
+            previewPopup.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        // Function to edit recipe
+        function editRecipe(recipe) {
+            const editPopup = document.getElementById('editRecipePopup');
+            const overlay = document.getElementById('overlay');
+            document.getElementById('editDishName').value = recipe.name;
+            document.getElementById('editDishDescription').value = recipe.description;
+            document.getElementById('editDishIngredients').value = recipe.ingredients.join(', ');
+            document.getElementById('editDishComplexity').value = recipe.complexity;
+            document.getElementById('editDishPrepTime').value = recipe.prepTime;
+            document.getElementById('editDishRating').value = recipe.rating;
+
+            editPopup.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        // Function to view message
+        function viewMessage(message) {
+            const viewMessagePopup = document.getElementById('viewMessagePopup');
+            const overlay = document.getElementById('overlay');
+            const viewMessageContent = document.getElementById('viewMessageContent');
+
+            viewMessageContent.innerHTML = `
+                <p><strong>Name:</strong> ${message.name}</p>
+                <p><strong>Email:</strong> ${message.email}</p>
+                <p><strong>Message:</strong> ${message.content}</p>
+                <p><strong>Date:</strong> ${message.date}</p>
+                <p><strong>Status:</strong> ${message.read ? 'Read' : 'Unread'}</p>
+            `;
+
+            viewMessagePopup.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        // Function to edit user
+        function editUser(user) {
+            const editUserPopup = document.getElementById('editUserPopup');
+            const overlay = document.getElementById('overlay');
+            document.getElementById('editUserName').value = user.name;
+            document.getElementById('editUserEmail').value = user.email;
+            document.getElementById('editUserPassword').value = ''; // Do not prefill password
+            document.getElementById('editUserRole').value = user.role;
+
+            editUserPopup.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        // Function to show confirmation popup
+        function confirmAction(message, action, id) {
+            const confirmPopup = document.getElementById('confirmActionPopup');
+            const overlay = document.getElementById('overlay');
+            const confirmMessage = document.getElementById('confirmActionMessage');
+            const yesButton = document.getElementById('confirmActionYesButton');
+
+            confirmMessage.textContent = message;
+            yesButton.onclick = function() {
+                if (action === 'disableUser') {
+                    disableUser(id);
+                } else if (action === 'unlockUser') {
+                    unlockUser(id);
+                } else if (action === 'deleteUser') {
+                    deleteUser(id);
+                } else if (action === 'deleteRecipe') {
+                    deleteRecipe(id);
+                } else if (action === 'deleteMessage') {
+                    deleteMessage(id);
+                } else if (action === 'resetPassword') {
+                    resetPassword(id);
+                }
+                confirmPopup.classList.remove('active');
+                overlay.classList.remove('active');
+            };
+
+            confirmPopup.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        // Function to close popups
+        document.getElementById('closePreviewPopup').addEventListener('click', () => {
+            document.getElementById('previewRecipePopup').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+
+        document.getElementById('closeEditPopup').addEventListener('click', () => {
+            document.getElementById('editRecipePopup').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+
+        document.getElementById('closeViewMessagePopup').addEventListener('click', () => {
+            document.getElementById('viewMessagePopup').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+
+        document.getElementById('closeEditUserPopup').addEventListener('click', () => {
+            document.getElementById('editUserPopup').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+
+        document.getElementById('closeConfirmActionPopup').addEventListener('click', () => {
+            document.getElementById('confirmActionPopup').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+
+        document.getElementById('confirmActionNoButton').addEventListener('click', () => {
+            document.getElementById('confirmActionPopup').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+
+        // Sample data for testing
+        const sampleRecipes = [
+            {
+                id: 1,
+                name: 'Butter Chicken',
+                description: 'A creamy and delicious butter chicken.',
+                category: 'Indian',
+                ingredients: ['chicken', 'butter', 'cream', 'tomato puree'],
+                complexity: 'Medium',
+                prepTime: '60 mins',
+                rating: 4,
+                image: 'path/to/image.jpg'
+            }
+        ];
+
+        const sampleMessages = [
+            {
+                id: 1,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+                content: 'Hello, I have a question...',
+                date: '2023-05-15',
+                read: false,
+                flagged: false
+            }
+        ];
+
+        const sampleUsers = [
+            {
+                id: 1,
+                name: 'Admin User',
+                email: 'admin@example.com',
+                role: 'admin'
+            },
+            {
+                id: 2,
+                name: 'Regular User',
+                email: 'user@example.com',
+                role: 'user'
+            }
+        ];
+
+        // Adding sample data to tables for testing
+        sampleRecipes.forEach(addRecipeRow);
+        sampleMessages.forEach(addMessageRow);
+        sampleUsers.forEach(addUserRow);
+
+        // Search and filter functionality for recipes
+        const recipeSearchBox = document.getElementById('recipeSearchBox');
+        const recipeCategoryFilter = document.getElementById('recipeCategoryFilter');
+        const recipeComplexityFilter = document.getElementById('recipeComplexityFilter');
+        const recipeRatingFilter = document.getElementById('recipeRatingFilter');
+        const recipePrepTimeFilter = document.getElementById('recipePrepTimeFilter');
+
+        recipeSearchBox.addEventListener('input', filterRecipes);
+        recipeCategoryFilter.addEventListener('change', filterRecipes);
+        recipeComplexityFilter.addEventListener('change', filterRecipes);
+        recipeRatingFilter.addEventListener('change', filterRecipes);
+        recipePrepTimeFilter.addEventListener('change', filterRecipes);
+
+        function filterRecipes() {
+            const searchText = recipeSearchBox.value.toLowerCase();
+            const filterCategory = recipeCategoryFilter.value;
+            const filterComplexity = recipeComplexityFilter.value;
+            const filterRating = recipeRatingFilter.value;
+            const filterPrepTime = recipePrepTimeFilter.value;
+
+            const filteredRecipes = sampleRecipes.filter(recipe => {
+                const matchesSearchText = recipe.name.toLowerCase().includes(searchText);
+                const matchesCategory = filterCategory === '' || recipe.category === filterCategory;
+                const matchesComplexity = filterComplexity === '' || recipe.complexity === filterComplexity;
+                const matchesRating = filterRating === '' || recipe.rating == filterRating;
+                const matchesPrepTime = filterPrepTime === '' || recipe.prepTime <= filterPrepTime;
+
+                return matchesSearchText && matchesCategory && matchesComplexity && matchesRating && matchesPrepTime;
+            });
+
+            document.getElementById('recipesList').innerHTML = '';
+            filteredRecipes.forEach(addRecipeRow);
+        }
+
+        // Search functionality for messages
+        const messageSearchBox = document.getElementById('messageSearchBox');
+        const messageReadFilter = document.getElementById('messageReadFilter');
+
+        messageSearchBox.addEventListener('input', filterMessages);
+        messageReadFilter.addEventListener('change', filterMessages);
+
+        function filterMessages() {
+            const searchText = messageSearchBox.value.toLowerCase();
+            const filterRead = messageReadFilter.value;
+
+            const filteredMessages = sampleMessages.filter(message => {
+                const matchesSearchText = message.name.toLowerCase().includes(searchText) ||
+                    message.email.toLowerCase().includes(searchText) ||
+                    message.content.toLowerCase().includes(searchText);
+                const matchesRead = filterRead === '' || (filterRead === 'read' && message.read) || (filterRead === 'unread' && !message.read);
+
+                return matchesSearchText && matchesRead;
+            });
+
+            document.getElementById('messagesList').innerHTML = '';
+            filteredMessages.forEach(addMessageRow);
+        }
+
+        // Search and filter functionality for users
+        const userSearchBox = document.getElementById('userSearchBox');
+        const userRoleFilter = document.getElementById('userRoleFilter');
+
+        userSearchBox.addEventListener('input', filterUsers);
+        userRoleFilter.addEventListener('change', filterUsers);
+
+        function filterUsers() {
+            const searchText = userSearchBox.value.toLowerCase();
+            const filterRole = userRoleFilter.value;
+
+            const filteredUsers = sampleUsers.filter(user => {
+                const matchesSearchText = user.name.toLowerCase().includes(searchText) ||
+                    user.email.toLowerCase().includes(searchText);
+                const matchesRole = filterRole === '' || user.role === filterRole;
+
+                return matchesSearchText && matchesRole;
+            });
+
+            document.getElementById('usersList').innerHTML = '';
+            filteredUsers.forEach(addUserRow);
+        }
+    </script>
 </body>
 </html>
