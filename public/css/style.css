@@ -270,7 +270,7 @@
 }
 
 
-footer {
+#footer {
             display: flex;
             flex-direction: column;
             text-align: center;       /* Center-align text */
