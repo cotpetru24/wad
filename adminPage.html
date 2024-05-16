@@ -215,7 +215,9 @@
             </div>
         </main>
         <footer class="admin-footer">
-            <p id="year">&copy; <span id="year"></span> Your Company. All rights reserved.</p>
+            <!-- to check why this is not diplayed correctly -->
+            <p id="year">&copy;<span id="year"></span> Your Company. All rights reserved.</p>
+            <!-- <p>ahjskdalksdjlkajsdkljaksdjkladjsl</p> -->
         </footer>
     </div>
     <div id="overlay"></div>
@@ -310,6 +312,7 @@
             <button class="button" id="saveUserChangesButton">Save Changes</button>
         </div>
     </div>
+<!-- not sure what this does//////////to check////////////////////////////////////////// -->
     <div class="popup" id="confirmActionPopup">
         <div class="popupHeader">
             <h2>Confirm Action</h2>
@@ -324,11 +327,26 @@
             </div>
         </div>
     </div>
+    <!-- \\\\\\\\\\\\//////////////////to remove the below when add/edit recipe is ready -->
     <div class="contentSection">
         <h2>Upload Image</h2>
         <input type="file" id="imageInput" accept="image/*">
         <button id="uploadButton">Upload Image</button>
     </div>
+
+
+
+
+
+
+
+
+
+
+<!-- to sort out the scripts and move the to js fiels ///////////////////////////////////////////////////// -->
+
+
+
     <script>
         // Set current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();

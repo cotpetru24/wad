@@ -624,6 +624,7 @@ td img {
 
 .search-filter .filter-group select {
   margin-top: 10px;
+  width: auto;
 }
 
 .flagged-indicator {
