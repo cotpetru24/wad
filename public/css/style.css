@@ -80,7 +80,7 @@ main {
   padding: 15px;
 }
 
-.recipeMainIngredients {
+.recipeFooterDiv {
   border: 2px dashed green;
   padding: 15px;
 }
@@ -650,4 +650,10 @@ td img {
 #footerLogo {
   height: 50px;
   width: auto;
+}
+
+.recipeHeadDiv{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
 }

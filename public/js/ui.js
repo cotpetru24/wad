@@ -1,6 +1,6 @@
 import * as logic from './logic.js';
 import { sendMessage } from './logic.js';
-
+logic.getRecipes();
 document.getElementById('year').textContent = new Date().getFullYear();
 
 const tabButtonArray = document.querySelectorAll('.tabs');
@@ -61,4 +61,4 @@ sendMsgBtn.addEventListener("click", (event) => {
             form.style.display = form.style.display === "none" ? "block" : "none";
         });
 
-logic.getRecipes();
+

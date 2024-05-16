@@ -76,6 +76,7 @@ dish_complexity_id INT NOT NULL,
 dish_prep_time INT,
 dish_img LONGBLOB,
 dish_upload_date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+dish_rating decimal (10, 2) not null default 0,
 CONSTRAINT pk_from_origin_table FOREIGN KEY(dish_origin_id) REFERENCES origin(origin_id),
 CONSTRAINT pk_from_category_table FOREIGN KEY (dish_category_id) REFERENCES category(category_id),
 CONSTRAINT pk_from_complexity_table FOREIGN KEY (dish_complexity_id) REFERENCES complexity(complexity_id)
