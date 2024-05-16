@@ -1,0 +1,19 @@
+#footer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  /* Center-align text */
+  padding: 20px 0;
+  /* Padding above and below the text */
+  font-size: 14px;
+  /* Smaller font size */
+  border-top: 4px solid #9b59b6;
+  justify-content: space-between;
+
+  width: 100%;
+  min-height: 300px;
+  margin-top: auto;
+  background-color: #0c0723;
+  color: white;
+  margin-top: 30px;
+}
