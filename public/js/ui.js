@@ -17,6 +17,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
             });
         });
 
+// Overlay for pop up dialog boxes
 const overlay = document.getElementById('overlay');
 const contactForm = document.getElementById('contactFormDiv');
                     const getInTouchBtn = document.getElementById('getInTouchBtn');
@@ -32,13 +33,9 @@ const contactForm = document.getElementById('contactFormDiv');
                         }
 }
 
-getInTouchBtn.addEventListener('click', () => {
-    toggleContactForm(true);
-            });
-
-closeContactForm.addEventListener('click', () => {
-    toggleContactForm(false);
-});
+//Get in touch form
+getInTouchBtn.addEventListener('click', () => {toggleContactForm(true);});
+closeContactForm.addEventListener('click', () => {toggleContactForm(false);});
 
 const sendMsgBtn = document.getElementById("sentMsgBtn");
 sendMsgBtn.addEventListener("click", (event) => {
@@ -61,11 +58,11 @@ sendMsgBtn.addEventListener("click", (event) => {
     toggleContactForm(false);
 });
 
-        // Toggle Add Recipe Form
-        document.getElementById("toggleFormButton").addEventListener("click", function () {
-            const form = document.getElementById("addRecipeForm");
-            form.style.display = form.style.display === "none" ? "block" : "none";
-        });
+// Toggle Add Recipe Form
+document.getElementById("toggleFormButton").addEventListener("click", function () {
+ const form = document.getElementById("addRecipeForm");
+form.style.display = form.style.display === "none" ? "block" : "none";
+});
 
 
 
