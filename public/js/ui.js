@@ -58,11 +58,19 @@ sendMsgBtn.addEventListener("click", (event) => {
     toggleContactForm(false);
 });
 
-// Toggle Add Recipe Form
-document.getElementById("toggleFormButton").addEventListener("click", function () {
- const form = document.getElementById("addRecipeForm");
-form.style.display = form.style.display === "none" ? "block" : "none";
-});
+        // Toggle Add Recipe Form
+        document.getElementById("toggleFormButton").addEventListener("click", function () {
+            const form = document.getElementById("addRecipeForm");
+            form.style.display = form.style.display === "none" ? "block" : "none";
+        });
+
+
+
+        // Toggle Add User Form
+        document.getElementById("toggleUserFormButton").addEventListener("click", function () {
+            const form = document.getElementById("addUserForm");
+            form.style.display = form.style.display === "none" ? "block" : "none";
+        });
 
 
 
