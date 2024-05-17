@@ -92,8 +92,6 @@ function removeRecipe($conn, $id)
     $sql = 'DELETE FROM recipes WHERE recipe_id = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $id);
-    $a = "todelete";
-//testing to delete this
     if ($stmt->execute()) {
         echo json_encode(['status' => 'success', 'message' => 'Recipe removed successfully']);
     } else {
