@@ -343,7 +343,7 @@
 
 
 
-<!-- to sort out the scripts and move the to js fiels ///////////////////////////////////////////////////// -->
+<!-- to sort out the scripts and move the to js fiels-->
 
 
 
@@ -391,8 +391,8 @@
                 <td>${recipe.prepTime}</td>
                 <td>${recipe.rating}</td>
                 <td><img src="${recipe.image}" alt="Dish Image"></td>
-                <td class="actions">
-                    <button id="todelete" onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
+                <td class="actions" id="actionsTh">
+                    <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
                     <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
                     <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
                 </td>
@@ -447,6 +447,8 @@
 
         // Function to preview recipe
         function previewRecipe(recipe) {
+            console.log("preview recipe function called");
+
             const previewPopup = document.getElementById('previewRecipePopup');
             const overlay = document.getElementById('overlay');
             const previewContent = document.getElementById('previewRecipeContent');
@@ -639,7 +641,7 @@
             const filterRating = recipeRatingFilter.value;
             const filterPrepTime = recipePrepTimeFilter.value;
 
-            const filteredRecipes = sampleRecipes.filter(recipe => {
+            const filteredRecipes = sampleRecipes.filter((recipe) => {
                 const matchesSearchText = recipe.name.toLowerCase().includes(searchText);
                 const matchesCategory = filterCategory === '' || recipe.category === filterCategory;
                 const matchesComplexity = filterComplexity === '' || recipe.complexity === filterComplexity;
@@ -664,7 +666,7 @@
             const searchText = messageSearchBox.value.toLowerCase();
             const filterRead = messageReadFilter.value;
 
-            const filteredMessages = sampleMessages.filter(message => {
+            const filteredMessages = sampleMessages.filter((message) => {
                 const matchesSearchText = message.name.toLowerCase().includes(searchText) ||
                     message.email.toLowerCase().includes(searchText) ||
                     message.content.toLowerCase().includes(searchText);
@@ -688,7 +690,7 @@
             const searchText = userSearchBox.value.toLowerCase();
             const filterRole = userRoleFilter.value;
 
-            const filteredUsers = sampleUsers.filter(user => {
+            const filteredUsers = sampleUsers.filter((user) => {
                 const matchesSearchText = user.name.toLowerCase().includes(searchText) ||
                     user.email.toLowerCase().includes(searchText);
                 const matchesRole = filterRole === '' || user.role === filterRole;
@@ -788,7 +790,7 @@
 
 
 
-    </script>
+    </script>    
 </body>
 
 </html>

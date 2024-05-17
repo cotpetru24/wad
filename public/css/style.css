@@ -422,6 +422,8 @@ input[type="search"] {
 
 table {
   width: 100%;
+  /* table-layout: fixed; */
+  border-spacing: 5px;
   border-collapse: collapse;
   margin-top: 20px;
 }
@@ -431,12 +433,21 @@ td {
   border: 1px solid #9b59b6;
   padding: 10px;
   text-align: left;
+  /* height: 100px; Fixed height */
+    overflow: hidden; /* Hides overflowed content */
+    text-overflow: ellipsis; /* Adds ellipsis to overflowed text */
+    white-space: nowrap; /* Prevents text from wrapping */
 }
 
 th {
   background-color: #9b59b6;
   color: white;
 }
+td {
+  /* min-height: 50px;  Adjust this value as needed */
+  vertical-align: middle; /* This ensures content is centered vertically */
+}
+
 
 td img {
   max-width: 100px;
@@ -444,8 +455,20 @@ td img {
 }
 
 .actions {
-  display: flex;
+  /* display: flex; */
+  white-space: nowrap;
   gap: 10px;
+  text-align: center;
+  overflow: visible;
+
+
+}
+#actionsTh {
+  padding: 10px;
+  text-align: left;
+  /* height: 100px; Fixed height */
+width: auto;
+  white-space: nowrap; /* Prevents text from wrapping */
 }
 
 .actions button {

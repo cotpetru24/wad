@@ -1,34 +1,79 @@
-<div1>
-	<div2a>
-	</div>
-
-	<div2b>
-		
-		<div2b3a>
-
-			<div2b3a4a>
-			</div>
-
-
-			<div2b3a4b>
-			</div>
-		</div>
-		
-		
-
-
-		
-		<div2b3b>
-
-			<div2b3c4a>
-			</div>
-
-
-			<div2b3b4b>
-			</div>
-
-			<div2b3b4b>
-			</div>
-		</div>
-	</div>
-</div>
+<osldsc:LdsForm xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:Controls="clr-namespace:OlsonSoftware.LegacyDocumentSystem.Controls;assembly=LegacyDocsControls" xmlns:osldsc="clr-namespace:OlsonSoftware.LegacyDocumentSystem.Controls;assembly=LegacyDocsControls" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib">
+  <Grid osldsc:GridWithPadding.InternalMargin="5">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="320" />
+      <ColumnDefinition Width="160" />
+      <ColumnDefinition Width="120" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Is the loan amount known yet?" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_123aafasasdgasdfasd342a4996e7}" />
+    <osldsc:LdsTextBox Prefix="  " Text="{Binding Fields.LOAN_ITT_AmountKnownYet}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Name="NAME_123aafasasdgasdfasd342a4996e7" />
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="What is the loan amount?" Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_svrrtetsea80casdfasdfasd96e7}" />
+    <osldsc:LdsTextBox Prefix="£" Text="{Binding Fields.LOAN_ITT_Loan_From_ItoI_Amount}" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="8" Name="NAME_svrrtetsea80casdfasdfasd96e7" />
+    <!--Is Interest to be charged on this amount?-->
+    <!--Was any Interest charged on this amount?-->
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Is the loan to be paid into a joint bank account?" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="24" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_j0a547fbm67sdmn7824bv6e7}" />
+    <osldsc:LdsTextBox Prefix="  " Text="{Binding Fields.LOAN_ITT_PayIntoJointBankAccount}" Grid.Column="1" Grid.Row="24" Name="NAME_j0a547fbm67sdmn7824bv6e7" />
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Are these funds going to be used to purchase a property?" Grid.Column="0" Grid.Row="25" Grid.ColumnSpan="1" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_asdfasd321dfasd4sdfsdc4a2e7d99b}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_4245987654asdfsdfasdfsaasdfasdf4a2e7d99b}" />
+    <osldsc:LdsComboBox Prefix="  " SelectedValue="{Binding Fields.LOAN_ITT_To_Purchase_Property}" Grid.Column="1" Grid.Row="25" Name="NAME_4245987654asdfsdfasdfsaasdfasdf4a2e7d99b">
+      <s:String>Yes</s:String>
+      <s:String>No</s:String>
+    </osldsc:LdsComboBox>
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Do you want the Loan to be repaid on the sale of this Property?" Grid.Column="0" Grid.Row="26" Grid.ColumnSpan="1" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_property4245987654asdfsdfasdfsaasdfasdf4a2e7d99b}" />
+    <osldsc:LdsComboBox Prefix="  " SelectedValue="{Binding Fields.LOAN_ITT_LoanRepayProperty}" Grid.Column="1" Grid.Row="26" Name="NAME_property4245987654asdfsdfasdfsaasdfasdf4a2e7d99b">
+      <s:String>Yes</s:String>
+      <s:String>No</s:String>
+    </osldsc:LdsComboBox>
+    <osldsc:LdsTextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="Where are the funds to be loaned being paid from?" Grid.Column="0" Grid.Row="27" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_6522af61cfdd47f3807e171e0ac9ac3b}" />
+    <osldsc:LdsTextBox Prefix="  " Grid.ColumnSpan="2" Text="{Binding Fields.LOAN_ITT_FundsSource}" Grid.Column="1" Grid.Row="27" Name="NAME_6522af61cfdd47f3807e171e0ac9ac3b" />
+    <osldsc:LdsTextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="Source of the funds" Grid.Column="0" Grid.Row="28" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_a6d8f30f9f2e47e5ahghgfh5656349d3c}" />
+    <osldsc:LdsTextBox Prefix="  " Grid.ColumnSpan="2" Text="{Binding Fields.LOAN_ITT_FundsSourceOther}" Grid.Column="1" Grid.Row="28" Name="NAME_a6d8f30f9f2e47e5ahghgfh5656349d3c" />
+  </Grid>
+</osldsc:LdsForm>
