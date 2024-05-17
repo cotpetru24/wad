@@ -3,13 +3,19 @@ import { sendMessage } from './logic.js';
 logic.getRecipes();
 document.getElementById('year').textContent = new Date().getFullYear();
 
-const tabButtonArray = document.querySelectorAll('.tabs');
-tabButtonArray.forEach(tabButton => {
-    tabButton.addEventListener('click', () => {
-        document.querySelector('.tabSelected')?.classList.remove('tabSelected');
-        tabButton.classList.add('tabSelected');
-    });
-});
+
+        // Tabs functionality for Admin Page
+        const contentSections = document.querySelectorAll('.contentSection');
+        const tabButtonArray = document.querySelectorAll('.tabs');
+        tabButtonArray.forEach((tabButton, index) => {
+            tabButton.addEventListener('click', () => {
+                document.querySelector('.tabSelected')?.classList.remove('tabSelected');
+                tabButton.classList.add('tabSelected');
+                contentSections.forEach((section, sectionIndex) => {
+                    section.style.display = sectionIndex === index ? 'block' : 'none';
+                });
+            });
+        });
 
 const overlay = document.getElementById('overlay');
 const contactForm = document.getElementById('contactFormDiv');
