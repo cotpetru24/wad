@@ -13,7 +13,7 @@
 <body>
     <div id="wrapper">
         <header>
-            <img src="./public/img/logo.jpg" alt="logo" style="height: 125px; width: auto; margin: 25px;">
+            <a href="index.html"><img id="headerLogo" src="./public/img/logo.jpg" alt="logo"/></a>         
             <div class="tabsDiv" id="tabsDiv">
                 <button class="tabs tabSelected" id="recipesTab">Recipes</button>
                 <button class="tabs" id="messagesTab">Messages</button>
@@ -21,7 +21,7 @@
             </div>
             <nav>
                 <div id="nav">
-                    <button id="homeButton" onclick="location.href='./index.html'">Home</button>
+                    <button id="homeButton" onclick="location.href='./index.html'"></button>
                     <button>Register</button>
                     <button>Login</button>
                     <button onclick="location.href='/adminPage.html'">Admin Page</button>
@@ -215,7 +215,9 @@
             </div>
         </main>
         <footer class="admin-footer">
-            <p id="year">&copy; <span id="year"></span> Your Company. All rights reserved.</p>
+            <!-- to check why this is not diplayed correctly -->
+            <p id="year">&copy;<span id="yearSpan"></span> Your Company. All rights reserved.</p>
+            <!-- <p>ahjskdalksdjlkajsdkljaksdjkladjsl</p> -->
         </footer>
     </div>
     <div id="overlay"></div>
@@ -310,6 +312,7 @@
             <button class="button" id="saveUserChangesButton">Save Changes</button>
         </div>
     </div>
+<!-- not sure what this does//////////to check////////////////////////////////////////// -->
     <div class="popup" id="confirmActionPopup">
         <div class="popupHeader">
             <h2>Confirm Action</h2>
@@ -324,15 +327,27 @@
             </div>
         </div>
     </div>
+    <!-- \\\\\\\\\\\\//////////////////to remove the below when add/edit recipe is ready -->
     <div class="contentSection">
         <h2>Upload Image</h2>
         <input type="file" id="imageInput" accept="image/*">
         <button id="uploadButton">Upload Image</button>
     </div>
-    <script>
-        // Set current year in the footer
-        document.getElementById('year').textContent = new Date().getFullYear();
 
+
+
+
+
+
+
+
+
+
+<!-- to sort out the scripts and move the to js fiels-->
+
+
+
+    <script>
         // Tabs functionality for Admin Page
         const tabButtonArray = document.querySelectorAll('.tabs');
         const contentSections = document.querySelectorAll('.contentSection');
@@ -347,88 +362,17 @@
             });
         });
 
-        // Toggle Add Recipe Form
-        document.getElementById("toggleFormButton").addEventListener("click", function () {
-            const form = document.getElementById("addRecipeForm");
-            form.style.display = form.style.display === "none" ? "block" : "none";
-        });
 
-        // Toggle Add User Form
-        document.getElementById("toggleUserFormButton").addEventListener("click", function () {
-            const form = document.getElementById("addUserForm");
-            form.style.display = form.style.display === "none" ? "block" : "none";
-        });
 
-        //Function to add a recipe row to the table
-        function addRecipeRow(recipe) {
-            const recipesList = document.getElementById('recipesList');
-            const row = document.createElement('tr');
 
-            row.innerHTML = `
-                <td>${recipe.name}</td>
-                <td>${recipe.description}</td>
-                <td>${recipe.category}</td>
-                <td>${recipe.ingredients.join(', ')}</td>
-                <td>${recipe.complexity}</td>
-                <td>${recipe.prepTime}</td>
-                <td>${recipe.rating}</td>
-                <td><img src="${recipe.image}" alt="Dish Image"></td>
-                <td class="actions">
-                    <button id="todelete" onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
-                    <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
-                    <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
-                </td>
-            `;
 
-            recipesList.appendChild(row);
-        }
 
-        // Function to add a message row to the table
-        function addMessageRow(message) {
-            const messagesList = document.getElementById('messagesList');
-            const row = document.createElement('tr');
 
-            row.innerHTML = `
-                <td>${message.flagged ? '<div class="flagged-indicator"></div>' : ''}</td>
-                <td>${message.name}</td>
-                <td>${message.email}</td>
-                <td>${message.content}</td>
-                <td>${message.date}</td>
-                <td>${message.read ? 'Read' : 'Unread'}</td>
-                <td>${message.flagged ? 'Flagged' : 'Not Flagged'}</td>
-                <td class="actions">
-                    <button onclick="viewMessage(${JSON.stringify(message)})">View</button>
-                    <button onclick="toggleFlagMessage(${message.id})">${message.flagged ? 'Unflag' : 'Flag'}</button>
-                    <button onclick="confirmAction('Delete message?', 'deleteMessage', ${message.id})">Delete</button>
-                </td>
-            `;
-
-            messagesList.appendChild(row);
-        }
-
-        // Function to add a user row to the table
-        function addUserRow(user) {
-            const usersList = document.getElementById('usersList');
-            const row = document.createElement('tr');
-
-            row.innerHTML = `
-                <td>${user.name}</td>
-                <td>${user.email}</td>
-                <td>${user.role}</td>
-                <td class="actions">
-                    <button onclick="editUser(${JSON.stringify(user)})">Edit</button>
-                    <button onclick="confirmAction('Reset password?', 'resetPassword', ${user.id})">Reset Password</button>
-                    <button onclick="confirmAction('Disable user?', 'disableUser', ${user.id})">Disable</button>
-                    <button onclick="confirmAction('Unlock user?', 'unlockUser', ${user.id})">Unlock</button>
-                    <button onclick="confirmAction('Delete user?', 'deleteUser', ${user.id})">Delete</button>
-                </td>
-            `;
-
-            usersList.appendChild(row);
-        }
 
         // Function to preview recipe
         function previewRecipe(recipe) {
+            console.log("preview recipe function called");
+
             const previewPopup = document.getElementById('previewRecipePopup');
             const overlay = document.getElementById('overlay');
             const previewContent = document.getElementById('previewRecipeContent');
@@ -554,52 +498,52 @@
             document.getElementById('overlay').classList.remove('active');
         });
 
-        // Sample data for testing
-        const sampleRecipes = [
-            {
-                id: 1,
-                name: 'Butter Chicken',
-                description: 'A creamy and delicious butter chicken.',
-                category: 'Indian',
-                ingredients: ['chicken', 'butter', 'cream', 'tomato puree'],
-                complexity: 'Medium',
-                prepTime: '60 mins',
-                rating: 4,
-                image: 'path/to/image.jpg'
-            }
-        ];
+        // // Sample data for testing
+        // const sampleRecipes = [
+        //     {
+        //         id: 1,
+        //         name: 'Butter Chicken',
+        //         description: 'A creamy and delicious butter chicken.',
+        //         category: 'Indian',
+        //         ingredients: ['chicken', 'butter', 'cream', 'tomato puree'],
+        //         complexity: 'Medium',
+        //         prepTime: '60 mins',
+        //         rating: 4,
+        //         image: 'path/to/image.jpg'
+        //     }
+        // ];
 
-        const sampleMessages = [
-            {
-                id: 1,
-                name: 'John Doe',
-                email: 'john.doe@example.com',
-                content: 'Hello, I have a question...',
-                date: '2023-05-15',
-                read: false,
-                flagged: false
-            }
-        ];
+        // const sampleMessages = [
+        //     {
+        //         id: 1,
+        //         name: 'John Doe',
+        //         email: 'john.doe@example.com',
+        //         content: 'Hello, I have a question...',
+        //         date: '2023-05-15',
+        //         read: false,
+        //         flagged: false
+        //     }
+        // ];
 
-        const sampleUsers = [
-            {
-                id: 1,
-                name: 'Admin User',
-                email: 'admin@example.com',
-                role: 'admin'
-            },
-            {
-                id: 2,
-                name: 'Regular User',
-                email: 'user@example.com',
-                role: 'user'
-            }
-        ];
+        // const sampleUsers = [
+        //     {
+        //         id: 1,
+        //         name: 'Admin User',
+        //         email: 'admin@example.com',
+        //         role: 'admin'
+        //     },
+        //     {
+        //         id: 2,
+        //         name: 'Regular User',
+        //         email: 'user@example.com',
+        //         role: 'user'
+        //     }
+        // ];
 
-        // Adding sample data to tables for testing
-        sampleRecipes.forEach(addRecipeRow);
-        sampleMessages.forEach(addMessageRow);
-        sampleUsers.forEach(addUserRow);
+        // // Adding sample data to tables for testing
+        // sampleRecipes.forEach(addRecipeRow);
+        // sampleMessages.forEach(addMessageRow);
+        // sampleUsers.forEach(addUserRow);
 
         // Search and filter functionality for recipes
         const recipeSearchBox = document.getElementById('recipeSearchBox');
@@ -621,7 +565,7 @@
             const filterRating = recipeRatingFilter.value;
             const filterPrepTime = recipePrepTimeFilter.value;
 
-            const filteredRecipes = sampleRecipes.filter(recipe => {
+            const filteredRecipes = sampleRecipes.filter((recipe) => {
                 const matchesSearchText = recipe.name.toLowerCase().includes(searchText);
                 const matchesCategory = filterCategory === '' || recipe.category === filterCategory;
                 const matchesComplexity = filterComplexity === '' || recipe.complexity === filterComplexity;
@@ -646,7 +590,7 @@
             const searchText = messageSearchBox.value.toLowerCase();
             const filterRead = messageReadFilter.value;
 
-            const filteredMessages = sampleMessages.filter(message => {
+            const filteredMessages = sampleMessages.filter((message) => {
                 const matchesSearchText = message.name.toLowerCase().includes(searchText) ||
                     message.email.toLowerCase().includes(searchText) ||
                     message.content.toLowerCase().includes(searchText);
@@ -670,7 +614,7 @@
             const searchText = userSearchBox.value.toLowerCase();
             const filterRole = userRoleFilter.value;
 
-            const filteredUsers = sampleUsers.filter(user => {
+            const filteredUsers = sampleUsers.filter((user) => {
                 const matchesSearchText = user.name.toLowerCase().includes(searchText) ||
                     user.email.toLowerCase().includes(searchText);
                 const matchesRole = filterRole === '' || user.role === filterRole;
@@ -707,6 +651,8 @@
             }
         });
 
+
+        //this hould go into logic folder
         async function insertImage(file) {
             try {
                 const reader = new FileReader();
@@ -770,7 +716,7 @@
 
 
 
-    </script>
+    </script>    
 </body>
 
 </html>

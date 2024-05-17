@@ -56,6 +56,37 @@ function getRecipesList($conn, $filterCriteria = [])
     $stmt->close();
 }
 
+// Fucntion to retrive messages from db
+function getMessagesList($conn){ 
+    $sql = "SELECT * FROM messages";
+    $stmt = $conn->prepare($sql);
+    $result = $conn->query($sql);
+    if ($stmt->execute()) {
+        if ($result) {
+            $results = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($results, $row);
+            }
+
+        echo json_encode($results);
+        } else {
+            $noResults = [
+                [   /** to check in db if these fields are correct */
+                    "message_id" => "0",
+                    "sender_first_name" => "No results",
+                    "sender_last_name" => "No results",
+                    "message_text" => "No messages to list",
+                    "message_flagged" => "0"
+                ]
+            ];
+            echo json_encode($noResults);
+        }
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error sending message: " . $stmt->error]);
+    }
+    $stmt->close();
+}
+
 function removeRecipe($conn, $id)
 {
     $sql = 'DELETE FROM recipes WHERE recipe_id = ?';
@@ -155,6 +186,8 @@ function sendMessage($conn, $data)
     $stmt->close();
 }
 
+
+//Function to insert an image in db
 function insertImage($conn, $base64Image)
 {
     // Decode the Base64 encoded image

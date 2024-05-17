@@ -7,49 +7,136 @@ function addRecipes(recipesList){
     list.innerText = "";
 
     recipesList.forEach((recipe) => {
-        //assign newly created page element to variables
-        let recipeDiv = document.createElement("div");
-        let recipeImgDiv = document.createElement("div");
+
+        //////----------Recipe img div---------\\\\\\\
         let recipeImg = document.createElement("img");
-        let recipeDescriptionDiv = document.createElement("div");
-        let recipeDetailsDiv = document.createElement("div");
+        if (recipe.dish_img){
+            recipeImg.src = recipe.dish_img;
+            recipeImg.style.maxHeight = "350px";
+            recipeImg.style.maxWidth = "200px"
+        }
+        // else {
+        //     recipeImg.src = 'default_image_path'; // Optionally set a default image path
+        // }
+        let recipeImgDiv = document.createElement("div");
+        recipeImgDiv.appendChild(recipeImg);
+
+
+        //////----------Recipe heading div---------\\\\\\\
+        //Heading
+        let recipeHeading = document.createElement("h2")
+        recipeHeading.innerHTML = recipe.dish_name
+        let recipeHeadingH2Div = document.createElement("div")
+        recipeHeadingH2Div.appendChild(recipeHeading);
+
+        //Fav Btn
+        let recipeAddFavBtn = document.createElement("button")
+        recipeAddFavBtn.textContent = "AddFav" //to add here image instead of text   
+        let recipeHeadingBtnDiv = document.createElement("div")
+        recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
+
+        //Recipe Heading Div
+        let recipeHeadingDiv = document.createElement("div");
+        recipeHeadingDiv.appendChild(recipeHeadingH2Div);
+        recipeHeadingDiv.appendChild(recipeHeadingBtnDiv);
+
+
+        //////----------Recipe subheading div---------\\\\\\\
+        let recipeRating = document.createElement("h3");
+        recipeRating.innerHTML = recipe.dish_rating;
+        let recipeNonvegetarianVegetarian = document.createElement("h3");
+        recipeNonvegetarianVegetarian.innerHTML = recipe.category;
+
+        //Recipe Subheading Div
+        let recipeSubheadingDiv = document.createElement("div");
+        recipeSubheadingDiv.appendChild(recipeRating);
+        recipeSubheadingDiv.appendChild(recipeNonvegetarianVegetarian);
+
+
+        //////----------Recipe head div---------\\\\\\\
+        let recipeHeadDiv = document.createElement("div");
+        recipeHeadDiv.appendChild(recipeHeadingDiv)
+        recipeHeadDiv.appendChild(recipeSubheadingDiv)
+
+
+
+        //////----------Recipe info div---------\\\\\\\
+        //Prep time div
+        let prepTimeHeading = document.createElement('h3');
+        prepTimeHeading.innerHTML = "Prep Time";
+        let prepTime = document.createElement("h4");
+        prepTime.innerHTML = recipe.dish_prep_time;
+        let prepTimeDiv = document.createElement("div");
+        prepTimeDiv.appendChild(prepTimeHeading);
+        prepTimeDiv.appendChild(prepTime);
+
+        //Dificulty div
+        let dificultyHeading = document.createElement('h3');
+        dificultyHeading.innerHTML = "Dificulty";
+        let dificulty = document.createElement('h4');
+        dificulty.innerHTML = recipe.dish_dish_complexity;
+        let dificultyDiv = document.createElement('div');
+        dificultyDiv.appendChild(dificultyHeading);
+        dificultyDiv.appendChild(dificulty);
+
+        //Recipe info div
+        let recipeInfoDiv = document.createElement('div');
+        recipeInfoDiv.appendChild(prepTimeDiv);
+        recipeInfoDiv.appendChild(dificultyDiv);
+
+
+
+        //////----------Recipe footer div---------\\\\\\\
+        //Recipe actions div
+        let expandBtn = document.createElement('button');
+        expandBtn.textContent = "Expand";
+        let recipeActionsDiv = document.createElement('div');
+        recipeActionsDiv.appendChild(expandBtn);
+        
+        let recipeFooterDiv = document.createElement('div');
+        recipeFooterDiv.appendChild(recipeInfoDiv);
+        recipeFooterDiv.appendChild(recipeActionsDiv);
+
+
+        //////----------Recipe description div---------\\\\\\\
+        //Recipe description paragraph div        
         let recipeDescriptionPar = document.createElement("p")
-        let recipeMainIngredientsDiv = document.createElement("div")
-        let recipeIngredientsPar = document.createElement("p")
+        recipeDescriptionPar.innerHTML = recipe.dish_recipe_description;
+        let recipeDescriptionParDiv = document.createElement("div")
+        recipeDescriptionParDiv.appendChild(recipeDescriptionPar);
+        
+        //Recipe description div
+        let recipeDescriptionDiv = document.createElement('div');
+        recipeDescriptionDiv.appendChild(recipeHeadDiv);
+        recipeDescriptionDiv.appendChild(recipeDescriptionParDiv);
+        recipeDescriptionDiv.appendChild(recipeFooterDiv);
 
-
+        
+        //////----------Recipe div---------\\\\\\\
+        let recipeDiv = document.createElement('div');
         recipeDiv.id = "recipe_ID" + recipe.recipe_id;
+        recipeDiv.appendChild(recipeImgDiv);
+        recipeDiv.appendChild(recipeDescriptionDiv);  
 
 
         recipeDiv.classList.add("recipe")
         recipeImgDiv.classList.add("dishImage")
         recipeDescriptionDiv.classList.add("recipeDescription")
-        recipeDetailsDiv.classList.add("recipeDetails")
-        recipeMainIngredientsDiv.classList.add("recipeMainIngredients")
-
-
-        //setting the values of the new elements
-        if (recipe.dish_img){
-            recipeImg.src = recipe.dish_img;
-            recipeImg.style.height = "350px"; // Set the height to 300px
-        }
-        // else {
-        //     recipeImg.src = 'default_image_path'; // Optionally set a default image path
-        // }
-
-        recipeImgDiv.appendChild(recipeImg);
-        recipeDetailsDiv.appendChild(recipeDescriptionPar);
-        recipeMainIngredientsDiv.appendChild(recipeIngredientsPar);
-        recipeDescriptionDiv.appendChild(recipeDetailsDiv)
-        recipeDescriptionDiv.appendChild(recipeMainIngredientsDiv)
-        recipeDiv.appendChild(recipeImgDiv)
-        recipeDiv.appendChild(recipeDescriptionDiv)
+        recipeHeadDiv.classList.add("recipeDetails")
+        recipeFooterDiv.classList.add("recipeFooterDiv");
+        recipeFooterDiv.classList.add("recipeHeadDiv")
+        recipeHeadingDiv.classList.add("recipeHeadDiv");
+        recipeSubheadingDiv.classList.add("recipeHeadDiv");
+        recipeInfoDiv.classList.add("recipeHeadDiv");
 
 
 
 
-        recipeDescriptionPar.innerHTML = recipe.dish_recipe_description
-        recipeIngredientsPar.innerHTML = recipe.dish_ingredients
+
+
+
+
+
 
 
 
@@ -57,6 +144,14 @@ function addRecipes(recipesList){
 
         // completeButton.addEventListener("click", ()=> {toggleCompleted(task)});
         // deleteButton.addEventListener("click", ()=> {removeTask(task)});
+
+
+
+
+
+
+
+
 
         list.appendChild(recipeDiv);
     });
@@ -70,11 +165,26 @@ function addRecipes(recipesList){
 // input.addEventListener("keypress", (k=>{if(k.key==="Enter") {addButton.click()}}));
 
 
-
-
+// 
+// this is the old one in case the above doesn't work use this onw
+// export async function getRecipes(){
+//     try{
+//         const response = await fetch("http://localhost/data/index.php");
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+//         const recipes = await response.json();
+//         addRecipes(recipes);
+//     }
+//     catch(error){
+//         console.log("Error retrieving data: " + error);
+//     }
+// }
+//the new get recipes function
 export async function getRecipes(){
     try{
-        const response = await fetch("http://localhost/data/index.php");
+        const param = new URLSearchParams ({"function" : "getRecipesList"});
+        const response = await fetch("http://localhost/data/index.php", {method: "GET", body: param});
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

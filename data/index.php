@@ -19,6 +19,20 @@ error_log(print_r($data, TRUE));
 $response = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+    // this is for the new get recipes and messages list, comment it out if it doesnt work to add this to list messages
+
+    if(isset($data['function'])) {
+        switch ($data['function']) {
+            case 'getRecipesList':
+                getRecipesList($conn);
+            break;
+            case 'getMessagesList':
+                getMessagesList($conn);
+            break;
+        }
+    }
+
     getRecipesList($conn);
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($data['function'])) {

@@ -12,9 +12,6 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  /* Ensures there are no extra spacings outside the viewport area */
-  box-sizing: border-box;
-  /* Includes padding and border in the element's total width and height */
   background-color: white;
 }
 
@@ -83,7 +80,7 @@ main {
   padding: 15px;
 }
 
-.recipeMainIngredients {
+.recipeFooterDiv {
   border: 2px dashed green;
   padding: 15px;
 }
@@ -119,7 +116,6 @@ nav {
 }
 
 #mainDiv {
-  /*border: 2px solid pink;*/
   flex-grow: 1;
 }
 
@@ -137,7 +133,6 @@ nav {
 
 input[type="search"] {
   flex-grow: 1;
-  /* Allows the input field to grow and fill available space */
   padding: 0px 10px;
   border: none;
   font-size: 16px;
@@ -221,7 +216,7 @@ input[type="search"] {
 #homeButton {
   height: 100%;
   width: auto;
-  background-image: url(./public/img/home_icon.png);
+  background-image: url(/public/img/home_icon.png);
   background-size: 17px 17px;
   background-position: center;
   background-repeat: no-repeat;
@@ -231,13 +226,13 @@ input[type="search"] {
 }
 
 #homeButton:hover {
-  background-image: url(./public/img/icons8-home-26_hover.png);
+  background-image: url(/public/img/icons8-home-26_hover.png);
 }
 
 #searchButton {
   height: 26px;
   width: 26px;
-  background-image: url(./public/img/search_icon.png);
+  background-image: url(/public/img/search_icon.png);
   background-size: 17px 17px;
   background-position: center;
   background-repeat: no-repeat;
@@ -246,35 +241,27 @@ input[type="search"] {
 }
 
 #searchButton:hover {
-  background-image: url(./public/img/icons8-search-26_hover.png);
+  background-image: url(/public/img/icons8-search-26_hover.png);
 }
 
 #nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* This aligns children vertically center */
   justify-content: space-between;
-  /* This aligns children horizontally center (optional) */
   height: 50px;
-  /* Adjust height as needed */
 }
 
 #footer {
   display: flex;
   flex-direction: column;
   text-align: center;
-  /* Center-align text */
   padding: 20px 0;
-  /* Padding above and below the text */
   font-size: 14px;
-  /* Smaller font size */
   border-top: 4px solid #9b59b6;
   justify-content: space-between;
-
   width: 100%;
   min-height: 300px;
-  margin-top: auto;
   background-color: #0c0723;
   color: white;
   margin-top: 30px;
@@ -282,16 +269,12 @@ input[type="search"] {
 
 #footerDiv a {
   color: white;
-  /* Default text color */
   text-decoration: none;
-  /* Removes underline */
   font-weight: normal;
-  /* Normal text weight */
 }
 
 #footerDiv a:hover {
   color: #0056b3;
-  /* Change color on hover */
 }
 
 #getInTouchBtn {
@@ -302,6 +285,7 @@ input[type="search"] {
   cursor: pointer;
   padding: 5px;
   margin-top: 30px;
+  width: 250px;
 }
 
 #emailContact {
@@ -412,28 +396,18 @@ input[type="search"] {
   background-color: #0c0723;
 }
 
-/* #contactUsForm {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-} */
-
-/* Additional styles for the admin page footer */
 .admin-footer {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 5px 0;
-  /* Adjusted padding for thinner footer */
   font-size: 14px;
   border-top: 4px solid #9b59b6;
   width: 100%;
   background-color: #0c0723;
   color: white;
   height: 50px;
-  /* Fixed height for a thinner footer */
 }
 
 .tabsDiv {
@@ -448,6 +422,8 @@ input[type="search"] {
 
 table {
   width: 100%;
+  /* table-layout: fixed; */
+  border-spacing: 5px;
   border-collapse: collapse;
   margin-top: 20px;
 }
@@ -457,12 +433,21 @@ td {
   border: 1px solid #9b59b6;
   padding: 10px;
   text-align: left;
+  /* height: 100px; Fixed height */
+    overflow: hidden; /* Hides overflowed content */
+    text-overflow: ellipsis; /* Adds ellipsis to overflowed text */
+    white-space: nowrap; /* Prevents text from wrapping */
 }
 
 th {
   background-color: #9b59b6;
   color: white;
 }
+td {
+  /* min-height: 50px;  Adjust this value as needed */
+  vertical-align: middle; /* This ensures content is centered vertically */
+}
+
 
 td img {
   max-width: 100px;
@@ -470,8 +455,20 @@ td img {
 }
 
 .actions {
-  display: flex;
+  /* display: flex; */
+  white-space: nowrap;
   gap: 10px;
+  text-align: center;
+  overflow: visible;
+
+
+}
+#actionsTh {
+  padding: 10px;
+  text-align: left;
+  /* height: 100px; Fixed height */
+width: auto;
+  white-space: nowrap; /* Prevents text from wrapping */
 }
 
 .actions button {
@@ -488,7 +485,6 @@ td img {
   color: #9b59b6;
 }
 
-/* Padding adjustments */
 .container {
   padding-top: 30px;
 }
@@ -501,7 +497,6 @@ td img {
   margin-bottom: 20px;
 }
 
-/* Form styling */
 .form-group {
   margin-bottom: 15px;
 }
@@ -550,7 +545,6 @@ td img {
   color: #9b59b6;
 }
 
-/* Popup styling */
 .popup {
   position: fixed;
   top: 50%;
@@ -624,7 +618,6 @@ td img {
   margin-top: 20px;
 }
 
-/* Search and filter styling */
 .search-filter {
   display: flex;
   justify-content: space-between;
@@ -654,6 +647,7 @@ td img {
 
 .search-filter .filter-group select {
   margin-top: 10px;
+  width: auto;
 }
 
 .flagged-indicator {
@@ -662,4 +656,27 @@ td img {
   background-color: red;
   border-radius: 50%;
   margin: auto;
+}
+
+.tabs img {
+  height: 20px;
+  width: auto;
+  margin-right: 5px;
+}
+
+#headerLogo {
+  height: 125px;
+  width: auto;
+  margin: 25px;
+}
+
+#footerLogo {
+  height: 50px;
+  width: auto;
+}
+
+.recipeHeadDiv{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
 }
