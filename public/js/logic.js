@@ -165,11 +165,26 @@ function addRecipes(recipesList){
 // input.addEventListener("keypress", (k=>{if(k.key==="Enter") {addButton.click()}}));
 
 
-
-
+// 
+// this is the old one in case the above doesn't work use this onw
+// export async function getRecipes(){
+//     try{
+//         const response = await fetch("http://localhost/data/index.php");
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+//         const recipes = await response.json();
+//         addRecipes(recipes);
+//     }
+//     catch(error){
+//         console.log("Error retrieving data: " + error);
+//     }
+// }
+//the new get recipes function
 export async function getRecipes(){
     try{
-        const response = await fetch("http://localhost/data/index.php");
+        const param = new URLSearchParams ({"function" : "getRecipesList"});
+        const response = await fetch("http://localhost/data/index.php", {method: "GET", body: param});
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

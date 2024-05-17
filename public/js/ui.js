@@ -77,7 +77,7 @@ sendMsgBtn.addEventListener("click", (event) => {
 
 
         //Function to add a recipe row to the table
-        function addRecipeRow(recipe) {
+        export function addRecipeRow(recipe) {
             const recipesList = document.getElementById('recipesList');
             const row = document.createElement('tr');
 
@@ -100,6 +100,51 @@ sendMsgBtn.addEventListener("click", (event) => {
             recipesList.appendChild(row);
         }
 
+                // Sample data for testing
+                const sampleRecipes = [
+                    {
+                        id: 1,
+                        name: 'Butter Chicken',
+                        description: 'A creamy and delicious butter chicken.',
+                        category: 'Indian',
+                        ingredients: ['chicken', 'butter', 'cream', 'tomato puree'],
+                        complexity: 'Medium',
+                        prepTime: '60 mins',
+                        rating: 4,
+                        image: 'path/to/image.jpg'
+                    }
+                ];
+        
+                const sampleMessages = [
+                    {
+                        id: 1,
+                        name: 'John Doe',
+                        email: 'john.doe@example.com',
+                        content: 'Hello, I have a question...',
+                        date: '2023-05-15',
+                        read: false,
+                        flagged: false
+                    }
+                ];
+        
+                const sampleUsers = [
+                    {
+                        id: 1,
+                        name: 'Admin User',
+                        email: 'admin@example.com',
+                        role: 'admin'
+                    },
+                    {
+                        id: 2,
+                        name: 'Regular User',
+                        email: 'user@example.com',
+                        role: 'user'
+                    }
+                ];
+        
+                // Adding sample data to tables for testing
+                sampleRecipes.forEach(addRecipeRow);
+        
 
 
         // Function to add a message row to the table
@@ -147,6 +192,7 @@ sendMsgBtn.addEventListener("click", (event) => {
             usersList.appendChild(row);
         }
 
+        
 
 
 
