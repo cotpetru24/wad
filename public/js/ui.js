@@ -140,19 +140,7 @@ sendMsgBtn.addEventListener("click", (event) => {
                         image: 'path/to/image.jpg'
                     }
                 ];
-        
-                const sampleMessages = [
-                    {
-                        id: 1,
-                        name: 'John Doe',
-                        email: 'john.doe@example.com',
-                        content: 'Hello, I have a question...',
-                        date: '2023-05-15',
-                        read: false,
-                        flagged: false
-                    }
-                ];
-        
+               
                 const sampleUsers = [
                     {
                         id: 1,

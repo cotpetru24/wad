@@ -72,6 +72,7 @@ dish_origin_id INT NOT NULL,
 dish_recipe_description TEXT NOT NULL,
 dish_category_id INT NOT NULL,
 dish_ingredients JSON NOT NULL,
+dish_steps JSON, 
 dish_complexity_id INT NOT NULL,
 dish_prep_time INT,
 dish_img LONGBLOB,
@@ -492,3 +493,85 @@ inner join category on recipes.dish_category_id=category.category_id
 inner join complexity on recipes.dish_complexity_id=complexity_id
 inner join origin on recipes.dish_origin_id=origin.origin_id
 order by recipes.dish_id asc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO recipes (dish_name, dish_origin_id, dish_recipe_description, dish_category_id, dish_ingredients, dish_complexity_id, dish_prep_time, steps)
+VALUES 
+-- Butter Chicken
+(
+    'Butter Chicken', 
+    1,
+    'Butter Chicken, also known as Murgh Makhani, is a beloved Indian dish that has gained international acclaim for its tantalizing flavors and rich, creamy texture. Originating from the Indian subcontinent, this dish beautifully marries tender, marinated chicken with a luscious tomato-based gravy, creating a culinary masterpiece that is both comforting and indulgent. The chicken is first marinated with spices and lemon juice, then cooked in butter to achieve a succulent and flavorful base. This is followed by the preparation of a vibrant tomato gravy, enriched with cream and aromatic spices like garam masala, which gives Butter Chicken its distinctive taste and smooth consistency. This step-by-step guide will help you recreate this classic dish in your own kitchen, ensuring you capture the authentic flavors and textures that make Butter Chicken a favorite for many. Whether you\'re serving it with naan, roti, or steamed rice, this dish is sure to impress and satisfy.',
+    1,  
+    JSON_ARRAY(
+        '500g boneless chicken, cut into bite-sized pieces',
+        '2 tbsp butter',
+        '1 tbsp lemon juice (for marinade)',
+        '1 tbsp lemon juice (for cooking)',
+        '1 tsp red chili powder (divided, for marinade)',
+        '1/2 tsp red chili powder (for cooking)',
+        '1 tsp salt (for marinade)',
+        'Salt to taste',
+        '1 cup tomato puree',
+        '1 cup fresh cream',
+        '1 tsp garam masala',
+        'Fresh coriander leaves, chopped (for garnish)'
+    ),
+    3,
+    60,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Marinate the Chicken',
+            'description', 'In a large bowl, combine the chicken pieces with 1 tsp salt, 1/2 tsp red chili powder, and 1 tbsp lemon juice. Mix well to ensure all chicken pieces are evenly coated with the marinade. Cover the bowl and let the chicken marinate for at least 30 minutes, preferably 1-2 hours, to allow the flavors to penetrate the meat. This step is crucial as it enhances the flavor of the chicken and makes it tender.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Cook the Chicken',
+            'description', 'Heat 2 tbsp butter in a large pan over medium heat. Once the butter has melted and is hot, add the marinated chicken pieces to the pan. Cook the chicken, stirring occasionally, until it is fully cooked and has a nice golden brown color on the outside. This should take about 10-12 minutes. Ensure the chicken pieces are cooked through and no longer pink in the center. Remove the chicken from the pan and set it aside.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Prepare the Gravy',
+            'description', 'In the same pan, add the tomato puree. Add 1/2 tsp red chili powder and salt to taste. Cook the tomato puree over medium heat for about 10 minutes, stirring occasionally. The tomato puree should thicken and lose its raw taste. Cooking the tomatoes thoroughly is essential for a rich and flavorful gravy.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Combine Chicken and Gravy',
+            'description', 'Once the tomato puree is ready, add the cooked chicken pieces back into the pan. Stir well to coat the chicken pieces with the tomato gravy. Make sure the chicken is fully submerged in the gravy for even flavor distribution.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Add Cream and Garam Masala',
+            'description', 'Pour in 1 cup of fresh cream and stir to combine. The cream will give the gravy a rich and creamy texture. Add 1 tsp garam masala and mix well. Let the butter chicken simmer on low heat for about 10-15 minutes. This simmering allows the flavors to meld together and creates a luscious, creamy sauce.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Garnish and Serve',
+            'description', 'Garnish the butter chicken with freshly chopped coriander leaves. Serve hot with naan, roti, or steamed rice. The fresh coriander adds a burst of color and a hint of freshness to the dish.'
+        )
+    )
+);
