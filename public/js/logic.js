@@ -184,7 +184,12 @@ function addRecipes(recipesList){
 export async function getRecipes(){
     try{
         const param = new URLSearchParams ({"function" : "getRecipesList"});
-        const response = await fetch("http://localhost/data/index.php", {method: "GET", body: param});
+        const response = await fetch(`http://localhost/data/index.php?${param.toString()}`,
+                {method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -256,3 +261,48 @@ export async function sendMessage(jsonData){
         console.log("Error sending message:", error);
     }
 }
+
+        // Function to view message
+        function addMessage(message) {
+            const viewMessagePopup = document.getElementById('viewMessagePopup');
+            const overlay = document.getElementById('overlay');
+            const viewMessageContent = document.getElementById('viewMessageContent');
+
+            viewMessageContent.innerHTML = `
+                <p><strong>Name:</strong> ${message.name}</p>
+                <p><strong>Email:</strong> ${message.email}</p>
+                <p><strong>Message:</strong> ${message.content}</p>
+                <p><strong>Date:</strong> ${message.date}</p>
+                <p><strong>Status:</strong> ${message.read ? 'Read' : 'Unread'}</p>
+            `;
+
+            viewMessagePopup.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        // sampleMessages.forEach(addMessageRow);
+
+export async function getMessages(){
+    try{
+        const param = new URLSearchParams ({"function" : "getMessagesList"});
+
+
+        const response = await fetch(`http://localhost/data/index.php?${param.toString()}`, 
+        {method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        });        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const messages = await response.json();
+        return messages;
+    }
+    catch(error){
+        console.log("Error getting messages:", error);
+    }
+}
+
+

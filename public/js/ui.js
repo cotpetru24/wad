@@ -1,7 +1,15 @@
 import * as logic from './logic.js';
-import { sendMessage } from './logic.js';
+// import { sendMessage } from './logic.js';
+
+
 logic.getRecipes();
 document.getElementById('year').textContent = new Date().getFullYear();
+
+
+
+
+
+
 
 
         // Tabs functionality for Admin Page
@@ -16,6 +24,21 @@ document.getElementById('year').textContent = new Date().getFullYear();
                 });
             });
         });
+
+        const messagesTab = document.getElementById("messagesTab");
+        // messagesTab.addEventListener('click', ()=>{addMessageRow(logic.getMessages())});
+
+        messagesTab.addEventListener('click', async () => {
+            try {
+                const messages = await logic.getMessages();
+                messages.forEach(message => addMessageRow(message));
+            } catch (error) {
+                console.error("Error fetching messages:", error);
+            }
+        });
+        
+
+
 
 // Overlay for pop up dialog boxes
 const overlay = document.getElementById('overlay');
@@ -50,7 +73,7 @@ sendMsgBtn.addEventListener("click", (event) => {
         message: message
     };
 
-    logic.sendMessage(jsonData);
+    // logic.sendMessage(jsonData);
 
     document.getElementById('name').value = '';
     document.getElementById('email').value = '';
@@ -154,10 +177,10 @@ sendMsgBtn.addEventListener("click", (event) => {
 
             row.innerHTML = `
                 <td>${message.flagged ? '<div class="flagged-indicator"></div>' : ''}</td>
-                <td>${message.name}</td>
-                <td>${message.email}</td>
-                <td>${message.content}</td>
-                <td>${message.date}</td>
+                <td>${message.sender_name}</td>
+                <td>${message.sender_email}</td>
+                <td>${message.message_text}</td>
+                <td>${message.messsage_sent_date_time}</td>
                 <td>${message.read ? 'Read' : 'Unread'}</td>
                 <td>${message.flagged ? 'Flagged' : 'Not Flagged'}</td>
                 <td class="actions">
@@ -193,6 +216,23 @@ sendMsgBtn.addEventListener("click", (event) => {
         }
 
         
+
+
+
+
+
+
+
+
+
+
+
+        closeContactForm.addEventListener('click', () => {toggleContactForm(false);});
+
+
+
+
+
 
 
 

@@ -1,10 +1,12 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 require "db_connect.php";
 require_once "functions_manager.php";
@@ -19,21 +21,24 @@ error_log(print_r($data, TRUE));
 $response = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
-    // this is for the new get recipes and messages list, comment it out if it doesnt work to add this to list messages
-
-    if(isset($data['function'])) {
-        switch ($data['function']) {
+    if (isset($_GET['function'])) {
+        switch ($_GET['function']) {
             case 'getRecipesList':
                 getRecipesList($conn);
-            break;
+                break;
             case 'getMessagesList':
                 getMessagesList($conn);
-            break;
+                break;
+            default:
+                $response = ["status" => "error", "message" => "Invalid function"];
+                echo json_encode($response);
+                exit();
         }
+    } else {
+        $response = ["status" => "error", "message" => "Function not specified"];
+        echo json_encode($response);
+        exit();
     }
-
-    getRecipesList($conn);
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($data['function'])) {
         switch ($data['function']) {

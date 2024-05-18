@@ -406,23 +406,6 @@
             overlay.classList.add('active');
         }
 
-        // Function to view message
-        function viewMessage(message) {
-            const viewMessagePopup = document.getElementById('viewMessagePopup');
-            const overlay = document.getElementById('overlay');
-            const viewMessageContent = document.getElementById('viewMessageContent');
-
-            viewMessageContent.innerHTML = `
-                <p><strong>Name:</strong> ${message.name}</p>
-                <p><strong>Email:</strong> ${message.email}</p>
-                <p><strong>Message:</strong> ${message.content}</p>
-                <p><strong>Date:</strong> ${message.date}</p>
-                <p><strong>Status:</strong> ${message.read ? 'Read' : 'Unread'}</p>
-            `;
-
-            viewMessagePopup.classList.add('active');
-            overlay.classList.add('active');
-        }
 
         // Function to edit user
         function editUser(user) {
@@ -542,7 +525,7 @@
 
         // // Adding sample data to tables for testing
         // sampleRecipes.forEach(addRecipeRow);
-        // sampleMessages.forEach(addMessageRow);
+
         // sampleUsers.forEach(addUserRow);
 
         // Search and filter functionality for recipes
