@@ -25,13 +25,13 @@ document.getElementById('year').textContent = new Date().getFullYear();
             });
         });
 
-        const messagesTab = document.getElementById("messagesTab");
-        // messagesTab.addEventListener('click', ()=>{addMessageRow(logic.getMessages())});
-
-
+        //listing messages in the messages tab/adming page
+        const messagesTab = document.getElementById("messagesTab");       
         if (messagesTab) {
             messagesTab.addEventListener('click', async () => {
                 try {
+                    const messagesList = document.getElementById("messagesList");
+                    messagesList.innerHTML = "";
                     const messages = await logic.getMessages();
                     messages.forEach(message => addMessageRow(message));
                 } catch (error) {
