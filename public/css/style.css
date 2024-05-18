@@ -63,9 +63,18 @@ main {
 
 .dishImage {
   height: 400px;
-  width: 400px;
+  width: 266px;
   /* border: 2px dashed red; */
-  padding: 15px;
+  /* padding: 15px; */
+  margin: 10px;
+}
+.dishImage img {
+  /* max-height:  100%;
+  max-width : 266px; */
+  max-height: 400px;
+  max-width: 266px;
+  object-fit: scale-down;
+
 }
 
 .recipeDescription {
@@ -78,12 +87,16 @@ main {
 
 .recipeDetails {
   border-bottom: 1px solid #9b59b6;
-  padding: 15px;
+  /* padding: 15px; */
+  margin: 10px;
+  margin-left: 20px;
 }
 
 .recipeFooterDiv {
   border-top: 1px solid #9b59b6;
-  padding: 15px;
+  /* padding: 15px; */
+  margin: 10px;
+  margin-left: 20px;
 }
 
 nav {
@@ -708,11 +721,33 @@ justify-content: space-between;
   cursor: pointer;
 }
 
+.recipe h3 {
+  font-size: 16px;
+}
+.recipe h4 {
+  color: #9b59b6;
+  font-size: 14px;
+}
 
 
 
 
+.recipeFooterInfoDiv{
 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* justify-content: space-between; */
+    align-items: center;
+    padding-right: 30px;
+    padding-top: 5px;
+    
+}
+
+.recipeParagraphDiv {
+  margin: 10px;
+  margin-left: 20px;
+}
 
 
 

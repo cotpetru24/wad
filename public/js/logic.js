@@ -12,8 +12,8 @@ function addRecipes(recipesList){
         let recipeImg = document.createElement("img");
         if (recipe.dish_img){
             recipeImg.src = recipe.dish_img;
-            recipeImg.style.maxHeight = "350px";
-            recipeImg.style.maxWidth = "200px"
+            // recipeImg.style.maxHeight = "100%";
+            // recipeImg.style.maxWidth = "266px"
         }
         // else {
         //     recipeImg.src = 'default_image_path'; // Optionally set a default image path
@@ -128,6 +128,10 @@ function addRecipes(recipesList){
         recipeHeadingDiv.classList.add("recipeHeadDiv");
         recipeSubheadingDiv.classList.add("recipeHeadDiv");
         recipeInfoDiv.classList.add("recipeHeadDiv");
+        recipeInfoDiv.classList.add("recipeFooterInfoInnerDivs");
+        dificultyDiv.classList.add("recipeFooterInfoDiv");
+        prepTimeDiv.classList.add("recipeFooterInfoDiv");
+        recipeDescriptionParDiv.classList.add("recipeParagraphDiv");
 
 
 
