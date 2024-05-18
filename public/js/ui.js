@@ -28,14 +28,17 @@ document.getElementById('year').textContent = new Date().getFullYear();
         const messagesTab = document.getElementById("messagesTab");
         // messagesTab.addEventListener('click', ()=>{addMessageRow(logic.getMessages())});
 
-        messagesTab.addEventListener('click', async () => {
-            try {
-                const messages = await logic.getMessages();
-                messages.forEach(message => addMessageRow(message));
-            } catch (error) {
-                console.error("Error fetching messages:", error);
-            }
-        });
+
+        if (messagesTab) {
+            messagesTab.addEventListener('click', async () => {
+                try {
+                    const messages = await logic.getMessages();
+                    messages.forEach(message => addMessageRow(message));
+                } catch (error) {
+                    console.error("Error fetching messages:", error);
+                }
+            });
+        }
         
 
 
@@ -73,7 +76,7 @@ sendMsgBtn.addEventListener("click", (event) => {
         message: message
     };
 
-    // logic.sendMessage(jsonData);
+     logic.sendMessage(jsonData);
 
     document.getElementById('name').value = '';
     document.getElementById('email').value = '';
