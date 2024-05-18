@@ -483,3 +483,12 @@ message_text text NOT NULL,
 message_sent_date_time timestamp default current_timestamp 
 
 )
+
+
+
+SELECT recipes.dish_id, recipes.dish_name, origin.origin_country, recipes.dish_recipe_description, category.category_name, complexity.complexity_name,
+recipes.dish_prep_time, recipes.dish_img, recipes.dish_upload_date_time, recipes.dish_rating  FROM recipes
+inner join category on recipes.dish_category_id=category.category_id
+inner join complexity on recipes.dish_complexity_id=complexity_id
+inner join origin on recipes.dish_origin_id=origin.origin_id
+order by recipes.dish_id asc;

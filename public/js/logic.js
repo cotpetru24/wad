@@ -1,6 +1,31 @@
 const list = document.getElementById("recipesList");
 
 
+
+function formatDishRating(rating) {
+    const yellowStar = '<img class="ratingStars" src="/public/img/icons8-star-filled-30-yellow.png" alt="Yellow Star" />';
+    const grayStar = '<img class="ratingStars" src="/public/img/icons8-star-filled-30-gray.png" alt="Gray Star" />';
+
+    let yellowStars = yellowStar.repeat(rating);
+    let grayStars = grayStar.repeat(5 - rating);
+
+    return yellowStars + grayStars;
+}
+
+
+function toTitleCase(str) {
+    return str.toLowerCase().replace(/\b\w/g, function (char) {
+        return char.toUpperCase();
+    });
+}
+
+
+function formatPrepTime (prepTime){
+    if (prepTime/60 < 1) return `&#x1F552; ${prepTime} min`;
+    else return `&#x1F552; ${prepTime/60} h`
+}
+
+
 // function to add tasks using a JSON data source
 function addRecipes(recipesList){
     //clear current tasks
@@ -43,9 +68,9 @@ function addRecipes(recipesList){
 
         //////----------Recipe subheading div---------\\\\\\\
         let recipeRating = document.createElement("h3");
-        recipeRating.innerHTML = recipe.dish_rating;
+        recipeRating.innerHTML = formatDishRating(recipe.dish_rating);
         let recipeNonvegetarianVegetarian = document.createElement("h3");
-        recipeNonvegetarianVegetarian.innerHTML = recipe.category;
+        recipeNonvegetarianVegetarian.innerHTML = toTitleCase(recipe.category_name);
 
         //Recipe Subheading Div
         let recipeSubheadingDiv = document.createElement("div");
@@ -65,7 +90,7 @@ function addRecipes(recipesList){
         let prepTimeHeading = document.createElement('h3');
         prepTimeHeading.innerHTML = "Prep Time";
         let prepTime = document.createElement("h4");
-        prepTime.innerHTML = recipe.dish_prep_time;
+        prepTime.innerHTML = formatPrepTime(recipe.dish_prep_time);
         let prepTimeDiv = document.createElement("div");
         prepTimeDiv.appendChild(prepTimeHeading);
         prepTimeDiv.appendChild(prepTime);
@@ -73,8 +98,8 @@ function addRecipes(recipesList){
         //Dificulty div
         let dificultyHeading = document.createElement('h3');
         dificultyHeading.innerHTML = "Dificulty";
-        let dificulty = document.createElement('h4');
-        dificulty.innerHTML = recipe.dish_dish_complexity;
+        let dificulty = document.createElement('h4');  
+        dificulty.innerHTML = toTitleCase(recipe.complexity_name);
         let dificultyDiv = document.createElement('div');
         dificultyDiv.appendChild(dificultyHeading);
         dificultyDiv.appendChild(dificulty);
@@ -133,7 +158,11 @@ function addRecipes(recipesList){
         prepTimeDiv.classList.add("recipeFooterInfoDiv");
         recipeDescriptionParDiv.classList.add("recipeParagraphDiv");
 
-
+        if (recipeNonvegetarianVegetarian.innerHTML.trim().toLowerCase() === "vegetarian") {
+            recipeNonvegetarianVegetarian.classList.add("vegetarian");
+        } else {
+            recipeNonvegetarianVegetarian.classList.add("non-vegetarian");
+        }
 
 
 

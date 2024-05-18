@@ -9,7 +9,25 @@ header("Content-Type: application/json");
 
 function getRecipesList($conn, $filterCriteria = [])
 {
-    $sql = "SELECT * FROM recipes WHERE 1=1";
+    // $sql = "SELECT * FROM recipes WHERE 1=1";
+    $sql = "SELECT 
+    recipes.dish_id, 
+    recipes.dish_name, 
+    origin.origin_country, 
+    recipes.dish_recipe_description, 
+    category.category_name, 
+    complexity.complexity_name,
+    recipes.dish_prep_time, 
+    recipes.dish_img, 
+    recipes.dish_upload_date_time, 
+    recipes.dish_rating  
+    FROM recipes
+    INNER JOIN category ON recipes.dish_category_id = category.category_id
+    INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
+    INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
+    WHERE 1=1
+    ORDER BY recipes.dish_id ASC;";
+
     $paramTypes = '';
     $paramValues = [];
     if (!empty($filterCriteria)) {

@@ -750,11 +750,22 @@ justify-content: space-between;
 }
 
 
+.recipe h2 {
+  color: #9b59b6;
+}
 
+.ratingStars{
+  width: 17px;
+  height: 17px;
+}
 
+.non-vegetarian{
+  color: #ff652f;
+}
 
-
-
+.vegetarian{
+  color: #14a76c;
+}
 
 
 
