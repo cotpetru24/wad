@@ -31,7 +31,7 @@ function addRecipes(recipesList){
 
         //Fav Btn
         let recipeAddFavBtn = document.createElement("button")
-        recipeAddFavBtn.textContent = "AddFav" //to add here image instead of text   
+        // recipeAddFavBtn.innerHTML = '<img src="/public/img/icons8-favourite-60.png" alt="Add to Favorites" />';
         let recipeHeadingBtnDiv = document.createElement("div")
         recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
 

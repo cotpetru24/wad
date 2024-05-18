@@ -278,7 +278,8 @@ input[type="search"] {
   color: #0056b3;
 }
 
-#getInTouchBtn {
+#getInTouchBtn,
+.recipeFooterDiv button {
   background: #9b59b6;
   color: #0c0723;
   border: 1px solid #9b59b6;
@@ -289,13 +290,19 @@ input[type="search"] {
   width: 250px;
 }
 
+.recipeFooterDiv button{
+  width: 100px;
+  font-weight: bolder;
+}
+
 #emailContact {
   color: #9b59b6;
   margin-top: 30px;
   margin-bottom: 5px;
 }
 
-#getInTouchBtn:hover {
+#getInTouchBtn:hover,
+.recipeFooterDiv button:hover {
   background: #0c0723;
   color: #9b59b6;
 }
@@ -682,9 +689,24 @@ flex-direction: row;
 justify-content: space-between;
 }
 
+.recipeDetails button {
+  height: 30px;
+  width: 30px;
+  background-color: transparent;
+  background-image: url(/public/img/icons8-favourite-60.png);;
+  background-size: 30px 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 2px;
+  border: none;
+}
 
-
-
+.recipeDetails button:hover {
+  background-image: url(/public/img/icons8-favourite-60-hover.png);
+  cursor: pointer;
+}
 
 
 
