@@ -179,13 +179,12 @@ sendMsgBtn.addEventListener("click", (event) => {
             const row = document.createElement('tr');
 
             row.innerHTML = `
-                <td>${message.flagged ? '<div class="flagged-indicator"></div>' : ''}</td>
+                <td>${message.flagged ? 'Flagged' : 'Not Flagged'}</td>
                 <td>${message.sender_name}</td>
                 <td>${message.sender_email}</td>
                 <td>${message.message_text}</td>
                 <td>${message.messsage_sent_date_time}</td>
                 <td>${message.read ? 'Read' : 'Unread'}</td>
-                <td>${message.flagged ? 'Flagged' : 'Not Flagged'}</td>
                 <td class="actions">
                     <button onclick="viewMessage(${JSON.stringify(message)})">View</button>
                     <button onclick="toggleFlagMessage(${message.id})">${message.flagged ? 'Unflag' : 'Flag'}</button>
