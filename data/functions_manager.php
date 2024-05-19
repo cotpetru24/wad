@@ -90,7 +90,8 @@ function getRecipesList($conn, $filterCriteria = []) {
         recipes.dish_upload_date_time, 
         recipes.dish_rating,  
         recipes.dish_ingredients,
-        recipes.dish_steps
+        recipes.dish_steps,
+        recipes.dish_chef_recommended
         FROM recipes
         INNER JOIN category ON recipes.dish_category_id = category.category_id
         INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
@@ -107,11 +108,30 @@ function getRecipesList($conn, $filterCriteria = []) {
                 // Validate column names to prevent SQL injection
                 $allowedColumns = ['dish_chef_recommended', 'dish_origin_id', 'category_name', 'complexity_name', 'origin_country'];
                 $keyParts = explode('.', $key);
-                if (count($keyParts) == 1 && in_array($keyParts[0], $allowedColumns)) {
+                // Handle keys with two parts
+                if (count($keyParts) == 2 && in_array($keyParts[1], $allowedColumns)) {
+                    $sql .= " AND {$keyParts[1]}=?";
+                // Handle keys with one part
+                } elseif (count($keyParts) == 1 && in_array($keyParts[0], $allowedColumns)) {
                     $sql .= " AND {$keyParts[0]}=?";
-                    $paramTypes .= 's'; // Change to 's' for string parameters if necessary
-                    $paramValues[] = $value;
+                } else {
+                    // Skip invalid keys
+                    continue;
                 }
+                // Dynamically determine parameter type
+                if (is_int($value)) {
+                    $paramTypes .= 'i';
+                } elseif (is_float($value)) {
+                    $paramTypes .= 'd';
+                } elseif (is_string($value)) {
+                    $paramTypes .= 's';
+                } else {
+                    // Default to string if type is not determined
+                    $paramTypes .= 's';
+                }
+
+                $paramValues[] = $value;
+                
             }
         }
     }

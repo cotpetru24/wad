@@ -2,7 +2,9 @@ import * as logic from './logic.js';
 // import { sendMessage } from './logic.js';
 
 
-logic.getRecipes();
+// logic.getRecipes();
+logic.getRecipes({"dish_chef_recommended":"1"})
+
 document.getElementById('year').textContent = new Date().getFullYear();
 
 
@@ -223,8 +225,8 @@ sendMsgBtn.addEventListener("click", (event) => {
 
         const popularTab = document.getElementById('popular');
         popularTab.addEventListener('click', () => (
-            logic.getRecipes()
-            // logic.getRecipes({"dish_chef_recommended":"1"})
+            // logic.getRecipes()
+            logic.getRecipes({"dish_chef_recommended":"1"})
 
         )
         )
