@@ -284,6 +284,7 @@ export async function getRecipes(filterCriteria = {}) {
         }
         const recipes = await response.json();
         addRecipes(recipes);
+        return recipes;
     }
     catch (error) {
         console.log("Error retrieving data: " + error);
@@ -419,5 +420,68 @@ export async function deleteMessage(messageId) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function addRecipeRows() {
+    const recipes = await getRecipes({ "dish_chef_recommended": "1" });
+    recipes.forEach(recipe => addRecipeRow(recipe));
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//Function to add a recipe row to the table
+export function addRecipeRow(recipe) {
+    const recipesList = document.getElementById('adminRecipesList');
+
+
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+                <td>${recipe.name}</td>
+                <td>${recipe.description}</td>
+                <td>${recipe.category}</td>
+                <td>${recipe.name}</td>
+                <td>${recipe.complexity}</td>
+                <td>${recipe.prepTime}</td>
+                <td>${recipe.rating}</td>
+                <td><img src="${recipe.image}" alt="Dish Image"></td>
+                <td class="actions" id="actionsTh">
+                    <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
+                    <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
+                    <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
+                </td>
+            `;
+
+    recipesList.appendChild(row);
+}
 
 

@@ -4,6 +4,7 @@ import * as logic from './logic.js';
 
 // logic.getRecipes();
 logic.getRecipes({ "dish_chef_recommended": "1" })
+logic.addRecipeRows()
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -234,6 +235,18 @@ document.getElementById('confirmActionNoButton')?.addEventListener('click', () =
 
 
 
+// async function addRecipeRows() {
+//     try {
+//         const recipesList = document.getElementById("adminRecipesList");
+//         if (recipesList) {
+//             recipesList.innerHTML = "";
+//         } 
+//         const recipes = await logic.getRecipes();
+//         recipes.forEach(recipe => addRecipeRow(message));
+//     } catch (error) {
+//         console.error("Error fetching recipes:", error);
+//     }
+// }
 
 
 
@@ -246,30 +259,31 @@ document.getElementById('confirmActionNoButton')?.addEventListener('click', () =
 
 
 
+// //Function to add a recipe row to the table
+// export function addRecipeRow(recipe) {
+//     const recipesList = document.getElementById('adminRecipesList');
 
-//Function to add a recipe row to the table
-export function addRecipeRow(recipe) {
-    const recipesList = document.getElementById('recipesList');
-    const row = document.createElement('tr');
 
-    row.innerHTML = `
-                <td>${recipe.name}</td>
-                <td>${recipe.description}</td>
-                <td>${recipe.category}</td>
-                <td>${recipe.ingredients.join(', ')}</td>
-                <td>${recipe.complexity}</td>
-                <td>${recipe.prepTime}</td>
-                <td>${recipe.rating}</td>
-                <td><img src="${recipe.image}" alt="Dish Image"></td>
-                <td class="actions" id="actionsTh">
-                    <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
-                    <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
-                    <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
-                </td>
-            `;
+//     const row = document.createElement('tr');
 
-    recipesList.appendChild(row);
-}
+//     row.innerHTML = `
+//                 <td>${recipe.name}</td>
+//                 <td>${recipe.description}</td>
+//                 <td>${recipe.category}</td>
+//                 <td>${recipe.ingredients.join(', ')}</td>
+//                 <td>${recipe.complexity}</td>
+//                 <td>${recipe.prepTime}</td>
+//                 <td>${recipe.rating}</td>
+//                 <td><img src="${recipe.image}" alt="Dish Image"></td>
+//                 <td class="actions" id="actionsTh">
+//                     <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
+//                     <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
+//                     <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
+//                 </td>
+//             `;
+
+//     recipesList.appendChild(row);
+// }
 
 
 
@@ -722,3 +736,6 @@ async function insertImage(file) {
 }
 
 
+export function toDelete (){
+    logic.addRecipeRows()
+}
