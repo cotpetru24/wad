@@ -224,6 +224,8 @@ sendMsgBtn.addEventListener("click", (event) => {
         const popularTab = document.getElementById('popular');
         popularTab.addEventListener('click', () => (
             logic.getRecipes()
+            // logic.getRecipes({"dish_chef_recommended":"1"})
+
         )
         )
 

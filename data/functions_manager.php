@@ -105,7 +105,7 @@ function getRecipesList($conn, $filterCriteria = []) {
         foreach ($filterCriteria as $key => $value) {
             if ($key !== 'function') {
                 // Validate column names to prevent SQL injection
-                $allowedColumns = ['dish_origin_id', 'category_name', 'complexity_name', 'origin_country'];
+                $allowedColumns = ['dish_chef_recommended', 'dish_origin_id', 'category_name', 'complexity_name', 'origin_country'];
                 $keyParts = explode('.', $key);
                 if (count($keyParts) == 1 && in_array($keyParts[0], $allowedColumns)) {
                     $sql .= " AND {$keyParts[0]}=?";
