@@ -20,14 +20,14 @@ function toTitleCase(str) {
 }
 
 
-function formatPrepTime (prepTime){
-    if (prepTime/60 < 1) return `&#x1F552; ${prepTime} min`;
-    else return `&#x1F552; ${prepTime/60} h`
+function formatPrepTime(prepTime) {
+    if (prepTime / 60 < 1) return `&#x1F552; ${prepTime} min`;
+    else return `&#x1F552; ${prepTime / 60} h`
 }
 
 
 // function to add tasks using a JSON data source
-function addRecipes(recipesList){
+function addRecipes(recipesList) {
     //clear current tasks
     list.innerText = "";
 
@@ -35,7 +35,7 @@ function addRecipes(recipesList){
 
         //////----------Recipe img div---------\\\\\\\
         let recipeImg = document.createElement("img");
-        if (recipe.dish_img){
+        if (recipe.dish_img) {
             recipeImg.src = recipe.dish_img;
             // recipeImg.style.maxHeight = "100%";
             // recipeImg.style.maxWidth = "266px"
@@ -98,7 +98,7 @@ function addRecipes(recipesList){
         //Dificulty div
         let dificultyHeading = document.createElement('h3');
         dificultyHeading.innerHTML = "Dificulty";
-        let dificulty = document.createElement('h4');  
+        let dificulty = document.createElement('h4');
         dificulty.innerHTML = toTitleCase(recipe.complexity_name);
         let dificultyDiv = document.createElement('div');
         dificultyDiv.appendChild(dificultyHeading);
@@ -117,31 +117,75 @@ function addRecipes(recipesList){
         expandBtn.textContent = "Expand";
         let recipeActionsDiv = document.createElement('div');
         recipeActionsDiv.appendChild(expandBtn);
-        
+
         let recipeFooterDiv = document.createElement('div');
         recipeFooterDiv.appendChild(recipeInfoDiv);
         recipeFooterDiv.appendChild(recipeActionsDiv);
 
 
         //////----------Recipe description div---------\\\\\\\
-        //Recipe description paragraph div        
+        //Recipe description paragraph div    
+        let recipeDescriptionParDiv = document.createElement("div")  
         let recipeDescriptionPar = document.createElement("p")
         recipeDescriptionPar.innerHTML = recipe.dish_recipe_description;
-        let recipeDescriptionParDiv = document.createElement("div")
         recipeDescriptionParDiv.appendChild(recipeDescriptionPar);
-        
+
+
+
+        //Ingredients
+        if (recipe.dish_ingredients){
+            let recipeIngredientsHeader = document.createElement("h3");
+            recipeIngredientsHeader.innerHTML = "Ingredients:";
+            let ingredientsList = document.createElement("ul");
+            const dishIngredientsArray = JSON.parse(recipe.dish_ingredients);
+            dishIngredientsArray.forEach(value => {
+                let listItem = document.createElement("li");
+                listItem.textContent = value;
+                ingredientsList.appendChild(listItem);
+            });
+
+            recipeDescriptionParDiv.appendChild(recipeIngredientsHeader);
+            recipeDescriptionParDiv.appendChild(ingredientsList);
+        }
+
+        //Steps
+        if (recipe.dish_steps) {
+            let recipeStepsHeader = document.createElement("h3");
+            recipeStepsHeader.innerHTML = "Instructions";        
+            let recipeSteps = document.createElement("ol");
+            const dishSteps = JSON.parse(recipe.dish_steps);
+                dishSteps.forEach(step => {
+                    let recipeStep = document.createElement("li");
+                    let stepTitle = document.createElement("strong");
+                    stepTitle.textContent = step.title + ":";
+                    let stepDescription = document.createElement("span");
+                    stepDescription.textContent = step.description;
+
+                    recipeStep.appendChild(stepTitle);
+                    recipeStep.appendChild(stepDescription);
+                    recipeSteps.appendChild(recipeStep);
+                }
+            )
+            recipeDescriptionParDiv.appendChild(recipeStepsHeader);
+            recipeDescriptionParDiv.appendChild(recipeSteps);
+        }
+
+
+
+
+
         //Recipe description div
         let recipeDescriptionDiv = document.createElement('div');
         recipeDescriptionDiv.appendChild(recipeHeadDiv);
         recipeDescriptionDiv.appendChild(recipeDescriptionParDiv);
         recipeDescriptionDiv.appendChild(recipeFooterDiv);
 
-        
+
         //////----------Recipe div---------\\\\\\\
         let recipeDiv = document.createElement('div');
         recipeDiv.id = "recipe_ID" + recipe.recipe_id;
         recipeDiv.appendChild(recipeImgDiv);
-        recipeDiv.appendChild(recipeDescriptionDiv);  
+        recipeDiv.appendChild(recipeDescriptionDiv);
 
 
         recipeDiv.classList.add("recipe")
@@ -164,6 +208,11 @@ function addRecipes(recipesList){
             recipeNonvegetarianVegetarian.classList.add("non-vegetarian");
         }
 
+        expandBtn.addEventListener("click", () => {
+            recipeDescriptionParDiv.classList.toggle("expanded");
+            expandBtn.textContent = recipeDescriptionParDiv.classList.contains("expanded") ? "Collapse" : "Expand";
+        });
+        
 
 
 
@@ -214,22 +263,23 @@ function addRecipes(recipesList){
 //     }
 // }
 //the new get recipes function
-export async function getRecipes(){
-    try{
-        const param = new URLSearchParams ({"function" : "getRecipesList"});
+export async function getRecipes() {
+    try {
+        const param = new URLSearchParams({ "function": "getRecipesList" });
         const response = await fetch(`http://localhost/data/index.php?${param.toString()}`,
-                {method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-        });
+            {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const recipes = await response.json();
         addRecipes(recipes);
     }
-    catch(error){
+    catch (error) {
         console.log("Error retrieving data: " + error);
     }
 }
@@ -237,13 +287,13 @@ export async function getRecipes(){
 
 
 
-export async function removeRecipe(recipe){
-    try{
-        const param = new URLSearchParams ({"function" : "removeRecipe", "recipeID": recipe.recipe_id});
-        const recipeData = await fetch("http://localhost/data/index.php", {method: "POST", body: param});
+export async function removeRecipe(recipe) {
+    try {
+        const param = new URLSearchParams({ "function": "removeRecipe", "recipeID": recipe.recipe_id });
+        const recipeData = await fetch("http://localhost/data/index.php", { method: "POST", body: param });
         getRecipes();
     }
-    catch(error){
+    catch (error) {
         console.log("Error removing recipe" + error);
     }
 }
@@ -252,37 +302,37 @@ export async function removeRecipe(recipe){
 
 
 
-export async function addRecipe(){
-try{
-        const param = new URLSearchParams({"function" : "addRecipe", "jsonData": "recipe data should go here"});
-        const recipeData = await fetch("http://localhost/data/index.php", {method: "POST", body: param});
+export async function addRecipe() {
+    try {
+        const param = new URLSearchParams({ "function": "addRecipe", "jsonData": "recipe data should go here" });
+        const recipeData = await fetch("http://localhost/data/index.php", { method: "POST", body: param });
         getRecipes();
     }
-    catch(error){
+    catch (error) {
         console.log("error retrieving data: " + error);
     }
 }
 
 
-export async function viewRecipe(recipe_ID){
-    try{
-        const param = new URLSearchParams({"function": "viewRecipe", "recipeID" : "recipe_ID"});
-        const recipeData = await fetch("http://localhost/data/index.php", {method: "POST", body: param});
+export async function viewRecipe(recipe_ID) {
+    try {
+        const param = new URLSearchParams({ "function": "viewRecipe", "recipeID": "recipe_ID" });
+        const recipeData = await fetch("http://localhost/data/index.php", { method: "POST", body: param });
     }
-    catch(error){
+    catch (error) {
         console.log("error retrieving data " + error)
     }
 }
 
 
-export async function sendMessage(jsonData){
-    try{
+export async function sendMessage(jsonData) {
+    try {
         jsonData.function = "sendMessage";
 
-        const response = await fetch("http://localhost/data/index.php", 
-        {method: "POST", headers: {'Content-Type' : 'application/json'}, body: JSON.stringify(jsonData)});
-        
-        if (!response.ok){
+        const response = await fetch("http://localhost/data/index.php",
+            { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(jsonData) });
+
+        if (!response.ok) {
             throw new Error(`Network response was not OK! Status: ${response.status}`);
         }
 
@@ -290,18 +340,18 @@ export async function sendMessage(jsonData){
         console.log(`Message sent successfully:`, responseData)
         // alert('Message sent successfully!');
     }
-    catch(error){
+    catch (error) {
         console.log("Error sending message:", error);
     }
 }
 
-        // Function to view message
-        function addMessage(message) {
-            const viewMessagePopup = document.getElementById('viewMessagePopup');
-            const overlay = document.getElementById('overlay');
-            const viewMessageContent = document.getElementById('viewMessageContent');
+// Function to view message
+function addMessage(message) {
+    const viewMessagePopup = document.getElementById('viewMessagePopup');
+    const overlay = document.getElementById('overlay');
+    const viewMessageContent = document.getElementById('viewMessageContent');
 
-            viewMessageContent.innerHTML = `
+    viewMessageContent.innerHTML = `
                 <p><strong>Name:</strong> ${message.name}</p>
                 <p><strong>Email:</strong> ${message.email}</p>
                 <p><strong>Message:</strong> ${message.content}</p>
@@ -309,23 +359,24 @@ export async function sendMessage(jsonData){
                 <p><strong>Status:</strong> ${message.read ? 'Read' : 'Unread'}</p>
             `;
 
-            viewMessagePopup.classList.add('active');
-            overlay.classList.add('active');
-        }
+    viewMessagePopup.classList.add('active');
+    overlay.classList.add('active');
+}
 
-        // sampleMessages.forEach(addMessageRow);
+// sampleMessages.forEach(addMessageRow);
 
-export async function getMessages(){
-    try{
-        const param = new URLSearchParams ({"function" : "getMessagesList"});
+export async function getMessages() {
+    try {
+        const param = new URLSearchParams({ "function": "getMessagesList" });
 
 
-        const response = await fetch(`http://localhost/data/index.php?${param.toString()}`, 
-        {method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-        });        
+        const response = await fetch(`http://localhost/data/index.php?${param.toString()}`,
+            {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -333,7 +384,7 @@ export async function getMessages(){
         const messages = await response.json();
         return messages;
     }
-    catch(error){
+    catch (error) {
         console.log("Error getting messages:", error);
     }
 }

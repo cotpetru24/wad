@@ -59,6 +59,8 @@ main {
   border-radius: 7px;
   width: 70%;
   margin-top: 30px;
+
+
 }
 
 .dishImage {
@@ -745,8 +747,30 @@ justify-content: space-between;
 }
 
 .recipeParagraphDiv {
+  height: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin: 10px;
   margin-left: 20px;
+  transition: height 0.3s ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 13;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+.recipeParagraphDiv p, span {
+  text-align: justify;
+  display: block;
+}
+
+.recipeParagraphDiv.expanded{
+  height: auto;
+  -webkit-line-clamp: unset;
+  transition: height 0.3s ease;
+
+}
+.recipeParagraphDiv ol, ul {
+  padding-left: 5%;
 }
 
 

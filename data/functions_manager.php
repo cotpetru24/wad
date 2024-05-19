@@ -20,7 +20,9 @@ function getRecipesList($conn, $filterCriteria = [])
     recipes.dish_prep_time, 
     recipes.dish_img, 
     recipes.dish_upload_date_time, 
-    recipes.dish_rating  
+    recipes.dish_rating,  
+    recipes.dish_ingredients,
+    recipes.dish_steps
     FROM recipes
     INNER JOIN category ON recipes.dish_category_id = category.category_id
     INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
