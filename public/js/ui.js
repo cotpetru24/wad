@@ -84,19 +84,19 @@ sendMsgBtn.addEventListener("click", (event) => {
     toggleContactForm(false);
 });
 
-        // Toggle Add Recipe Form
-        document.getElementById("toggleFormButton").addEventListener("click", function () {
-            const form = document.getElementById("addRecipeForm");
-            form.style.display = form.style.display === "none" ? "block" : "none";
-        });
+        // // Toggle Add Recipe Form
+        // document.getElementById("toggleFormButton").addEventListener("click", function () {
+        //     const form = document.getElementById("addRecipeForm");
+        //     form.style.display = form.style.display === "none" ? "block" : "none";
+        // });
 
 
 
-        // Toggle Add User Form
-        document.getElementById("toggleUserFormButton").addEventListener("click", function () {
-            const form = document.getElementById("addUserForm");
-            form.style.display = form.style.display === "none" ? "block" : "none";
-        });
+        // // Toggle Add User Form
+        // document.getElementById("toggleUserFormButton").addEventListener("click", function () {
+        //     const form = document.getElementById("addUserForm");
+        //     form.style.display = form.style.display === "none" ? "block" : "none";
+        // });
 
 
 
@@ -221,16 +221,69 @@ sendMsgBtn.addEventListener("click", (event) => {
 
 
 
+        const popularTab = document.getElementById('popular');
+        popularTab.addEventListener('click', () => (
+            logic.getRecipes()
+        )
+        )
 
 
 
 
+        const indianTab = document.getElementById('indian');
+        indianTab.addEventListener('click', () => (
+            logic.getRecipes({"origin_country":"india"})
+
+            // logic.getReipes({"dish_origin_id":"1"})
+
+        )
+        )
 
 
 
+        const chineseTab = document.getElementById('chinese');
+        chineseTab.addEventListener('click', () => (
+            logic.getRecipes({"origin_country":"china"})
 
+            // logic.getReipes({"dish_origin_id":"1"})
 
+        )
+        )
 
+        const italianTab = document.getElementById('italian');
+        italianTab.addEventListener('click', () => (
+            logic.getRecipes({"origin_country":"italia"})
 
+            // logic.getReipes({"dish_origin_id":"1"})
+
+        )
+        )
+
+        const frenchTab = document.getElementById('french');
+        frenchTab.addEventListener('click', () => (
+            logic.getRecipes({"origin_country":"france"})
+
+            // logic.getReipes({"dish_origin_id":"1"})
+
+        )
+        )
+
+        const russianTab = document.getElementById('russian');
+        russianTab.addEventListener('click', () => (
+            logic.getRecipes({"origin_country":"russia"})
+
+            // logic.getReipes({"dish_origin_id":"1"})
+
+        )
+        )
+
+        const moldovanTab = document.getElementById('moldovan');
+        moldovanTab.addEventListener('click', () => (
+            logic.getRecipes({"origin_country":"moldova"})
+
+            // logic.getReipes({"dish_origin_id":"1"})
+
+        )
+        )
 
 

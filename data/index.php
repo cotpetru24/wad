@@ -11,12 +11,9 @@ header("Content-Type: application/json");
 require "db_connect.php";
 require_once "functions_manager.php";
 
-// Read the input and determine the function to call
-$input = file_get_contents("php://input");
-$data = json_decode($input, true);
-
-// Log the received data
-error_log(print_r($data, TRUE));
+// Log the request method and parameters
+error_log("Request method: " . $_SERVER['REQUEST_METHOD']);
+error_log("GET data: " . print_r($_GET, true));
 
 $response = [];
 
@@ -24,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['function'])) {
         switch ($_GET['function']) {
             case 'getRecipesList':
-                getRecipesList($conn);
+                getRecipesList($conn, $_GET);
                 break;
             case 'getMessagesList':
                 getMessagesList($conn);
@@ -40,6 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         exit();
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $input = file_get_contents("php://input");
+    $data = json_decode($input, true);
+    error_log("POST data: " . print_r($data, true));
+
     if (isset($data['function'])) {
         switch ($data['function']) {
             case 'removeRecipe':

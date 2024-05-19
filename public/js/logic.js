@@ -263,9 +263,15 @@ function addRecipes(recipesList) {
 //     }
 // }
 //the new get recipes function
-export async function getRecipes() {
+export async function getRecipes(filterCriteria = {}) {
     try {
         const param = new URLSearchParams({ "function": "getRecipesList" });
+
+        for(const [key, value] of Object.entries(filterCriteria)){
+            param.append(key, value)
+        }
+
+
         const response = await fetch(`http://localhost/data/index.php?${param.toString()}`,
             {
                 method: "GET",

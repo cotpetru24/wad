@@ -7,40 +7,122 @@ error_reporting(E_ALL);
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-function getRecipesList($conn, $filterCriteria = [])
-{
-    // $sql = "SELECT * FROM recipes WHERE 1=1";
+// function getRecipesList($conn, $filterCriteria = [])
+// {
+//     // $sql = "SELECT * FROM recipes WHERE 1=1";
+//     $sql = "SELECT 
+//     recipes.dish_id, 
+//     recipes.dish_name, 
+//     origin.origin_country, 
+//     recipes.dish_recipe_description, 
+//     category.category_name, 
+//     complexity.complexity_name,
+//     recipes.dish_prep_time, 
+//     recipes.dish_img, 
+//     recipes.dish_upload_date_time, 
+//     recipes.dish_rating,  
+//     recipes.dish_ingredients,
+//     recipes.dish_steps
+//     FROM recipes
+//     INNER JOIN category ON recipes.dish_category_id = category.category_id
+//     INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
+//     INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
+//     WHERE 1=1;";
+//     // ORDER BY recipes.dish_id ASC;";
+
+//     $paramTypes = '';
+//     $paramValues = [];
+//     if (!empty($filterCriteria)) {
+//         foreach ($filterCriteria as $key => $value) {
+//             $sql .= " AND $key=?";
+//             $paramTypes .= 's'; // Assuming all parameters are strings; change as necessary
+//             $paramValues[] = $value;
+//         }
+//     }
+
+//     $stmt = $conn->prepare($sql);
+
+//     if (!empty($paramValues)) {
+//         $stmt->bind_param($paramTypes, ...$paramValues);
+//     }
+
+//     $stmt->execute();
+//     $result = $stmt->get_result();
+
+//     if ($result->num_rows > 0) {
+//         $results = [];
+//         while ($row = $result->fetch_assoc()) {
+//             if (!empty($row['dish_img'])) {
+//                 $dishImgData = $row['dish_img'];
+//                 $row['dish_img'] = 'data:image/jpeg;base64,' . base64_encode($dishImgData);
+//             }
+//             array_push($results, $row);
+//         }
+//         echo json_encode($results);
+//     } else {
+//         $noResults = [
+//             [
+//                 "recipe_id" => "0",
+//                 "dish_name" => "No results",
+//                 "dish_recipe_description" => "No recipes to list",
+//                 "dish_ingredients" => "No ingredients",
+//                 "dish_complexity_id" => "1",
+//                 "dish_prep_time" => "0"
+//             ]
+//         ];
+//         echo json_encode($noResults);
+//     }
+
+//     $stmt->close();
+// }
+
+
+function getRecipesList($conn, $filterCriteria = []) {
     $sql = "SELECT 
-    recipes.dish_id, 
-    recipes.dish_name, 
-    origin.origin_country, 
-    recipes.dish_recipe_description, 
-    category.category_name, 
-    complexity.complexity_name,
-    recipes.dish_prep_time, 
-    recipes.dish_img, 
-    recipes.dish_upload_date_time, 
-    recipes.dish_rating,  
-    recipes.dish_ingredients,
-    recipes.dish_steps
-    FROM recipes
-    INNER JOIN category ON recipes.dish_category_id = category.category_id
-    INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
-    INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
-    WHERE 1=1
-    ORDER BY recipes.dish_id ASC;";
+        recipes.dish_id, 
+        recipes.dish_name, 
+        origin.origin_country, 
+        recipes.dish_recipe_description, 
+        category.category_name, 
+        complexity.complexity_name,
+        recipes.dish_prep_time, 
+        recipes.dish_img, 
+        recipes.dish_upload_date_time, 
+        recipes.dish_rating,  
+        recipes.dish_ingredients,
+        recipes.dish_steps
+        FROM recipes
+        INNER JOIN category ON recipes.dish_category_id = category.category_id
+        INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
+        INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
+        WHERE 1=1";
 
     $paramTypes = '';
     $paramValues = [];
+    
+    // Adding filter criteria to the SQL query
     if (!empty($filterCriteria)) {
         foreach ($filterCriteria as $key => $value) {
-            $sql .= " AND $key=?";
-            $paramTypes .= 's'; // Assuming all parameters are strings; change as necessary
-            $paramValues[] = $value;
+            if ($key !== 'function') {
+                // Validate column names to prevent SQL injection
+                $allowedColumns = ['dish_origin_id', 'category_name', 'complexity_name', 'origin_country'];
+                $keyParts = explode('.', $key);
+                if (count($keyParts) == 1 && in_array($keyParts[0], $allowedColumns)) {
+                    $sql .= " AND {$keyParts[0]}=?";
+                    $paramTypes .= 's'; // Change to 's' for string parameters if necessary
+                    $paramValues[] = $value;
+                }
+            }
         }
     }
 
+    $sql .= " ORDER BY recipes.dish_id ASC";
+
     $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        echo json_encode(["status" => "error", "message" => "Failed to prepare SQL statement"]);
+        return;
+    }
 
     if (!empty($paramValues)) {
         $stmt->bind_param($paramTypes, ...$paramValues);
@@ -75,6 +157,8 @@ function getRecipesList($conn, $filterCriteria = [])
 
     $stmt->close();
 }
+
+
 
 // Fucntion to retrive messages from db
 function getMessagesList($conn){ 
