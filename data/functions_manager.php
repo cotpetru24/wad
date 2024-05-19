@@ -77,7 +77,8 @@ header("Content-Type: application/json");
 // }
 
 
-function getRecipesList($conn, $filterCriteria = []) {
+function getRecipesList($conn, $filterCriteria = [])
+{
     $sql = "SELECT 
         recipes.dish_id, 
         recipes.dish_name, 
@@ -100,7 +101,7 @@ function getRecipesList($conn, $filterCriteria = []) {
 
     $paramTypes = '';
     $paramValues = [];
-    
+
     // Adding filter criteria to the SQL query
     if (!empty($filterCriteria)) {
         foreach ($filterCriteria as $key => $value) {
@@ -111,7 +112,7 @@ function getRecipesList($conn, $filterCriteria = []) {
                 // Handle keys with two parts
                 if (count($keyParts) == 2 && in_array($keyParts[1], $allowedColumns)) {
                     $sql .= " AND {$keyParts[1]}=?";
-                // Handle keys with one part
+                    // Handle keys with one part
                 } elseif (count($keyParts) == 1 && in_array($keyParts[0], $allowedColumns)) {
                     $sql .= " AND {$keyParts[0]}=?";
                 } else {
@@ -131,7 +132,7 @@ function getRecipesList($conn, $filterCriteria = []) {
                 }
 
                 $paramValues[] = $value;
-                
+
             }
         }
     }
@@ -181,7 +182,8 @@ function getRecipesList($conn, $filterCriteria = []) {
 
 
 // Fucntion to retrive messages from db
-function getMessagesList($conn){ 
+function getMessagesList($conn)
+{
     $sql = "SELECT * FROM messages";
     $stmt = $conn->prepare($sql);
     $result = $conn->query($sql);
@@ -192,7 +194,7 @@ function getMessagesList($conn){
                 array_push($results, $row);
             }
 
-        echo json_encode($results);
+            echo json_encode($results);
         } else {
             $noResults = [
                 [   /** to check in db if these fields are correct */
@@ -210,6 +212,40 @@ function getMessagesList($conn){
     }
     $stmt->close();
 }
+
+function sendMessage($conn, $data)
+{
+    $sql = "INSERT INTO messages (sender_name, sender_email, message_text) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $data['name'], $data['email'], $data['message']);
+
+    if ($stmt->execute()) {
+        echo json_encode(["status" => "success", "message" => "Message sent successfully"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error sending message: " . $stmt->error]);
+    }
+
+    $stmt->close();
+}
+
+function deleteMessage($conn, $messageId)
+{
+    error_log("deleteMessage called with messageId: $messageId");
+    $sql = 'DELETE FROM messages WHERE message_id = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $messageId);
+    if ($stmt->execute()) {
+        error_log("Message deleted successfully.");
+        echo json_encode(['status' => 'success', 'message' => 'Message deleted successfully']);
+    } else {
+        error_log("Error deleting message: " . $stmt->error);
+        echo json_encode(['status' => 'error', 'message' => 'Error deleting message: ' . $stmt->error]);
+    }
+
+    $stmt->close();
+}
+
+
 
 function removeRecipe($conn, $id)
 {
@@ -294,20 +330,7 @@ function editRecipe($conn, $id, $json)
     $stmt->close();
 }
 
-function sendMessage($conn, $data)
-{
-    $sql = "INSERT INTO messages (sender_name, sender_email, message_text) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $data['name'], $data['email'], $data['message']);
 
-    if ($stmt->execute()) {
-        echo json_encode(["status" => "success", "message" => "Message sent successfully"]);
-    } else {
-        echo json_encode(["status" => "error", "message" => "Error sending message: " . $stmt->error]);
-    }
-
-    $stmt->close();
-}
 
 
 //Function to insert an image in db

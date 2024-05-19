@@ -2,7 +2,7 @@ const list = document.getElementById("recipesList");
 
 
 
-function formatDishRating(rating) {
+export function formatDishRating(rating) {
     const yellowStar = '<img class="ratingStars" src="/public/img/icons8-star-filled-30-yellow.png" alt="Yellow Star" />';
     const grayStar = '<img class="ratingStars" src="/public/img/icons8-star-filled-30-gray.png" alt="Gray Star" />';
 
@@ -13,21 +13,21 @@ function formatDishRating(rating) {
 }
 
 
-function toTitleCase(str) {
+export function toTitleCase(str) {
     return str.toLowerCase().replace(/\b\w/g, function (char) {
         return char.toUpperCase();
     });
 }
 
 
-function formatPrepTime(prepTime) {
+export function formatPrepTime(prepTime) {
     if (prepTime / 60 < 1) return `&#x1F552; ${prepTime} min`;
     else return `&#x1F552; ${prepTime / 60} h`
 }
 
 
 // function to add tasks using a JSON data source
-function addRecipes(recipesList) {
+export function addRecipes(recipesList) {
     //clear current tasks
     list.innerText = "";
 
@@ -125,7 +125,7 @@ function addRecipes(recipesList) {
 
         //////----------Recipe description div---------\\\\\\\
         //Recipe description paragraph div    
-        let recipeDescriptionParDiv = document.createElement("div")  
+        let recipeDescriptionParDiv = document.createElement("div")
         let recipeDescriptionPar = document.createElement("p")
         recipeDescriptionPar.innerHTML = recipe.dish_recipe_description;
         recipeDescriptionParDiv.appendChild(recipeDescriptionPar);
@@ -133,7 +133,7 @@ function addRecipes(recipesList) {
 
 
         //Ingredients
-        if (recipe.dish_ingredients){
+        if (recipe.dish_ingredients) {
             let recipeIngredientsHeader = document.createElement("h3");
             recipeIngredientsHeader.innerHTML = "Ingredients:";
             let ingredientsList = document.createElement("ul");
@@ -151,20 +151,20 @@ function addRecipes(recipesList) {
         //Steps
         if (recipe.dish_steps) {
             let recipeStepsHeader = document.createElement("h3");
-            recipeStepsHeader.innerHTML = "Instructions";        
+            recipeStepsHeader.innerHTML = "Instructions";
             let recipeSteps = document.createElement("ol");
             const dishSteps = JSON.parse(recipe.dish_steps);
-                dishSteps.forEach(step => {
-                    let recipeStep = document.createElement("li");
-                    let stepTitle = document.createElement("strong");
-                    stepTitle.textContent = step.title + ":";
-                    let stepDescription = document.createElement("span");
-                    stepDescription.textContent = step.description;
+            dishSteps.forEach(step => {
+                let recipeStep = document.createElement("li");
+                let stepTitle = document.createElement("strong");
+                stepTitle.textContent = step.title + ":";
+                let stepDescription = document.createElement("span");
+                stepDescription.textContent = step.description;
 
-                    recipeStep.appendChild(stepTitle);
-                    recipeStep.appendChild(stepDescription);
-                    recipeSteps.appendChild(recipeStep);
-                }
+                recipeStep.appendChild(stepTitle);
+                recipeStep.appendChild(stepDescription);
+                recipeSteps.appendChild(recipeStep);
+            }
             )
             recipeDescriptionParDiv.appendChild(recipeStepsHeader);
             recipeDescriptionParDiv.appendChild(recipeSteps);
@@ -212,7 +212,7 @@ function addRecipes(recipesList) {
             recipeDescriptionParDiv.classList.toggle("expanded");
             expandBtn.textContent = recipeDescriptionParDiv.classList.contains("expanded") ? "Collapse" : "Expand";
         });
-        
+
 
 
 
@@ -267,7 +267,7 @@ export async function getRecipes(filterCriteria = {}) {
     try {
         const param = new URLSearchParams({ "function": "getRecipesList" });
 
-        for(const [key, value] of Object.entries(filterCriteria)){
+        for (const [key, value] of Object.entries(filterCriteria)) {
             param.append(key, value)
         }
 
@@ -352,7 +352,7 @@ export async function sendMessage(jsonData) {
 }
 
 // Function to view message
-function addMessage(message) {
+export function addMessage(message) {
     const viewMessagePopup = document.getElementById('viewMessagePopup');
     const overlay = document.getElementById('overlay');
     const viewMessageContent = document.getElementById('viewMessageContent');
@@ -394,5 +394,30 @@ export async function getMessages() {
         console.log("Error getting messages:", error);
     }
 }
+
+
+export async function deleteMessage(messageId) {
+    try {
+        const data = {
+            "function": "deleteMessage",
+            "messageId": messageId
+        };
+        const response = await fetch("http://localhost/data/index.php", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'  // Set the content type header to JSON
+            },
+            body: JSON.stringify(data)  // Convert data to JSON string
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        getMessages();
+    } catch (error) {
+        console.log("Error deleting message:", error);
+    }
+}
+
+
 
 

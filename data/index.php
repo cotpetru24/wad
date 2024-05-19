@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -60,6 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 break;
             case 'sendMessage':
                 sendMessage($conn, $data);
+                break;
+            case 'deleteMessage':
+                deleteMessage($conn, $data['messageId']);
                 break;
             default:
                 $response = ["status" => "error", "message" => "Invalid function"];
