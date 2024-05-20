@@ -47,7 +47,7 @@ export async function getRecipes(filterCriteria = {}) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const recipes = await response.json();
-        addRecipes(recipes);
+        //addRecipes(recipes);
         return recipes;
     }
     catch (error) {

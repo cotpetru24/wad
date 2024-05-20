@@ -1,9 +1,35 @@
 import * as apiCalls from './apiCalls.js';
 import * as functions from './functions.js';
+//addRecipes(apiCalls.getRecipes({ "dish_chef_recommended": "1" }))
+// apiCalls.addRecipeRows()
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if the current URL includes "adminPage.html"
+    if (window.location.pathname.includes('adminPage.html')) {
+        apiCalls.addRecipeRows();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Check if the current URL includes "index.html"
+    if (window.location.pathname.includes('index.html')) {
+        try {
+            const recipes = await apiCalls.getRecipes({ "dish_chef_recommended": "1" });
+            addRecipes(recipes);
+        } catch (error) {
+            console.error("Error loading recipes:", error);
+        }
+    }
+});
+
+
+
+
+
 
 
 const list = document.getElementById("recipesList");
-export function addRecipes(recipesList) {
+function addRecipes(recipesList) {
     //clear current tasks
     list.innerText = "";
 
@@ -44,9 +70,9 @@ export function addRecipes(recipesList) {
 
         //////----------Recipe subheading div---------\\\\\\\
         let recipeRating = document.createElement("h3");
-        recipeRating.innerHTML = formatDishRating(recipe.dish_rating);
+        recipeRating.innerHTML = functions.formatDishRating(recipe.dish_rating);
         let recipeNonvegetarianVegetarian = document.createElement("h3");
-        recipeNonvegetarianVegetarian.innerHTML = toTitleCase(recipe.category_name);
+        recipeNonvegetarianVegetarian.innerHTML = functions.toTitleCase(recipe.category_name);
 
         //Recipe Subheading Div
         let recipeSubheadingDiv = document.createElement("div");
@@ -66,7 +92,7 @@ export function addRecipes(recipesList) {
         let prepTimeHeading = document.createElement('h3');
         prepTimeHeading.innerHTML = "Prep Time";
         let prepTime = document.createElement("h4");
-        prepTime.innerHTML = formatPrepTime(recipe.dish_prep_time);
+        prepTime.innerHTML = functions.formatPrepTime(recipe.dish_prep_time);
         let prepTimeDiv = document.createElement("div");
         prepTimeDiv.appendChild(prepTimeHeading);
         prepTimeDiv.appendChild(prepTime);
@@ -75,7 +101,7 @@ export function addRecipes(recipesList) {
         let dificultyHeading = document.createElement('h3');
         dificultyHeading.innerHTML = "Dificulty";
         let dificulty = document.createElement('h4');
-        dificulty.innerHTML = toTitleCase(recipe.complexity_name);
+        dificulty.innerHTML = functions.toTitleCase(recipe.complexity_name);
         let dificultyDiv = document.createElement('div');
         dificultyDiv.appendChild(dificultyHeading);
         dificultyDiv.appendChild(dificulty);
@@ -230,9 +256,28 @@ export function addRecipes(recipesList) {
 
 
 
+// to check what this calls                ==========>>>>>>>>>>>>           infinite loop
+// apiCalls.getRecipes({ "dish_chef_recommended": "1" })
 
-apiCalls.getRecipes({ "dish_chef_recommended": "1" })
-apiCalls.addRecipeRows()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// apiCalls.addRecipeRows()
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -606,71 +651,46 @@ closeContactForm.addEventListener('click', () => { toggleContactForm(false); });
 
 
 const popularTab = document.getElementById('popular');
-popularTab.addEventListener('click', () => (
-    // logic.getRecipes()
-    apiCalls.getRecipes({ "dish_chef_recommended": "1" })
-
-)
-)
-
-
-
+popularTab.addEventListener('click', async () => {
+    let recipes = await apiCalls.getRecipes({ "dish_chef_recommended": "1" });
+    addRecipes(recipes);
+})
 
 const indianTab = document.getElementById('indian');
-indianTab.addEventListener('click', () => (
-    apiCalls.getRecipes({ "origin_country": "india" })
-
-    // logic.getReipes({"dish_origin_id":"1"})
-
-)
-)
-
-
+indianTab.addEventListener('click', async () => {
+    let recipes = await apiCalls.getRecipes({ "origin_country": "india" });
+    addRecipes(recipes);
+})
 
 const chineseTab = document.getElementById('chinese');
-chineseTab.addEventListener('click', () => (
-    apiCalls.getRecipes({ "origin_country": "china" })
-
-    // logic.getReipes({"dish_origin_id":"1"})
-
-)
-)
+chineseTab.addEventListener('click', async () => {
+    let recipes = await apiCalls.getRecipes({ "origin_country": "china" });
+    addRecipes(recipes);
+})
 
 const italianTab = document.getElementById('italian');
-italianTab.addEventListener('click', () => (
-    apiCalls.getRecipes({ "origin_country": "italia" })
-
-    // logic.getReipes({"dish_origin_id":"1"})
-
-)
-)
+italianTab.addEventListener('click', async () => {
+    let recipes = await apiCalls.getRecipes({ "origin_country": "italia" });
+    addRecipes(recipes);
+})
 
 const frenchTab = document.getElementById('french');
-frenchTab.addEventListener('click', () => (
-    apiCalls.getRecipes({ "origin_country": "france" })
-
-    // logic.getReipes({"dish_origin_id":"1"})
-
-)
-)
+frenchTab.addEventListener('click', async () => {
+    let recipes = await apiCalls.getRecipes({ "origin_country": "france" });
+    addRecipes(recipes);
+})
 
 const russianTab = document.getElementById('russian');
-russianTab.addEventListener('click', () => (
-    apiCalls.getRecipes({ "origin_country": "russia" })
-
-    // logic.getReipes({"dish_origin_id":"1"})
-
-)
-)
+russianTab.addEventListener('click', async () => {
+    let recipes = await apiCalls.getRecipes({ "origin_country": "russia" });
+    addRecipes(recipes);
+})
 
 const moldovanTab = document.getElementById('moldovan');
-moldovanTab.addEventListener('click', () => (
-    apiCalls.getRecipes({ "origin_country": "moldova" })
-
-    // logic.getReipes({"dish_origin_id":"1"})
-
-)
-)
+moldovanTab.addEventListener('click', async () => {
+    let recipes = await apiCalls.getRecipes({ "origin_country": "moldova" });
+    addRecipes(recipes);
+})
 
 
 
@@ -796,172 +816,172 @@ function editUser(user) {
 // sampleUsers.forEach(addUserRow);
 
 // Search and filter functionality for recipes
-const recipeSearchBox = document.getElementById('recipeSearchBox');
-const recipeCategoryFilter = document.getElementById('recipeCategoryFilter');
-const recipeComplexityFilter = document.getElementById('recipeComplexityFilter');
-const recipeRatingFilter = document.getElementById('recipeRatingFilter');
-const recipePrepTimeFilter = document.getElementById('recipePrepTimeFilter');
+// const recipeSearchBox = document.getElementById('recipeSearchBox');
+// const recipeCategoryFilter = document.getElementById('recipeCategoryFilter');
+// const recipeComplexityFilter = document.getElementById('recipeComplexityFilter');
+// const recipeRatingFilter = document.getElementById('recipeRatingFilter');
+// const recipePrepTimeFilter = document.getElementById('recipePrepTimeFilter');
 
-recipeSearchBox.addEventListener('input', filterRecipes);
-recipeCategoryFilter.addEventListener('change', filterRecipes);
-recipeComplexityFilter.addEventListener('change', filterRecipes);
-recipeRatingFilter.addEventListener('change', filterRecipes);
-recipePrepTimeFilter.addEventListener('change', filterRecipes);
+// recipeSearchBox.addEventListener('input', filterRecipes);
+// recipeCategoryFilter.addEventListener('change', filterRecipes);
+// recipeComplexityFilter.addEventListener('change', filterRecipes);
+// recipeRatingFilter.addEventListener('change', filterRecipes);
+// recipePrepTimeFilter.addEventListener('change', filterRecipes);
 
-function filterRecipes() {
-    const searchText = recipeSearchBox.value.toLowerCase();
-    const filterCategory = recipeCategoryFilter.value;
-    const filterComplexity = recipeComplexityFilter.value;
-    const filterRating = recipeRatingFilter.value;
-    const filterPrepTime = recipePrepTimeFilter.value;
+// function filterRecipes() {
+//     const searchText = recipeSearchBox.value.toLowerCase();
+//     const filterCategory = recipeCategoryFilter.value;
+//     const filterComplexity = recipeComplexityFilter.value;
+//     const filterRating = recipeRatingFilter.value;
+//     const filterPrepTime = recipePrepTimeFilter.value;
 
-    const filteredRecipes = sampleRecipes.filter((recipe) => {
-        const matchesSearchText = recipe.name.toLowerCase().includes(searchText);
-        const matchesCategory = filterCategory === '' || recipe.category === filterCategory;
-        const matchesComplexity = filterComplexity === '' || recipe.complexity === filterComplexity;
-        const matchesRating = filterRating === '' || recipe.rating == filterRating;
-        const matchesPrepTime = filterPrepTime === '' || recipe.prepTime <= filterPrepTime;
+//     const filteredRecipes = sampleRecipes.filter((recipe) => {
+//         const matchesSearchText = recipe.name.toLowerCase().includes(searchText);
+//         const matchesCategory = filterCategory === '' || recipe.category === filterCategory;
+//         const matchesComplexity = filterComplexity === '' || recipe.complexity === filterComplexity;
+//         const matchesRating = filterRating === '' || recipe.rating == filterRating;
+//         const matchesPrepTime = filterPrepTime === '' || recipe.prepTime <= filterPrepTime;
 
-        return matchesSearchText && matchesCategory && matchesComplexity && matchesRating && matchesPrepTime;
-    });
+//         return matchesSearchText && matchesCategory && matchesComplexity && matchesRating && matchesPrepTime;
+//     });
 
-    document.getElementById('recipesList').innerHTML = '';
-    filteredRecipes.forEach(addRecipeRow);
-}
+//     document.getElementById('recipesList').innerHTML = '';
+//     filteredRecipes.forEach(addRecipeRow);
+// }
 
 // Search functionality for messages
-const messageSearchBox = document.getElementById('messageSearchBox');
-const messageReadFilter = document.getElementById('messageReadFilter');
+// const messageSearchBox = document.getElementById('messageSearchBox');
+// const messageReadFilter = document.getElementById('messageReadFilter');
 
-messageSearchBox.addEventListener('input', filterMessages);
-messageReadFilter.addEventListener('change', filterMessages);
+// messageSearchBox.addEventListener('input', filterMessages);
+// messageReadFilter.addEventListener('change', filterMessages);
 
-function filterMessages() {
-    const searchText = messageSearchBox.value.toLowerCase();
-    const filterRead = messageReadFilter.value;
+// function filterMessages() {
+//     const searchText = messageSearchBox.value.toLowerCase();
+//     const filterRead = messageReadFilter.value;
 
-    const filteredMessages = sampleMessages.filter((message) => {
-        const matchesSearchText = message.name.toLowerCase().includes(searchText) ||
-            message.email.toLowerCase().includes(searchText) ||
-            message.content.toLowerCase().includes(searchText);
-        const matchesRead = filterRead === '' || (filterRead === 'read' && message.read) || (filterRead === 'unread' && !message.read);
+//     const filteredMessages = sampleMessages.filter((message) => {
+//         const matchesSearchText = message.name.toLowerCase().includes(searchText) ||
+//             message.email.toLowerCase().includes(searchText) ||
+//             message.content.toLowerCase().includes(searchText);
+//         const matchesRead = filterRead === '' || (filterRead === 'read' && message.read) || (filterRead === 'unread' && !message.read);
 
-        return matchesSearchText && matchesRead;
-    });
+//         return matchesSearchText && matchesRead;
+//     });
 
-    document.getElementById('messagesList').innerHTML = '';
-    filteredMessages.forEach(addMessageRow);
-}
+//     document.getElementById('messagesList').innerHTML = '';
+//     filteredMessages.forEach(addMessageRow);
+// }
 
-// Search and filter functionality for users
-const userSearchBox = document.getElementById('userSearchBox');
-const userRoleFilter = document.getElementById('userRoleFilter');
+// // Search and filter functionality for users
+// const userSearchBox = document.getElementById('userSearchBox');
+// const userRoleFilter = document.getElementById('userRoleFilter');
 
-userSearchBox.addEventListener('input', filterUsers);
-userRoleFilter.addEventListener('change', filterUsers);
+// userSearchBox.addEventListener('input', filterUsers);
+// userRoleFilter.addEventListener('change', filterUsers);
 
-function filterUsers() {
-    const searchText = userSearchBox.value.toLowerCase();
-    const filterRole = userRoleFilter.value;
+// function filterUsers() {
+//     const searchText = userSearchBox.value.toLowerCase();
+//     const filterRole = userRoleFilter.value;
 
-    const filteredUsers = sampleUsers.filter((user) => {
-        const matchesSearchText = user.name.toLowerCase().includes(searchText) ||
-            user.email.toLowerCase().includes(searchText);
-        const matchesRole = filterRole === '' || user.role === filterRole;
+//     const filteredUsers = sampleUsers.filter((user) => {
+//         const matchesSearchText = user.name.toLowerCase().includes(searchText) ||
+//             user.email.toLowerCase().includes(searchText);
+//         const matchesRole = filterRole === '' || user.role === filterRole;
 
-        return matchesSearchText && matchesRole;
-    });
+//         return matchesSearchText && matchesRole;
+//     });
 
-    document.getElementById('usersList').innerHTML = '';
-    filteredUsers.forEach(addUserRow);
-}
-
-
-// const todelete= document.getElementById('todelete');
-// todelete.addEventListener('click', ()=>{
-//     insertImage();
-// })
+//     document.getElementById('usersList').innerHTML = '';
+//     filteredUsers.forEach(addUserRow);
+// }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const uploadButton = document.getElementById('uploadButton');
-    const fileInput = document.getElementById('imageInput');
-
-    if (uploadButton && fileInput) {
-        uploadButton.addEventListener('click', () => {
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                insertImage(file);
-            } else {
-                alert('Please select a file.');
-            }
-        });
-    } else {
-        console.error('Upload button or file input not found.');
-    }
-});
+// // const todelete= document.getElementById('todelete');
+// // todelete.addEventListener('click', ()=>{
+// //     insertImage();
+// // })
 
 
-//this hould go into logic folder
-async function insertImage(file) {
-    try {
-        const reader = new FileReader();
+// document.addEventListener('DOMContentLoaded', () => {
+//     const uploadButton = document.getElementById('uploadButton');
+//     const fileInput = document.getElementById('imageInput');
 
-        reader.onloadend = async function () {
-            const base64Image = reader.result.split(',')[1];
+//     if (uploadButton && fileInput) {
+//         uploadButton.addEventListener('click', () => {
+//             if (fileInput.files.length > 0) {
+//                 const file = fileInput.files[0];
+//                 insertImage(file);
+//             } else {
+//                 alert('Please select a file.');
+//             }
+//         });
+//     } else {
+//         console.error('Upload button or file input not found.');
+//     }
+// });
 
-            // Prepare the data to be sent as JSON
-            const data = {
-                "function": "insertImage",
-                "image": base64Image
-            };
 
-            // Send the data to the server
-            const response = await fetch("http://localhost/data/index.php", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
+// //this hould go into logic folder
+// async function insertImage(file) {
+//     try {
+//         const reader = new FileReader();
 
-            // Check if the response is OK
-            if (!response.ok) {
-                console.error('Error response from server:', response.status, response.statusText);
-                return;
-            }
+//         reader.onloadend = async function () {
+//             const base64Image = reader.result.split(',')[1];
 
-            const textResponse = await response.text();
-            console.log('Raw server response:', textResponse);
+//             // Prepare the data to be sent as JSON
+//             const data = {
+//                 "function": "insertImage",
+//                 "image": base64Image
+//             };
 
-            // Try parsing the response as JSON
-            let jsonResponse;
-            try {
-                jsonResponse = JSON.parse(textResponse);
-            } catch (e) {
-                console.error('Error parsing JSON response:', e);
-                console.error('Received response:', textResponse); // Log the received response
-                return;
-            }
+//             // Send the data to the server
+//             const response = await fetch("http://localhost/data/index.php", {
+//                 method: "POST",
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify(data)
+//             });
 
-            console.log('Parsed JSON response:', jsonResponse);
+//             // Check if the response is OK
+//             if (!response.ok) {
+//                 console.error('Error response from server:', response.status, response.statusText);
+//                 return;
+//             }
 
-            if (jsonResponse.status === "success") {
-                console.log('Image uploaded successfully:', jsonResponse);
-            } else {
-                console.error('Error uploading image:', jsonResponse);
-            }
-        };
+//             const textResponse = await response.text();
+//             console.log('Raw server response:', textResponse);
 
-        reader.onerror = function (error) {
-            console.error('Error reading file:', error);
-        };
+//             // Try parsing the response as JSON
+//             let jsonResponse;
+//             try {
+//                 jsonResponse = JSON.parse(textResponse);
+//             } catch (e) {
+//                 console.error('Error parsing JSON response:', e);
+//                 console.error('Received response:', textResponse); // Log the received response
+//                 return;
+//             }
 
-        reader.readAsDataURL(file);
-    } catch (error) {
-        console.log("Error uploading image:", error);
-    }
-}
+//             console.log('Parsed JSON response:', jsonResponse);
+
+//             if (jsonResponse.status === "success") {
+//                 console.log('Image uploaded successfully:', jsonResponse);
+//             } else {
+//                 console.error('Error uploading image:', jsonResponse);
+//             }
+//         };
+
+//         reader.onerror = function (error) {
+//             console.error('Error reading file:', error);
+//         };
+
+//         reader.readAsDataURL(file);
+//     } catch (error) {
+//         console.log("Error uploading image:", error);
+//     }
+// }
 
 
 export function toDelete (){
