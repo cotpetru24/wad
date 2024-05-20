@@ -3,15 +3,8 @@ import * as functions from './functions.js';
 //addRecipes(apiCalls.getRecipes({ "dish_chef_recommended": "1" }))
 // apiCalls.addRecipeRows()
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Check if the current URL includes "adminPage.html"
-    if (window.location.pathname.includes('adminPage.html')) {
-        apiCalls.addRecipeRows();
-    }
-});
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Check if the current URL includes "index.html"
     if (window.location.pathname.includes('index.html')) {
         try {
             const recipes = await apiCalls.getRecipes({ "dish_chef_recommended": "1" });
@@ -24,12 +17,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-
-
-
-
-const list = document.getElementById("recipesList");
+//function to add recipes to index.html
 function addRecipes(recipesList) {
+    const list = document.getElementById("recipesList");
     //clear current tasks
     list.innerText = "";
 
@@ -39,12 +29,10 @@ function addRecipes(recipesList) {
         let recipeImg = document.createElement("img");
         if (recipe.dish_img) {
             recipeImg.src = recipe.dish_img;
-            // recipeImg.style.maxHeight = "100%";
-            // recipeImg.style.maxWidth = "266px"
         }
-        // else {
-        //     recipeImg.src = 'default_image_path'; // Optionally set a default image path
-        // }
+        else {
+            recipeImg.src = 'public/img/image_coming_soon_with_camera_text.jpg';
+        }
         let recipeImgDiv = document.createElement("div");
         recipeImgDiv.appendChild(recipeImg);
 
@@ -58,7 +46,6 @@ function addRecipes(recipesList) {
 
         //Fav Btn
         let recipeAddFavBtn = document.createElement("button")
-        // recipeAddFavBtn.innerHTML = '<img src="/public/img/icons8-favourite-60.png" alt="Add to Favorites" />';
         let recipeHeadingBtnDiv = document.createElement("div")
         recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
 
@@ -86,7 +73,6 @@ function addRecipes(recipesList) {
         recipeHeadDiv.appendChild(recipeSubheadingDiv)
 
 
-
         //////----------Recipe info div---------\\\\\\\
         //Prep time div
         let prepTimeHeading = document.createElement('h3');
@@ -112,7 +98,6 @@ function addRecipes(recipesList) {
         recipeInfoDiv.appendChild(dificultyDiv);
 
 
-
         //////----------Recipe footer div---------\\\\\\\
         //Recipe actions div
         let expandBtn = document.createElement('button');
@@ -131,8 +116,6 @@ function addRecipes(recipesList) {
         let recipeDescriptionPar = document.createElement("p")
         recipeDescriptionPar.innerHTML = recipe.dish_recipe_description;
         recipeDescriptionParDiv.appendChild(recipeDescriptionPar);
-
-
 
         //Ingredients
         if (recipe.dish_ingredients) {
@@ -172,10 +155,6 @@ function addRecipes(recipesList) {
             recipeDescriptionParDiv.appendChild(recipeSteps);
         }
 
-
-
-
-
         //Recipe description div
         let recipeDescriptionDiv = document.createElement('div');
         recipeDescriptionDiv.appendChild(recipeHeadDiv);
@@ -189,7 +168,7 @@ function addRecipes(recipesList) {
         recipeDiv.appendChild(recipeImgDiv);
         recipeDiv.appendChild(recipeDescriptionDiv);
 
-
+        //adding classes to dom elements
         recipeDiv.classList.add("recipe")
         recipeImgDiv.classList.add("dishImage")
         recipeDescriptionDiv.classList.add("recipeDescription")
@@ -215,10 +194,9 @@ function addRecipes(recipesList) {
             expandBtn.textContent = recipeDescriptionParDiv.classList.contains("expanded") ? "Collapse" : "Expand";
         });
 
-
-
-
-
+        list.appendChild(recipeDiv);
+    });
+}
 
 
 
@@ -228,24 +206,6 @@ function addRecipes(recipesList) {
 
         // completeButton.addEventListener("click", ()=> {toggleCompleted(task)});
         // deleteButton.addEventListener("click", ()=> {removeTask(task)});
-
-
-
-
-
-
-
-
-
-        list.appendChild(recipeDiv);
-    });
-
-}
-
-
-
-
-
 
 
 
