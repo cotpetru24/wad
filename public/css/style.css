@@ -138,11 +138,14 @@ nav {
 #searchDiv {
   display: flex;
   justify-content: flex-end;
+
 }
 
 #searchForm {
   display: flex;
-  width: 370px;
+  width: 100%;
+  /* commented the below when trying to fix the display issue */
+  /* width: 370px; */
   align-items: center;
   padding-right: 30px;
 }
@@ -795,8 +798,9 @@ justify-content: space-between;
   color: #9b59b6;
   padding-top: 15px;
 }
-
-
+#year {
+  display: inline;
+}
 
 
 

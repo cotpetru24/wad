@@ -1,10 +1,238 @@
-import * as logic from './logic.js';
-// import { sendMessage } from './logic.js';
+import * as apiCalls from './apiCalls.js';
+import * as functions from './functions.js';
 
 
-// logic.getRecipes();
-logic.getRecipes({ "dish_chef_recommended": "1" })
-logic.addRecipeRows()
+const list = document.getElementById("recipesList");
+export function addRecipes(recipesList) {
+    //clear current tasks
+    list.innerText = "";
+
+    recipesList.forEach((recipe) => {
+
+        //////----------Recipe img div---------\\\\\\\
+        let recipeImg = document.createElement("img");
+        if (recipe.dish_img) {
+            recipeImg.src = recipe.dish_img;
+            // recipeImg.style.maxHeight = "100%";
+            // recipeImg.style.maxWidth = "266px"
+        }
+        // else {
+        //     recipeImg.src = 'default_image_path'; // Optionally set a default image path
+        // }
+        let recipeImgDiv = document.createElement("div");
+        recipeImgDiv.appendChild(recipeImg);
+
+
+        //////----------Recipe heading div---------\\\\\\\
+        //Heading
+        let recipeHeading = document.createElement("h2")
+        recipeHeading.innerHTML = recipe.dish_name
+        let recipeHeadingH2Div = document.createElement("div")
+        recipeHeadingH2Div.appendChild(recipeHeading);
+
+        //Fav Btn
+        let recipeAddFavBtn = document.createElement("button")
+        // recipeAddFavBtn.innerHTML = '<img src="/public/img/icons8-favourite-60.png" alt="Add to Favorites" />';
+        let recipeHeadingBtnDiv = document.createElement("div")
+        recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
+
+        //Recipe Heading Div
+        let recipeHeadingDiv = document.createElement("div");
+        recipeHeadingDiv.appendChild(recipeHeadingH2Div);
+        recipeHeadingDiv.appendChild(recipeHeadingBtnDiv);
+
+
+        //////----------Recipe subheading div---------\\\\\\\
+        let recipeRating = document.createElement("h3");
+        recipeRating.innerHTML = formatDishRating(recipe.dish_rating);
+        let recipeNonvegetarianVegetarian = document.createElement("h3");
+        recipeNonvegetarianVegetarian.innerHTML = toTitleCase(recipe.category_name);
+
+        //Recipe Subheading Div
+        let recipeSubheadingDiv = document.createElement("div");
+        recipeSubheadingDiv.appendChild(recipeRating);
+        recipeSubheadingDiv.appendChild(recipeNonvegetarianVegetarian);
+
+
+        //////----------Recipe head div---------\\\\\\\
+        let recipeHeadDiv = document.createElement("div");
+        recipeHeadDiv.appendChild(recipeHeadingDiv)
+        recipeHeadDiv.appendChild(recipeSubheadingDiv)
+
+
+
+        //////----------Recipe info div---------\\\\\\\
+        //Prep time div
+        let prepTimeHeading = document.createElement('h3');
+        prepTimeHeading.innerHTML = "Prep Time";
+        let prepTime = document.createElement("h4");
+        prepTime.innerHTML = formatPrepTime(recipe.dish_prep_time);
+        let prepTimeDiv = document.createElement("div");
+        prepTimeDiv.appendChild(prepTimeHeading);
+        prepTimeDiv.appendChild(prepTime);
+
+        //Dificulty div
+        let dificultyHeading = document.createElement('h3');
+        dificultyHeading.innerHTML = "Dificulty";
+        let dificulty = document.createElement('h4');
+        dificulty.innerHTML = toTitleCase(recipe.complexity_name);
+        let dificultyDiv = document.createElement('div');
+        dificultyDiv.appendChild(dificultyHeading);
+        dificultyDiv.appendChild(dificulty);
+
+        //Recipe info div
+        let recipeInfoDiv = document.createElement('div');
+        recipeInfoDiv.appendChild(prepTimeDiv);
+        recipeInfoDiv.appendChild(dificultyDiv);
+
+
+
+        //////----------Recipe footer div---------\\\\\\\
+        //Recipe actions div
+        let expandBtn = document.createElement('button');
+        expandBtn.textContent = "Expand";
+        let recipeActionsDiv = document.createElement('div');
+        recipeActionsDiv.appendChild(expandBtn);
+
+        let recipeFooterDiv = document.createElement('div');
+        recipeFooterDiv.appendChild(recipeInfoDiv);
+        recipeFooterDiv.appendChild(recipeActionsDiv);
+
+
+        //////----------Recipe description div---------\\\\\\\
+        //Recipe description paragraph div    
+        let recipeDescriptionParDiv = document.createElement("div")
+        let recipeDescriptionPar = document.createElement("p")
+        recipeDescriptionPar.innerHTML = recipe.dish_recipe_description;
+        recipeDescriptionParDiv.appendChild(recipeDescriptionPar);
+
+
+
+        //Ingredients
+        if (recipe.dish_ingredients) {
+            let recipeIngredientsHeader = document.createElement("h3");
+            recipeIngredientsHeader.innerHTML = "Ingredients:";
+            let ingredientsList = document.createElement("ul");
+            const dishIngredientsArray = JSON.parse(recipe.dish_ingredients);
+            dishIngredientsArray.forEach(value => {
+                let listItem = document.createElement("li");
+                listItem.textContent = value;
+                ingredientsList.appendChild(listItem);
+            });
+
+            recipeDescriptionParDiv.appendChild(recipeIngredientsHeader);
+            recipeDescriptionParDiv.appendChild(ingredientsList);
+        }
+
+        //Steps
+        if (recipe.dish_steps) {
+            let recipeStepsHeader = document.createElement("h3");
+            recipeStepsHeader.innerHTML = "Instructions";
+            let recipeSteps = document.createElement("ol");
+            const dishSteps = JSON.parse(recipe.dish_steps);
+            dishSteps.forEach(step => {
+                let recipeStep = document.createElement("li");
+                let stepTitle = document.createElement("strong");
+                stepTitle.textContent = step.title + ":";
+                let stepDescription = document.createElement("span");
+                stepDescription.textContent = step.description;
+
+                recipeStep.appendChild(stepTitle);
+                recipeStep.appendChild(stepDescription);
+                recipeSteps.appendChild(recipeStep);
+            }
+            )
+            recipeDescriptionParDiv.appendChild(recipeStepsHeader);
+            recipeDescriptionParDiv.appendChild(recipeSteps);
+        }
+
+
+
+
+
+        //Recipe description div
+        let recipeDescriptionDiv = document.createElement('div');
+        recipeDescriptionDiv.appendChild(recipeHeadDiv);
+        recipeDescriptionDiv.appendChild(recipeDescriptionParDiv);
+        recipeDescriptionDiv.appendChild(recipeFooterDiv);
+
+
+        //////----------Recipe div---------\\\\\\\
+        let recipeDiv = document.createElement('div');
+        recipeDiv.id = "recipe_ID" + recipe.recipe_id;
+        recipeDiv.appendChild(recipeImgDiv);
+        recipeDiv.appendChild(recipeDescriptionDiv);
+
+
+        recipeDiv.classList.add("recipe")
+        recipeImgDiv.classList.add("dishImage")
+        recipeDescriptionDiv.classList.add("recipeDescription")
+        recipeHeadDiv.classList.add("recipeDetails")
+        recipeFooterDiv.classList.add("recipeFooterDiv");
+        recipeFooterDiv.classList.add("recipeHeadDiv")
+        recipeHeadingDiv.classList.add("recipeHeadDiv");
+        recipeSubheadingDiv.classList.add("recipeHeadDiv");
+        recipeInfoDiv.classList.add("recipeHeadDiv");
+        recipeInfoDiv.classList.add("recipeFooterInfoInnerDivs");
+        dificultyDiv.classList.add("recipeFooterInfoDiv");
+        prepTimeDiv.classList.add("recipeFooterInfoDiv");
+        recipeDescriptionParDiv.classList.add("recipeParagraphDiv");
+
+        if (recipeNonvegetarianVegetarian.innerHTML.trim().toLowerCase() === "vegetarian") {
+            recipeNonvegetarianVegetarian.classList.add("vegetarian");
+        } else {
+            recipeNonvegetarianVegetarian.classList.add("non-vegetarian");
+        }
+
+        expandBtn.addEventListener("click", () => {
+            recipeDescriptionParDiv.classList.toggle("expanded");
+            expandBtn.textContent = recipeDescriptionParDiv.classList.contains("expanded") ? "Collapse" : "Expand";
+        });
+
+
+
+
+
+
+
+
+
+
+        //to add here event listeners for tabs and button click
+
+        // completeButton.addEventListener("click", ()=> {toggleCompleted(task)});
+        // deleteButton.addEventListener("click", ()=> {removeTask(task)});
+
+
+
+
+
+
+
+
+
+        list.appendChild(recipeDiv);
+    });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+apiCalls.getRecipes({ "dish_chef_recommended": "1" })
+apiCalls.addRecipeRows()
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -41,7 +269,7 @@ async function listMessages() {
         const messagesList = document.getElementById("messagesList");
         if (messagesList) {
             messagesList.innerHTML = "";
-            const messages = await logic.getMessages();
+            const messages = await apiCalls.getMessages();
             messages.forEach(message => addMessageRow(message));
         } else {
             console.error("Element with ID 'messagesList' not found.");
@@ -87,7 +315,7 @@ sendMsgBtn.addEventListener("click", (event) => {
         message: message
     };
 
-    logic.sendMessage(jsonData);
+    apiCalls.sendMessage(jsonData);
 
     document.getElementById('name').value = '';
     document.getElementById('email').value = '';
@@ -174,7 +402,7 @@ function confirmAction(message, action, id, callback) {
             } else if (action === 'deleteRecipe') {
                 await deleteRecipe(id);
             } else if (action === 'deleteMessage') {
-                await logic.deleteMessage(id);
+                await apiCalls.deleteMessage(id);
             } else if (action === 'resetPassword') {
                 await resetPassword(id);
             }
@@ -380,7 +608,7 @@ closeContactForm.addEventListener('click', () => { toggleContactForm(false); });
 const popularTab = document.getElementById('popular');
 popularTab.addEventListener('click', () => (
     // logic.getRecipes()
-    logic.getRecipes({ "dish_chef_recommended": "1" })
+    apiCalls.getRecipes({ "dish_chef_recommended": "1" })
 
 )
 )
@@ -390,7 +618,7 @@ popularTab.addEventListener('click', () => (
 
 const indianTab = document.getElementById('indian');
 indianTab.addEventListener('click', () => (
-    logic.getRecipes({ "origin_country": "india" })
+    apiCalls.getRecipes({ "origin_country": "india" })
 
     // logic.getReipes({"dish_origin_id":"1"})
 
@@ -401,7 +629,7 @@ indianTab.addEventListener('click', () => (
 
 const chineseTab = document.getElementById('chinese');
 chineseTab.addEventListener('click', () => (
-    logic.getRecipes({ "origin_country": "china" })
+    apiCalls.getRecipes({ "origin_country": "china" })
 
     // logic.getReipes({"dish_origin_id":"1"})
 
@@ -410,7 +638,7 @@ chineseTab.addEventListener('click', () => (
 
 const italianTab = document.getElementById('italian');
 italianTab.addEventListener('click', () => (
-    logic.getRecipes({ "origin_country": "italia" })
+    apiCalls.getRecipes({ "origin_country": "italia" })
 
     // logic.getReipes({"dish_origin_id":"1"})
 
@@ -419,7 +647,7 @@ italianTab.addEventListener('click', () => (
 
 const frenchTab = document.getElementById('french');
 frenchTab.addEventListener('click', () => (
-    logic.getRecipes({ "origin_country": "france" })
+    apiCalls.getRecipes({ "origin_country": "france" })
 
     // logic.getReipes({"dish_origin_id":"1"})
 
@@ -428,7 +656,7 @@ frenchTab.addEventListener('click', () => (
 
 const russianTab = document.getElementById('russian');
 russianTab.addEventListener('click', () => (
-    logic.getRecipes({ "origin_country": "russia" })
+    apiCalls.getRecipes({ "origin_country": "russia" })
 
     // logic.getReipes({"dish_origin_id":"1"})
 
@@ -437,7 +665,7 @@ russianTab.addEventListener('click', () => (
 
 const moldovanTab = document.getElementById('moldovan');
 moldovanTab.addEventListener('click', () => (
-    logic.getRecipes({ "origin_country": "moldova" })
+    apiCalls.getRecipes({ "origin_country": "moldova" })
 
     // logic.getReipes({"dish_origin_id":"1"})
 
@@ -737,5 +965,5 @@ async function insertImage(file) {
 
 
 export function toDelete (){
-    logic.addRecipeRows()
+    apiCalls.addRecipeRows()
 }
