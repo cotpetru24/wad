@@ -28,7 +28,7 @@ export function addRecipeRow(recipe) {
 
     row.innerHTML = `
                 <td>${recipe.dish_name}</td>
-                <td>${recipe.description}</td><!--iadd elipse for description and ingredients so that it has a fixed size-->
+                <td>${recipe.description}</td><!--add elipse for description and ingredients so that it has a fixed size-->
                 <td>${recipe.category_name}</td>
                 <td>${recipe.name}</td><!--ingredients here-->
                 <td>${functions.toTitleCase(recipe.complexity_name)}</td>
