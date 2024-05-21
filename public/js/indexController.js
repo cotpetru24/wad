@@ -1,5 +1,6 @@
 import * as apiCalls from './apiCalls.js';
 import * as functions from './functions.js';
+import * as commonController from './commonController.js'
 
 //add current year to footer copyright 
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error("Error loading recipes:", error);
         }
     }
+    commonController.tabsController();
 });
 
 

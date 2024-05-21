@@ -217,17 +217,6 @@ export async function addRecipeRows() {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
 //Function to add a recipe row to the table
 export function addRecipeRow(recipe) {
     const recipesList = document.getElementById('adminRecipesList');

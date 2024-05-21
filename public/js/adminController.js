@@ -1,28 +1,67 @@
 import * as apiCalls from './apiCalls.js';
 import * as functions from './functions.js';
+import * as commonController from './commonController.js';
 
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Check if the current URL includes "adminPage.html"
     if (window.location.pathname.includes('adminPage.html')) {
-       apiCalls.addRecipeRows();
+       addRecipeRows();
     }
+    commonController.tabsController()
 });
 
 
 
-// Tabs functionality for Admin Page
-const contentSections = document.querySelectorAll('.contentSection');
-const tabButtonArray = document.querySelectorAll('.tabs');
-tabButtonArray.forEach((tabButton, index) => {
-    tabButton.addEventListener('click', () => {
-        document.querySelector('.tabSelected')?.classList.remove('tabSelected');
-        tabButton.classList.add('tabSelected');
-        contentSections.forEach((section, sectionIndex) => {
-            section.style.display = sectionIndex === index ? 'block' : 'none';
-        });
-    });
-});
+async function addRecipeRows() {
+    const recipes = await apiCalls.getRecipes();
+    recipes.forEach(recipe => addRecipeRow(recipe));
+
+}
+
+//Function to add a recipe row to the table
+export function addRecipeRow(recipe) {
+    const recipesList = document.getElementById('adminRecipesList');
+
+
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+                <td>${recipe.dish_name}</td>
+                <td>${recipe.description}</td><!--iadd elipse for description and ingredients so that it has a fixed size-->
+                <td>${recipe.category_name}</td>
+                <td>${recipe.name}</td><!--ingredients here-->
+                <td>${functions.toTitleCase(recipe.complexity_name)}</td>
+                <td>${functions.formatPrepTime(recipe.dish_prep_time)}</td>
+                <td>${recipe.dish_rating}</td>
+                <td><img src="${recipe.dish_img}" alt="Dish Image"></td>
+                <td class="actions" id="actionsTh">
+                    <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
+                    <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
+                    <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
+                </td>
+            `;
+
+    recipesList.appendChild(row);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Listing messages in the messages tab/admin page
 const messagesTab = document.getElementById("messagesTab");
@@ -144,62 +183,25 @@ document.getElementById('confirmActionNoButton')?.addEventListener('click', () =
 });
 
 
-async function addRecipeRows() {
-    try {
-        const recipesList = document.getElementById("adminRecipesList");
-        if (recipesList) {
-            recipesList.innerHTML = "";
-        } 
-        const recipes = await logic.getRecipes();
-        recipes.forEach(recipe => addRecipeRow(message));
-    } catch (error) {
-        console.error("Error fetching recipes:", error);
-    }
-}
 
 
 
-//Function to add a recipe row to the table
-export function addRecipeRow(recipe) {
-    const recipesList = document.getElementById('adminRecipesList');
 
 
-    const row = document.createElement('tr');
-
-    row.innerHTML = `
-                <td>${recipe.name}</td>
-                <td>${recipe.description}</td>
-                <td>${recipe.category}</td>
-                <td>${recipe.ingredients.join(', ')}</td>
-                <td>${recipe.complexity}</td>
-                <td>${recipe.prepTime}</td>
-                <td>${recipe.rating}</td>
-                <td><img src="${recipe.image}" alt="Dish Image"></td>
-                <td class="actions" id="actionsTh">
-                    <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
-                    <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
-                    <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
-                </td>
-            `;
-
-    recipesList.appendChild(row);
-}
-
-
-const sampleUsers = [
-    {
-        id: 1,
-        name: 'Admin User',
-        email: 'admin@example.com',
-        role: 'admin'
-    },
-    {
-        id: 2,
-        name: 'Regular User',
-        email: 'user@example.com',
-        role: 'user'
-    }
-];
+// const sampleUsers = [
+//     {
+//         id: 1,
+//         name: 'Admin User',
+//         email: 'admin@example.com',
+//         role: 'admin'
+//     },
+//     {
+//         id: 2,
+//         name: 'Regular User',
+//         email: 'user@example.com',
+//         role: 'user'
+//     }
+// ];
 
 
 // Function to add a message row to the table
@@ -260,15 +262,6 @@ function addUserRow(user) {
 }
 
 
-tabButtonArray.forEach((tabButton, index) => {
-    tabButton.addEventListener('click', () => {
-        document.querySelector('.tabSelected')?.classList.remove('tabSelected');
-        tabButton.classList.add('tabSelected');
-        contentSections.forEach((section, sectionIndex) => {
-            section.style.display = sectionIndex === index ? 'block' : 'none';
-        });
-    });
-});
 
 
 
