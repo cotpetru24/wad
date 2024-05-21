@@ -57,6 +57,63 @@ export async function getRecipes(filterCriteria = {}) {
 
 
 
+
+// add new recipe function - API call
+export async function addNewRecipe(jsonData) {
+    try {
+
+                // Convert dish_ingredients to a JSON string if it's an array
+                if (Array.isArray(jsonData.dishIngredients)) {
+                    jsonData.dishIngredients = JSON.stringify(jsonData.dishIngredients);
+                }
+        jsonData.function = "addNewRecipe";
+
+        const response = await fetch("http://localhost/data/index.php",
+         { method: "POST", 
+         headers : {'Content-Type' :'application/json'},
+         body: JSON.stringify(jsonData) }
+        );
+
+        if(!response.ok){
+            throw new Error(`HTTP error! status: ${response.status}`); 
+        }
+
+        const responseData = await response.json();
+        console.log(`recipe added successfully:`, responseData)
+        alert('recipe added successfully');
+        // getRecipes();
+    }
+    catch (error) {
+        console.log("error saving recipe: " + error);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // remove recipe funcion - API call
 export async function removeRecipe(recipe) {
     try {
@@ -72,17 +129,6 @@ export async function removeRecipe(recipe) {
 
 
 
-// add recipe function - API call
-export async function addRecipe() {
-    try {
-        const param = new URLSearchParams({ "function": "addRecipe", "jsonData": "recipe data should go here" });
-        const recipeData = await fetch("http://localhost/data/index.php", { method: "POST", body: param });
-        getRecipes();
-    }
-    catch (error) {
-        console.log("error retrieving data: " + error);
-    }
-}
 
 // view recipe function - API call
 export async function viewRecipe(recipe_ID) {

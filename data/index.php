@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'removeRecipe':
                 removeRecipe($conn, $data['recipeID']);
                 break;
-            case 'addRecipe':
-                addRecipe($conn, $data['json']);
+            case 'addNewRecipe':
+                addNewRecipe($conn, $data);
                 break;
             case 'editRecipe':
                 editRecipe($conn, $data['recipeID'], $data['json']);

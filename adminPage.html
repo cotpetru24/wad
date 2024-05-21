@@ -74,28 +74,54 @@
                             </select>
                         </div>
                     </div>
-                    <button class="button" id="toggleFormButton">+ Add Recipe</button>
+                    <button class="button" id="toggleFormButton">+ Add Recipe (show/hide form)</button>
                     <div class="addRecipe" id="addRecipeForm" style="display: none;">
                         <h2>Add New Recipe</h2>
                         <div class="form-group">
                             <label for="dishName">Dish Name:</label>
-                            <input type="text" id="dishName" placeholder="Dish name here">
+                            <input type="text" id="dishName" placeholder="Dish name here" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dishOrigin">Origin</label>
+                            <select id="dishOrigin" required>
+                                <option value="" disabled selected>Select Origin</option>
+                                <option value="1">India</option>
+                                <option value="2">China</option>
+                                <option value="3">Italy</option>
+                                <option value="4">France</option>
+                                <option value="5">Russia</option>
+                                <option value="6">Moldova</option>
+                            </select>
+
                         </div>
                         <div class="form-group">
                             <label for="dishDescription">Dish Description:</label>
-                            <input type="text" id="dishDescription" placeholder="Dish description here">
+                            <input type="text" id="dishDescription" placeholder="Dish description here" required>
                         </div>
+
                         <div class="form-group">
-                            <label for="dishIngredients">Dish Ingredients:</label>
+                            <label for="dishIngredients">Dish Ingredients</label>
                             <input type="text" id="dishIngredients" placeholder="Dish ingredients here">
                         </div>
+
                         <div class="form-group">
-                            <label for="dishImage">Dish Image:</label>
-                            <input type="file" id="dishImage">
+                            <label for="dishSteps">Steps</label>
+                            <input type="text" id="dishSteps" placeholder="Dish steps here" required>
                         </div>
+
+                        <div class="form-group">
+                            <label for="dishCategory">Dish Category</label>
+                            <select id="dishCategory" required>
+                                <option value="" disabled selected>Select Category</option>
+                                <option value="1">non-vegetarian</option>
+                                <option value="2">vegetarian</option>
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label for="dishComplexity">Dish Complexity:</label>
-                            <select id="dishComplexity">
+                            <select id="dishComplexity" required>
+                                <option value="" disabled selected>Select Complexity</option>
                                 <option value="1">Very Easy</option>
                                 <option value="2">Easy</option>
                                 <option value="3">Medium</option>
@@ -105,13 +131,38 @@
                         </div>
                         <div class="form-group">
                             <label for="dishPrepTime">Dish Prep Time:</label>
-                            <input type="text" id="dishPrepTime" placeholder="Prep time here">
+                            <input type="number" id="dishPrepTime" placeholder="Prep time here" required>
                         </div>
                         <div class="form-group">
                             <label for="dishRating">Dish Rating:</label>
-                            <input type="number" id="dishRating" min="1" max="5" step="1" placeholder="Rating (1-5)">
+                            <select id="dishRating">
+                                <option value="" disabled selected>Select Rating</option>
+                                <option value="0">No rating yet</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
-                        <button class="button">+ Add Recipe</button>
+                        <div class="form-group">
+                            <label for="dishChefRecommended">Chef Recommended ...</label>
+                            <select id="dishChefRecommended">
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="0">Don't Know</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dishImage">Dish Image:</label>
+                            <input type="file" id="dishImage">
+                        </div>
+
+
+
+                        <button class="button" id="addNewRecipe">+ Add Recipe Action</button>
                     </div>
                     <table>
                         <thead>
@@ -328,11 +379,11 @@
         </div>
     </div>
     <!-- \\\\\\\\\\\\//////////////////to remove the below when add/edit recipe is ready -->
-    <div class="contentSection">
+    <!-- <div class="contentSection">
         <h2>Upload Image</h2>
         <input type="file" id="imageInput" accept="image/*">
         <button id="uploadButton">Upload Image</button>
-    </div>
+    </div> -->
     <script src="public/js/adminController.js" type="module" defer></script>
 </body>
 

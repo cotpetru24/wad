@@ -40,7 +40,7 @@ use recipes;
 INSERT INTO origin (origin_country) VALUES
 ('india'),
 ('china'),
-('italia'),
+('italy'),
 ('france'),
 ('russia'),
 ('moldova')
@@ -74,7 +74,7 @@ dish_category_id INT NOT NULL,
 dish_ingredients JSON NOT NULL,
 dish_steps JSON, 
 dish_complexity_id INT NOT NULL,
-dish_prep_time INT,
+dish_prep_time INT NOT NULL,
 dish_img LONGBLOB,
 dish_upload_date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 dish_rating decimal (10, 2) not null default 0,

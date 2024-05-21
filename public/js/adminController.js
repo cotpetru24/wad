@@ -34,7 +34,7 @@ export function addRecipeRow(recipe) {
                 <td>${functions.toTitleCase(recipe.complexity_name)}</td>
                 <td>${functions.formatPrepTime(recipe.dish_prep_time)}</td>
                 <td>${recipe.dish_rating}</td>
-                <td><img src="${recipe.dish_img}" alt="Dish Image"></td>
+                <td><img src="${recipe.dish_img ? recipe.dish_img : 'public/img/image_coming_soon_with_camera_text.jpg'}" alt="Dish Image"></td>
                 <td class="actions" id="actionsTh">
                     <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
                     <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
@@ -187,6 +187,69 @@ document.getElementById('confirmActionNoButton')?.addEventListener('click', () =
 
 
 
+document.getElementById('addNewRecipe')?.addEventListener('click', () => {
+    addNewRecipe();
+    alert ("add reipe button clicked")
+});
+
+
+
+function addNewRecipe () {
+    const dishName = document.getElementById("dishName").value;
+    const dishOrigin = document.getElementById("dishOrigin").value;
+    const dishDescription = document.getElementById("dishDescription").value;
+    const dishIngredients = document.getElementById("dishIngredients").value;
+    const dishSteps = document.getElementById("dishSteps").value;
+    const dishCategory = document.getElementById("dishCategory").value;
+    const dishComplexity = document.getElementById("dishComplexity").value;
+    const dishPrepTime = document.getElementById("dishPrepTime").value;
+    const dishRating = document.getElementById("dishRating").value;
+    const dishChefRecommended = document.getElementById("dishChefRecommended").value;
+    const dishImage = document.getElementById("dishImage").value;
+
+
+    const jsonData = {
+        dishName: dishName,
+        dishOrigin: dishOrigin,
+        dishDescription: dishDescription,
+        dishIngredients: functions.convertToJSONArray(dishIngredients),
+        dishSteps: dishSteps,  //have to sor this ================>>>>>>>>>>>>
+        dishCategory: dishCategory,
+        dishComplexity: dishComplexity,
+        dishPrepTime: dishPrepTime,
+        dishRating: dishRating,
+        dishChefRecommended: dishChefRecommended,
+        dishImage: dishImage
+    };
+
+    apiCalls.addNewRecipe(jsonData);
+
+    // document.getElementById('name').value = '';
+    // document.getElementById('email').value = '';
+    // document.getElementById('message').value = '';
+    // toggleContactForm(false);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // const sampleUsers = [
 //     {
@@ -317,19 +380,19 @@ function editUser(user) {
 }
 
 // Sample data for testing
-const sampleRecipes = [
-    {
-        id: 1,
-        name: 'Butter Chicken',
-        description: 'A creamy and delicious butter chicken.',
-        category: 'Indian',
-        ingredients: ['chicken', 'butter', 'cream', 'tomato puree'],
-        complexity: 'Medium',
-        prepTime: '60 mins',
-        rating: 4,
-        image: 'path/to/image.jpg'
-    }
-];
+// const sampleRecipes = [
+//     {
+//         id: 1,
+//         name: 'Butter Chicken',
+//         description: 'A creamy and delicious butter chicken.',
+//         category: 'Indian',
+//         ingredients: ['chicken', 'butter', 'cream', 'tomato puree'],
+//         complexity: 'Medium',
+//         prepTime: '60 mins',
+//         rating: 4,
+//         image: 'path/to/image.jpg'
+//     }
+// ];
 
 const sampleMessages = [
     {
@@ -359,9 +422,31 @@ const sampleUsers = [
 ];
 
 // Adding sample data to tables for testing
-sampleRecipes.forEach(addRecipeRow);
+// sampleRecipes.forEach(addRecipeRow);
 
 sampleUsers.forEach(addUserRow);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -451,6 +536,26 @@ sampleUsers.forEach(addUserRow);
 // // todelete.addEventListener('click', ()=>{
 // //     insertImage();
 // // })
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////// this is the code that insert the image   \\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+
+
+
+
 
 
 // document.addEventListener('DOMContentLoaded', () => {

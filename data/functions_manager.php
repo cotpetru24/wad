@@ -213,20 +213,7 @@ function getMessagesList($conn)
     $stmt->close();
 }
 
-function sendMessage($conn, $data)
-{
-    $sql = "INSERT INTO messages (sender_name, sender_email, message_text) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $data['name'], $data['email'], $data['message']);
 
-    if ($stmt->execute()) {
-        echo json_encode(["status" => "success", "message" => "Message sent successfully"]);
-    } else {
-        echo json_encode(["status" => "error", "message" => "Error sending message: " . $stmt->error]);
-    }
-
-    $stmt->close();
-}
 
 function deleteMessage($conn, $messageId)
 {
@@ -261,22 +248,46 @@ function removeRecipe($conn, $id)
     $stmt->close();
 }
 
-function addRecipe($conn, $jsonData)
+
+
+
+
+function sendMessage($conn, $data)
 {
-    $data = json_decode($jsonData, true);
+    $sql = "INSERT INTO messages (sender_name, sender_email, message_text) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $data['name'], $data['email'], $data['message']);
+
+    if ($stmt->execute()) {
+        echo json_encode(["status" => "success", "message" => "Message sent successfully"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error sending message: " . $stmt->error]);
+    }
+
+    $stmt->close();
+}
+
+
+function addNewRecipe($conn, $data)
+{
+    // $data = json_decode($data, true);
     $sql = 'INSERT INTO recipes (
-        dish_name, dish_origin_id, dish_recipe_description, dish_category_id, dish_ingredients, dish_complexity_id, dish_prep_time)
-        VALUES (?, ?, ?, ?, ?, ?, ?)';
+        dish_name, dish_origin_id, dish_recipe_description, dish_ingredients,/* dish_steps,*/
+        dish_category_id, dish_complexity_id, dish_prep_time, dish_rating, dish_chef_recommended)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        'sisssii',
-        $data['dish_name'],
-        $data['dish_origin_id'],
-        $data['dish_recipe_description'],
-        $data['dish_category_id'],
-        $data['dish_ingredients'],
-        $data['dish_complexity_id'],
-        $data['dish_prep_time']
+        'sissiiiii',
+        $data['dishName'],
+        $data['dishOrigin'],
+        $data['dishDescription'],
+        $data['dishIngredients'],
+        // $data['dishSteps'],
+        $data['dishCategory'],
+        $data['dishComplexity'],
+        $data['dishPrepTime'],
+        $data['dishRating'],
+        $data['dishChefRecommended']
     );
 
     if ($stmt->execute()) {
