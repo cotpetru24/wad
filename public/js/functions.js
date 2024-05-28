@@ -18,11 +18,11 @@ export function toTitleCase(str) {
 
 export function formatPrepTime(prepTime) {
     if (prepTime / 60 < 1) return `&#x1F552; ${prepTime} min`;
-    else return `&#x1F552; ${prepTime / 60} h`
+    else return `&#x1F552; ${Math.floor(prepTime / 60)} h ${prepTime % 60} min.`
 }
 
-export function convertToJSONArray(string){
-    let array = string.split(',').map(item=>item.trim());
+export function convertToJSONArray(string, delimiter = ','){
+    let array = string.split(delimiter).map(item=>item.trim());
     let jsonArray = JSON.stringify(array);
 
     return jsonArray;

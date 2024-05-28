@@ -447,8 +447,8 @@ input[type="search"] {
 }
 
 table {
-  width: 100%;
-  /* table-layout: fixed; */
+  width: 90%;
+   /* table-layout: fixed; */
   border-spacing: 5px;
   border-collapse: collapse;
   margin-top: 20px;
@@ -463,6 +463,7 @@ td {
     overflow: hidden; /* Hides overflowed content */
     text-overflow: ellipsis; /* Adds ellipsis to overflowed text */
     white-space: nowrap; /* Prevents text from wrapping */
+    vertical-align: middle;
 }
 
 th {
@@ -800,6 +801,16 @@ justify-content: space-between;
 }
 #year {
   display: inline;
+}
+
+
+.fixed-cell {
+  width: 200px; /* Set your desired fixed width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* display: inline-block; Ensures the element respects the width */
+  max-width: 200px; /* Ensures the element respects the width */
 }
 
 

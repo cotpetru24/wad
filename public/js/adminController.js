@@ -28,9 +28,9 @@ export function addRecipeRow(recipe) {
 
     row.innerHTML = `
                 <td>${recipe.dish_name}</td>
-                <td>${recipe.description}</td><!--add elipse for description and ingredients so that it has a fixed size-->
+                <td class="fixed-cell">${recipe.dish_recipe_description}</td><!--add elipse for description and ingredients so that it has a fixed size-->
                 <td>${recipe.category_name}</td>
-                <td>${recipe.name}</td><!--ingredients here-->
+                <td class="fixed-cell">${JSON.parse(recipe.dish_ingredients)}</td><!--ingredients here-->
                 <td>${functions.toTitleCase(recipe.complexity_name)}</td>
                 <td>${functions.formatPrepTime(recipe.dish_prep_time)}</td>
                 <td>${recipe.dish_rating}</td>
@@ -548,7 +548,7 @@ sampleUsers.forEach(addUserRow);
 
 
 
-/////////////////////////////// this is the code that insert the image   \\\\\\\\\\\\\\\\\\\\\\\\\\\
+/////////////////////////////// this is the code that inserts the image   \\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
 
@@ -578,62 +578,62 @@ sampleUsers.forEach(addUserRow);
 
 
 // //this hould go into logic folder
-// async function insertImage(file) {
-//     try {
-//         const reader = new FileReader();
+async function insertImage(file) {
+    try {
+        const reader = new FileReader();
 
-//         reader.onloadend = async function () {
-//             const base64Image = reader.result.split(',')[1];
+        reader.onloadend = async function () {
+            const base64Image = reader.result.split(',')[1];
 
-//             // Prepare the data to be sent as JSON
-//             const data = {
-//                 "function": "insertImage",
-//                 "image": base64Image
-//             };
+            // Prepare the data to be sent as JSON
+            const data = {
+                "function": "insertImage",
+                "image": base64Image
+            };
 
-//             // Send the data to the server
-//             const response = await fetch("http://localhost/data/index.php", {
-//                 method: "POST",
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify(data)
-//             });
+            // Send the data to the server
+            const response = await fetch("http://localhost/data/index.php", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
 
-//             // Check if the response is OK
-//             if (!response.ok) {
-//                 console.error('Error response from server:', response.status, response.statusText);
-//                 return;
-//             }
+            // Check if the response is OK
+            if (!response.ok) {
+                console.error('Error response from server:', response.status, response.statusText);
+                return;
+            }
 
-//             const textResponse = await response.text();
-//             console.log('Raw server response:', textResponse);
+            const textResponse = await response.text();
+            console.log('Raw server response:', textResponse);
 
-//             // Try parsing the response as JSON
-//             let jsonResponse;
-//             try {
-//                 jsonResponse = JSON.parse(textResponse);
-//             } catch (e) {
-//                 console.error('Error parsing JSON response:', e);
-//                 console.error('Received response:', textResponse); // Log the received response
-//                 return;
-//             }
+            // Try parsing the response as JSON
+            let jsonResponse;
+            try {
+                jsonResponse = JSON.parse(textResponse);
+            } catch (e) {
+                console.error('Error parsing JSON response:', e);
+                console.error('Received response:', textResponse); // Log the received response
+                return;
+            }
 
-//             console.log('Parsed JSON response:', jsonResponse);
+            console.log('Parsed JSON response:', jsonResponse);
 
-//             if (jsonResponse.status === "success") {
-//                 console.log('Image uploaded successfully:', jsonResponse);
-//             } else {
-//                 console.error('Error uploading image:', jsonResponse);
-//             }
-//         };
+            if (jsonResponse.status === "success") {
+                console.log('Image uploaded successfully:', jsonResponse);
+            } else {
+                console.error('Error uploading image:', jsonResponse);
+            }
+        };
 
-//         reader.onerror = function (error) {
-//             console.error('Error reading file:', error);
-//         };
+        reader.onerror = function (error) {
+            console.error('Error reading file:', error);
+        };
 
-//         reader.readAsDataURL(file);
-//     } catch (error) {
-//         console.log("Error uploading image:", error);
-//     }
-// }
+        reader.readAsDataURL(file);
+    } catch (error) {
+        console.log("Error uploading image:", error);
+    }
+}
