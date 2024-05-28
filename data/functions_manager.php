@@ -270,9 +270,9 @@ function sendMessage($conn, $data)
 
 function addNewRecipe($conn, $data)
 {
-    // $data = json_decode($data, true);
+    // Prepare the SQL statement to insert the new recipe
     $sql = 'INSERT INTO recipes (
-        dish_name, dish_origin_id, dish_recipe_description, dish_ingredients,/* dish_steps,*/
+        dish_name, dish_origin_id, dish_recipe_description, dish_ingredients, 
         dish_category_id, dish_complexity_id, dish_prep_time, dish_rating, dish_chef_recommended)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
     $stmt = $conn->prepare($sql);
@@ -282,7 +282,6 @@ function addNewRecipe($conn, $data)
         $data['dishOrigin'],
         $data['dishDescription'],
         $data['dishIngredients'],
-        // $data['dishSteps'],
         $data['dishCategory'],
         $data['dishComplexity'],
         $data['dishPrepTime'],
@@ -291,7 +290,32 @@ function addNewRecipe($conn, $data)
     );
 
     if ($stmt->execute()) {
-        echo json_encode(['status' => 'success', 'message' => 'Recipe added successfully']);
+        $lastInsertedId = $stmt->insert_id;
+
+        if (isset($data['dishImage']) && $data['dishImage']) {
+            // Decode the Base64 encoded image
+            $base64Image = $data['dishImage'];
+            $binaryData = base64_decode($base64Image);
+
+            if ($binaryData === false) {
+                echo json_encode(["status" => "error", "message" => "Base64 decoding failed"]);
+                return;
+            }
+
+            // Prepare the SQL statement to update the image in the database
+            $stmt = $conn->prepare("UPDATE recipes SET dish_img = ? WHERE dish_id = ?");
+            $null = NULL;
+            $stmt->bind_param("bi", $null, $lastInsertedId);
+            $stmt->send_long_data(0, $binaryData);
+
+            if ($stmt->execute()) {
+                echo json_encode(["status" => "success", "message" => "Recipe added successfully with image"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Failed to upload image: " . $stmt->error]);
+            }
+        } else {
+            echo json_encode(["status" => "success", "message" => "Recipe added successfully without image"]);
+        }
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Error adding recipe: ' . $stmt->error]);
     }
@@ -344,29 +368,29 @@ function editRecipe($conn, $id, $json)
 
 
 
-//Function to insert an image in db
-function insertImage($conn, $base64Image)
-{
-    // Decode the Base64 encoded image
-    $binaryData = base64_decode($base64Image);
+// //Function to insert an image in db
+// function insertImage($conn, $base64Image)
+// {
+//     // Decode the Base64 encoded image
+//     $binaryData = base64_decode($base64Image);
 
-    if ($binaryData === false) {
-        echo json_encode(["status" => "error", "message" => "Base64 decoding failed"]);
-        return;
-    }
+//     if ($binaryData === false) {
+//         echo json_encode(["status" => "error", "message" => "Base64 decoding failed"]);
+//         return;
+//     }
 
-    // Prepare the SQL statement to update the image in the database
-    $stmt = $conn->prepare("UPDATE recipes SET dish_img = ? WHERE dish_id = 2");
+//     // Prepare the SQL statement to update the image in the database
+//     $stmt = $conn->prepare("UPDATE recipes SET dish_img = ? WHERE dish_id = 2");
 
-    // Bind the binary data to the prepared statement
-    $null = NULL;
-    $stmt->bind_param("b", $null);
-    $stmt->send_long_data(0, $binaryData);
+//     // Bind the binary data to the prepared statement
+//     $null = NULL;
+//     $stmt->bind_param("b", $null);
+//     $stmt->send_long_data(0, $binaryData);
 
-    if ($stmt->execute()) {
-        echo json_encode(["status" => "success", "message" => "Image uploaded successfully"]);
-    } else {
-        echo json_encode(["status" => "error", "message" => "Failed to upload image: " . $stmt->error]);
-    }
-    $stmt->close();
-}
+//     if ($stmt->execute()) {
+//         echo json_encode(["status" => "success", "message" => "Image uploaded successfully"]);
+//     } else {
+//         echo json_encode(["status" => "error", "message" => "Failed to upload image: " . $stmt->error]);
+//     }
+//     $stmt->close();
+// }

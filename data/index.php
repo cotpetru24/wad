@@ -56,9 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'viewRecipe':
                 viewRecipe($conn, $data['recipeID']);
                 break;
-            case 'insertImage':
-                insertImage($conn, $data['image']);
-                break;
+            // case 'insertImage':
+            //     insertImage($conn, $data['image']);
+            //     break;
             case 'sendMessage':
                 sendMessage($conn, $data);
                 break;

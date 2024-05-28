@@ -194,7 +194,7 @@ document.getElementById('addNewRecipe')?.addEventListener('click', () => {
 
 
 
-function addNewRecipe () {
+function addNewRecipe() {
     const dishName = document.getElementById("dishName").value;
     const dishOrigin = document.getElementById("dishOrigin").value;
     const dishDescription = document.getElementById("dishDescription").value;
@@ -205,30 +205,56 @@ function addNewRecipe () {
     const dishPrepTime = document.getElementById("dishPrepTime").value;
     const dishRating = document.getElementById("dishRating").value;
     const dishChefRecommended = document.getElementById("dishChefRecommended").value;
-    const dishImage = document.getElementById("dishImage").value;
+    const dishImage = document.getElementById("dishImage").files[0]; // Use files[0] to get the selected file
 
+    const reader = new FileReader();
 
-    const jsonData = {
-        dishName: dishName,
-        dishOrigin: dishOrigin,
-        dishDescription: dishDescription,
-        dishIngredients: functions.convertToJSONArray(dishIngredients),
-        dishSteps: dishSteps,  //have to sor this ================>>>>>>>>>>>>
-        dishCategory: dishCategory,
-        dishComplexity: dishComplexity,
-        dishPrepTime: dishPrepTime,
-        dishRating: dishRating,
-        dishChefRecommended: dishChefRecommended,
-        dishImage: dishImage
+    reader.onloadend = function () {
+        const base64Image = reader.result.split(',')[1];
+
+        const jsonData = {
+            function: 'addNewRecipe', // Use the existing function name
+            dishName: dishName,
+            dishOrigin: dishOrigin,
+            dishDescription: dishDescription,
+            dishIngredients: functions.convertToJSONArray(dishIngredients),
+            dishSteps: dishSteps,
+            dishCategory: dishCategory,
+            dishComplexity: dishComplexity,
+            dishPrepTime: dishPrepTime,
+            dishRating: dishRating,
+            dishChefRecommended: dishChefRecommended,
+            dishImage: base64Image // Include the image data
+        };
+
+        apiCalls.addNewRecipe(jsonData);
     };
 
-    apiCalls.addNewRecipe(jsonData);
+    reader.onerror = function (error) {
+        console.error('Error reading file:', error);
+    };
 
-    // document.getElementById('name').value = '';
-    // document.getElementById('email').value = '';
-    // document.getElementById('message').value = '';
-    // toggleContactForm(false);
+    if (dishImage) {
+        reader.readAsDataURL(dishImage); // Read the image file as a data URL
+    } else {
+        // If no image is selected, send the data without the image
+        const jsonData = {
+            function: 'addNewRecipe', // Use the existing function name
+            dishName: dishName,
+            dishOrigin: dishOrigin,
+            dishDescription: dishDescription,
+            dishIngredients: functions.convertToJSONArray(dishIngredients),
+            dishSteps: dishSteps,
+            dishCategory: dishCategory,
+            dishComplexity: dishComplexity,
+            dishPrepTime: dishPrepTime,
+            dishRating: dishRating,
+            dishChefRecommended: dishChefRecommended,
+            dishImage: null // No image data
+        };
 
+        apiCalls.addNewRecipe(jsonData);
+    }
 }
 
 
@@ -578,62 +604,62 @@ sampleUsers.forEach(addUserRow);
 
 
 // //this hould go into logic folder
-async function insertImage(file) {
-    try {
-        const reader = new FileReader();
+// async function insertImage(file) {
+//     try {
+//         const reader = new FileReader();
 
-        reader.onloadend = async function () {
-            const base64Image = reader.result.split(',')[1];
+//         reader.onloadend = async function () {
+//             const base64Image = reader.result.split(',')[1];
 
-            // Prepare the data to be sent as JSON
-            const data = {
-                "function": "insertImage",
-                "image": base64Image
-            };
+//             // Prepare the data to be sent as JSON
+//             const data = {
+//                 "function": "insertImage",
+//                 "image": base64Image
+//             };
 
-            // Send the data to the server
-            const response = await fetch("http://localhost/data/index.php", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
+//             // Send the data to the server
+//             const response = await fetch("http://localhost/data/index.php", {
+//                 method: "POST",
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify(data)
+//             });
 
-            // Check if the response is OK
-            if (!response.ok) {
-                console.error('Error response from server:', response.status, response.statusText);
-                return;
-            }
+//             // Check if the response is OK
+//             if (!response.ok) {
+//                 console.error('Error response from server:', response.status, response.statusText);
+//                 return;
+//             }
 
-            const textResponse = await response.text();
-            console.log('Raw server response:', textResponse);
+//             const textResponse = await response.text();
+//             console.log('Raw server response:', textResponse);
 
-            // Try parsing the response as JSON
-            let jsonResponse;
-            try {
-                jsonResponse = JSON.parse(textResponse);
-            } catch (e) {
-                console.error('Error parsing JSON response:', e);
-                console.error('Received response:', textResponse); // Log the received response
-                return;
-            }
+//             // Try parsing the response as JSON
+//             let jsonResponse;
+//             try {
+//                 jsonResponse = JSON.parse(textResponse);
+//             } catch (e) {
+//                 console.error('Error parsing JSON response:', e);
+//                 console.error('Received response:', textResponse); // Log the received response
+//                 return;
+//             }
 
-            console.log('Parsed JSON response:', jsonResponse);
+//             console.log('Parsed JSON response:', jsonResponse);
 
-            if (jsonResponse.status === "success") {
-                console.log('Image uploaded successfully:', jsonResponse);
-            } else {
-                console.error('Error uploading image:', jsonResponse);
-            }
-        };
+//             if (jsonResponse.status === "success") {
+//                 console.log('Image uploaded successfully:', jsonResponse);
+//             } else {
+//                 console.error('Error uploading image:', jsonResponse);
+//             }
+//         };
 
-        reader.onerror = function (error) {
-            console.error('Error reading file:', error);
-        };
+//         reader.onerror = function (error) {
+//             console.error('Error reading file:', error);
+//         };
 
-        reader.readAsDataURL(file);
-    } catch (error) {
-        console.log("Error uploading image:", error);
-    }
-}
+//         reader.readAsDataURL(file);
+//     } catch (error) {
+//         console.log("Error uploading image:", error);
+//     }
+// }
