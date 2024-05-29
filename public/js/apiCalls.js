@@ -266,7 +266,29 @@ export async function deleteMessage(messageId) {
 }
 
 
+export async function editRecipe (jsonData){
+    try{
+        jsonData.function = "editRecipe";
+        const response = await fetch ("http://localhost/data/index.php",
+            {
+            method: "POST", 
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(jsonData)
+            }
+        );
+        if (!response.ok){
+            throw new Error (`http error! status: , ${response.status}`);
+        }
+        const responseData = await response.json();
+        console.log(`changes saved successfully`, responseData);
+        alert(`changes saved successfully`);
+    }
 
+    catch(error){
+        console.log("error saving changes" + error);
+    }
+
+}
 
 
 

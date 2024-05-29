@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 addNewRecipe($conn, $data);
                 break;
             case 'editRecipe':
-                editRecipe($conn, $data['recipeID'], $data['json']);
+                editRecipe($conn, $data);
                 break;
             case 'viewRecipe':
                 viewRecipe($conn, $data['recipeID']);

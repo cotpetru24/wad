@@ -74,7 +74,7 @@
                             </select>
                         </div>
                     </div>
-                    <button class="button" id="toggleFormButton">+ Add Recipe (show/hide form)</button>
+                    <button class="button" id="toggleFormButton">+ Add Recipe</button>
                     <div class="addRecipe" id="addRecipeForm" style="display: none;">
                         <h2>Add New Recipe</h2>
                         <div class="form-group">
@@ -92,23 +92,19 @@
                                 <option value="5">Russia</option>
                                 <option value="6">Moldova</option>
                             </select>
-
                         </div>
                         <div class="form-group">
                             <label for="dishDescription">Dish Description:</label>
                             <input type="text" id="dishDescription" placeholder="Dish description here" required>
                         </div>
-
                         <div class="form-group">
-                            <label for="dishIngredients">Dish Ingredients: (separate the ingredients using  "," (comma))</label>
+                            <label for="dishIngredients">Dish Ingredients: (separate the ingredients using "," (comma))</label>
                             <input type="text" id="dishIngredients" placeholder="Dish ingredients here">
                         </div>
-
                         <div class="form-group">
                             <label for="dishSteps">Steps</label>
                             <input type="text" id="dishSteps" placeholder="Dish steps here" required>
                         </div>
-
                         <div class="form-group">
                             <label for="dishCategory">Dish Category</label>
                             <select id="dishCategory" required>
@@ -117,7 +113,6 @@
                                 <option value="2">vegetarian</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label for="dishComplexity">Dish Complexity:</label>
                             <select id="dishComplexity" required>
@@ -159,9 +154,6 @@
                             <label for="dishImage">Dish Image:</label>
                             <input type="file" id="dishImage">
                         </div>
-
-
-
                         <button class="button" id="addNewRecipe">+ Add Recipe Action</button>
                     </div>
                     <table>
@@ -204,7 +196,6 @@
                                 <th>Message</th>
                                 <th>Date</th>
                                 <th>Read</th>
-                                <!-- <th>Flag</th> -->
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -288,9 +279,21 @@
         </div>
         <div id="editRecipeContent">
             <!-- Edit form goes here -->
+            <input type="hidden" id="editRecipeId">
             <div class="form-group">
                 <label for="editDishName">Dish Name:</label>
                 <input type="text" id="editDishName" placeholder="Dish name here">
+            </div>
+            <div class="form-group">
+                <label for="editDishOrigin">Origin:</label>
+                <select id="editDishOrigin">
+                    <option value="1">India</option>
+                    <option value="2">China</option>
+                    <option value="3">Italy</option>
+                    <option value="4">France</option>
+                    <option value="5">Russia</option>
+                    <option value="6">Moldova</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="editDishDescription">Dish Description:</label>
@@ -301,8 +304,15 @@
                 <input type="text" id="editDishIngredients" placeholder="Dish ingredients here">
             </div>
             <div class="form-group">
-                <label for="editDishImage">Dish Image:</label>
-                <input type="file" id="editDishImage">
+                <label for="editDishSteps">Steps:</label>
+                <input type="text" id="editDishSteps" placeholder="Dish steps here">
+            </div>
+            <div class="form-group">
+                <label for="editDishCategory">Dish Category:</label>
+                <select id="editDishCategory">
+                    <option value="1">non-vegetarian</option>
+                    <option value="2">vegetarian</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="editDishComplexity">Dish Complexity:</label>
@@ -316,11 +326,23 @@
             </div>
             <div class="form-group">
                 <label for="editDishPrepTime">Dish Prep Time:</label>
-                <input type="text" id="editDishPrepTime" placeholder="Prep time here">
+                <input type="number" id="editDishPrepTime" placeholder="Prep time here">
             </div>
             <div class="form-group">
                 <label for="editDishRating">Dish Rating:</label>
-                <input type="number" id="editDishRating" min="1" max="5" step="1" placeholder="Rating (1-5)">
+                <select id="editDishRating">
+                    <option value="0">No rating yet</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="editDishImage">Dish Image:</label>
+                <input type="file" id="editDishImage">
             </div>
             <button class="button" id="saveEditButton">Save Changes</button>
         </div>
@@ -363,14 +385,12 @@
             <button class="button" id="saveUserChangesButton">Save Changes</button>
         </div>
     </div>
-    <!-- not sure what this does//////////to check////////////////////////////////////////// -->
     <div class="popup" id="confirmActionPopup">
         <div class="popupHeader">
             <h2>Confirm Action</h2>
             <button class="closeButton" id="closeConfirmActionPopup">&times;</button>
         </div>
         <div id="confirmActionContent">
-            <!-- Confirmation message goes here -->
             <p id="confirmActionMessage">Are you sure?</p>
             <div class="actions">
                 <button id="confirmActionYesButton" class="button">Yes</button>
@@ -378,12 +398,6 @@
             </div>
         </div>
     </div>
-    <!-- \\\\\\\\\\\\//////////////////to remove the below when add/edit recipe is ready -->
-    <!-- <div class="contentSection">
-        <h2>Upload Image</h2>
-        <input type="file" id="imageInput" accept="image/*">
-        <button id="uploadButton">Upload Image</button>
-    </div> -->
     <script src="public/js/adminController.js" type="module" defer></script>
 </body>
 

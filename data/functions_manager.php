@@ -1,5 +1,6 @@
 <?php
 // Enable error reporting for debugging
+ini_set('memory_limit', '256M');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -341,26 +342,84 @@ function viewRecipe($conn, $id)
     $stmt->close();
 }
 
-function editRecipe($conn, $id, $json)
+function editRecipe($conn, $data)
 {
-    $data = json_decode($json, true);
-    $sql = "UPDATE recipes SET dish_name=?, dish_recipe_description=?, dish_ingredients=?, dish_complexity_id=?, dish_prep_time=? WHERE recipe_id=?";
+    $sql = "UPDATE recipes SET dish_name=?, dish_origin_id=?, dish_recipe_description=?, dish_ingredients=?, dish_complexity_id=?, 
+    dish_prep_time=?, dish_category_id=?, dish_rating=? WHERE dish_id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        'sssiii',
-        $data['dish_name'],
-        $data['dish_recipe_description'],
-        $data['dish_ingredients'],
-        $data['dish_complexity_id'],
-        $data['dish_prep_time'],
-        $id
+        'sissiiiii',
+        $data['dishName'],
+        $data['dishOrigin'],
+        $data['dishDescription'],
+        $data['dishIngredients'],
+        $data['dishComplexity'],
+        $data['dishPrepTime'],
+        $data['dishCategory'],
+        $data['dishRating'],
+        $data['dishId']
     );
 
+
     if ($stmt->execute()) {
-        echo json_encode(['status' => 'success', 'message' => 'Recipe edited successfully']);
+        if (isset($data['dishImage']) && $data['dishImage']) {
+            // Decode the Base64 encoded image
+            $base64Image = $data['dishImage'];
+            $binaryData = base64_decode($base64Image);
+
+            if ($binaryData === false) {
+                echo json_encode(["status" => "error", "message" => "Base64 decoding failed"]);
+                return;
+            }
+
+            // Prepare the SQL statement to update the image in the database
+            $stmt = $conn->prepare("UPDATE recipes SET dish_img = ? WHERE dish_id = ?");
+            $null = NULL;
+            $stmt->bind_param("bi", $null, $data['dishId']);
+            $stmt->send_long_data(0, $binaryData);
+
+            if ($stmt->execute()) {
+                echo json_encode(["status" => "success", "message" => "Recipe updated successfully with image"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Failed to upload image: " . $stmt->error]);
+            }
+        } else {
+            echo json_encode(["status" => "success", "message" => "Recipe updated successfully without image"]);
+        }
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Error editing recipe: ' . $stmt->error]);
+        echo json_encode(['status' => 'error', 'message' => 'Error adding recipe: ' . $stmt->error]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // if ($stmt->execute()) {
+    //     echo json_encode(['status' => 'success', 'message' => 'Recipe edited successfully']);
+    // } else {
+    //     echo json_encode(['status' => 'error', 'message' => 'Error editing recipe: ' . $stmt->error]);
+    // }
 
     $stmt->close();
 }
