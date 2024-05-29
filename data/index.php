@@ -44,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     if (isset($data['function'])) {
         switch ($data['function']) {
-            case 'removeRecipe':
-                removeRecipe($conn, $data['recipeID']);
+            case 'deleteRecipe':
+                deleteRecipe($conn, $data['recipeId']);
                 break;
             case 'addNewRecipe':
                 addNewRecipe($conn, $data);

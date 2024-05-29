@@ -262,7 +262,7 @@ chineseTab.addEventListener('click', async () => {
 
 const italianTab = document.getElementById('italian');
 italianTab.addEventListener('click', async () => {
-    let recipes = await apiCalls.getRecipes({ "origin_country": "italia" });
+    let recipes = await apiCalls.getRecipes({ "origin_country": "italy" });
     addRecipes(recipes);
 })
 

@@ -234,9 +234,9 @@ function deleteMessage($conn, $messageId)
 
 
 
-function removeRecipe($conn, $id)
+function deleteRecipe($conn, $id)
 {
-    $sql = 'DELETE FROM recipes WHERE recipe_id = ?';
+    $sql = 'DELETE FROM recipes WHERE dish_id = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $id);
     if ($stmt->execute()) {

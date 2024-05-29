@@ -19,32 +19,95 @@ async function addRecipeRows() {
 
 }
 
-//Function to add a recipe row to the table
-export function addRecipeRow(recipe) {
-    const recipesList = document.getElementById('adminRecipesList');
+// //Function to add a recipe row to the table
+// export function addRecipeRow(recipe) {
+//     const recipesList = document.getElementById('adminRecipesList');
 
 
-    const row = document.createElement('tr');
+//     const row = document.createElement('tr');
 
-    row.innerHTML = `
-                <td>${recipe.dish_name}</td>
-                <td class="fixed-cell">${recipe.dish_recipe_description}</td><!--add elipse for description and ingredients so that it has a fixed size-->
-                <td>${recipe.category_name}</td>
-                <td class="fixed-cell">${JSON.parse(recipe.dish_ingredients)}</td><!--ingredients here-->
-                <td>${functions.toTitleCase(recipe.complexity_name)}</td>
-                <td>${functions.formatPrepTime(recipe.dish_prep_time)}</td>
-                <td>${recipe.dish_rating}</td>
-                <td><img src="${recipe.dish_img ? recipe.dish_img : 'public/img/image_coming_soon_with_camera_text.jpg'}" alt="Dish Image"></td>
-                <td class="actions" id="actionsTh">
-                    <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
-                    <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
-                    <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
-                </td>
-            `;
+//     row.innerHTML = `
+//                 <td>${recipe.dish_name}</td>
+//                 <td class="fixed-cell">${recipe.dish_recipe_description}</td><!--add elipse for description and ingredients so that it has a fixed size-->
+//                 <td>${recipe.category_name}</td>
+//                 <td class="fixed-cell">${JSON.parse(recipe.dish_ingredients)}</td><!--ingredients here-->
+//                 <td>${functions.toTitleCase(recipe.complexity_name)}</td>
+//                 <td>${functions.formatPrepTime(recipe.dish_prep_time)}</td>
+//                 <td>${recipe.dish_rating}</td>
+//                 <td><img src="${recipe.dish_img ? recipe.dish_img : 'public/img/image_coming_soon_with_camera_text.jpg'}" alt="Dish Image"></td>
+//                 <td class="actions" id="actionsTh">
+//                     <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
+//                     <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
+//                     <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
+//                 </td>
+//             `;
 
-    recipesList.appendChild(row);
+//     recipesList.appendChild(row);
+// }
+
+
+export function toggleExpand(event) {
+    const button = event.target; // Get the target button from the event
+    const row = button.closest('tr'); // Ensure button is a DOM element and get the closest tr
+    const expandedRow = row.nextElementSibling;
+    if (expandedRow && expandedRow.style.display === 'none') {
+        expandedRow.style.display = 'table-row';
+        button.textContent = 'Collapse';
+    } else if (expandedRow) {
+        expandedRow.style.display = 'none';
+        button.textContent = 'Expand';
+    }
 }
 
+
+
+
+export function addRecipeRow(recipe) {
+    const recipesList = document.getElementById('adminRecipesList');
+    const row = document.createElement('tr');
+    row.classList.add('recipe-row');
+
+    row.innerHTML = `
+        <td>${recipe.dish_name}</td>
+        <td class="fixed-cell">${recipe.dish_recipe_description}</td>
+        <td>${recipe.category_name}</td>
+        <td class="fixed-cell">${JSON.parse(recipe.dish_ingredients).join(', ')}</td>
+        <td>${functions.toTitleCase(recipe.complexity_name)}</td>
+        <td>${functions.formatPrepTime(recipe.dish_prep_time)}</td>
+        <td>${recipe.dish_rating}</td>
+        <td><img src="${recipe.dish_img ? recipe.dish_img : 'public/img/image_coming_soon_with_camera_text.jpg'}" alt="Dish Image"></td>
+        <td class="actions" id="actionsTh">
+            <button class="expand-btn">Expand</button>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+        </td>
+    `;
+
+    const expandedRow = document.createElement('tr');
+    expandedRow.classList.add('recipe-expanded-row');
+    expandedRow.style.display = 'none';
+
+    expandedRow.innerHTML = `
+        <td colspan="9">
+            <div class="expanded-content">
+                <h3>Description</h3>
+                <p>${recipe.dish_recipe_description}</p>
+                <h3>Ingredients</h3>
+                <p>${JSON.parse(recipe.dish_ingredients).join(', ')}</p>
+                <h3>Steps</h3>
+                <p>${recipe.dish_steps}</p>
+            </div>
+        </td>
+    `;
+
+    recipesList.appendChild(row);
+    recipesList.appendChild(expandedRow);
+
+    // Attach event listeners
+    row.querySelector('.expand-btn').addEventListener('click', toggleExpand);
+    row.querySelector('.edit-btn').addEventListener('click', () => editRecipe(recipe));
+    row.querySelector('.delete-btn').addEventListener('click', () => confirmAction('Delete recipe?', 'deleteRecipe', recipe.dish_id));
+}
 
 
 
@@ -127,7 +190,7 @@ function confirmAction(message, action, id, callback) {
             } else if (action === 'deleteUser') {
                 await deleteUser(id);
             } else if (action === 'deleteRecipe') {
-                await deleteRecipe(id);
+                await apiCalls.deleteRecipe(id);
             } else if (action === 'deleteMessage') {
                 await apiCalls.deleteMessage(id);
             } else if (action === 'resetPassword') {

@@ -114,17 +114,47 @@ export async function addNewRecipe(jsonData) {
 
 
 
-// remove recipe funcion - API call
-export async function removeRecipe(recipe) {
-    try {
-        const param = new URLSearchParams({ "function": "removeRecipe", "recipeID": recipe.recipe_id });
-        const recipeData = await fetch("http://localhost/data/index.php", { method: "POST", body: param });
-        getRecipes();
-    }
-    catch (error) {
-        console.log("Error removing recipe" + error);
-    }
-}
+// // remove recipe funcion - API call
+// export async function deleteRecipe(id) {
+//     try {
+//         const param = new URLSearchParams({ "function": "removeRecipe", "recipeID": id });
+//         const recipeData = await fetch("http://localhost/data/index.php", { method: "POST", body: param });
+//         getRecipes();
+//     }
+//     catch (error) {
+//         console.log("Error removing recipe" + error);
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -290,3 +320,25 @@ export function addRecipeRow(recipe) {
 }
 
 
+// delete message fucntion - API call
+export async function deleteRecipe(recipeId) {
+    try {
+        const data = {
+            "function": "deleteRecipe",
+            "recipeId": recipeId
+        };
+        const response = await fetch("http://localhost/data/index.php", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'  // Set the content type header to JSON
+            },
+            body: JSON.stringify(data)  // Convert data to JSON string
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        addRecipeRows();
+    } catch (error) {
+        console.log("Error deleting recipe:", error);
+    }
+}
