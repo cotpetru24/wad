@@ -498,7 +498,13 @@ width: auto;
   white-space: nowrap; /* Prevents text from wrapping */
 }
 
-.actions button {
+.actions button, 
+#adminRecipesFilter,
+#adminRecipesSearch,
+#adminMessagesSearch,
+#adminMessagesFilter,
+#adminUsersSearch,
+#adminUsersFilter {
   background-color: #9b59b6;
   color: white;
   border: none;

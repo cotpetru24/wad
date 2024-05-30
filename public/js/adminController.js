@@ -1236,8 +1236,25 @@ async function filterRecipes(){
     const recipeRating = document.getElementById('recipeRatingFilter').value;
     const recipePretTime = document.getElementById('recipePrepTimeFilter').value;
 
-    let filter = {"category":recipeCategory, "complexity": recipeComplexity, prepTime: recipePretTime, rating: recipeRating};
+    let filterCriteria = {"category":recipeCategory, "complexity": recipeComplexity, prepTime: recipePretTime, rating: recipeRating};
 
-    addRecipeRows(filter)
+    addRecipeRows(filterCriteria)
 }
 
+async function searchRecipes(){
+    const search = document.getElementById("search-box").value;
+    let searchCriteria = {"dish_name": search}
+
+    addRecipeRows(searchCriteria);
+}
+
+
+document.getElementById('adminRecipesSearch')?.addEventListener('click', () => {
+    searchRecipes();
+    alert ("seaching for recidpes")
+});
+
+document.getElementById('adminRecipesFilter')?.addEventListener('click', () => {
+    filterRecipes();
+    alert ("filtering recipes")
+});

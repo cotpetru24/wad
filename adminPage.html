@@ -38,6 +38,7 @@
                 <div class="container">
                     <div class="search-filter">
                         <input type="text" id="recipeSearchBox" placeholder="Search recipes...">
+                        <button id="adminRecipesSearch">Search</button>
                         <div class="filter-group">
                             <select id="recipeCategoryFilter">
                                 <option value="">All Categories</option>
@@ -72,6 +73,7 @@
                                 <option value="240">Up to 4 hours</option>
                                 <option value="300">Over 4 hours</option>
                             </select>
+                            <button id="adminRecipesFilter">Filter</button>
                         </div>
                     </div>
                     <button class="button" id="toggleFormButton">+ Add Recipe</button>
@@ -181,11 +183,15 @@
                     <h2>Messages</h2>
                     <div class="search-filter">
                         <input type="text" id="messageSearchBox" placeholder="Search messages...">
-                        <select id="messageReadFilter">
-                            <option value="">All</option>
-                            <option value="read">Read</option>
-                            <option value="unread">Unread</option>
-                        </select>
+                        <button id="adminMessagesSearch">Search</button>
+                        <div class="filter-group">
+                            <select id="messageReadFilter">
+                                <option value="">All</option>
+                                <option value="read">Read</option>
+                                <option value="unread">Unread</option>
+                            </select>
+                            <button id="adminMessagesFilter">Filter</button>
+                        </div>
                     </div>
                     <table>
                         <thead>
@@ -209,11 +215,15 @@
                 <div class="container">
                     <div class="search-filter">
                         <input type="text" id="userSearchBox" placeholder="Search users...">
-                        <select id="userRoleFilter">
-                            <option value="">All Roles</option>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
+                        <button id="adminUsersSearch">Search</button>
+                        <div class="filter-group">
+                            <select id="userRoleFilter">
+                                <option value="">All Roles</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                            <button id="adminUsersFilter">Filter</button>
+                        </div>
                     </div>
                     <button class="button" id="toggleUserFormButton">+ Add User</button>
                     <div class="addUser" id="addUserForm" style="display: none;">
