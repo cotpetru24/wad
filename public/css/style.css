@@ -320,7 +320,14 @@ input[type="search"] {
 }
 
 #getInTouchBtn:hover,
-.recipeFooterDiv button:hover {
+.recipeFooterDiv button:hover,
+#adminRecipesFilter:hover,
+#adminRecipesSearch:hover,
+#adminMessagesSearch:hover,
+#adminMessagesFilter:hover,
+#adminUsersSearch:hover,
+#adminUsersFilter:hover
+ {
   background: #0c0723;
   color: #9b59b6;
 }
