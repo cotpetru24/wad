@@ -7,7 +7,7 @@ export function formatDishRating(rating) {
 
 export function toTitleCase(str) {
     if (typeof str !== 'string') {
-        return ''; // or handle the error as appropriate for your use case
+        return '';
     }
     return str.toLowerCase().replace(/\b\w/g, function (char) {
         return char.toUpperCase();
@@ -24,6 +24,5 @@ export function formatPrepTime(prepTime) {
 export function convertToJSONArray(string, delimiter = ','){
     let array = string.split(delimiter).map(item=>item.trim());
     let jsonArray = JSON.stringify(array);
-
     return jsonArray;
 }

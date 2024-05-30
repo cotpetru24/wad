@@ -91,75 +91,6 @@ export async function addNewRecipe(jsonData) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // remove recipe funcion - API call
-// export async function deleteRecipe(id) {
-//     try {
-//         const param = new URLSearchParams({ "function": "removeRecipe", "recipeID": id });
-//         const recipeData = await fetch("http://localhost/data/index.php", { method: "POST", body: param });
-//         getRecipes();
-//     }
-//     catch (error) {
-//         console.log("Error removing recipe" + error);
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // view recipe function - API call
 export async function viewRecipe(recipe_ID) {
     try {
@@ -252,9 +183,9 @@ export async function deleteMessage(messageId) {
         const response = await fetch("http://localhost/data/index.php", {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json'  // Set the content type header to JSON
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)  // Convert data to JSON string
+            body: JSON.stringify(data)
         });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -289,22 +220,6 @@ export async function editRecipe (jsonData){
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -352,9 +267,9 @@ export async function deleteRecipe(recipeId) {
         const response = await fetch("http://localhost/data/index.php", {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json'  // Set the content type header to JSON
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)  // Convert data to JSON string
+            body: JSON.stringify(data)
         });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

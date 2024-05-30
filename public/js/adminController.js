@@ -818,8 +818,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     commonController.tabsController();
 });
 
-async function addRecipeRows() {
-    const recipes = await apiCalls.getRecipes();
+async function addRecipeRows(filter={}) {
+    const recipes = await apiCalls.getRecipes(filter);
     const recipesList = document.getElementById('adminRecipesList');
     recipesList.innerHTML = ''; // Clear existing rows before adding new ones
     recipes.forEach(recipe => addRecipeRow(recipe));
@@ -1210,7 +1210,7 @@ async function updateUser() {
     }
 }
 
-// Tabs functionality
+// Tabs functionality ///////////////************ the same is in common controller - should remove this one */
 export function tabsController() {
     const contentSections = document.querySelectorAll('.contentSection');
     const tabButtonArray = document.querySelectorAll('.tabs');
@@ -1224,3 +1224,20 @@ export function tabsController() {
         });
     });
 }
+
+
+
+
+
+// Filter recipes function
+async function filterRecipes(){
+    const recipeCategory = document.getElementById('recipeCategoryFilter').value;
+    const recipeComplexity = document.getElementById('recipeComplexityFilter').value;
+    const recipeRating = document.getElementById('recipeRatingFilter').value;
+    const recipePretTime = document.getElementById('recipePrepTimeFilter').value;
+
+    let filter = {"category":recipeCategory, "complexity": recipeComplexity, prepTime: recipePretTime, rating: recipeRating};
+
+    addRecipeRows(filter)
+}
+
