@@ -108,7 +108,7 @@ function getRecipesList($conn, $filterCriteria = [])
         foreach ($filterCriteria as $key => $value) {
             if ($key !== 'function') {
                 // Validate column names to prevent SQL injection
-                $allowedColumns = ['dish_chef_recommended', 'dish_origin_id', 'category_name', 'complexity_name', 'origin_country'];
+                $allowedColumns = ['dish_chef_recommended', 'dish_origin_id', 'origin_country', 'dish_rating', 'dish_prep_time', 'category_name', 'complexity_name', 'origin_country'];
                 $keyParts = explode('.', $key);
                 // Handle keys with two parts
                 if (count($keyParts) == 2 && in_array($keyParts[1], $allowedColumns)) {

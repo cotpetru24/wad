@@ -1251,12 +1251,12 @@ document.getElementById('adminRecipesSearch')?.addEventListener('click', () => {
 
 // Filter recipes function + event listener
 async function filterRecipes(){
-    const recipeCategory = document.getElementById('recipeCategoryFilter').value;
+    const recipeCategory = document.getElementById('recipeOriginFilter').value;
     const recipeComplexity = document.getElementById('recipeComplexityFilter').value;
     const recipeRating = document.getElementById('recipeRatingFilter').value;
     const recipePrepTime = document.getElementById('recipePrepTimeFilter').value;
 
-    let filterCriteria = {"category":recipeCategory, "complexity": recipeComplexity, prepTime: recipePrepTime, rating: recipeRating};
+    let filterCriteria = {"origin_country":recipeCategory, "complexity_name": recipeComplexity, "dish_prep_time": recipePrepTime, "dish_rating": recipeRating};
 
     addRecipeRows(filterCriteria)
 }
