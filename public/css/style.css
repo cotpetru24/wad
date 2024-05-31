@@ -248,7 +248,7 @@ input[type="search"] {
   background-image: url(/public/img/icons8-home-26_hover.png);
 }
 
-#searchButton {
+#indexRecipesSearch {
   height: 26px;
   width: 26px;
   background-image: url(/public/img/search_icon.png);
@@ -259,7 +259,7 @@ input[type="search"] {
   position: relative;
 }
 
-#searchButton:hover {
+#indexRecipesSearch:hover {
   background-image: url(/public/img/icons8-search-26_hover.png);
 }
 
