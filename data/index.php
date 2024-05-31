@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 searchMessages($conn, $criteria);
                 break;
             case 'searchRecipes':
-                searchRecipes($conn,$criteria);
+                searchRecipes($conn,$data);
                 break;
             case 'filterMessages':
                 filterMessages($conn, $criteria);

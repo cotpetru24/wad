@@ -11,4 +11,14 @@ export function tabsController() {
             });
         });
     });
+
+    // const searchButtonIndex = document.getElementById('searchButton');
+    // if (searchButtonIndex) {
+    //     searchButtonIndex.addEventListener('click', () => {
+    //         const currentSelectedTab = document.querySelector('.tabSelected');
+    //         if (currentSelectedTab) {
+    //             currentSelectedTab.classList.remove('tabSelected');
+    //         }
+    //     });
+    // }
 }

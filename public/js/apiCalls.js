@@ -305,7 +305,6 @@ export async function searchRecipes(searchCriteria) {
         }
 
         const recipes = await response.json();
-        //addRecipes(recipes);
         return recipes;
     } catch (error) {
         console.log("Error retrieving data: " + error);

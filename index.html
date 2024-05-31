@@ -15,7 +15,7 @@
         <header>
             <a href="index.html"><img id="headerLogo" src="./public/img/logo.jpg" alt="logo" /></a>
             <div class="tabsDiv" id="tabsDiv">
-                <button class="tabs tabSelected" id="popular">
+                <button class="tabs tabSelected" id="popular"> <!--tabSelected   to add this to class-->
                     <img src="/public/img/icons8-star-48.png" alt="Popular" />Recommended
                 </button>
                 <button class="tabs" id="indian">
@@ -47,10 +47,13 @@
                     </button>
                 </div>
                 <div id="searchDiv">
-                    <form id="searchForm" >
-                        <input type="search" name="searchQuery" id="search-box" placeholder="Search..." />
+                    <input type="text" id="indexRecipeSearchBox" placeholder="Search recipes...">
+                    <button id="indexRecipesSearch">Search</button>
+
+                    <!-- <form id="searchForm" >
+                        <input type="text" id="search-box" placeholder="Search..." />
                         <button id="searchButton"></button>
-                    </form>
+                    </form> -->
                 </div>
             </nav>
         </header>

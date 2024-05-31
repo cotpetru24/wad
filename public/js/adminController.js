@@ -1233,9 +1233,12 @@ export function tabsController() {
 
 //search recipes function + event listener => admin page
 async function searchRecipesAdmin(){
-    const search = document.getElementById("search-box").value;
+    const search = document.getElementById("recipeSearchBox").value;
     let searchResults = await apiCalls.searchRecipes(search);
-    addRecipeRows(searchResults);
+    const recipesList = document.getElementById('adminRecipesList');
+    recipesList.innerHTML = ''; // Clear existing rows before adding new ones
+    searchResults.forEach(result => addRecipeRow(result));
+    // addRecipeRows(searchResults);
 }
 
 

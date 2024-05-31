@@ -478,12 +478,12 @@ function searchRecipes($conn, $criteria) {
             INNER JOIN category ON recipes.dish_category_id = category.category_id
             INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
             INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
-            WHERE dish_name LIKE ? OR dish_recipe_description LIKE ?
-            ORDER BY recipes.dish_id DESC";
+            WHERE dish_name LIKE ?
+            ORDER BY recipes.dish_name ASC";
     
     $stmt = $conn->prepare($sql);
     $searchCriteria = '%'.$criteria['criteria'].'%';
-    $stmt->bind_param('ss', $searchCriteria, $searchCriteria);
+    $stmt->bind_param('s', $searchCriteria);
 
     // Execute statement and handle results
     $stmt->execute();

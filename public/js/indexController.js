@@ -19,13 +19,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
+
+
+
 //function to add recipes to index.html
 function addRecipes(recipesList) {
+
     const list = document.getElementById("recipesList");
     //clear current tasks
     list.innerText = "";
 
     recipesList.forEach((recipe) => {
+        // alert('add recipes function has been called, this is the search result:'+ recipesList );
+        // console.log(recipesList);
 
         //////----------Recipe img div---------\\\\\\\
         let recipeImg = document.createElement("img");
@@ -291,17 +297,17 @@ closeContactForm.addEventListener('click', () => { toggleContactForm(false); });
 
 //search recipes function + event listener => index page
 async function searchRecipesIndex(){
-        const search = document.getElementById("search-box").value;
+        // const search = document.getElementById("search-box").value;
+        const search = document.getElementById("indexRecipeSearchBox").value;
+
         let searchResults = await apiCalls.searchRecipes(search);
         addRecipes(searchResults);
 }
 
-
-document.getElementById('searchButton')?.addEventListener('click', () => {
+document.getElementById('indexRecipesSearch')?.addEventListener('click', () => {
     searchRecipesIndex();
-    alert ("seaching for recipes")
+    document.querySelector('.tabSelected')?.classList.remove('tabSelected');
 });
-
 
 
 
