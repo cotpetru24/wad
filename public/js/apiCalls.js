@@ -32,9 +32,10 @@ export async function getRecipes(filterCriteria = {}) {
         const param = new URLSearchParams({ "function": "getRecipesList" });
 
         for (const [key, value] of Object.entries(filterCriteria)) {
-            param.append(key, value)
+            if(value){
+                param.append(key, value)
+            }
         }
-
 
         const response = await fetch(`http://localhost/data/index.php?${param.toString()}`,
             {
@@ -284,10 +285,6 @@ export async function deleteRecipe(recipeId) {
 
 
 //searchRecipes function
-
-
-// get recipes function - API call
-// get recipes function - API call
 export async function searchRecipes(searchCriteria) {
     try {
         const data = {
@@ -310,6 +307,34 @@ export async function searchRecipes(searchCriteria) {
         const recipes = await response.json();
         //addRecipes(recipes);
         return recipes;
+    } catch (error) {
+        console.log("Error retrieving data: " + error);
+    }
+}
+
+//searchMessages function
+export async function searchMessages(searchCriteria) {
+    try {
+        const data = {
+            "function": "searchMessages",
+            "criteria": searchCriteria
+        };
+
+        const response = await fetch(`http://localhost/data/index.php`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const messages = await response.json();
+        //addRecipes(recipes);
+        return messages;
     } catch (error) {
         console.log("Error retrieving data: " + error);
     }

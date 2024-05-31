@@ -1251,9 +1251,9 @@ async function filterRecipes(){
     const recipeCategory = document.getElementById('recipeCategoryFilter').value;
     const recipeComplexity = document.getElementById('recipeComplexityFilter').value;
     const recipeRating = document.getElementById('recipeRatingFilter').value;
-    const recipePretTime = document.getElementById('recipePrepTimeFilter').value;
+    const recipePrepTime = document.getElementById('recipePrepTimeFilter').value;
 
-    let filterCriteria = {"category":recipeCategory, "complexity": recipeComplexity, prepTime: recipePretTime, rating: recipeRating};
+    let filterCriteria = {"category":recipeCategory, "complexity": recipeComplexity, prepTime: recipePrepTime, rating: recipeRating};
 
     addRecipeRows(filterCriteria)
 }
@@ -1261,3 +1261,31 @@ document.getElementById('adminRecipesFilter')?.addEventListener('click', () => {
     filterRecipes();
     alert ("filtering recipes")
 });
+
+
+
+
+
+
+//search messages function + event listener
+async function searchMessages (){
+    try {
+        const search = document.getElementById("messageSearchBox").value;
+        if (search) {
+            let searchResults = await apiCalls.searchMessages(search);
+            searchResults.forEach(result => addMessageRow(result));
+        } else {
+            console.error("No messages found found.");
+        }
+    } catch (error) {
+        console.error("Error fetching messages:", error);
+    }
+} 
+
+document.getElementById('adminMessagesSearch')?.addEventListener('click', () => {
+    searchMessages();
+    alert ("searching for messages")
+});
+
+
+
