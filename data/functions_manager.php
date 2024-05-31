@@ -453,3 +453,100 @@ function editRecipe($conn, $data)
 //     }
 //     $stmt->close();
 // }
+
+
+
+
+
+
+function searchRecipes($conn, $criteria) {
+    $sql = "SELECT 
+                recipes.dish_id, 
+                recipes.dish_name, 
+                origin.origin_country, 
+                recipes.dish_recipe_description, 
+                category.category_name, 
+                complexity.complexity_name,
+                recipes.dish_prep_time, 
+                recipes.dish_img, 
+                recipes.dish_upload_date_time, 
+                recipes.dish_rating,  
+                recipes.dish_ingredients,
+                recipes.dish_steps,
+                recipes.dish_chef_recommended
+            FROM recipes
+            INNER JOIN category ON recipes.dish_category_id = category.category_id
+            INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
+            INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
+            WHERE dish_name LIKE ? OR dish_recipe_description LIKE ?
+            ORDER BY recipes.dish_id DESC";
+    
+    $stmt = $conn->prepare($sql);
+    $searchCriteria = '%'.$criteria.'%';
+    $stmt->bind_param('ss', $searchCriteria, $searchCriteria);
+
+    // Execute statement and handle results
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $results = [];
+        while ($row = $result->fetch_assoc()) {
+            if (!empty($row['dish_img'])) {
+                $dishImgData = $row['dish_img'];
+                $row['dish_img'] = 'data:image/jpeg;base64,' . base64_encode($dishImgData);
+            }
+            array_push($results, $row);
+        }
+        echo json_encode($results);
+    } else {
+        $noResults = [
+            [
+                "recipe_id" => "0",
+                "dish_name" => "No results",
+                "dish_recipe_description" => "No recipes to list",
+                "dish_ingredients" => "No ingredients",
+                "dish_complexity_id" => "1",
+                "dish_prep_time" => "0"
+            ]
+        ];
+        echo json_encode($noResults);
+    }
+
+    $stmt->close();
+}
+
+
+function searchMessages($conn, $criteria) {
+    $sql = "SELECT * FROM messages
+            WHERE sender_name LIKE ? OR sender_email LIKE ?";
+
+    $stmt = $conn->prepare($sql);
+    $searchCriteria = '%'.$criteria.'%';
+    $stmt->bind_param('ss', $searchCriteria, $searchCriteria);
+
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $results = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($results, $row);
+            }
+            echo json_encode($results);
+        } else {
+            $noResults = [
+                [
+                    "message_id" => "0",
+                    "sender_first_name" => "No results",
+                    "sender_last_name" => "No results",
+                    "message_text" => "No messages to list",
+                    "message_flagged" => "0"
+                ]
+            ];
+            echo json_encode($noResults);
+        }
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error executing query: " . $stmt->error]);
+    }
+    $stmt->close();
+}

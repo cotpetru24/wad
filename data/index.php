@@ -65,6 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'deleteMessage':
                 deleteMessage($conn, $data['messageId']);
                 break;
+            case 'searchMessages': 
+                searchMessages($conn, $criteria);
+                break;
+            case 'searchRecipes':
+                searchRecipes($conn,$criteria);
+                break;
             default:
                 $response = ["status" => "error", "message" => "Invalid function"];
                 echo json_encode($response);
