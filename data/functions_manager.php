@@ -482,7 +482,7 @@ function searchRecipes($conn, $criteria) {
             ORDER BY recipes.dish_id DESC";
     
     $stmt = $conn->prepare($sql);
-    $searchCriteria = '%'.$criteria.'%';
+    $searchCriteria = '%'.$criteria['criteria'].'%';
     $stmt->bind_param('ss', $searchCriteria, $searchCriteria);
 
     // Execute statement and handle results

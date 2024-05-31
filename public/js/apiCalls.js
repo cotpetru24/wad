@@ -279,3 +279,38 @@ export async function deleteRecipe(recipeId) {
         console.log("Error deleting recipe:", error);
     }
 }
+
+
+
+
+//searchRecipes function
+
+
+// get recipes function - API call
+// get recipes function - API call
+export async function searchRecipes(searchCriteria) {
+    try {
+        const data = {
+            "function": "searchRecipes",
+            "criteria": searchCriteria
+        };
+
+        const response = await fetch(`http://localhost/data/index.php`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const recipes = await response.json();
+        //addRecipes(recipes);
+        return recipes;
+    } catch (error) {
+        console.log("Error retrieving data: " + error);
+    }
+}

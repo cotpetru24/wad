@@ -289,6 +289,18 @@ closeContactForm.addEventListener('click', () => { toggleContactForm(false); });
 
 
 
+//search recipes function + event listener => index page
+async function searchRecipesIndex(){
+        const search = document.getElementById("search-box").value;
+        let searchResults = await apiCalls.searchRecipes(search);
+        addRecipes(searchResults);
+}
+
+
+document.getElementById('searchButton')?.addEventListener('click', () => {
+    searchRecipesIndex();
+    alert ("seaching for recipes")
+});
 
 
 

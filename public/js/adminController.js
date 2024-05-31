@@ -1229,7 +1229,24 @@ export function tabsController() {
 
 
 
-// Filter recipes function
+
+
+//search recipes function + event listener => admin page
+async function searchRecipesAdmin(){
+    const search = document.getElementById("search-box").value;
+    let searchResults = await apiCalls.searchRecipes(search);
+    addRecipeRows(searchResults);
+}
+
+
+document.getElementById('adminRecipesSearch')?.addEventListener('click', () => {
+    searchRecipesAdmin();
+    alert ("seaching for recidpes")
+});
+
+
+
+// Filter recipes function + event listener
 async function filterRecipes(){
     const recipeCategory = document.getElementById('recipeCategoryFilter').value;
     const recipeComplexity = document.getElementById('recipeComplexityFilter').value;
@@ -1240,20 +1257,6 @@ async function filterRecipes(){
 
     addRecipeRows(filterCriteria)
 }
-
-async function searchRecipes(){
-    const search = document.getElementById("search-box").value;
-    let searchCriteria = {"dish_name": search}
-
-    addRecipeRows(searchCriteria);
-}
-
-
-document.getElementById('adminRecipesSearch')?.addEventListener('click', () => {
-    searchRecipes();
-    alert ("seaching for recidpes")
-});
-
 document.getElementById('adminRecipesFilter')?.addEventListener('click', () => {
     filterRecipes();
     alert ("filtering recipes")
