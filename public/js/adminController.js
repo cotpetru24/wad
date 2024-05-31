@@ -1289,3 +1289,17 @@ document.getElementById('adminMessagesSearch')?.addEventListener('click', () => 
 
 
 
+//Filter messages function + event listener
+async function filterMessages (){
+    try {
+        const messageStatus = document.getElementById('messageReadFilter').value;
+        let filterResults = await apiCalls.filterMessages(messageStatus);
+        filterResults.forEach(result => addMessageRow(result));
+    } catch (error) {
+        console.error("Error fetching messages:", error);
+    }
+} 
+document.getElementById('adminMessagesFilter')?.addEventListener('click', () => {
+    filterMessages();
+    alert ("filtering messages")
+});

@@ -339,3 +339,32 @@ export async function searchMessages(searchCriteria) {
         console.log("Error retrieving data: " + error);
     }
 }
+
+
+//filterMessages function
+export async function filterMessages(filterCriteria) {
+    try {
+        const data = {
+            "function": "searchMessages",
+            "criteria": searchCriteria
+        };
+
+        const response = await fetch(`http://localhost/data/index.php`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const messages = await response.json();
+        //addRecipes(recipes);
+        return messages;
+    } catch (error) {
+        console.log("Error retrieving data: " + error);
+    }
+}

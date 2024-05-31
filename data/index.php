@@ -71,6 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'searchRecipes':
                 searchRecipes($conn,$criteria);
                 break;
+            case 'filterMessages':
+                filterMessages($conn, $criteria);
+                break;
             default:
                 $response = ["status" => "error", "message" => "Invalid function"];
                 echo json_encode($response);
