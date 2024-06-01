@@ -1265,6 +1265,17 @@ document.getElementById('adminRecipesFilter')?.addEventListener('click', () => {
     alert ("filtering recipes")
 });
 
+//Removing filters
+document.getElementById('adminRecipesClearFilters')?.addEventListener('click', function() {
+    const filterSelects = document.querySelectorAll('.filter-group select');
+    filterSelects.forEach(function(select) {
+        select.value = '';
+    });
+    addRecipeRows();
+    alert ("removing filters")
+});
+
+
 
 
 
@@ -1274,7 +1285,9 @@ document.getElementById('adminRecipesFilter')?.addEventListener('click', () => {
 async function searchMessages (){
     try {
         const search = document.getElementById("messageSearchBox").value;
-        if (search) {
+        const messagesList = document.getElementById("messagesList");
+        if (search && messagesList) {
+            messagesList.innerHTML = "";
             let searchResults = await apiCalls.searchMessages(search);
             searchResults.forEach(result => addMessageRow(result));
         } else {

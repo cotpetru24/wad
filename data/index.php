@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 deleteMessage($conn, $data['messageId']);
                 break;
             case 'searchMessages': 
-                searchMessages($conn, $criteria);
+                searchMessages($conn, $data);
                 break;
             case 'searchRecipes':
                 searchRecipes($conn,$data);

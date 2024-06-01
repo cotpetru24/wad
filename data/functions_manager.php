@@ -78,6 +78,130 @@ header("Content-Type: application/json");
 // }
 
 
+// function getRecipesList($conn, $filterCriteria = [])
+// {
+//     $sql = "SELECT 
+//         recipes.dish_id, 
+//         recipes.dish_name, 
+//         origin.origin_country, 
+//         recipes.dish_recipe_description, 
+//         category.category_name, 
+//         complexity.complexity_name,
+//         recipes.dish_prep_time, 
+//         recipes.dish_img, 
+//         recipes.dish_upload_date_time, 
+//         recipes.dish_rating,  
+//         recipes.dish_ingredients,
+//         recipes.dish_steps,
+//         recipes.dish_chef_recommended
+//         FROM recipes
+//         INNER JOIN category ON recipes.dish_category_id = category.category_id
+//         INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
+//         INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
+//         WHERE 1=1";
+
+//     $paramTypes = '';
+//     $paramValues = [];
+
+//     // Adding filter criteria to the SQL query
+//     if (!empty($filterCriteria)) {
+//         foreach ($filterCriteria as $key => $value) {
+//             if ($key !== 'function') {
+//                 // Validate column names to prevent SQL injection
+//                 $allowedColumns = ['dish_chef_recommended', 'dish_origin_id', 'origin_country', 'dish_rating', 'dish_prep_time', 'category_name', 'complexity_name', 'origin_country'];
+//                 $keyParts = explode('.', $key);
+//                 // Handle keys with two parts
+//                 if (count($keyParts) == 2 && in_array($keyParts[1], $allowedColumns)) {
+//                     $sql .= " AND {$keyParts[1]}=?";
+//                     // Handle keys with one part
+//                 } elseif (count($keyParts) == 1 && in_array($keyParts[0], $allowedColumns)) {
+//                     $sql .= " AND {$keyParts[0]}=?";
+//                 } else {
+//                     // Skip invalid keys
+//                     continue;
+//                 }
+//                 // Dynamically determine parameter type
+//                 if (is_int($value)) {
+//                     $paramTypes .= 'i';
+//                 } elseif (is_float($value)) {
+//                     $paramTypes .= 'd';
+//                 } elseif (is_string($value)) {
+//                     $paramTypes .= 's';
+//                 } else {
+//                     // Default to string if type is not determined
+//                     $paramTypes .= 's';
+//                 }
+
+//                 $paramValues[] = $value;
+
+//             }
+//         }
+//     }
+
+//     $sql .= " ORDER BY recipes.dish_id ASC";
+
+//     $stmt = $conn->prepare($sql);
+//     if ($stmt === false) {
+//         echo json_encode(["status" => "error", "message" => "Failed to prepare SQL statement"]);
+//         return;
+//     }
+
+//     if (!empty($paramValues)) {
+//         $stmt->bind_param($paramTypes, ...$paramValues);
+//     }
+
+//     $stmt->execute();
+//     $result = $stmt->get_result();
+
+//     if ($result->num_rows > 0) {
+//         $results = [];
+//         while ($row = $result->fetch_assoc()) {
+//             if (!empty($row['dish_img'])) {
+//                 $dishImgData = $row['dish_img'];
+//                 $row['dish_img'] = 'data:image/jpeg;base64,' . base64_encode($dishImgData);
+//             }
+//             array_push($results, $row);
+//         }
+//         echo json_encode($results);
+//     } else {
+//         $noResults = [
+//             [
+//                 "recipe_id" => "0",
+//                 "dish_name" => "No results",
+//                 "dish_recipe_description" => "No recipes to list",
+//                 "dish_ingredients" => "No ingredients",
+//                 "dish_complexity_id" => "1",
+//                 "dish_prep_time" => "0"
+//             ]
+//         ];
+//         echo json_encode($noResults);
+//     }
+
+//     $stmt->close();
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//if this works delete the above
+
 function getRecipesList($conn, $filterCriteria = [])
 {
     $sql = "SELECT 
@@ -112,33 +236,48 @@ function getRecipesList($conn, $filterCriteria = [])
                 $keyParts = explode('.', $key);
                 // Handle keys with two parts
                 if (count($keyParts) == 2 && in_array($keyParts[1], $allowedColumns)) {
-                    $sql .= " AND {$keyParts[1]}=?";
-                    // Handle keys with one part
+                    $column = $keyParts[1];
+                // Handle keys with one part
                 } elseif (count($keyParts) == 1 && in_array($keyParts[0], $allowedColumns)) {
-                    $sql .= " AND {$keyParts[0]}=?";
+                    $column = $keyParts[0];
                 } else {
                     // Skip invalid keys
                     continue;
                 }
-                // Dynamically determine parameter type
-                if (is_int($value)) {
-                    $paramTypes .= 'i';
-                } elseif (is_float($value)) {
-                    $paramTypes .= 'd';
-                } elseif (is_string($value)) {
-                    $paramTypes .= 's';
+                
+                // Special handling for dish_prep_time with comparison operators
+                if ($column == 'dish_prep_time') {
+                    if (preg_match('/^(<=?|>=?|=)\s*(\d+)$/', $value, $matches)) {
+                        $operator = $matches[1];
+                        $prepTimeValue = (int)$matches[2];
+                        $sql .= " AND {$column} {$operator} ?";
+                        $paramValues[] = $prepTimeValue;
+                        $paramTypes .= 'i';
+                    } else {
+                        // Skip invalid prep time filter
+                        continue;
+                    }
                 } else {
-                    // Default to string if type is not determined
-                    $paramTypes .= 's';
+                    $sql .= " AND {$column}=?";
+                    // Dynamically determine parameter type
+                    if (is_int($value)) {
+                        $paramTypes .= 'i';
+                    } elseif (is_float($value)) {
+                        $paramTypes .= 'd';
+                    } elseif (is_string($value)) {
+                        $paramTypes .= 's';
+                    } else {
+                        // Default to string if type is not determined
+                        $paramTypes .= 's';
+                    }
+
+                    $paramValues[] = $value;
                 }
-
-                $paramValues[] = $value;
-
             }
         }
     }
 
-    $sql .= " ORDER BY recipes.dish_id ASC";
+    $sql .= " ORDER BY recipes.dish_name ASC";
 
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
@@ -185,7 +324,8 @@ function getRecipesList($conn, $filterCriteria = [])
 // Fucntion to retrive messages from db
 function getMessagesList($conn)
 {
-    $sql = "SELECT * FROM messages";
+    $sql = "SELECT * FROM messages 
+            ORDER BY message_sent_date_time DESC";
     $stmt = $conn->prepare($sql);
     $result = $conn->query($sql);
     if ($stmt->execute()) {
@@ -522,7 +662,7 @@ function searchMessages($conn, $criteria) {
             WHERE sender_name LIKE ? OR sender_email LIKE ?";
 
     $stmt = $conn->prepare($sql);
-    $searchCriteria = '%'.$criteria.'%';
+    $searchCriteria = '%'.$criteria['criteria'].'%';
     $stmt->bind_param('ss', $searchCriteria, $searchCriteria);
 
     if ($stmt->execute()) {
