@@ -35,18 +35,7 @@ async function addRecipeRows(filter={}) {
     recipes.forEach(recipe => addRecipeRow(recipe));
 }
 
-export function toggleExpand(event) {
-    const button = event.target; // Get the target button from the event
-    const row = button.closest('tr'); // Ensure button is a DOM element and get the closest tr
-    const expandedRow = row.nextElementSibling;
-    if (expandedRow && expandedRow.style.display === 'none') {
-        expandedRow.style.display = 'table-row';
-        button.textContent = 'Collapse';
-    } else if (expandedRow) {
-        expandedRow.style.display = 'none';
-        button.textContent = 'Expand';
-    }
-}
+
 
 export function addRecipeRow(recipe) {
     const recipesList = document.getElementById('adminRecipesList');
@@ -90,7 +79,7 @@ export function addRecipeRow(recipe) {
     recipesList.appendChild(expandedRow);
 
     // Attach event listeners
-    row.querySelector('.expand-btn').addEventListener('click', toggleExpand);
+    row.querySelector('.expand-btn').addEventListener('click', commonController.toggleExpand);
     row.querySelector('.edit-btn').addEventListener('click', () => editRecipe(recipe));
     row.querySelector('.delete-btn').addEventListener('click', () => confirmAction('Delete recipe?', 'deleteRecipe', recipe.dish_id));
 }
@@ -345,6 +334,19 @@ document.getElementById("toggleUserFormButton").addEventListener("click", functi
 function addMessageRow(message) {
     const messagesList = document.getElementById('messagesList');
     const row = document.createElement('tr');
+
+
+
+
+
+    row.classList.add('message-row');
+    //to add here message read  unread class==================================-----------------------============
+
+
+
+
+
+
     row.id = message.message_id;
 
     // Create a unique ID for the button and image
@@ -359,7 +361,7 @@ function addMessageRow(message) {
         <td>${message.sender_email}</td>
         <td>${message.message_sent_date_time}</td>
         <td class="actions">
-            <button class="expand-btn">Read</button>
+            <button class="read-btn">Read</button>
             <button class="delete-btn">Delete</button>
         </td>
     `;
@@ -386,7 +388,7 @@ function addMessageRow(message) {
 
     // Create and append the expanded row
     const expandedRow = document.createElement('tr');
-    expandedRow.classList.add('recipe-expanded-row'); // to change the name
+    expandedRow.classList.add('message-expanded-row'); // to change the name
     expandedRow.style.display = 'none';
 
     expandedRow.innerHTML = `
@@ -402,7 +404,7 @@ function addMessageRow(message) {
     messagesList.appendChild(expandedRow);
 
     // Set event handlers for the buttons
-    row.querySelector('.expand-btn').addEventListener('click', toggleExpand);
+    row.querySelector('.read-btn').addEventListener('click', commonController.toggleExpand);
 
     row.querySelector('.delete-btn').addEventListener('click', () => {
         confirmAction('Delete message?', 'deleteMessage', message.message_id, () => {
