@@ -74,6 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'filterMessages':
                 filterMessages($conn, $criteria);
                 break;
+
+            case 'flagUnflagMessage':
+                flagUnflagMessage($conn, $data);
+                break;
             default:
                 $response = ["status" => "error", "message" => "Invalid function"];
                 echo json_encode($response);

@@ -367,3 +367,30 @@ export async function filterMessages(filterCriteria) {
         console.log("Error retrieving data: " + error);
     }
 }
+
+//flagUnflagMessage function
+export async function flagUnflagMessage(messageId){
+    try {
+        const data= {
+            "function" : "flagUnflagMessage" ,
+            "message_id": messageId
+        };
+
+        const response = await fetch (`http://localhost/data/index.php`,{
+            method: "POST",
+            headers: {
+                'Content-Type': 'appliction/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok){
+            throw new Error(`HTTp error! status: ${response.status}`);
+        }
+        getMessages();
+    } catch (error) {
+        console.log("Error deleting message:", error);
+    }
+
+    
+}

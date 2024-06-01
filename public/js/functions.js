@@ -26,3 +26,11 @@ export function convertToJSONArray(string, delimiter = ','){
     let jsonArray = JSON.stringify(array);
     return jsonArray;
 }
+
+export function swapFlagImage(flagIcon) {
+    const currentSrc = flagIcon.src;
+    console.log("Current Src:", currentSrc);  // Debugging line
+    const newSrc = currentSrc.includes('flag-pink.png') ? 'public/img/icons8-flag-grey.png' : 'public/img/icons8-flag-pink.png';
+    flagIcon.src = newSrc;
+    console.log("New Src:", flagIcon.src);  // Debugging line
+}

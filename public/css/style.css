@@ -897,3 +897,17 @@ justify-content: space-between;
   text-decoration: none;
   cursor: pointer;
 }
+
+.flag-button {
+  border: none;
+  background-color: transparent;
+
+}
+
+.flag-button img {
+  width: 20px;
+}
+
+.flag-button:hover{
+  cursor: pointer;
+}

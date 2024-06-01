@@ -690,3 +690,25 @@ function searchMessages($conn, $criteria) {
     }
     $stmt->close();
 }
+
+
+function flagUnflagMessage($conn, $data){
+    $sql = "UPDATE messages 
+    SET flagged = CASE 
+                    WHEN flagged = 1 THEN 0 
+                    ELSE 1 
+                  END 
+    WHERE message_id = ?";
+$stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $data['message_id']);
+    if ($stmt->execute()) {
+        error_log("Message flagged successfully.");
+        echo json_encode(['status' => 'success', 'message' => 'Message flagged successfully']);
+    } else {
+        error_log("Error flagging message: " . $stmt->error);
+        echo json_encode(['status' => 'error', 'message' => 'Error flagging message: ' . $stmt->error]);
+    }
+
+    $stmt->close();
+
+}
