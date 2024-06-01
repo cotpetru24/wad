@@ -3,7 +3,7 @@
 
 document.getElementById('addNewRecipe')?.addEventListener('click', () => {
     addNewRecipe();
-    alert ("add reipe button clicked")
+    alert("add reipe button clicked")
 });
 
 
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     commonController.tabsController();
 });
 
-async function addRecipeRows(filter={}) {
+async function addRecipeRows(filter = {}) {
     const recipes = await apiCalls.getRecipes(filter);
     const recipesList = document.getElementById('adminRecipesList');
     recipesList.innerHTML = ''; // Clear existing rows before adding new ones
@@ -298,9 +298,9 @@ async function listMessages() {
 document.getElementById("toggleFormButton").addEventListener("click", function () {
     const form = document.getElementById("addRecipeForm");
     form.style.display = form.style.display === "none" ? "block" : "none";
-    document.getElementById("toggleFormButton").innerText ==="+ Add Recipe" 
-    ? document.getElementById("toggleFormButton").innerText ="Cancel"
-    : document.getElementById("toggleFormButton").innerText ="+ Add Recipe"
+    document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
+        ? document.getElementById("toggleFormButton").innerText = "Cancel"
+        : document.getElementById("toggleFormButton").innerText = "+ Add Recipe"
 
     // ? (document.getElementById("toggleFormButton").innerText ="Cancel", resetAddRecipeForm())
     // : (document.getElementById("toggleFormButton").innerText ="+ Add Recipe", resetAddRecipeForm())
@@ -334,19 +334,7 @@ document.getElementById("toggleUserFormButton").addEventListener("click", functi
 function addMessageRow(message) {
     const messagesList = document.getElementById('messagesList');
     const row = document.createElement('tr');
-
-
-
-
-
-    row.classList.add('message-row');
-    //to add here message read  unread class==================================-----------------------============
-
-
-
-
-
-
+    row.classList.add(message.message_read == 1 ? 'read-message-row' : 'unread-message-row');
     row.id = message.message_id;
 
     // Create a unique ID for the button and image
@@ -371,7 +359,7 @@ function addMessageRow(message) {
 
     // Add hover functionality to the flag button
     const flagButton = document.getElementById(flagButtonId);
-    
+
     flagButton.addEventListener('mouseenter', () => {
         flagButton.classList.add('flag-purple');
     });
@@ -404,7 +392,14 @@ function addMessageRow(message) {
     messagesList.appendChild(expandedRow);
 
     // Set event handlers for the buttons
-    row.querySelector('.read-btn').addEventListener('click', commonController.toggleExpand);
+    row.querySelector('.read-btn').addEventListener('click', (event) => {
+        if (row.classList.contains('unread-message-row')) {
+            row.classList.remove('unread-message-row');
+            row.classList.add('read-message-row');
+        };
+        commonController.toggleExpand(event);
+        apiCalls.markMessageAsRead(message.message_id);
+    });
 
     row.querySelector('.delete-btn').addEventListener('click', () => {
         confirmAction('Delete message?', 'deleteMessage', message.message_id, () => {
@@ -507,7 +502,7 @@ export function tabsController() {
 
 
 //search recipes function + event listener => admin page
-async function searchRecipesAdmin(){
+async function searchRecipesAdmin() {
     const search = document.getElementById("recipeSearchBox").value;
     let searchResults = await apiCalls.searchRecipes(search);
     const recipesList = document.getElementById('adminRecipesList');
@@ -519,35 +514,35 @@ async function searchRecipesAdmin(){
 
 document.getElementById('adminRecipesSearch')?.addEventListener('click', () => {
     searchRecipesAdmin();
-    alert ("seaching for recidpes")
+    alert("seaching for recidpes")
 });
 
 
 
 // Filter recipes function + event listener
-async function filterRecipes(){
+async function filterRecipes() {
     const recipeCategory = document.getElementById('recipeOriginFilter').value;
     const recipeComplexity = document.getElementById('recipeComplexityFilter').value;
     const recipeRating = document.getElementById('recipeRatingFilter').value;
     const recipePrepTime = document.getElementById('recipePrepTimeFilter').value;
 
-    let filterCriteria = {"origin_country":recipeCategory, "complexity_name": recipeComplexity, "dish_prep_time": recipePrepTime, "dish_rating": recipeRating};
+    let filterCriteria = { "origin_country": recipeCategory, "complexity_name": recipeComplexity, "dish_prep_time": recipePrepTime, "dish_rating": recipeRating };
 
     addRecipeRows(filterCriteria)
 }
 document.getElementById('adminRecipesFilter')?.addEventListener('click', () => {
     filterRecipes();
-    alert ("filtering recipes")
+    alert("filtering recipes")
 });
 
 //Removing filters
-document.getElementById('adminRecipesClearFilters')?.addEventListener('click', function() {
+document.getElementById('adminRecipesClearFilters')?.addEventListener('click', function () {
     const filterSelects = document.querySelectorAll('.filter-group select');
-    filterSelects.forEach(function(select) {
+    filterSelects.forEach(function (select) {
         select.value = '';
     });
     addRecipeRows();
-    alert ("removing filters")
+    alert("removing filters")
 });
 
 
@@ -557,13 +552,13 @@ document.getElementById('adminRecipesClearFilters')?.addEventListener('click', f
 
 
 //search messages function + event listener
-async function searchMessages (){
+async function searchMessages() {
     try {
         const search = document.getElementById("messageSearchBox").value;
         const messagesList = document.getElementById("messagesList");
         if (search && messagesList) {
             messagesList.innerHTML = "";
-            let searchResults = await apiCalls.searchMessages(search);
+            const searchResults = await apiCalls.searchMessages(search);
             searchResults.forEach(result => addMessageRow(result));
         } else {
             console.error("No messages found found.");
@@ -571,26 +566,34 @@ async function searchMessages (){
     } catch (error) {
         console.error("Error fetching messages:", error);
     }
-} 
+}
 
 document.getElementById('adminMessagesSearch')?.addEventListener('click', () => {
     searchMessages();
-    alert ("searching for messages")
+    alert("searching for messages")
 });
 
 
 
 //Filter messages function + event listener
-async function filterMessages (){
+async function filterMessages() {
     try {
         const messageStatus = document.getElementById('messageReadFilter').value;
-        let filterResults = await apiCalls.filterMessages(messageStatus);
-        filterResults.forEach(result => addMessageRow(result));
+        const messagesList = document.getElementById("messagesList");
+
+
+        if (messageStatus && messagesList) {
+            messagesList.innerHTML = "";
+            const filterResults = await apiCalls.filterMessages(messageStatus);
+            filterResults.forEach(result => addMessageRow(result));
+        }else {
+            console.error("No messages found found.");
+        }
     } catch (error) {
         console.error("Error fetching messages:", error);
     }
-} 
+}
 document.getElementById('adminMessagesFilter')?.addEventListener('click', () => {
     filterMessages();
-    alert ("filtering messages")
+    alert("filtering messages")
 });

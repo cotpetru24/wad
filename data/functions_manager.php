@@ -237,19 +237,19 @@ function getRecipesList($conn, $filterCriteria = [])
                 // Handle keys with two parts
                 if (count($keyParts) == 2 && in_array($keyParts[1], $allowedColumns)) {
                     $column = $keyParts[1];
-                // Handle keys with one part
+                    // Handle keys with one part
                 } elseif (count($keyParts) == 1 && in_array($keyParts[0], $allowedColumns)) {
                     $column = $keyParts[0];
                 } else {
                     // Skip invalid keys
                     continue;
                 }
-                
+
                 // Special handling for dish_prep_time with comparison operators
                 if ($column == 'dish_prep_time') {
                     if (preg_match('/^(<=?|>=?|=)\s*(\d+)$/', $value, $matches)) {
                         $operator = $matches[1];
-                        $prepTimeValue = (int)$matches[2];
+                        $prepTimeValue = (int) $matches[2];
                         $sql .= " AND {$column} {$operator} ?";
                         $paramValues[] = $prepTimeValue;
                         $paramTypes .= 'i';
@@ -599,7 +599,8 @@ function editRecipe($conn, $data)
 
 
 
-function searchRecipes($conn, $criteria) {
+function searchRecipes($conn, $criteria)
+{
     $sql = "SELECT 
                 recipes.dish_id, 
                 recipes.dish_name, 
@@ -620,9 +621,9 @@ function searchRecipes($conn, $criteria) {
             INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
             WHERE dish_name LIKE ?
             ORDER BY recipes.dish_name ASC";
-    
+
     $stmt = $conn->prepare($sql);
-    $searchCriteria = '%'.$criteria['criteria'].'%';
+    $searchCriteria = '%' . $criteria['criteria'] . '%';
     $stmt->bind_param('s', $searchCriteria);
 
     // Execute statement and handle results
@@ -657,12 +658,13 @@ function searchRecipes($conn, $criteria) {
 }
 
 
-function searchMessages($conn, $criteria) {
+function searchMessages($conn, $criteria)
+{
     $sql = "SELECT * FROM messages
             WHERE sender_name LIKE ? OR sender_email LIKE ?";
 
     $stmt = $conn->prepare($sql);
-    $searchCriteria = '%'.$criteria['criteria'].'%';
+    $searchCriteria = '%' . $criteria['criteria'] . '%';
     $stmt->bind_param('ss', $searchCriteria, $searchCriteria);
 
     if ($stmt->execute()) {
@@ -692,14 +694,15 @@ function searchMessages($conn, $criteria) {
 }
 
 
-function flagUnflagMessage($conn, $data){
+function flagUnflagMessage($conn, $data)
+{
     $sql = "UPDATE messages 
     SET flagged = CASE 
                     WHEN flagged = 1 THEN 0 
                     ELSE 1 
                   END 
     WHERE message_id = ?";
-$stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $data['message_id']);
     if ($stmt->execute()) {
         error_log("Message flagged successfully.");
@@ -711,4 +714,57 @@ $stmt = $conn->prepare($sql);
 
     $stmt->close();
 
+}
+
+
+function markMessageAsRead($conn, $data)
+{
+    $sql = "UPDATE messages SET message_read = 1 where message_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $data['message_id']);
+
+    if ($stmt->execute()) {
+        error_log("Message marked as read successfully.");
+        echo json_encode(['status' => 'success', 'message' => 'Message marked as read successfully']);
+    } else {
+        error_log("Error marking message as read: " . $stmt->error);
+        echo json_encode(['status' => 'error', 'message' => 'Error marking message as read: ' . $stmt->error]);
+    }
+
+    $stmt->close();
+}
+
+
+function filterMessages($conn, $data)
+{
+    $sql = "SELECT * FROM messages
+            WHERE message_read = ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $data['criteria']);
+
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $results = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($results, $row);
+            }
+            echo json_encode($results);
+        } else {
+            $noResults = [
+                [
+                    "message_id" => "0",
+                    "sender_first_name" => "No results",
+                    "sender_last_name" => "No results",
+                    "message_text" => "No messages to list",
+                    "message_flagged" => "0"
+                ]
+            ];
+            echo json_encode($noResults);
+        }
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error executing query: " . $stmt->error]);
+    }
+    $stmt->close();
 }

@@ -32,7 +32,7 @@ export async function getRecipes(filterCriteria = {}) {
         const param = new URLSearchParams({ "function": "getRecipesList" });
 
         for (const [key, value] of Object.entries(filterCriteria)) {
-            if(value){
+            if (value) {
                 param.append(key, value)
             }
         }
@@ -63,20 +63,22 @@ export async function getRecipes(filterCriteria = {}) {
 export async function addNewRecipe(jsonData) {
     try {
 
-                // Convert dish_ingredients to a JSON string if it's an array
-                if (Array.isArray(jsonData.dishIngredients)) {
-                    jsonData.dishIngredients = JSON.stringify(jsonData.dishIngredients);
-                }
+        // Convert dish_ingredients to a JSON string if it's an array
+        if (Array.isArray(jsonData.dishIngredients)) {
+            jsonData.dishIngredients = JSON.stringify(jsonData.dishIngredients);
+        }
         jsonData.function = "addNewRecipe";
 
         const response = await fetch("http://localhost/data/index.php",
-         { method: "POST", 
-         headers : {'Content-Type' :'application/json'},
-         body: JSON.stringify(jsonData) }
+            {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(jsonData)
+            }
         );
 
-        if(!response.ok){
-            throw new Error(`HTTP error! status: ${response.status}`); 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const responseData = await response.json();
@@ -198,25 +200,25 @@ export async function deleteMessage(messageId) {
 }
 
 
-export async function editRecipe (jsonData){
-    try{
+export async function editRecipe(jsonData) {
+    try {
         jsonData.function = "editRecipe";
-        const response = await fetch ("http://localhost/data/index.php",
+        const response = await fetch("http://localhost/data/index.php",
             {
-            method: "POST", 
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(jsonData)
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(jsonData)
             }
         );
-        if (!response.ok){
-            throw new Error (`http error! status: , ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`http error! status: , ${response.status}`);
         }
         const responseData = await response.json();
         console.log(`changes saved successfully`, responseData);
         alert(`changes saved successfully`);
     }
 
-    catch(error){
+    catch (error) {
         console.log("error saving changes" + error);
     }
 
@@ -344,8 +346,8 @@ export async function searchMessages(searchCriteria) {
 export async function filterMessages(filterCriteria) {
     try {
         const data = {
-            "function": "searchMessages",
-            "criteria": searchCriteria
+            "function": "filterMessages",
+            "criteria": filterCriteria
         };
 
         const response = await fetch(`http://localhost/data/index.php`, {
@@ -369,14 +371,14 @@ export async function filterMessages(filterCriteria) {
 }
 
 //flagUnflagMessage function
-export async function flagUnflagMessage(messageId){
+export async function flagUnflagMessage(messageId) {
     try {
-        const data= {
-            "function" : "flagUnflagMessage" ,
+        const data = {
+            "function": "flagUnflagMessage",
             "message_id": messageId
         };
 
-        const response = await fetch (`http://localhost/data/index.php`,{
+        const response = await fetch(`http://localhost/data/index.php`, {
             method: "POST",
             headers: {
                 'Content-Type': 'appliction/json'
@@ -384,13 +386,39 @@ export async function flagUnflagMessage(messageId){
             body: JSON.stringify(data)
         });
 
-        if (!response.ok){
-            throw new Error(`HTTp error! status: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`http error! status: ${response.status}`);
         }
         getMessages();
     } catch (error) {
         console.log("Error deleting message:", error);
     }
 
-    
+
+}
+
+//function to mark a message as read
+
+export async function markMessageAsRead(messageId) {
+    try {
+        const data = {
+            "function": "markMessageAsRead",
+            "message_id": messageId
+        };
+
+        const response = await fetch(`http://localhost/data/index.php`, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`http error! status: ${response.status}`);
+        }
+    }
+    catch (error) {
+        console.log("Error marking message as read:", error)
+    }
 }

@@ -943,3 +943,9 @@ justify-content: space-between;
   border: none;
   cursor: pointer;
 }
+
+
+.unread-message-row {
+  background-color: #eeebed;
+  font-weight: bolder;
+}

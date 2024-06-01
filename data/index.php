@@ -72,7 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 searchRecipes($conn,$data);
                 break;
             case 'filterMessages':
-                filterMessages($conn, $criteria);
+                filterMessages($conn, $data);
+                break;
+            case 'markMessageAsRead':
+                markMessageAsRead($conn, $data);
                 break;
 
             case 'flagUnflagMessage':
