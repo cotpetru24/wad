@@ -323,6 +323,24 @@ document.getElementById("toggleUserFormButton").addEventListener("click", functi
     form.style.display = form.style.display === "none" ? "block" : "none";
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Function to add a message row to the table
 function addMessageRow(message) {
     const messagesList = document.getElementById('messagesList');
@@ -331,13 +349,10 @@ function addMessageRow(message) {
 
     // Create a unique ID for the button and image
     const flagButtonId = `flag-button-${message.message_id}`;
-    const flagIconId = `flag-icon-${message.message_id}`;
 
     row.innerHTML = `
         <td>
-            <button class = "flag-button" id="${flagButtonId}">
-                <img id="${flagIconId}" src="${message.flagged == 1 ? 'public/img/icons8-flag-pink.png' 
-                : 'public/img/icons8-flag-grey.png'}" alt="Flag Icon">
+            <button class="flag-button ${message.flagged == 1 ? 'flag-pink' : 'flag-grey'}" id="${flagButtonId}">
             </button>
         </td>
         <td>${message.sender_name}</td>
@@ -354,17 +369,19 @@ function addMessageRow(message) {
 
     // Add hover functionality to the flag button
     const flagButton = document.getElementById(flagButtonId);
-    const flagIcon = document.getElementById(flagIconId);
     
-    const originalSrc = flagIcon.src;
-    const hoverSrc = 'public/img/icons8-flag-purple.png';
-
     flagButton.addEventListener('mouseenter', () => {
-        flagIcon.src = hoverSrc;
+        flagButton.classList.add('flag-purple');
     });
 
     flagButton.addEventListener('mouseleave', () => {
-        flagIcon.src = originalSrc;
+        flagButton.classList.remove('flag-purple');
+    });
+
+    // Add click event listener for the flag button to swap classes
+    row.querySelector('.flag-button').addEventListener('click', () => {
+        functions.toggleFlagClass(flagButton);
+        apiCalls.flagUnflagMessage(message.message_id);
     });
 
     // Create and append the expanded row
@@ -373,7 +390,7 @@ function addMessageRow(message) {
     expandedRow.style.display = 'none';
 
     expandedRow.innerHTML = `
-        <td colspan="7">
+        <td colspan="5">
            <div class="expanded-content">
                 <h3>From: ${message.sender_name}</h3>
                 <h3>Email: ${message.sender_email}</h3>
@@ -391,12 +408,6 @@ function addMessageRow(message) {
         confirmAction('Delete message?', 'deleteMessage', message.message_id, () => {
             listMessages();  // Refresh the message list after deleting the message
         });
-    });
-
-    row.querySelector('.flag-button'). addEventListener('click', () => {
-        functions.swapFlagImage(flagIcon);
-        apiCalls.flagUnflagMessage(message.message_id);
-        // listMessages();
     });
 }
 

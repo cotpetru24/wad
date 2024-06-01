@@ -727,7 +727,7 @@ justify-content: space-between;
   height: 30px;
   width: 30px;
   background-color: transparent;
-  background-image: url(/public/img/icons8-favourite-60.png);;
+  background-image: url(/public/img/icons8-favourite-60.png);
   background-size: 30px 30px;
   background-position: center;
   background-repeat: no-repeat;
@@ -909,5 +909,36 @@ justify-content: space-between;
 }
 
 .flag-button:hover{
+  cursor: pointer;
+}
+
+.flag-pink {
+  background-image: url(/public/img/icons8-flag-pink.png);
+  /* background-image: url(/public/img/icons8-home-26_hover.png); */
+  width: 20px; /* Adjust the width and height as needed */
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+}
+
+.flag-grey {
+  background-image: url(/public/img/icons8-flag-grey.png);
+  width: 20px; /* Adjust the width and height as needed */
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+}
+
+.flag-purple {
+  background-image: url(/public/img/icons8-flag-purple.png);
+  width: 20px; /* Adjust the width and height as needed */
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
   cursor: pointer;
 }
