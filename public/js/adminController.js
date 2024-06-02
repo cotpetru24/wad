@@ -53,7 +53,7 @@ async function addRecipeRows(filter = {}) {
         const noRecipesCell = document.createElement('td');
         noRecipesCell.classList.add('noResultsFound');
 
-        noRecipesCell.colSpan = 9;
+        noRecipesCell.colSpan = 8;
         noRecipesCell.textContent = 'No Recipes found';
         noRecipesRow.appendChild(noRecipesCell);
         recipesList.appendChild(noRecipesRow);
@@ -71,9 +71,8 @@ export function addRecipeRow(recipe) {
 
     row.innerHTML = `
         <td>${recipe.dish_name}</td>
-        <td class="fixed-cell">${recipe.dish_recipe_description}</td>
-        <td>${recipe.category_name}</td>
-        <td class="fixed-cell">${JSON.parse(recipe.dish_ingredients).join(', ')}</td>
+        <td>${functions.toTitleCase(recipe.origin_country)}</td>
+        <td>${functions.toTitleCase(recipe.category_name)}</td>
         <td>${functions.toTitleCase(recipe.complexity_name)}</td>
         <td>${functions.formatPrepTime(recipe.dish_prep_time)}</td>
         <td>${recipe.dish_rating}</td>
@@ -85,19 +84,33 @@ export function addRecipeRow(recipe) {
         </td>
     `;
 
+
+    // <td class="fixed-cell">${recipe.dish_recipe_description}</td>
+    // <td class="fixed-cell">${JSON.parse(recipe.dish_ingredients).join(', ')}</td>
+
+
     const expandedRow = document.createElement('tr');
     expandedRow.classList.add('recipe-expanded-row');
     expandedRow.style.display = 'none';
+    const chefRecommendedText = recipe.dish_chef_recommended === 1 ? "Yes" : "No";
+
 
     expandedRow.innerHTML = `
-        <td colspan="9">
+        <td colspan="8">
             <div class="expanded-content">
-                <h3>Description</h3>
+                <h3>Description:</h3>
                 <p>${recipe.dish_recipe_description}</p>
-                <h3>Ingredients</h3>
+                <h3>Ingredients:</h3>
                 <p>${JSON.parse(recipe.dish_ingredients).join(', ')}</p>
-                <h3>Steps</h3>
+                <h3>Steps:</h3>
                 <p>${recipe.dish_steps}</p>
+
+
+
+                <h3>Chef Recommended: ${chefRecommendedText}</h3>
+
+                <h3>Recipe added: ${recipe.dish_upload_date_time}</h3>
+
             </div>
         </td>
     `;
@@ -554,7 +567,7 @@ async function searchRecipesAdmin() {
         const noRecipesCell = document.createElement('td');
         noRecipesCell.classList.add('noResultsFound');
 
-        noRecipesCell.colSpan = 9;
+        noRecipesCell.colSpan = 8;
         noRecipesCell.textContent = 'No Recipes found';
         noRecipesRow.appendChild(noRecipesCell);
         recipesList.appendChild(noRecipesRow);
@@ -564,7 +577,7 @@ async function searchRecipesAdmin() {
 
 
 
-    searchResults.forEach(result => addRecipeRow(result));
+    // searchResults.forEach(result => addRecipeRow(result)); ---------------- commented but not sure if this is needed
     // addRecipeRows(searchResults);
 }
 
