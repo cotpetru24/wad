@@ -450,7 +450,7 @@ nav {
 
 table {
   width: 80%;
-  table-layout: fixed;
+  /* table-layout: fixed; */
   border-spacing: 5px;
   border-collapse: collapse;
   margin-top: 20px;
@@ -550,7 +550,9 @@ td img {
 
 
 
-
+.contentSection {
+  width: 100%;
+}
 
 
 .contentSection h2 {
@@ -626,8 +628,7 @@ td img {
   border-radius: 7px;
   z-index: 10;
   background-color: white;
-  width: 500px;
-  max-width: 80%;
+  width: 80%;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
