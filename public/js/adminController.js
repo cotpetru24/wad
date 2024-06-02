@@ -552,26 +552,75 @@ document.getElementById('adminRecipesClearFilters')?.addEventListener('click', f
 
 
 //search messages function + event listener
-async function searchMessages() {
-    try {
-        const search = document.getElementById("messageSearchBox").value;
-        const messagesList = document.getElementById("messagesList");
-        if (search && messagesList) {
-            messagesList.innerHTML = "";
-            const searchResults = await apiCalls.searchMessages(search);
-            searchResults.forEach(result => addMessageRow(result));
+
+// async function searchMessages() {
+//     try {
+//         const search = document.getElementById("messageSearchBox").value;
+//         const messagesList = document.getElementById("messagesList");
+//         if (search && messagesList) {
+//             messagesList.innerHTML = "";
+//             const searchResults = await apiCalls.searchMessages(search);
+//             searchResults.forEach(result => addMessageRow(result));
+//         } else {
+//             console.error("No messages found found.");
+//         }
+//     } catch (error) {
+//         console.error("Error fetching messages:", error);
+//     }
+// }
+
+// document.getElementById('adminMessagesSearch')?.addEventListener('click', () => {
+//     searchMessages();
+//     alert("searching for messages")
+// });
+
+
+
+
+//delete the above if the below works fine
+
+// Function to display messages
+function displayMessages(messages) {
+    const messagesList = document.getElementById('messagesList');
+    messagesList.innerHTML = ''; // Clear the list first
+
+    if (messages.length === 0) {
+        const noMessagesRow = document.createElement('tr');
+        noMessagesRow.classList.add('noResultsRow');
+        const noMessagesCell = document.createElement('td');
+        noMessagesCell.classList.add('noResultsFound');
+
+        noMessagesCell.colSpan = 5; // Adjust based on the number of columns in your table
+        noMessagesCell.textContent = 'No Messages found';
+        noMessagesRow.appendChild(noMessagesCell);
+        messagesList.appendChild(noMessagesRow);
         } else {
-            console.error("No messages found found.");
-        }
-    } catch (error) {
-        console.error("Error fetching messages:", error);
+        messages.forEach(message => {
+            addMessageRow(message);
+        });
     }
 }
 
+
+// document.getElementById('adminMessagesSearch')?.addEventListener('click', () => {
+//     searchMessages();
+//     alert("searching for messages")
+// });
+
+
 document.getElementById('adminMessagesSearch')?.addEventListener('click', () => {
-    searchMessages();
-    alert("searching for messages")
+    // alert("searching for messages")
+    const searchCriteria = document.getElementById('messageSearchBox').value;
+    handleSearch(searchCriteria);
 });
+
+
+
+// Function to handle the search
+async function handleSearch(searchCriteria) {
+    const messages = await apiCalls.searchMessages(searchCriteria);
+    displayMessages(messages);
+}
 
 
 
@@ -586,7 +635,10 @@ async function filterMessages() {
             messagesList.innerHTML = "";
             const filterResults = await apiCalls.filterMessages(messageStatus);
             filterResults.forEach(result => addMessageRow(result));
-        }else {
+        }else if (!messageStatus){
+            await listMessages();
+        }
+        else {
             console.error("No messages found found.");
         }
     } catch (error) {
@@ -595,5 +647,20 @@ async function filterMessages() {
 }
 document.getElementById('adminMessagesFilter')?.addEventListener('click', () => {
     filterMessages();
-    alert("filtering messages")
+    // alert("filtering messages")
 });
+
+
+// list all messages and clear search input
+const showAllMessages = document.getElementById("adminMessagesShowAll");
+if (showAllMessages) {
+    showAllMessages.addEventListener('click', async () => {
+        const messagesSearchInput = document.getElementById("messageSearchBox");
+        const messageReadFilter = document.getElementById("messageReadFilter");
+        messageReadFilter.value = ""; // Clear the input box
+        if (messagesSearchInput) {
+            messagesSearchInput.value = ""; // Clear the input box
+        }
+        await listMessages();
+    });
+}

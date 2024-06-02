@@ -676,15 +676,7 @@ function searchMessages($conn, $criteria)
             }
             echo json_encode($results);
         } else {
-            $noResults = [
-                [
-                    "message_id" => "0",
-                    "sender_first_name" => "No results",
-                    "sender_last_name" => "No results",
-                    "message_text" => "No messages to list",
-                    "message_flagged" => "0"
-                ]
-            ];
+            $noResults = [];
             echo json_encode($noResults);
         }
     } else {

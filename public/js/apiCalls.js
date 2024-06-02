@@ -338,6 +338,7 @@ export async function searchMessages(searchCriteria) {
         return messages;
     } catch (error) {
         console.log("Error retrieving data: " + error);
+        return [];
     }
 }
 

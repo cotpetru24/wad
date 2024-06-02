@@ -8,8 +8,8 @@ html,
 body {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -70,6 +70,7 @@ main {
   /* padding: 15px; */
   margin: 10px;
 }
+
 .dishImage img {
   /* max-height:  100%;
   max-width : 266px; */
@@ -150,7 +151,8 @@ nav {
   padding-right: 30px;
 }
 
-input[type="search"] {
+/* input[type="search"] { */
+#indexRecipeSearchBox {
   flex-grow: 1;
   padding: 0px 10px;
   border: none;
@@ -308,7 +310,7 @@ input[type="search"] {
   width: 250px;
 }
 
-.recipeFooterDiv button{
+.recipeFooterDiv button {
   width: 100px;
   font-weight: bolder;
 }
@@ -324,11 +326,11 @@ input[type="search"] {
 #adminRecipesFilter:hover,
 #adminRecipesSearch:hover,
 #adminMessagesSearch:hover,
+#adminMessagesShowAll:hover,
 #adminMessagesFilter:hover,
 #adminUsersSearch:hover,
 #adminUsersFilter:hover,
-#adminRecipesClearFilters
- {
+#adminRecipesClearFilters:hover {
   background: #0c0723;
   color: #9b59b6;
 }
@@ -456,7 +458,7 @@ input[type="search"] {
 
 table {
   width: 90%;
-   table-layout: fixed;
+  table-layout: fixed;
   border-spacing: 5px;
   border-collapse: collapse;
   margin-top: 20px;
@@ -468,19 +470,24 @@ td {
   padding: 10px;
   text-align: left;
   /* height: 100px; Fixed height */
-    overflow: hidden; /* Hides overflowed content */
-    text-overflow: ellipsis; /* Adds ellipsis to overflowed text */
-    white-space: nowrap; /* Prevents text from wrapping */
-    vertical-align: middle;
+  overflow: hidden;
+  /* Hides overflowed content */
+  text-overflow: ellipsis;
+  /* Adds ellipsis to overflowed text */
+  white-space: nowrap;
+  /* Prevents text from wrapping */
+  vertical-align: middle;
 }
 
 th {
   background-color: #9b59b6;
   color: white;
 }
+
 td {
   /* min-height: 50px;  Adjust this value as needed */
-  vertical-align: middle; /* This ensures content is centered vertically */
+  vertical-align: middle;
+  /* This ensures content is centered vertically */
 }
 
 
@@ -498,18 +505,21 @@ td img {
 
 
 }
+
 #actionsTh {
   padding: 10px;
   text-align: left;
   /* height: 100px; Fixed height */
-width: auto;
-  white-space: nowrap; /* Prevents text from wrapping */
+  width: auto;
+  white-space: nowrap;
+  /* Prevents text from wrapping */
 }
 
-.actions button, 
+.actions button,
 #adminRecipesFilter,
 #adminRecipesSearch,
 #adminMessagesSearch,
+#adminMessagesShowAll,
 #adminMessagesFilter,
 #adminUsersSearch,
 #adminUsersFilter,
@@ -717,10 +727,10 @@ width: auto;
   width: auto;
 }
 
-.recipeHeadDiv{
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+.recipeHeadDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .recipeDetails button {
@@ -745,6 +755,7 @@ justify-content: space-between;
 .recipe h3 {
   font-size: 16px;
 }
+
 .recipe h4 {
   color: #9b59b6;
   font-size: 14px;
@@ -753,16 +764,16 @@ justify-content: space-between;
 
 
 
-.recipeFooterInfoDiv{
+.recipeFooterInfoDiv {
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    /* justify-content: space-between; */
-    align-items: center;
-    padding-right: 30px;
-    padding-top: 5px;
-    
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding-right: 30px;
+  padding-top: 5px;
+
 }
 
 .recipeParagraphDiv {
@@ -777,18 +788,22 @@ justify-content: space-between;
   -webkit-box-orient: vertical;
   white-space: normal;
 }
-.recipeParagraphDiv p, span {
+
+.recipeParagraphDiv p,
+span {
   text-align: justify;
   display: block;
 }
 
-.recipeParagraphDiv.expanded{
+.recipeParagraphDiv.expanded {
   height: auto;
   -webkit-line-clamp: unset;
   transition: height 0.3s ease;
 
 }
-.recipeParagraphDiv ol, ul {
+
+.recipeParagraphDiv ol,
+ul {
   padding-left: 5%;
 }
 
@@ -797,39 +812,42 @@ justify-content: space-between;
   color: #9b59b6;
 }
 
-.ratingStars{
+.ratingStars {
   width: 17px;
   height: 17px;
 }
 
-.non-vegetarian{
+.non-vegetarian {
   color: #ff652f;
 }
 
-.vegetarian{
+.vegetarian {
   color: #14a76c;
 }
 
-.recipeParagraphDiv h3{
+.recipeParagraphDiv h3 {
   color: #9b59b6;
   padding-top: 15px;
 }
+
 #year {
   display: inline;
 }
 
 
 .fixed-cell {
-  width: 200px; /* Set your desired fixed width */
+  width: 200px;
+  /* Set your desired fixed width */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   /* display: inline-block; Ensures the element respects the width */
-  max-width: 200px; /* Ensures the element respects the width */
+  max-width: 200px;
+  /* Ensures the element respects the width */
 }
 
 
-.recipe-expanded-row, 
+.recipe-expanded-row,
 .message-expanded-row {
   background-color: #f9f9f9;
 }
@@ -839,10 +857,14 @@ justify-content: space-between;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
-  display: block; /* Ensures the content is treated as a block element */
-  word-wrap: break-word; /* Ensures long words break to fit within the container */
-  word-break: break-word; /* Ensures long words break to fit within the container */
-  white-space: normal; /* Allows the text to wrap normally */
+  display: block;
+  /* Ensures the content is treated as a block element */
+  word-wrap: break-word;
+  /* Ensures long words break to fit within the container */
+  word-break: break-word;
+  /* Ensures long words break to fit within the container */
+  white-space: normal;
+  /* Allows the text to wrap normally */
 }
 
 .expanded-content h3 {
@@ -850,7 +872,8 @@ justify-content: space-between;
 }
 
 .expanded-content p {
-  margin-bottom: 15px; /* Add some spacing between paragraphs for better readability */
+  margin-bottom: 15px;
+  /* Add some spacing between paragraphs for better readability */
 }
 
 
@@ -865,24 +888,24 @@ justify-content: space-between;
 
 
 .modal {
-  display: none; 
-  position: fixed; 
-  z-index: 1; 
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4); 
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; 
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; 
+  width: 80%;
 }
 
 .close-button {
@@ -909,14 +932,15 @@ justify-content: space-between;
   width: 20px;
 }
 
-.flag-button:hover{
+.flag-button:hover {
   cursor: pointer;
 }
 
 .flag-pink {
   background-image: url(/public/img/icons8-flag-pink.png);
   /* background-image: url(/public/img/icons8-home-26_hover.png); */
-  width: 20px; /* Adjust the width and height as needed */
+  width: 20px;
+  /* Adjust the width and height as needed */
   height: 20px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -926,7 +950,8 @@ justify-content: space-between;
 
 .flag-grey {
   background-image: url(/public/img/icons8-flag-grey.png);
-  width: 20px; /* Adjust the width and height as needed */
+  width: 20px;
+  /* Adjust the width and height as needed */
   height: 20px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -936,7 +961,8 @@ justify-content: space-between;
 
 .flag-purple {
   background-image: url(/public/img/icons8-flag-purple.png);
-  width: 20px; /* Adjust the width and height as needed */
+  width: 20px;
+  /* Adjust the width and height as needed */
   height: 20px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -948,4 +974,43 @@ justify-content: space-between;
 .unread-message-row {
   background-color: #eeebed;
   font-weight: bolder;
+}
+
+.adminSearchShowBtnDiv {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; /* Distributes space between flex items */
+  /* height: 100%; Ensure the container has a height to see the effect */
+}
+
+#adminMessagesShowAll,
+#adminMessagesSearch {
+  margin: 10px;
+}
+
+.noResultsFound {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  color: #0c0723;
+  padding: 20px;
+  border: none;
+  margin-top: 100px;
+}
+
+.noResultsRow {
+  height: 300px;
+}
+
+#messageSearchBox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  height: 35px;
+  border-radius: 5px;
+  appearance: none;
+  width: 70%;
+  padding: 10px;
 }
