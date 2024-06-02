@@ -378,13 +378,39 @@ async function searchRecipesIndex(){
         addRecipes(searchResults);
 }
 
-document.getElementById('indexRecipesSearch')?.addEventListener('click', () => {
-    searchRecipesIndex();
-    document.querySelector('.tabSelected')?.classList.remove('tabSelected');
+
+
+
+// document.getElementById('indexRecipesSearch')?.addEventListener('click', () => {
+//     searchRecipesIndex();
+//     document.querySelector('.tabSelected')?.classList.remove('tabSelected');
+// });
+
+
+
+
+
+//if the below works remove the above!!!!!!!!!!!!!!!!!!!!!!!!!
+document.addEventListener("DOMContentLoaded", () => {
+    const searchButton = document.getElementById('indexRecipesSearch');
+    const searchInput = document.getElementById('indexRecipeSearchBox');
+
+    if (searchButton) {
+        searchButton.addEventListener('click', () => {
+            searchRecipesIndex();
+            document.querySelector('.tabSelected')?.classList.remove('tabSelected');
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                searchRecipesIndex();
+                document.querySelector('.tabSelected')?.classList.remove('tabSelected');
+            }
+        });
+    }
 });
-
-
-
 
 
 

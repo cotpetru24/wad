@@ -37,8 +37,20 @@
             <div id="recipesSection" class="contentSection">
                 <div class="container">
                     <div class="search-filter">
-                        <input type="text" id="recipeSearchBox" placeholder="Search recipes...">
-                        <button id="adminRecipesSearch">Search</button>
+                        <input type="search" id="recipeSearchBox" placeholder="Search recipes...">
+
+
+                        <div class="adminSearchShowBtnDiv">
+                            <button id="adminRecipesSearch">Search</button>
+                            <button id="adminRecipesClearFilters"> Show All</button>
+
+
+                            <!-- <button id="adminMessagesShowAll">Show All</button> -->
+                        </div>
+
+
+
+
                         <div class="filter-group">
                             <select id="recipeOriginFilter">
                                 <option value="">All Countries</option>
@@ -74,7 +86,6 @@
                                 <option value=">240">Over 4 hours</option>
                             </select>
                             <button id="adminRecipesFilter">Filter</button>
-                            <button id="adminRecipesClearFilters"> Clear Filters</button>
 
                         </div>
                     </div>
@@ -186,8 +197,8 @@
                     <div class="search-filter">
                         <input type="search" id="messageSearchBox" placeholder="Search messages...">
                         <div class="adminSearchShowBtnDiv">
-                        <button id="adminMessagesSearch">Search</button>
-                        <button id="adminMessagesShowAll">Show All</button>
+                            <button id="adminMessagesSearch">Search</button>
+                            <button id="adminMessagesShowAll">Show All</button>
                         </div>
                         <div class="filter-group">
                             <select id="messageReadFilter">

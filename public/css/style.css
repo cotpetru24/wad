@@ -152,15 +152,7 @@ nav {
 }
 
 /* input[type="search"] { */
-#indexRecipeSearchBox {
-  flex-grow: 1;
-  padding: 0px 10px;
-  border: none;
-  font-size: 16px;
-  outline: none;
-  height: 25px;
-  border-radius: 5px;
-}
+
 
 #nav button {
   background-color: transparent;
@@ -868,11 +860,13 @@ ul {
 }
 
 .expanded-content h3 {
-  margin-top: 0;
+  margin: 10px;
 }
 
 .expanded-content p {
-  margin-bottom: 15px;
+  margin: 10px;
+  padding-top: 15px;
+  text-align: justify;
   /* Add some spacing between paragraphs for better readability */
 }
 
@@ -984,7 +978,10 @@ ul {
 }
 
 #adminMessagesShowAll,
-#adminMessagesSearch {
+#adminMessagesSearch,
+#adminRecipesSearch,
+#adminRecipesClearFilters
+ {
   margin: 10px;
 }
 
@@ -1002,7 +999,8 @@ ul {
   height: 300px;
 }
 
-#messageSearchBox {
+#messageSearchBox,
+#recipeSearchBox {
   -webkit-appearance: none;
   -moz-appearance: none;
   border: 1px solid #ccc;
@@ -1013,4 +1011,19 @@ ul {
   appearance: none;
   width: 70%;
   padding: 10px;
+}
+
+#indexRecipeSearchBox {
+  flex-grow: 1;
+  padding: 0px 10px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  height: 25px;
+  border-radius: 5px;
+}
+
+
+.expanded-content {
+
 }

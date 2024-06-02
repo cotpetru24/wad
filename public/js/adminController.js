@@ -512,10 +512,38 @@ async function searchRecipesAdmin() {
 }
 
 
-document.getElementById('adminRecipesSearch')?.addEventListener('click', () => {
-    searchRecipesAdmin();
-    alert("seaching for recidpes")
+// document.getElementById('adminRecipesSearch')?.addEventListener('click', () => {
+//     searchRecipesAdmin();
+//     alert("seaching for recidpes")
+// });
+
+
+//if the below works remove the above!!!!!!!!!!!!!!!!!!!!!!!!!
+document.addEventListener("DOMContentLoaded", () => {
+    const searchButton = document.getElementById('adminRecipesSearch')
+    const searchInput = document.getElementById('recipeSearchBox');
+
+    if (searchButton) {
+        searchButton.addEventListener('click', () => {
+            searchRecipesAdmin();
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                searchRecipesAdmin();
+            }
+        });
+    }
 });
+
+
+
+
+
+
+
 
 
 
@@ -538,6 +566,8 @@ document.getElementById('adminRecipesFilter')?.addEventListener('click', () => {
 //Removing filters
 document.getElementById('adminRecipesClearFilters')?.addEventListener('click', function () {
     const filterSelects = document.querySelectorAll('.filter-group select');
+    const searchInput = document.getElementById('recipeSearchBox');
+    searchInput.value='',
     filterSelects.forEach(function (select) {
         select.value = '';
     });
@@ -608,11 +638,37 @@ function displayMessages(messages) {
 // });
 
 
-document.getElementById('adminMessagesSearch')?.addEventListener('click', () => {
-    // alert("searching for messages")
-    const searchCriteria = document.getElementById('messageSearchBox').value;
-    handleSearch(searchCriteria);
+// document.getElementById('adminMessagesSearch')?.addEventListener('click', () => {
+//     // alert("searching for messages")
+//     const searchCriteria = document.getElementById('messageSearchBox').value;
+//     handleSearch(searchCriteria);
+// });
+
+
+//if the below works remove the above!!!!!!!!!!!!!!!!!!!!!!!!!
+document.addEventListener("DOMContentLoaded", () => {
+    const searchButton = document.getElementById('adminMessagesSearch');
+    const searchInput = document.getElementById('messageSearchBox');
+
+    if (searchButton) {
+        searchButton.addEventListener('click', () => {
+            const searchCriteria = searchInput.value;
+            handleSearch(searchCriteria);
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const searchCriteria = searchInput.value;
+                handleSearch(searchCriteria);
+            }
+        });
+    }
 });
+
+
+
 
 
 

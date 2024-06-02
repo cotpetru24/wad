@@ -661,7 +661,8 @@ function searchRecipes($conn, $criteria)
 function searchMessages($conn, $criteria)
 {
     $sql = "SELECT * FROM messages
-            WHERE sender_name LIKE ? OR sender_email LIKE ?";
+            WHERE sender_name LIKE ? OR sender_email LIKE ?
+            ORDER BY message_sent_date_time DESC";
 
     $stmt = $conn->prepare($sql);
     $searchCriteria = '%' . $criteria['criteria'] . '%';
