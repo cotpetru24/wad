@@ -303,16 +303,7 @@ function getRecipesList($conn, $filterCriteria = [])
         }
         echo json_encode($results);
     } else {
-        $noResults = [
-            [
-                "recipe_id" => "0",
-                "dish_name" => "No results",
-                "dish_recipe_description" => "No recipes to list",
-                "dish_ingredients" => "No ingredients",
-                "dish_complexity_id" => "1",
-                "dish_prep_time" => "0"
-            ]
-        ];
+        $noResults = [];
         echo json_encode($noResults);
     }
 
@@ -337,15 +328,7 @@ function getMessagesList($conn)
 
             echo json_encode($results);
         } else {
-            $noResults = [
-                [   /** to check in db if these fields are correct */
-                    "message_id" => "0",
-                    "sender_first_name" => "No results",
-                    "sender_last_name" => "No results",
-                    "message_text" => "No messages to list",
-                    "message_flagged" => "0"
-                ]
-            ];
+            $noResults = [];
             echo json_encode($noResults);
         }
     } else {
@@ -641,16 +624,7 @@ function searchRecipes($conn, $criteria)
         }
         echo json_encode($results);
     } else {
-        $noResults = [
-            [
-                "recipe_id" => "0",
-                "dish_name" => "No results",
-                "dish_recipe_description" => "No recipes to list",
-                "dish_ingredients" => "No ingredients",
-                "dish_complexity_id" => "1",
-                "dish_prep_time" => "0"
-            ]
-        ];
+        $noResults = [];
         echo json_encode($noResults);
     }
 
@@ -745,15 +719,7 @@ function filterMessages($conn, $data)
             }
             echo json_encode($results);
         } else {
-            $noResults = [
-                [
-                    "message_id" => "0",
-                    "sender_first_name" => "No results",
-                    "sender_last_name" => "No results",
-                    "message_text" => "No messages to list",
-                    "message_flagged" => "0"
-                ]
-            ];
+            $noResults = [];
             echo json_encode($noResults);
         }
     } else {

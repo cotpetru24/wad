@@ -52,6 +52,7 @@ export async function getRecipes(filterCriteria = {}) {
         return recipes;
     }
     catch (error) {
+        return [];
         console.log("Error retrieving data: " + error);
     }
 }

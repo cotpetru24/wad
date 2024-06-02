@@ -1023,7 +1023,6 @@ ul {
   border-radius: 5px;
 }
 
-
-.expanded-content {
-
+.noResultsIndex {
+  padding-top: 200px;
 }

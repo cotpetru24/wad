@@ -370,12 +370,23 @@ closeContactForm.addEventListener('click', () => { toggleContactForm(false); });
 
 
 //search recipes function + event listener => index page
-async function searchRecipesIndex(){
-        // const search = document.getElementById("search-box").value;
-        const search = document.getElementById("indexRecipeSearchBox").value;
+async function searchRecipesIndex() {
+    // const search = document.getElementById("search-box").value;
+    const recipesList = document.getElementById('recipesList');
+    const search = document.getElementById("indexRecipeSearchBox").value;
+    let searchResults = await apiCalls.searchRecipes(search);
+    recipesList.innerText = "";
 
-        let searchResults = await apiCalls.searchRecipes(search);
+    if (searchResults.length === 0) {
+
+        const noResultsIndex = document.createElement('h2');
+        noResultsIndex.classList.add('noResultsIndex');
+        noResultsIndex.innerHTML = 'No Recipes Found'
+
+        recipesList.appendChild(noResultsIndex);
+    } else {
         addRecipes(searchResults);
+    }
 }
 
 

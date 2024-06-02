@@ -32,7 +32,20 @@ async function addRecipeRows(filter = {}) {
     const recipes = await apiCalls.getRecipes(filter);
     const recipesList = document.getElementById('adminRecipesList');
     recipesList.innerHTML = ''; // Clear existing rows before adding new ones
+
+    if(recipes.length ===0){
+        const noRecipesRow = document.createElement('tr');
+        noRecipesRow.classList.add('noResultsRow');
+        const noRecipesCell = document.createElement('td');
+        noRecipesCell.classList.add('noResultsFound');
+
+        noRecipesCell.colSpan = 9;
+        noRecipesCell.textContent = 'No Recipes found';
+        noRecipesRow.appendChild(noRecipesCell);
+        recipesList.appendChild(noRecipesRow);
+    }else{
     recipes.forEach(recipe => addRecipeRow(recipe));
+    }
 }
 
 
@@ -504,12 +517,41 @@ export function tabsController() {
 //search recipes function + event listener => admin page
 async function searchRecipesAdmin() {
     const search = document.getElementById("recipeSearchBox").value;
-    let searchResults = await apiCalls.searchRecipes(search);
     const recipesList = document.getElementById('adminRecipesList');
+    let searchResults = await apiCalls.searchRecipes(search);
     recipesList.innerHTML = ''; // Clear existing rows before adding new ones
+
+
+
+
+    if(searchResults.length ===0){
+        const noRecipesRow = document.createElement('tr');
+        noRecipesRow.classList.add('noResultsRow');
+        const noRecipesCell = document.createElement('td');
+        noRecipesCell.classList.add('noResultsFound');
+
+        noRecipesCell.colSpan = 9;
+        noRecipesCell.textContent = 'No Recipes found';
+        noRecipesRow.appendChild(noRecipesCell);
+        recipesList.appendChild(noRecipesRow);
+    }else{
+        searchResults.forEach(result => addRecipeRow(result));
+    }
+
+
+
     searchResults.forEach(result => addRecipeRow(result));
     // addRecipeRows(searchResults);
 }
+
+
+
+
+
+
+
+
+
 
 
 // document.getElementById('adminRecipesSearch')?.addEventListener('click', () => {
@@ -690,7 +732,20 @@ async function filterMessages() {
         if (messageStatus && messagesList) {
             messagesList.innerHTML = "";
             const filterResults = await apiCalls.filterMessages(messageStatus);
-            filterResults.forEach(result => addMessageRow(result));
+
+            if (filterResults.length === 0) {
+                const noMessagesRow = document.createElement('tr');
+                noMessagesRow.classList.add('noResultsRow');
+                const noMessagesCell = document.createElement('td');
+                noMessagesCell.classList.add('noResultsFound');
+        
+                noMessagesCell.colSpan = 5; // Adjust based on the number of columns in your table
+                noMessagesCell.textContent = 'No Messages found';
+                noMessagesRow.appendChild(noMessagesCell);
+                messagesList.appendChild(noMessagesRow);
+            } else {
+                    filterResults.forEach(result => addMessageRow(result));
+            }
         }else if (!messageStatus){
             await listMessages();
         }
