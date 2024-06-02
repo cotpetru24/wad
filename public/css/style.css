@@ -449,7 +449,7 @@ nav {
 }
 
 table {
-  width: 90%;
+  width: 80%;
   table-layout: fixed;
   border-spacing: 5px;
   border-collapse: collapse;
@@ -531,7 +531,27 @@ td img {
 
 .container {
   padding-top: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .contentSection h2 {
   margin-bottom: 20px;
@@ -539,6 +559,8 @@ td img {
 
 .contentSection .button {
   margin-bottom: 20px;
+  align-self: start;
+  margin-left: 10%;
 }
 
 .form-group {
@@ -564,10 +586,13 @@ td img {
 }
 
 .addRecipe {
+  width: 80%;
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgb(0 0 0 / 42%);
+  align-self: start;
+  margin-left: 10%;
 }
 
 .addRecipe h2 {
@@ -663,10 +688,15 @@ td img {
 }
 
 .search-filter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+
+
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-direction: row;
+    align-content: space-between;
 }
 
 .search-filter input[type="text"] {
@@ -1025,4 +1055,8 @@ ul {
 
 .noResultsIndex {
   padding-top: 200px;
+}
+
+#addNewRecipe {
+  margin-left: 0;
 }

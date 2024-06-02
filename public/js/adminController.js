@@ -2,7 +2,21 @@
 
 
 document.getElementById('addNewRecipe')?.addEventListener('click', () => {
-    addNewRecipe();
+
+
+
+
+    document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
+        ? document.getElementById("toggleFormButton").innerText = "Cancel"
+        : document.getElementById("toggleFormButton").innerText = "+ Add Recipe"
+
+        addNewRecipe();
+
+
+
+
+
+    
     alert("add reipe button clicked")
 });
 
@@ -311,9 +325,19 @@ async function listMessages() {
 document.getElementById("toggleFormButton").addEventListener("click", function () {
     const form = document.getElementById("addRecipeForm");
     form.style.display = form.style.display === "none" ? "block" : "none";
-    document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
-        ? document.getElementById("toggleFormButton").innerText = "Cancel"
-        : document.getElementById("toggleFormButton").innerText = "+ Add Recipe"
+    // document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
+    //     ? document.getElementById("toggleFormButton").innerText = "Cancel"
+    //     : document.getElementById("toggleFormButton").innerText = "+ Add Recipe"
+
+    const toggleButton = document.getElementById("toggleFormButton");
+    if (toggleButton.innerText === "+ Add Recipe") {
+        toggleButton.innerText = "Cancel";
+    } else {
+        toggleButton.innerText = "+ Add Recipe";
+        resetAddRecipeForm();
+    }
+
+
 
     // ? (document.getElementById("toggleFormButton").innerText ="Cancel", resetAddRecipeForm())
     // : (document.getElementById("toggleFormButton").innerText ="+ Add Recipe", resetAddRecipeForm())
@@ -773,5 +797,75 @@ if (showAllMessages) {
             messagesSearchInput.value = ""; // Clear the input box
         }
         await listMessages();
+    });
+}
+
+
+
+
+
+function resetAddRecipeForm() {
+    document.getElementById("dishName").value = '';
+    document.getElementById("dishOrigin").value = '';
+    document.getElementById("dishDescription").value = '';
+    document.getElementById("dishIngredients").value = '';
+    document.getElementById("dishSteps").value = '';
+    document.getElementById("dishCategory").value = '';
+    document.getElementById("dishComplexity").value = '';
+    document.getElementById("dishPrepTime").value = '';
+    document.getElementById("dishRating").value = '';
+    document.getElementById("dishChefRecommended").value = '';
+    document.getElementById("dishImage").value = '';
+
+    document.getElementById("addRecipeForm").style.display = 'none';
+}
+//if the below works delete the one above addnewrecipe function
+async function addNewRecipe() {
+    const dishName = document.getElementById("dishName").value;
+    const dishOrigin = document.getElementById("dishOrigin").value;
+    const dishDescription = document.getElementById("dishDescription").value;
+    const dishIngredients = document.getElementById("dishIngredients").value;
+    const dishSteps = document.getElementById("dishSteps").value;
+    const dishCategory = document.getElementById("dishCategory").value;
+    const dishComplexity = document.getElementById("dishComplexity").value;
+    const dishPrepTime = document.getElementById("dishPrepTime").value;
+    const dishRating = document.getElementById("dishRating").value;
+    const dishChefRecommended = document.getElementById("dishChefRecommended").value;
+    const dishImage = document.getElementById("dishImage").files[0]; // Use files[0] to get the selected file
+
+    const jsonData = {
+        function: 'addNewRecipe', // Use the existing function name
+        dishName: dishName,
+        dishOrigin: dishOrigin,
+        dishDescription: dishDescription,
+        dishIngredients: functions.convertToJSONArray(dishIngredients),
+        dishSteps: dishSteps,
+        dishCategory: dishCategory,
+        dishComplexity: dishComplexity,
+        dishPrepTime: dishPrepTime,
+        dishRating: dishRating,
+        dishChefRecommended: dishChefRecommended,
+        dishImage: null // Placeholder, will be updated if there is an image
+    };
+
+    if (dishImage) {
+        const base64Image = await convertImageToBase64(dishImage);
+        jsonData.dishImage = base64Image; // Include the image data
+    }
+
+    await apiCalls.addNewRecipe(jsonData);
+    addRecipeRows(); // Refresh the recipe list
+
+
+    // Clear and hide the form after adding the recipe
+    resetAddRecipeForm();
+}
+
+function convertImageToBase64(imageFile) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(imageFile);
     });
 }
