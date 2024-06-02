@@ -1,24 +1,7 @@
 
 
 
-document.getElementById('addNewRecipe')?.addEventListener('click', () => {
 
-
-
-
-    document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
-        ? document.getElementById("toggleFormButton").innerText = "Cancel"
-        : document.getElementById("toggleFormButton").innerText = "+ Add Recipe"
-
-        addNewRecipe();
-
-
-
-
-
-    
-    alert("add reipe button clicked")
-});
 
 
 
@@ -815,64 +798,302 @@ if (showAllMessages) {
 
 
 
+//commented to test the below
+
+// function resetAddRecipeForm() {
+//     document.getElementById("dishName").value = '';
+//     document.getElementById("dishOrigin").value = '';
+//     document.getElementById("dishDescription").value = '';
+//     document.getElementById("dishIngredients").value = '';
+//     document.getElementById("dishSteps").value = '';
+//     document.getElementById("dishCategory").value = '';
+//     document.getElementById("dishComplexity").value = '';
+//     document.getElementById("dishPrepTime").value = '';
+//     document.getElementById("dishRating").value = '';
+//     document.getElementById("dishChefRecommended").value = '';
+//     document.getElementById("dishImage").value = '';
+
+//     document.getElementById("addRecipeForm").style.display = 'none';
+// }
+// //if the below works delete the one above addnewrecipe function
+// async function addNewRecipe() {
+//     const dishName = document.getElementById("dishName").value;
+//     const dishOrigin = document.getElementById("dishOrigin").value;
+//     const dishDescription = document.getElementById("dishDescription").value;
+//     const dishIngredients = document.getElementById("dishIngredients").value;
+//     const dishSteps = document.getElementById("dishSteps").value;
+//     const dishCategory = document.getElementById("dishCategory").value;
+//     const dishComplexity = document.getElementById("dishComplexity").value;
+//     const dishPrepTime = document.getElementById("dishPrepTime").value;
+//     const dishRating = document.getElementById("dishRating").value;
+//     const dishChefRecommended = document.getElementById("dishChefRecommended").value;
+//     const dishImage = document.getElementById("dishImage").files[0]; // Use files[0] to get the selected file
+
+//     const jsonData = {
+//         function: 'addNewRecipe', // Use the existing function name
+//         dishName: dishName,
+//         dishOrigin: dishOrigin,
+//         dishDescription: dishDescription,
+//         dishIngredients: functions.convertToJSONArray(dishIngredients),
+//         dishSteps: dishSteps,
+//         dishCategory: dishCategory,
+//         dishComplexity: dishComplexity,
+//         dishPrepTime: dishPrepTime,
+//         dishRating: dishRating,
+//         dishChefRecommended: dishChefRecommended,
+//         dishImage: null // Placeholder, will be updated if there is an image
+//     };
+
+//     if (dishImage) {
+//         const base64Image = await convertImageToBase64(dishImage);
+//         jsonData.dishImage = base64Image; // Include the image data
+//     }
+
+//     await apiCalls.addNewRecipe(jsonData);
+//     addRecipeRows(); // Refresh the recipe list
 
 
-function resetAddRecipeForm() {
-    document.getElementById("dishName").value = '';
-    document.getElementById("dishOrigin").value = '';
-    document.getElementById("dishDescription").value = '';
-    document.getElementById("dishIngredients").value = '';
-    document.getElementById("dishSteps").value = '';
-    document.getElementById("dishCategory").value = '';
-    document.getElementById("dishComplexity").value = '';
-    document.getElementById("dishPrepTime").value = '';
-    document.getElementById("dishRating").value = '';
-    document.getElementById("dishChefRecommended").value = '';
-    document.getElementById("dishImage").value = '';
+//     // Clear and hide the form after adding the recipe
+//     resetAddRecipeForm();
+// }
 
-    document.getElementById("addRecipeForm").style.display = 'none';
-}
-//if the below works delete the one above addnewrecipe function
-async function addNewRecipe() {
-    const dishName = document.getElementById("dishName").value;
-    const dishOrigin = document.getElementById("dishOrigin").value;
-    const dishDescription = document.getElementById("dishDescription").value;
-    const dishIngredients = document.getElementById("dishIngredients").value;
-    const dishSteps = document.getElementById("dishSteps").value;
-    const dishCategory = document.getElementById("dishCategory").value;
-    const dishComplexity = document.getElementById("dishComplexity").value;
-    const dishPrepTime = document.getElementById("dishPrepTime").value;
-    const dishRating = document.getElementById("dishRating").value;
-    const dishChefRecommended = document.getElementById("dishChefRecommended").value;
-    const dishImage = document.getElementById("dishImage").files[0]; // Use files[0] to get the selected file
 
-    const jsonData = {
-        function: 'addNewRecipe', // Use the existing function name
-        dishName: dishName,
-        dishOrigin: dishOrigin,
-        dishDescription: dishDescription,
-        dishIngredients: functions.convertToJSONArray(dishIngredients),
-        dishSteps: dishSteps,
-        dishCategory: dishCategory,
-        dishComplexity: dishComplexity,
-        dishPrepTime: dishPrepTime,
-        dishRating: dishRating,
-        dishChefRecommended: dishChefRecommended,
-        dishImage: null // Placeholder, will be updated if there is an image
-    };
 
-    if (dishImage) {
-        const base64Image = await convertImageToBase64(dishImage);
-        jsonData.dishImage = base64Image; // Include the image data
+
+
+// document.getElementById('addNewRecipe')?.addEventListener('click', () => {
+//     document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
+//         ? document.getElementById("toggleFormButton").innerText = "Cancel"
+//         : document.getElementById("toggleFormButton").innerText = "+ Add Recipe"
+//         addNewRecipe();   
+//     alert("add reipe button clicked")
+// });
+
+
+//if the below works remove the above-------------------88888888888************************
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     document.getElementById("addStepButton").addEventListener("click", addStepField);
+
+//     document.getElementById('addNewRecipe')?.addEventListener('click', () => {
+//         document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
+//             ? document.getElementById("toggleFormButton").innerText = "Cancel"
+//             : document.getElementById("toggleFormButton").innerText = "+ Add Recipe"
+//             addNewRecipe();   
+//         alert("add reipe button clicked")
+//     });
+
+//     function addStepField() {
+//         const stepsContainer = document.getElementById("stepsContainer");
+//         const stepNumber = stepsContainer.children.length + 1;
+
+//         const stepDiv = document.createElement("div");
+//         stepDiv.classList.add("step");
+//         stepDiv.innerHTML = `
+//             <h4>Step ${stepNumber}</h4>
+//             <input type="text" class="stepTitle" placeholder="Title" required>
+//             <textarea class="stepDescription" placeholder="Description" required></textarea>
+//         `;
+//         stepsContainer.appendChild(stepDiv);
+//     }
+
+//     async function addNewRecipe() {
+//         const dishName = document.getElementById("dishName").value;
+//         const dishOrigin = document.getElementById("dishOrigin").value;
+//         const dishDescription = document.getElementById("dishDescription").value;
+//         const dishIngredients = document.getElementById("dishIngredients").value;
+//         const dishCategory = document.getElementById("dishCategory").value;
+//         const dishComplexity = document.getElementById("dishComplexity").value;
+//         const dishPrepTime = document.getElementById("dishPrepTime").value;
+//         const dishRating = document.getElementById("dishRating").value;
+//         const dishChefRecommended = document.getElementById("dishChefRecommended").value;
+//         const dishImage = document.getElementById("dishImage").files[0];
+
+//         const stepsElements = document.querySelectorAll("#stepsContainer .step");
+//         const dishSteps = Array.from(stepsElements).map((stepElement, index) => ({
+//             step: index + 1,
+//             title: stepElement.querySelector(".stepTitle").value,
+//             description: stepElement.querySelector(".stepDescription").value,
+//         }));
+
+//         const jsonData = {
+//             function: 'addNewRecipe',
+//             dishName: dishName,
+//             dishOrigin: dishOrigin,
+//             dishDescription: dishDescription,
+//             dishIngredients: functions.convertToJSONArray(dishIngredients),
+//             dishSteps: JSON.stringify(dishSteps),
+//             dishCategory: dishCategory,
+//             dishComplexity: dishComplexity,
+//             dishPrepTime: dishPrepTime,
+//             dishRating: dishRating,
+//             dishChefRecommended: dishChefRecommended,
+//             dishImage: null
+//         };
+
+//         if (dishImage) {
+//             const base64Image = await convertImageToBase64(dishImage);
+//             jsonData.dishImage = base64Image;
+//         }
+
+//         await apiCalls.addNewRecipe(jsonData);
+//         addRecipeRows(); // Refresh the recipe list
+
+//         resetAddRecipeForm();
+//     }
+
+//     function resetAddRecipeForm() {
+//         document.getElementById("dishName").value = "";
+//         document.getElementById("dishOrigin").selectedIndex = 0;
+//         document.getElementById("dishDescription").value = "";
+//         document.getElementById("dishIngredients").value = "";
+//         document.getElementById("dishCategory").selectedIndex = 0;
+//         document.getElementById("dishComplexity").selectedIndex = 0;
+//         document.getElementById("dishPrepTime").value = "";
+//         document.getElementById("dishRating").selectedIndex = 0;
+//         document.getElementById("dishChefRecommended").selectedIndex = 0;
+//         document.getElementById("dishImage").value = "";
+
+//         // Clear steps
+//         const stepsContainer = document.getElementById("stepsContainer");
+//         while (stepsContainer.firstChild) {
+//             stepsContainer.removeChild(stepsContainer.firstChild);
+//         }
+//     }
+// });
+
+
+//if the below works remove the above-------------------88888888888************************
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("addStepButton").addEventListener("click", addStepField);
+
+    document.getElementById('addNewRecipe')?.addEventListener('click', () => {
+        document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
+            ? document.getElementById("toggleFormButton").innerText = "Cancel"
+            : document.getElementById("toggleFormButton").innerText = "+ Add Recipe";
+        addNewRecipe();   
+        alert("Add recipe button clicked");
+    });
+
+    function addStepField() {
+        const stepsContainer = document.getElementById("stepsContainer");
+        const stepNumber = stepsContainer.children.length + 1;
+
+        const stepDiv = document.createElement("div");
+        stepDiv.classList.add("step");
+        stepDiv.innerHTML = `
+            <h4>Step ${stepNumber}</h4>
+            <input type="text" class="stepTitle" placeholder="Title" required>
+            <textarea class="stepDescription" placeholder="Description" required></textarea>
+            <button type="button" class="removeStepButton">Remove</button>
+        `;
+        stepsContainer.appendChild(stepDiv);
+
+        // Add event listener for the remove button
+        stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
+            stepDiv.remove();
+            updateStepNumbers();
+        });
     }
 
-    await apiCalls.addNewRecipe(jsonData);
-    addRecipeRows(); // Refresh the recipe list
+    async function addNewRecipe() {
+        const dishName = document.getElementById("dishName").value;
+        const dishOrigin = document.getElementById("dishOrigin").value;
+        const dishDescription = document.getElementById("dishDescription").value;
+        const dishIngredients = document.getElementById("dishIngredients").value;
+        const dishCategory = document.getElementById("dishCategory").value;
+        const dishComplexity = document.getElementById("dishComplexity").value;
+        const dishPrepTime = document.getElementById("dishPrepTime").value;
+        const dishRating = document.getElementById("dishRating").value;
+        const dishChefRecommended = document.getElementById("dishChefRecommended").value;
+        const dishImage = document.getElementById("dishImage").files[0];
+
+        const stepsElements = document.querySelectorAll("#stepsContainer .step");
+        const dishSteps = Array.from(stepsElements).map((stepElement, index) => ({
+            step: index + 1,
+            title: stepElement.querySelector(".stepTitle").value,
+            description: stepElement.querySelector(".stepDescription").value,
+        }));
+
+        const jsonData = {
+            function: 'addNewRecipe',
+            dishName: dishName,
+            dishOrigin: dishOrigin,
+            dishDescription: dishDescription,
+            dishIngredients: functions.convertToJSONArray(dishIngredients),
+            dishSteps: JSON.stringify(dishSteps),
+            dishCategory: dishCategory,
+            dishComplexity: dishComplexity,
+            dishPrepTime: dishPrepTime,
+            dishRating: dishRating,
+            dishChefRecommended: dishChefRecommended,
+            dishImage: null
+        };
+
+        if (dishImage) {
+            const base64Image = await convertImageToBase64(dishImage);
+            jsonData.dishImage = base64Image;
+        }
+
+        await apiCalls.addNewRecipe(jsonData);
+        addRecipeRows(); // Refresh the recipe list
+
+        resetAddRecipeForm();
+    }
+
+    function resetAddRecipeForm() {
+        document.getElementById("dishName").value = "";
+        document.getElementById("dishOrigin").selectedIndex = 0;
+        document.getElementById("dishDescription").value = "";
+        document.getElementById("dishIngredients").value = "";
+        document.getElementById("dishCategory").selectedIndex = 0;
+        document.getElementById("dishComplexity").selectedIndex = 0;
+        document.getElementById("dishPrepTime").value = "";
+        document.getElementById("dishRating").selectedIndex = 0;
+        document.getElementById("dishChefRecommended").selectedIndex = 0;
+        document.getElementById("dishImage").value = "";
+
+        // Clear steps
+        const stepsContainer = document.getElementById("stepsContainer");
+        while (stepsContainer.firstChild) {
+            stepsContainer.removeChild(stepsContainer.firstChild);
+        }
+    }
+
+    function updateStepNumbers() {
+        const steps = document.querySelectorAll("#stepsContainer .step");
+        steps.forEach((step, index) => {
+            step.querySelector("h4").innerText = `Step ${index + 1}`;
+        });
+    }
+});
 
 
-    // Clear and hide the form after adding the recipe
-    resetAddRecipeForm();
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function convertImageToBase64(imageFile) {
     return new Promise((resolve, reject) => {

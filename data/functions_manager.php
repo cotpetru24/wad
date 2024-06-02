@@ -397,11 +397,11 @@ function addNewRecipe($conn, $data)
     // Prepare the SQL statement to insert the new recipe
     $sql = 'INSERT INTO recipes (
         dish_name, dish_origin_id, dish_recipe_description, dish_ingredients, 
-        dish_category_id, dish_complexity_id, dish_prep_time, dish_rating, dish_chef_recommended)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        dish_category_id, dish_complexity_id, dish_prep_time, dish_rating, dish_chef_recommended, dish_steps)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        'sissiiiii',
+        'sissiiiiis',
         $data['dishName'],
         $data['dishOrigin'],
         $data['dishDescription'],
@@ -410,7 +410,8 @@ function addNewRecipe($conn, $data)
         $data['dishComplexity'],
         $data['dishPrepTime'],
         $data['dishRating'],
-        $data['dishChefRecommended']
+        $data['dishChefRecommended'],
+        $data['dishSteps']
     );
 
     if ($stmt->execute()) {
