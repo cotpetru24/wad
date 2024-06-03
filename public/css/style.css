@@ -1119,3 +1119,7 @@ cursor: pointer;
 .step p {
   margin-bottom: 5px;
 }
+
+.expandedRecipeTd {
+  column-span: 8;
+}
