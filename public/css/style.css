@@ -599,6 +599,8 @@ td img {
 
 .addRecipe h2 {
   margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #9b59b6;
 }
 
 .button {
@@ -620,7 +622,7 @@ td img {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%); */
   visibility: hidden;
   transition: 200ms ease-in-out;
   color: #0c0723;
@@ -629,9 +631,77 @@ td img {
   z-index: 10;
   background-color: white;
   width: 80%;
+  max-height: 100%;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+
+#confirmActionPopup{
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* transition: none; */
+/* height: 40%; */
+  transform: translate(-50%, -50%); 
+  width: 40%;
+}
+
+#editRecipePopup {
+  /* position: fixed;
+  top: 50%;
+  left: 50%;*/
+  
+  /* width: 80%; */
+  max-height: 90%;
+  /* background-color: white; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  /* border-radius: 8px; */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* transition: none; */
+
+  transform: translate(-50%, -50%); 
+}
+
+/* 
+#editRecipePopupHeader h2 {
+  margin: 0;
+} */
+
+#closeEditPopup {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#editRecipeContent {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* .form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.steptIngredientsButton {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+} */
+
+
 
 .popup.active {
   visibility: visible;
@@ -678,6 +748,7 @@ td img {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  transform: translateZ(0); /* This helps to force GPU rendering */
 }
 
 .popup .form-group textarea {
@@ -891,17 +962,20 @@ ul {
 }
 
 .expanded-content h3 {
-  margin: 10px;
+  margin: 20px;
 }
 
 .expanded-content p {
-  margin: 10px;
-  padding-top: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  /* padding-top: 15px; */
   text-align: justify;
   /* Add some spacing between paragraphs for better readability */
 }
 
-
+.expanded-content ol {
+padding-left: 5%;
+}
 
 
 
@@ -1062,7 +1136,9 @@ ul {
   margin-left: 0;
 }
 
-.steptIngredientsButton {
+.steptIngredientsButton,
+.removeIngredientButton,
+.removeStepButton {
   background-color: #9b59b6;
   color: white;
   border: none;
@@ -1072,6 +1148,10 @@ ul {
   font-size: 14px;
   margin-bottom: 5px;
   margin-top: 5px;
+
+
+  backface-visibility: hidden;  /* Add this line */
+  -webkit-font-smoothing: antialiased;  /* Add this line */
 }
 
 .stepDescription {
@@ -1082,14 +1162,23 @@ ul {
   border-radius: 4px;
 }
 
-.ingredientDescription {
+.ingredientDescription,
+.inputclass {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.steptIngredientsButton:hover {
+
+.inputclass {
+
+  height: 6em;
+}
+
+.steptIngredientsButton:hover,
+.removeIngredientButton:hover,
+.removeStepButton:hover {
 background: #0c0723;
 color: #9b59b6;
 /* border: 1px solid #9b59b6; */
@@ -1097,7 +1186,7 @@ border-radius: 7px;
 cursor: pointer;
 }
 
-#file-upload-button {
+/* #file-upload-button {
   background-color: #9b59b6;
   color: white;
   border: none;
@@ -1105,7 +1194,7 @@ cursor: pointer;
   cursor: pointer;
   border-radius: 4px;
   font-size: 14px;
-}
+} */
 
 .step {
   margin-top: 5px;

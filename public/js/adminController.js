@@ -341,7 +341,7 @@ async function updateRecipe() {
 function updateEditStepNumbers() {
     const steps = document.querySelectorAll("#editStepsContainer .step");
     steps.forEach((step, index) => {
-        step.querySelector("h4").innerText = `Step ${index + 1}`;
+        step.querySelector("p").innerText = `Step ${index + 1}`;
     });
 }
 
@@ -707,7 +707,6 @@ async function filterRecipes() {
 }
 document.getElementById('adminRecipesFilter')?.addEventListener('click', () => {
     filterRecipes();
-    alert("filtering recipes")
 });
 
 //Removing filters
@@ -719,7 +718,6 @@ document.getElementById('adminRecipesClearFilters')?.addEventListener('click', f
             select.value = '';
         });
     addRecipeRows();
-    alert("removing filters")
 });
 
 
@@ -818,7 +816,6 @@ async function filterMessages() {
 }
 document.getElementById('adminMessagesFilter')?.addEventListener('click', () => {
     filterMessages();
-    // alert("filtering messages")
 });
 
 
@@ -921,7 +918,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const stepDiv = document.createElement("div");
         stepDiv.classList.add("step");
         stepDiv.innerHTML = `
-            <h4>Step ${stepNumber}</h4>
+            <p>Step ${stepNumber}</p>
             <input type="text" class="stepTitle" placeholder="Title" required>
             <textarea class="stepDescription" placeholder="Description" required></textarea>
             <button type="button" class="removeStepButton">Remove</button>
@@ -939,7 +936,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateStepNumbers() {
         const steps = document.querySelectorAll("#stepsContainer .step");
         steps.forEach((step, index) => {
-            step.querySelector("h4").innerText = `Step ${index + 1}`;
+            step.querySelector("p").innerText = `Step ${index + 1}`;
         });
     }
 
@@ -947,7 +944,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateEditStepNumbers() {
         const steps = document.querySelectorAll("#editStepsContainer .step");
         steps.forEach((step, index) => {
-            step.querySelector("h4").innerText = `Step ${index + 1}`;
+            step.querySelector("p").innerText = `Step ${index + 1}`;
         });
     }
 });
@@ -1007,7 +1004,7 @@ function editRecipe(recipe) {
         const stepDiv = document.createElement('div');
         stepDiv.classList.add('step');
         stepDiv.innerHTML = `
-            <h4>Step ${index + 1}</h4>
+            <p>Step ${index + 1}</p>
             <input type="text" class="stepTitle" placeholder="Title" required value="${step.title}">
             <textarea class="stepDescription" placeholder="Description" required>${step.description}</textarea>
             <button type="button" class="removeStepButton">Remove</button>

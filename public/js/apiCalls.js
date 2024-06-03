@@ -84,7 +84,6 @@ export async function addNewRecipe(jsonData) {
 
         const responseData = await response.json();
         console.log(`recipe added successfully:`, responseData)
-        alert('recipe added successfully');
         // getRecipes();
     }
     catch (error) {
@@ -216,7 +215,6 @@ export async function editRecipe(jsonData) {
         }
         const responseData = await response.json();
         console.log(`changes saved successfully`, responseData);
-        alert(`changes saved successfully`);
     }
 
     catch (error) {

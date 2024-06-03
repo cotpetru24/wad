@@ -104,7 +104,11 @@
                         </div>
                         <div class="form-group">
                             <label for="dishDescription">Dish Description:</label>
-                            <input type="text" id="dishDescription" placeholder="Dish description here" required>
+
+                            <textarea class="inputclass" id="dishDescription" placeholder="Dish description here" required></textarea>
+
+
+                            <!-- <input type="text" id="dishDescription" placeholder="Dish description here" required> -->
                         </div>
                         <!-- Steps Section -->
                         <div class="form-group">
@@ -113,6 +117,25 @@
                             <button type="button" class="steptIngredientsButton" id="addIngredientButton">+ Add
                                 Ingredient</button>
                         </div>
+
+
+
+
+
+
+                        <!-- Steps Section -->
+                        <div class="form-group">
+                            <label>Steps:</label>
+                            <div id="stepsContainer"></div>
+                            <button class="steptIngredientsButton" type="button" id="addStepButton">+ Add Step</button>
+                        </div>
+
+
+
+
+
+
+
 
 
 
@@ -137,7 +160,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="dishPrepTime">Dish Prep Time:</label>
+                            <label for="dishPrepTime">Dish Prep Time (min):</label>
                             <input type="number" id="dishPrepTime" placeholder="Prep time here" required>
                         </div>
                         <div class="form-group">
@@ -153,7 +176,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="dishChefRecommended">Chef Recommended ...</label>
+                            <label for="dishChefRecommended">Chef Recommended:</label>
                             <select id="dishChefRecommended">
                                 <option value="" disabled selected>Select an option</option>
                                 <option value="0">Don't Know</option>
@@ -166,12 +189,7 @@
                             <input type="file" id="dishImage">
                         </div>
 
-                        <!-- Steps Section -->
-                        <div class="form-group">
-                            <label>Steps:</label>
-                            <div id="stepsContainer"></div>
-                            <button class="steptIngredientsButton" type="button" id="addStepButton">+ Add Step</button>
-                        </div>
+
 
                         <button class="button" id="addNewRecipe">+ Save Recipe</button>
                     </div>
@@ -322,10 +340,16 @@
             </div>
             <div class="form-group">
                 <label for="editDishDescription">Dish Description:</label>
-                <input type="text" id="editDishDescription" placeholder="Dish description here">
+
+                <textarea class="inputclass" id="editDishDescription" placeholder="Dish description here" required></textarea>
+
+
+
+
+                <!-- <input type="text" id="editDishDescription" placeholder="Dish description here"> -->
             </div>
             <div class="form-group">
-                <label for="editIngredientsContainer">Ingredients:</label>
+                <label for="editIngredientsContainer">Dish Ingredients:</label>
                 <div id="editIngredientsContainer"></div>
                 <button type="button" class="steptIngredientsButton" id="addEditIngredientButton">+ Add
                     Ingredient</button>
@@ -353,7 +377,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="editDishPrepTime">Dish Prep Time:</label>
+                <label for="editDishPrepTime">Dish Prep Time (min):</label>
                 <input type="number" id="editDishPrepTime" placeholder="Prep time here">
             </div>
             <div class="form-group">
@@ -369,7 +393,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="editChefRecommended">Chef Recommended</label>
+                <label for="editChefRecommended">Chef Recommended:</label>
                 <select id="editChefRecommended">
                     <option value="" disabled selected>Select an option</option>
                     <option value="0">Don't Know</option>
