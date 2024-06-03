@@ -245,80 +245,92 @@ sendMsgBtn.addEventListener("click", (event) => {
     // if (!emailValidation.test(email)) {
     //     alert("Please enter a valid email address.");
     //     return;
-    // }
+    });
 
-    const jsonData = {
-        name: name,
-        email: email,
-        message: message
+//     const jsonData = {
+//         name: name,
+//         email: email,
+//         message: message
+//     };
+
+//     apiCalls.sendMessage(jsonData);
+
+//     document.getElementById('name').value = '';
+//     document.getElementById('email').value = '';
+//     document.getElementById('message').value = '';
+//     toggleContactForm(false);
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const sentMsgBtn = document.getElementById("sentMsgBtn");
+    const customAlertModal = document.getElementById("customAlert");
+    const closeButton = document.querySelector(".close-button");
+    const modalMessage = document.getElementById("modalMessage");
+
+    const showModal = (message) => {
+        modalMessage.textContent = message;
+        customAlertModal.style.display = "block";
     };
 
-    apiCalls.sendMessage(jsonData);
+    const closeModal = () => {
+        customAlertModal.style.display = "none";
+    };
 
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('message').value = '';
-    toggleContactForm(false);
+    closeButton.addEventListener("click", closeModal);
+
+    sentMsgBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const nameFieldValue = document.getElementById("name").value;
+        const emailFieldValue = document.getElementById("email").value;
+        const messageFieldValue = document.getElementById("message").value;
+
+        // Checking if all fields are filled in
+        if (!nameFieldValue || !emailFieldValue || !messageFieldValue) {
+            showModal("Please fill in the required fields.");
+            return;
+        }
+
+        // Validate email field
+        const emailValidationPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailValidationPattern.test(emailFieldValue)) {
+            showModal("Please enter a valid email address.");
+            return;
+        }
+
+        const jsonData = {
+            name: nameFieldValue,
+            email: emailFieldValue,
+            message: messageFieldValue
+        };
+
+        apiCalls.sendMessage(jsonData);
+
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
+        toggleContactForm(false);
+    });
+
+    window.onclick = function(event) {
+        if (event.target == customAlertModal) {
+            customAlertModal.style.display = "none";
+        }
+    };
 });
-
-
-// document.addEventListener('DOMContentLoaded', (event) => {
-//     const sentMsgBtn = document.getElementById("sentMsgBtn");
-//     const customAlertModal = document.getElementById("customAlert");
-//     const closeButton = document.querySelector(".close-button");
-//     const modalMessage = document.getElementById("modalMessage");
-
-//     const showModal = (message) => {
-//         modalMessage.textContent = message;
-//         customAlertModal.style.display = "block";
-//     };
-
-//     const closeModal = () => {
-//         customAlertModal.style.display = "none";
-//     };
-
-//     closeButton.addEventListener("click", closeModal);
-
-//     sentMsgBtn.addEventListener("click", (event) => {
-//         event.preventDefault();
-
-//         const nameFieldValue = document.getElementById("name").value;
-//         const emailFieldValue = document.getElementById("email").value;
-//         const messageFieldValue = document.getElementById("message").value;
-
-//         // Checking if all fields are filled in
-//         if (!nameFieldValue || !emailFieldValue || !messageFieldValue) {
-//             showModal("Please fill in the required fields.");
-//             return;
-//         }
-
-//         // Validate email field
-//         const emailValidationPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//         if (!emailValidationPattern.test(emailFieldValue)) {
-//             showModal("Please enter a valid email address.");
-//             return;
-//         }
-
-//         const jsonData = {
-//             name: nameFieldValue,
-//             email: emailFieldValue,
-//             message: messageFieldValue
-//         };
-
-//         apiCalls.sendMessage(jsonData);
-
-//         document.getElementById('name').value = '';
-//         document.getElementById('email').value = '';
-//         document.getElementById('message').value = '';
-//         toggleContactForm(false);
-//     });
-
-//     window.onclick = function(event) {
-//         if (event.target == customAlertModal) {
-//             customAlertModal.style.display = "none";
-//         }
-//     };
-// });
 
 
 

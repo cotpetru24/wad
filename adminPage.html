@@ -25,12 +25,6 @@
                     <button>Log Out</button>
                     <button onclick="location.href='/adminPage.html'">Admin Page</button>
                 </div>
-                <!-- <div id="searchDiv">
-                    <form id="searchForm" action="/search" method="GET">
-                         <input type="search" name="query" id="search-box" placeholder="Search...">
-                        <button id="searchButton" type="submit"></button>
-                    </form>
-                </div> -->
             </nav>
         </header>
         <main>
@@ -90,14 +84,14 @@
                         </div>
                     </div>
                     <button class="button" id="toggleFormButton">+ Add Recipe</button>
-                    <!-- <div class="addRecipe" id="addRecipeForm" style="display: none;">
+                    <div class="addRecipe" id="addRecipeForm" style="display: none;">
                         <h2>Add New Recipe</h2>
                         <div class="form-group">
                             <label for="dishName">Dish Name:</label>
                             <input type="text" id="dishName" placeholder="Dish name here" required>
                         </div>
                         <div class="form-group">
-                            <label for="dishOrigin">Origin</label>
+                            <label for="dishOrigin">Origin:</label>
                             <select id="dishOrigin" required>
                                 <option value="" disabled selected>Select Origin</option>
                                 <option value="1">India</option>
@@ -112,16 +106,19 @@
                             <label for="dishDescription">Dish Description:</label>
                             <input type="text" id="dishDescription" placeholder="Dish description here" required>
                         </div>
+                        <!-- Steps Section -->
                         <div class="form-group">
-                            <label for="dishIngredients">Dish Ingredients: (separate the ingredients using "," (comma))</label>
-                            <input type="text" id="dishIngredients" placeholder="Dish ingredients here">
+                            <label>Dish Ingredients:</label>
+                            <div id="ingredientsContainer"></div>
+                            <button type="button" class="steptIngredientsButton" id="addIngredientButton">+ Add
+                                Ingredient</button>
                         </div>
+
+
+
+
                         <div class="form-group">
-                            <label for="dishSteps">Steps</label>
-                            <input type="text" id="dishSteps" placeholder="Dish steps here" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="dishCategory">Dish Category</label>
+                            <label for="dishCategory">Dish Category:</label>
                             <select id="dishCategory" required>
                                 <option value="" disabled selected>Select Category</option>
                                 <option value="1">non-vegetarian</option>
@@ -148,7 +145,6 @@
                             <select id="dishRating">
                                 <option value="" disabled selected>Select Rating</option>
                                 <option value="0">No rating yet</option>
-                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -169,126 +165,16 @@
                             <label for="dishImage">Dish Image:</label>
                             <input type="file" id="dishImage">
                         </div>
+
+                        <!-- Steps Section -->
+                        <div class="form-group">
+                            <label>Steps:</label>
+                            <div id="stepsContainer"></div>
+                            <button class="steptIngredientsButton" type="button" id="addStepButton">+ Add Step</button>
+                        </div>
+
                         <button class="button" id="addNewRecipe">+ Save Recipe</button>
-                    </div> -->
-
-
-<!--if the below works, remove the above-->
-<div class="addRecipe" id="addRecipeForm" style="display: none;">
-    <h2>Add New Recipe</h2>
-    <div class="form-group">
-        <label for="dishName">Dish Name:</label>
-        <input type="text" id="dishName" placeholder="Dish name here" required>
-    </div>
-    <div class="form-group">
-        <label for="dishOrigin">Origin:</label>
-        <select id="dishOrigin" required>
-            <option value="" disabled selected>Select Origin</option>
-            <option value="1">India</option>
-            <option value="2">China</option>
-            <option value="3">Italy</option>
-            <option value="4">France</option>
-            <option value="5">Russia</option>
-            <option value="6">Moldova</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="dishDescription">Dish Description:</label>
-        <input type="text" id="dishDescription" placeholder="Dish description here" required>
-    </div>
-    <!-- <div class="form-group">
-        <label for="dishIngredients">Dish Ingredients: (separate the ingredients using "," (comma))</label>
-        <input type="text" id="dishIngredients" placeholder="Dish ingredients here">
-    </div> -->
-
-    <!-- Steps Section -->
-    <div class="form-group">
-        <label>Dish Ingredients:</label>
-        <div id="ingredientsContainer"></div>
-        <button type="button" class = "steptIngredientsButton" id="addIngredientButton">+ Add Ingredient</button>
-    </div>
-
-
-
-
-    <div class="form-group">
-        <label for="dishCategory">Dish Category:</label>
-        <select id="dishCategory" required>
-            <option value="" disabled selected>Select Category</option>
-            <option value="1">non-vegetarian</option>
-            <option value="2">vegetarian</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="dishComplexity">Dish Complexity:</label>
-        <select id="dishComplexity" required>
-            <option value="" disabled selected>Select Complexity</option>
-            <option value="1">Very Easy</option>
-            <option value="2">Easy</option>
-            <option value="3">Medium</option>
-            <option value="4">Hard</option>
-            <option value="5">Very Hard</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="dishPrepTime">Dish Prep Time:</label>
-        <input type="number" id="dishPrepTime" placeholder="Prep time here" required>
-    </div>
-    <div class="form-group">
-        <label for="dishRating">Dish Rating:</label>
-        <select id="dishRating">
-            <option value="" disabled selected>Select Rating</option>
-            <option value="0">No rating yet</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="dishChefRecommended">Chef Recommended ...</label>
-        <select id="dishChefRecommended">
-            <option value="" disabled selected>Select an option</option>
-            <option value="0">Don't Know</option>
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="dishImage">Dish Image:</label>
-        <input type="file" id="dishImage">
-    </div>
-    
-    <!-- Steps Section -->
-    <div class="form-group">
-        <label>Steps:</label>
-        <div id="stepsContainer"></div>
-        <button class="steptIngredientsButton" type="button" id="addStepButton">+ Add Step</button>
-    </div>
-
-    <button class="button" id="addNewRecipe">+ Save Recipe</button>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -412,83 +298,6 @@
             <!-- Preview content goes here -->
         </div>
     </div>
-    <!-- <div class="popup" id="editRecipePopup">
-        <div class="popupHeader">
-            <h2>Edit Recipe</h2>
-            <button class="closeButton" id="closeEditPopup">&times;</button>
-        </div>
-        <div id="editRecipeContent">
-             Edit form goes here
-            <input type="hidden" id="editRecipeId">
-            <div class="form-group">
-                <label for="editDishName">Dish Name:</label>
-                <input type="text" id="editDishName" placeholder="Dish name here">
-            </div>
-            <div class="form-group">
-                <label for="editDishOrigin">Origin:</label>
-                <select id="editDishOrigin">
-                    <option value="1">India</option>
-                    <option value="2">China</option>
-                    <option value="3">Italy</option>
-                    <option value="4">France</option>
-                    <option value="5">Russia</option>
-                    <option value="6">Moldova</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="editDishDescription">Dish Description:</label>
-                <input type="text" id="editDishDescription" placeholder="Dish description here">
-            </div>
-            <div class="form-group">
-                <label for="editDishIngredients">Dish Ingredients:</label>
-                <input type="text" id="editDishIngredients" placeholder="Dish ingredients here">
-            </div>
-            <div class="form-group">
-                <label for="editDishSteps">Steps:</label>
-                <input type="text" id="editDishSteps" placeholder="Dish steps here">
-            </div>
-            <div class="form-group">
-                <label for="editDishCategory">Dish Category:</label>
-                <select id="editDishCategory">
-                    <option value="1">non-vegetarian</option>
-                    <option value="2">vegetarian</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="editDishComplexity">Dish Complexity:</label>
-                <select id="editDishComplexity">
-                    <option value="1">Very Easy</option>
-                    <option value="2">Easy</option>
-                    <option value="3">Medium</option>
-                    <option value="4">Hard</option>
-                    <option value="5">Very Hard</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="editDishPrepTime">Dish Prep Time:</label>
-                <input type="number" id="editDishPrepTime" placeholder="Prep time here">
-            </div>
-            <div class="form-group">
-                <label for="editDishRating">Dish Rating:</label>
-                <select id="editDishRating">
-                    <option value="0">No rating yet</option>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="editDishImage">Dish Image:</label>
-                <input type="file" id="editDishImage">
-            </div>
-            <button class="button" id="saveEditButton">Save Changes</button>
-        </div>
-    </div> -->
-
-<!--to delete the above if the below works-->
     <div class="popup" id="editRecipePopup">
         <div class="popupHeader">
             <h2>Edit Recipe</h2>
@@ -518,12 +327,13 @@
             <div class="form-group">
                 <label for="editIngredientsContainer">Ingredients:</label>
                 <div id="editIngredientsContainer"></div>
-                <button type="button" id="addEditIngredientButton">+ Add Ingredient</button>
+                <button type="button" class="steptIngredientsButton" id="addEditIngredientButton">+ Add
+                    Ingredient</button>
             </div>
             <div class="form-group">
                 <label for="editStepsContainer">Steps:</label>
                 <div id="editStepsContainer"></div>
-                <button type="button" id="addEditStepButton">+ Add Step</button>
+                <button type="button" class="steptIngredientsButton" id="addEditStepButton">+ Add Step</button>
             </div>
             <div class="form-group">
                 <label for="editDishCategory">Dish Category:</label>
@@ -574,7 +384,7 @@
             <button class="button" id="saveEditButton">Save Changes</button>
         </div>
     </div>
-    
+
 
 
 

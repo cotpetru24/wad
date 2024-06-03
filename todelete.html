@@ -1,5 +1,35 @@
 <osldsc:LdsForm xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:Controls="clr-namespace:OlsonSoftware.Windows.Controls;assembly=LegacyDocsControls" xmlns:osldsc="clr-namespace:OlsonSoftware.LegacyDocumentSystem.Controls;assembly=LegacyDocsControls" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib">
+  <!--
+		*Changed Trust Name ComboBox to TextBox and changed dropdown to the Shared CustomList -     TrustNamesList
+		
+		*Dhruv 24/11/17
+	-->
+  <osldsc:LdsForm.Resources>
+    <Style x:Key="NumberComboStyle" TargetType="osldsc:LdsComboBox">
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="ItemsPanel">
+        <Setter.Value>
+          <ItemsPanelTemplate>
+            <Controls:SharedWrapPanel Width="250" />
+          </ItemsPanelTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="ItemTemplate">
+        <Setter.Value>
+          <DataTemplate>
+            <osldsc:LdsTextBlock Width="20" TextAlignment="Center" Text="{Binding}" />
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </osldsc:LdsForm.Resources>
   <Grid Controls:GridWithPadding.InternalMargin="5">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="320" />
+      <ColumnDefinition Width="120" />
+      <ColumnDefinition Width="100" />
+      <ColumnDefinition Width="130" />
+    </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
@@ -10,103 +40,135 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="300" />
-      <ColumnDefinition Width="160" />
-      <ColumnDefinition Width="80" />
-      <ColumnDefinition Width="160" />
-    </Grid.ColumnDefinitions>
-    <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Text="{Binding Fields.2f11a535-4fa9-4ce0-888d-abb4893c29c0\\Testator, Converter={StaticResource StringFormatConverter}, ConverterParameter=Is \{0\} a Trustee?}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_4245kasdasdasgdg4a2e7d99b}" />
-    <osldsc:LdsComboBox SelectedValue="{Binding Path=Fields.LOAN_TTT_SettlorTrusteeBorrow}" Grid.Column="1" Grid.Row="0" Name="NAME_4245kasdasdasgdg4a2e7d99b">
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Trust Details" FontWeight="SemiBold" Grid.ColumnSpan="1" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_1asfdasdfcbb1dasdf00a4996e7}" />
+    <osldsc:LdsTextBlock Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" Text="Is this a Countrywide Trust?" />
+    <osldsc:LdsComboBox Name="NAME_424546asdfdsfastfgjggf" SelectedValue="{Binding Fields.LOAN_TTT_IsCTTCTrust}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" osldsc:FieldExtensions.BindToField="{Binding Fields.LOAN_TTT_IsCTTCTrust}">
       <s:String>Yes</s:String>
       <s:String>No</s:String>
     </osldsc:LdsComboBox>
-    <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="{Binding Fields.2f11a535-4fa9-4ce0-888d-abb4893c29c0\\Spouse\, partner or fiancee, Converter={StaticResource StringFormatConverter}, ConverterParameter=Is \{0\} a Trustee?}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_bdrye4vytystbuqe5yb5srbs}" />
-    <osldsc:LdsComboBox SelectedValue="{Binding Path=Fields.LOAN_TTT_SpouseTrusteeBorrow}" Grid.Column="1" Grid.Row="1" Name="NAME_bdrye4vytystbuqe5yb5srbs">
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Who settled the trust?" Grid.Row="2" Grid.Column="0" />
+    <osldsc:LdsTextBox Text="{Binding Fields.LOAN_TTT_TrustSettlor}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" />
+    <Grid Controls:GridWithPadding.InternalMargin="5" Grid.Row="3" Grid.ColumnSpan="5" osldsc:FieldExtensions.BindToField="{Binding Fields.CONTROL_ab8bb1b4f99c403c8a38d3f6b0fa9122}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_521e054c79e44a37bf999b8443c256b8}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="140" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <TextBlock VerticalAlignment="Center" Text="Name" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_153e2e7ea9534d818a25fcef960fd0cf}" />
+      <Grid Grid.Row="0" Grid.Column="1" Controls:GridWithPadding.InternalMargin="5" Grid.ColumnSpan="3">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <osldsc:LdsComboBox ItemsSource="{Binding Titles}" SelectedValue="{Binding Fields.LOAN_TTT_Settlor_Title}" Grid.Column="0" Grid.Row="0" osldsc:FieldExtensions.FieldType="Title" />
+        <osldsc:LdsAutoCompleteBox FirstName="{Binding Fields.LOAN_TTT_Settlor_First_Name}" LastName="{Binding Fields.LOAN_TTT_Settlor_Last_Name}" Title="{Binding Fields.LOAN_TTT_Settlor_Title}" ItemsSource="{Binding RecentNames}" Text="{Binding Fields.LOAN_TTT_Settlor_First_Name}" Address="{Binding Fields.LOAN_TTT_SettlorAddress_1}" Address2="{Binding Fields.LOAN_TTT_SettlorAddress_2}" Address3="{Binding Fields.LOAN_TTT_SettlorAddress_3}" Postcode="{Binding Fields.LOAN_TTT_SettlorAddress_Postcode}" Email="{Binding Fields.LOAN_TTT_SettlorEmail}" MobilePhone="{Binding Fields.LOAN_TTT_SettlorMobile}" Grid.Column="1" Grid.Row="0" osldsc:FieldExtensions.FieldType="FirstName" />
+        <osldsc:LdsAutoCompleteBox FirstName="{Binding Fields.LOAN_TTT_Settlor_First_Name}" LastName="{Binding Fields.LOAN_TTT_Settlor_Last_Name}" Title="{Binding Fields.LOAN_TTT_Settlor_Title}" ItemsSource="{Binding RecentNames}" Text="{Binding Fields.LOAN_TTT_Settlor_Last_Name}" Address="{Binding Fields.LOAN_TTT_SettlorAddress_1}" Address2="{Binding Fields.LOAN_TTT_SettlorAddress_2}" Address3="{Binding Fields.LOAN_TTT_SettlorAddress_3}" Postcode="{Binding Fields.LOAN_TTT_SettlorAddress_Postcode}" Email="{Binding Fields.LOAN_TTT_SettlorEmail}" MobilePhone="{Binding Fields.LOAN_TTT_SettlorMobile}" Grid.Column="2" Grid.Row="0" osldsc:FieldExtensions.FieldType="LastName" />
+      </Grid>
+      <TextBlock Text="Address Line 1" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+      <osldsc:LdsAddressControl Address="{Binding Fields.LOAN_TTT_SettlorAddress_1}" Address2="{Binding Fields.LOAN_TTT_SettlorAddress_2}" Address3="{Binding Fields.LOAN_TTT_SettlorAddress_3}" Postcode="{Binding Fields.LOAN_TTT_SettlorAddress_Postcode}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" />
+      <TextBlock Text="Town/City" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" />
+      <osldsc:LdsTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Fields.LOAN_TTT_SettlorAddress_2}" osldsc:FieldExtensions.FieldType="Address2" />
+      <TextBlock Text="County" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" />
+      <osldsc:LdsTextBox Grid.Row="3" Grid.Column="1" Text="{Binding Fields.LOAN_TTT_SettlorAddress_3}" osldsc:FieldExtensions.FieldType="Address3" />
+      <TextBlock Text="Postcode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="3" />
+      <osldsc:LdsPostcodeControl Grid.Row="3" Grid.Column="3" Address="{Binding Fields.LOAN_TTT_SettlorAddress_1}" Address2="{Binding Fields.LOAN_TTT_SettlorAddress_2}" Address3="{Binding Fields.LOAN_TTT_SettlorAddress_3}" Text="{Binding Fields.LOAN_TTT_SettlorAddress_Postcode}" />
+      <!-- NEW MOBILE EMAIL FIELD FOR LOAN SETTLOR -->
+      <osldsc:LdsTextBlock Grid.Row="4" Grid.Column="0" Text="Email" VerticalAlignment="Center" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_s251905nnefuiwm34r4k18a27}" />
+      <osldsc:LdsTextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="1" Text="{Binding Fields.LOAN_TTT_SettlorEmail}" Name="NAME_s251905nnefuiwm34r4k18a27" />
+      <osldsc:LdsTextBlock Grid.Row="4" Grid.Column="2" Text="Mobile" VerticalAlignment="Center" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_s384nc3isfski93b27}" />
+      <osldsc:LdsTextBox Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="1" Text="{Binding Fields.LOAN_TTT_SettlorMobile}" Name="NAME_s384nc3isfski93b27" />
+      <!-- NEW MOBILE EMAIL FIELD FOR LOAN SETTLOR END -->
+    </Grid>
+    <osldsc:LdsTextBlock Text="Settlor's Gender" Grid.Row="4" Grid.Column="0" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_f950b7ed22634e0187ffa316d329c377}" />
+    <osldsc:LdsComboBox SelectedValue="{Binding Fields.LOAN_TTT_gender}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="1" Name="NAME_f950b7ed22634e0187ffa316d329c377">
+      <s:String>Male</s:String>
+      <s:String>Female</s:String>
+    </osldsc:LdsComboBox>
+    <osldsc:LdsTextBlock Grid.ColumnSpan="2" Text="Is the settlor of the trust alive?" Grid.Row="5" Grid.Column="0" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_63a435107ce045a8a4f0c594c78b1f3b}" />
+    <osldsc:LdsTextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="1" Name="NAME_63a435107ce045a8a4f0c594c78b1f3b" Text="{Binding Fields.LOAN_TTT_SettlorAlive}"></osldsc:LdsTextBox>
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="What date did the settlor die?" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_r5bdr5gy5rbua4996e7}" />
+    <osldsc:LdsTextBox Text="{Binding Path=Fields.LOAN_TTT_OtherSettlorDeadDate, Mode=TwoWay}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Name="NAME_r5bdr5gy5rbua4996e7" />
+    <osldsc:LdsTextBlock Text="Whose name appears on the trust deed?" TextWrapping="Wrap" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="7" LabelForElement="{Binding ElementName=Name_opsdflksd1}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=Name_opsdflksd1}" />
+    <osldsc:LdsTextBox Text="{Binding Fields.LOAN_TTT_LoanDoc_TrustOwner}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" osldsc:FieldExtensions.BindToField="{Binding Fields.LOAN_TTT_LoanDoc_TrustOwner}" Name="Name_opsdflksd1" />
+    <osldsc:LdsTextBlock Text="Name on trust deed" Grid.Column="0" Grid.Row="8" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_884bda4763094842ae1f506ca1e25f44}" />
+    <osldsc:LdsTextBox Text="{Binding Fields.LOAN_TTT_SettlorOther}" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="8" Name="NAME_884bda4763094842ae1f506ca1e25f44" />
+    <osldsc:LdsTextBlock Text="Trust type:" TextWrapping="Wrap" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="9" LabelForElement="{Binding ElementName=Name_opsdflksd0}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=Name_opsdflksd0}" />
+    <osldsc:LdsTextBox Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="3" osldsc:FieldExtensions.BindToField="{Binding Fields.LOAN_TTT_Trust_TrustName}" Name="Name_opsdflksd0" Text="{Binding Fields.LOAN_TTT_Trust_TrustName}" />
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Please state the trust type:" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="10" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_asdfasdf1s4ed5s3df00a4996e7}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_asdfasdy8mir6heee5500a4996e7}" />
+    <osldsc:LdsTextBox Text="{Binding Fields.LOAN_TTT_Full_Name}" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="10" Name="NAME_asdfasdy8mir6heee5500a4996e7" />
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Does this Trust have a number?" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="11" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_424546asdfdsfasdasdc4a2e7d99b}" />
+    <osldsc:LdsComboBox SelectedValue="{Binding Fields.LOAN_TTT_DoesTrustHaveNumber}" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="11" Name="NAME_424546asdfdsfasdasdc4a2e7d99b">
       <s:String>Yes</s:String>
       <s:String>No</s:String>
     </osldsc:LdsComboBox>
-    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Are Countrywide acting as Trustee?" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_4245khkjhasdffas9876554641265106510gdg4a2e7d99b}" />
-    <osldsc:LdsComboBox SelectedValue="{Binding Path=Fields.LOAN_TTT_CWTrusteeBorrow}" Grid.Column="1" Grid.Row="2" Name="NAME_4245khkjhasdffas9876554641265106510gdg4a2e7d99b">
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Trust Number" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="12" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_asdfasdf1dasdf00a4996e7}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_asdfasdfdbeee5500a4996e7}" />
+    <osldsc:LdsComboBox ItemsSource="{Binding ProductCounts}" Style="{StaticResource NumberComboStyle}" SelectedValue="{Binding Fields.LOAN_TTT_Trust_Giving_LOAN_TTT_Number}" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="12" Name="NAME_asdfasdfdbeee5500a4996e7" />
+    <osldsc:LdsTextBlock Prefix="Trust name:" TextWrapping="Wrap" Foreground="#0073e5" FontWeight="SemiBold" FontStyle="Italic" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="13" VerticalAlignment="Center" Text="{Binding Fields.LOAN_TTT_Total_Full_Trust_Name}" />
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Is the above trust name correct?" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="14" VerticalAlignment="Center" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_fdffadc3b5094610839a177440484576}" />
+    <osldsc:LdsTextBox Text="{Binding Fields.LOAN_TTT_Trustnamecorrect}" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="14" Name="NAME_fdffadc3b5094610839a177440484576" />
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Please state the Trust Name in full:" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="15" VerticalAlignment="Center" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_0e526b6209404d90b2ba938cf01e2151}" />
+    <osldsc:LdsTextBox Text="{Binding Fields.LOAN_TTT_Trust_Name}" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="15" Name="NAME_0e526b6209404d90b2ba938cf01e2151" />
+    <osldsc:LdsTextBlock Prefix="Trust name:" TextWrapping="Wrap" Foreground="#0073e5" FontWeight="SemiBold" FontStyle="Italic" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="16" VerticalAlignment="Center" Text="{Binding Fields.LOAN_TTT_Trust_Name}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_0e526b6209404d90b2ba938cf01e2151}" />
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Do you know the date of the trust?" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="18" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_424546asdfdsasdassdc4a2e7d99b}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_424546asdfdsasdasdaa2e7d99b}" />
+    <osldsc:LdsComboBox SelectedValue="{Binding Fields.LOAN_TTT_DoYouKnowTrustDate}" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="18" Name="NAME_4124546asdfdsasdasdaa2e7d99b">
       <s:String>Yes</s:String>
       <s:String>No</s:String>
     </osldsc:LdsComboBox>
-    <osldsc:LdsExpandingListControl Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Margin="0,5,0,5" BaseFieldName="LoanDocTrusteeSame" MinItemsInExpandingList="1" AddButtonText=" Select Trustee of both Trusts" ShowDeleteButton="True" osldsc:FieldExtensions.BindToField="{Binding Fields.CONTROL_55bb9a014535417a90f8d0e7aaf15965}">
-      <osldsc:LdsExpandingListControl.ExpandingDataTemplate>
-        <DataTemplate>
-          <Grid Controls:GridWithPadding.InternalMargin="5" Margin="0,0,0,10">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <TextBlock Text="Please select:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="15" />
-            <osldsc:LdsTextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Fields.LoanDocTrusteeSame}" osldsc:FieldExtensions.FieldType="Address" />
-          </Grid>
-        </DataTemplate>
-      </osldsc:LdsExpandingListControl.ExpandingDataTemplate>
-    </osldsc:LdsExpandingListControl>
-    <osldsc:LdsTextBlock TextWrapping="Wrap" HorizontalAlignment="center" FontWeight="SemiBold" Text="If there are further Trustees of the Trust involved, you will need to individually add these below.                " Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="4" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_4245khkjhasdffas9876554641265106510gdg4a2e7d99b}" />
-    <osldsc:LdsExpandingListControl Grid.ColumnSpan="4" Margin="0,5,0,5" BaseFieldName="LOAN_TTT_Trustee_FirstNameBorrow" AddButtonText="Add Trustee" MinItemsInExpandingList="0" ShowBottomBorder="true" ShowDeleteButton="true" Grid.Row="5">
-      <osldsc:LdsExpandingListControl.ExpandingDataTemplate>
-        <DataTemplate>
-          <Grid Controls:GridWithPadding.InternalMargin="5" Margin="5" osldsc:FieldExtensions.BindToField="{Binding Fields.CONTROL_4fdab17a30b1416eba4214f6ff0e80c123}">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="150" />
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <TextBlock Text="Trustee" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_86a9601d58ff40b1b4ad8ca7922b6d36}" />
-            <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Controls:GridWithPadding.InternalMargin="5">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-              </Grid.ColumnDefinitions>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-              </Grid.RowDefinitions>
-              <osldsc:LdsComboBox ItemsSource="{Binding Titles}" SelectedValue="{Binding Path=Fields.LOAN_TTT_Trustee_TitleBorrow}" Grid.Column="0" Grid.Row="0" osldsc:FieldExtensions.FieldType="Title" />
-              <osldsc:LdsAutoCompleteBox Address="{Binding Path=Fields.LOAN_TTT_Trustee_address_1Borrow, Mode=TwoWay}" Address2="{Binding Path=Fields.LOAN_TTT_Trustee_address_2Borrow, Mode=TwoWay}" Address3="{Binding Path=Fields.LOAN_TTT_Trustee_address_3Borrow, Mode=TwoWay}" Postcode="{Binding Path=Fields.LOAN_TTT_Trustee_address_PostcodeBorrow, Mode=TwoWay}" FirstName="{Binding Path=Fields.LOAN_TTT_Trustee_FirstNameBorrow, Mode=TwoWay}" LastName="{Binding Path=Fields.LOAN_TTT_Trustee_LastNameBorrow, Mode=TwoWay}" Title="{Binding Path=Fields.LOAN_TTT_Trustee_TitleBorrow, Mode=TwoWay}" ItemsSource="{Binding Path=RecentNames}" Text="{Binding Path=Fields.LOAN_TTT_Trustee_FirstNameBorrow, Mode=TwoWay}" Email="{Binding Fields.LOAN_TTT_Trustee_EmailBorrow}" MobilePhone="{Binding Fields.LOAN_TTT_Trustee_MobileBorrow}" Grid.Column="1" Grid.Row="0" osldsc:FieldExtensions.FieldType="FirstName" Name="NAME_86a9601d58ff40b1b4ad8ca7922b6d36" />
-              <osldsc:LdsAutoCompleteBox Address="{Binding Path=Fields.LOAN_TTT_Trustee_address_1Borrow, Mode=TwoWay}" Address2="{Binding Path=Fields.LOAN_TTT_Trustee_address_2Borrow, Mode=TwoWay}" Address3="{Binding Path=Fields.LOAN_TTT_Trustee_address_3Borrow, Mode=TwoWay}" Postcode="{Binding Path=Fields.LOAN_TTT_Trustee_address_PostcodeBorrow, Mode=TwoWay}" FirstName="{Binding Path=Fields.LOAN_TTT_Trustee_FirstNameBorrow, Mode=TwoWay}" LastName="{Binding Path=Fields.LOAN_TTT_Trustee_LastNameBorrow, Mode=TwoWay}" Title="{Binding Path=Fields.LOAN_TTT_Trustee_TitleBorrow, Mode=TwoWay}" ItemsSource="{Binding Path=RecentNames}" Text="{Binding Path=Fields.LOAN_TTT_Trustee_LastNameBorrow, Mode=TwoWay}" Email="{Binding Fields.LOAN_TTT_Trustee_EmailBorrow}" MobilePhone="{Binding Fields.LOAN_TTT_Trustee_MobileBorrow}" Grid.Column="2" Grid.Row="0" osldsc:FieldExtensions.FieldType="LastName" />
-            </Grid>
-            <TextBlock Text="Address Line 1" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_912cafffd7e04a319857cc57a03bfb6b}" />
-            <osldsc:LdsAddressControl HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Address="{Binding Path=Fields.LOAN_TTT_Trustee_address_1Borrow, Mode=TwoWay}" Address2="{Binding Path=Fields.LOAN_TTT_Trustee_address_2Borrow, Mode=TwoWay}" Address3="{Binding Path=Fields.LOAN_TTT_Trustee_address_3Borrow, Mode=TwoWay}" Postcode="{Binding Path=Fields.LOAN_TTT_Trustee_address_PostcodeBorrow, Mode=TwoWay}" Name="NAME_912cafffd7e04a319857cc57a03bfb6b" />
-            <TextBlock Text="Town/City" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_6ec939c5f99445bb844ced54f041adc3}" />
-            <osldsc:LdsTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Fields.LOAN_TTT_Trustee_address_2Borrow, Mode=TwoWay}" osldsc:FieldExtensions.FieldType="Address2" Name="NAME_6ec939c5f99445bb844ced54f041adc3" />
-            <TextBlock Text="County" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_69ff317b1072463ca07332dab9fc311a}" />
-            <osldsc:LdsTextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Path=Fields.LOAN_TTT_Trustee_address_3Borrow, Mode=TwoWay}" osldsc:FieldExtensions.FieldType="Address3" Name="NAME_69ff317b1072463ca07332dab9fc311a" />
-            <TextBlock Text="Postcode" VerticalAlignment="Center" Grid.Column="3" Grid.Row="3" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_22f4b02a08794f73a710f0dc63d6e64b}" />
-            <osldsc:LdsPostcodeControl Grid.Row="3" Grid.Column="4" Address="{Binding Path=Fields.LOAN_TTT_Trustee_address_1Borrow, Mode=TwoWay}" Address2="{Binding Path=Fields.LOAN_TTT_Trustee_address_2Borrow, Mode=TwoWay}" Address3="{Binding Path=Fields.LOAN_TTT_Trustee_address_3Borrow, Mode=TwoWay}" Text="{Binding Path=Fields.LOAN_TTT_Trustee_address_PostcodeBorrow, Mode=TwoWay}" osldsc:FieldExtensions.FieldType="Postcode" Name="NAME_22f4b02a08794f73a710f0dc63d6e64b" />
-            <!-- NEW MOBILE EMAIL FIELD FOR LOAN TRUSTEE BORROWERS -->
-            <osldsc:LdsTextBlock Grid.Row="4" Grid.Column="0" Text="Email" VerticalAlignment="Center" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_s251905nnefuiwm34r4k18a32}" />
-            <osldsc:LdsTextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Fields.LOAN_TTT_Trustee_EmailBorrow}" Name="NAME_s251905nnefuiwm34r4k18a32" />
-            <osldsc:LdsTextBlock Grid.Row="4" Grid.Column="3" Text="Mobile" HorizontalAlignment="Center" VerticalAlignment="Center" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_s384nc3isfski93b32}" />
-            <osldsc:LdsTextBox Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="1" Text="{Binding Fields.LOAN_TTT_Trustee_MobileBorrow}" Name="NAME_s384nc3isfski93b32" />
-            <!-- NEW MOBILE EMAIL FIELD FOR LOAN TRUSTEE BORROWERS END -->
-          </Grid>
-        </DataTemplate>
-      </osldsc:LdsExpandingListControl.ExpandingDataTemplate>
-    </osldsc:LdsExpandingListControl>
-    <TextBlock Text="Are the Trustees the same for each Loan Document ordered?" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_7769ebbb307e4a5095605dfdae06b45f}" />
-    <osldsc:LdsTextBox Grid.Row="7" Grid.Column="2" Text="{Binding Path=Fields.LOAN_TTT_Trustee_SameBorrow, Mode=TwoWay}" Name="NAME_7769ebbb307e4a5095605dfdae06b45f" />
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Trust Date" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="19" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_asdfasdasdfasdfasdsdf00a4996e7}" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_asdfaasdfsadfsd5500a4996e7}" />
+    <osldsc:LdsTextBox Text="{Binding Fields.LOAN_TTT_Trust_Giving_Loan_Date}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="19" Name="NAME_asdfaasdfsadfsd5500a4996e7" />
+    <osldsc:LdsTextBlock TextWrapping="Wrap" Text="Have monies been settled into the Trust?" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="38" VerticalAlignment="Center" LabelForElement="{Binding ElementName=NAME_4245asdfadsfasdasdc4a2e7d99b}" />
+    <osldsc:LdsComboBox SelectedValue="{Binding Fields.LOAN_TTT_Assets_Settled_Into_Trust}" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="38" Name="NAME_4245asdfadsfasdasdc4a2e7d99b">
+      <s:String>Yes</s:String>
+      <s:String>No</s:String>
+    </osldsc:LdsComboBox>
+    <TextBlock TextWrapping="Wrap" Text="What is the balance of the Trust Bank Account as shown in Tracker/Workflow?" Grid.ColumnSpan="1" VerticalAlignment="Center" Grid.Row="39" Grid.Column="0" osldsc:FieldExtensions.LabelForElement="{Binding ElementName=NAME_t7nitfb59c1ad0abceee7cba}" />
+    <osldsc:LdsTextBox Text="{Binding Fields.LOAN_TTT_AlphaLegalTBAAmount}" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="39" Name="NAME_t7nitfb59c1ad0abceee7cba" Prefix="£" />
   </Grid>
 </osldsc:LdsForm>

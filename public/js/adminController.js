@@ -15,7 +15,7 @@ async function addRecipeRows(filter = {}) {
     const recipesList = document.getElementById('adminRecipesList');
     recipesList.innerHTML = ''; // Clear existing rows before adding new ones
 
-    if(recipes.length ===0){
+    if (recipes.length === 0) {
         const noRecipesRow = document.createElement('tr');
         noRecipesRow.classList.add('noResultsRow');
         const noRecipesCell = document.createElement('td');
@@ -25,8 +25,8 @@ async function addRecipeRows(filter = {}) {
         noRecipesCell.textContent = 'No Recipes found';
         noRecipesRow.appendChild(noRecipesCell);
         recipesList.appendChild(noRecipesRow);
-    }else{
-    recipes.forEach(recipe => addRecipeRow(recipe));
+    } else {
+        recipes.forEach(recipe => addRecipeRow(recipe));
     }
 }
 
@@ -316,22 +316,6 @@ document.getElementById("toggleUserFormButton").addEventListener("click", functi
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Function to add a message row to the table
 function addMessageRow(message) {
     const messagesList = document.getElementById('messagesList');
@@ -409,9 +393,6 @@ function addMessageRow(message) {
         });
     });
 }
-
-
-
 
 
 
@@ -500,9 +481,6 @@ export function tabsController() {
 
 
 
-
-
-
 //search recipes function + event listener => admin page
 async function searchRecipesAdmin() {
     const search = document.getElementById("recipeSearchBox").value;
@@ -513,7 +491,7 @@ async function searchRecipesAdmin() {
 
 
 
-    if(searchResults.length ===0){
+    if (searchResults.length === 0) {
         const noRecipesRow = document.createElement('tr');
         noRecipesRow.classList.add('noResultsRow');
         const noRecipesCell = document.createElement('td');
@@ -523,7 +501,7 @@ async function searchRecipesAdmin() {
         noRecipesCell.textContent = 'No Recipes found';
         noRecipesRow.appendChild(noRecipesCell);
         recipesList.appendChild(noRecipesRow);
-    }else{
+    } else {
         searchResults.forEach(result => addRecipeRow(result));
     }
 
@@ -534,22 +512,6 @@ async function searchRecipesAdmin() {
 }
 
 
-
-
-
-
-
-
-
-
-
-// document.getElementById('adminRecipesSearch')?.addEventListener('click', () => {
-//     searchRecipesAdmin();
-//     alert("seaching for recidpes")
-// });
-
-
-//if the below works remove the above!!!!!!!!!!!!!!!!!!!!!!!!!
 document.addEventListener("DOMContentLoaded", () => {
     const searchButton = document.getElementById('adminRecipesSearch')
     const searchInput = document.getElementById('recipeSearchBox');
@@ -568,12 +530,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-
-
-
-
-
-
 
 
 
@@ -598,47 +554,15 @@ document.getElementById('adminRecipesFilter')?.addEventListener('click', () => {
 document.getElementById('adminRecipesClearFilters')?.addEventListener('click', function () {
     const filterSelects = document.querySelectorAll('.filter-group select');
     const searchInput = document.getElementById('recipeSearchBox');
-    searchInput.value='',
-    filterSelects.forEach(function (select) {
-        select.value = '';
-    });
+    searchInput.value = '',
+        filterSelects.forEach(function (select) {
+            select.value = '';
+        });
     addRecipeRows();
     alert("removing filters")
 });
 
 
-
-
-
-
-
-//search messages function + event listener
-
-// async function searchMessages() {
-//     try {
-//         const search = document.getElementById("messageSearchBox").value;
-//         const messagesList = document.getElementById("messagesList");
-//         if (search && messagesList) {
-//             messagesList.innerHTML = "";
-//             const searchResults = await apiCalls.searchMessages(search);
-//             searchResults.forEach(result => addMessageRow(result));
-//         } else {
-//             console.error("No messages found found.");
-//         }
-//     } catch (error) {
-//         console.error("Error fetching messages:", error);
-//     }
-// }
-
-// document.getElementById('adminMessagesSearch')?.addEventListener('click', () => {
-//     searchMessages();
-//     alert("searching for messages")
-// });
-
-
-
-
-//delete the above if the below works fine
 
 // Function to display messages
 function displayMessages(messages) {
@@ -655,7 +579,7 @@ function displayMessages(messages) {
         noMessagesCell.textContent = 'No Messages found';
         noMessagesRow.appendChild(noMessagesCell);
         messagesList.appendChild(noMessagesRow);
-        } else {
+    } else {
         messages.forEach(message => {
             addMessageRow(message);
         });
@@ -663,20 +587,7 @@ function displayMessages(messages) {
 }
 
 
-// document.getElementById('adminMessagesSearch')?.addEventListener('click', () => {
-//     searchMessages();
-//     alert("searching for messages")
-// });
 
-
-// document.getElementById('adminMessagesSearch')?.addEventListener('click', () => {
-//     // alert("searching for messages")
-//     const searchCriteria = document.getElementById('messageSearchBox').value;
-//     handleSearch(searchCriteria);
-// });
-
-
-//if the below works remove the above!!!!!!!!!!!!!!!!!!!!!!!!!
 document.addEventListener("DOMContentLoaded", () => {
     const searchButton = document.getElementById('adminMessagesSearch');
     const searchInput = document.getElementById('messageSearchBox');
@@ -727,15 +638,15 @@ async function filterMessages() {
                 noMessagesRow.classList.add('noResultsRow');
                 const noMessagesCell = document.createElement('td');
                 noMessagesCell.classList.add('noResultsFound');
-        
+
                 noMessagesCell.colSpan = 5; // Adjust based on the number of columns in your table
                 noMessagesCell.textContent = 'No Messages found';
                 noMessagesRow.appendChild(noMessagesCell);
                 messagesList.appendChild(noMessagesRow);
             } else {
-                    filterResults.forEach(result => addMessageRow(result));
+                filterResults.forEach(result => addMessageRow(result));
             }
-        }else if (!messageStatus){
+        } else if (!messageStatus) {
             await listMessages();
         }
         else {
@@ -767,959 +678,6 @@ if (showAllMessages) {
 
 
 
-//commented to test the below
-
-// function resetAddRecipeForm() {
-//     document.getElementById("dishName").value = '';
-//     document.getElementById("dishOrigin").value = '';
-//     document.getElementById("dishDescription").value = '';
-//     document.getElementById("dishIngredients").value = '';
-//     document.getElementById("dishSteps").value = '';
-//     document.getElementById("dishCategory").value = '';
-//     document.getElementById("dishComplexity").value = '';
-//     document.getElementById("dishPrepTime").value = '';
-//     document.getElementById("dishRating").value = '';
-//     document.getElementById("dishChefRecommended").value = '';
-//     document.getElementById("dishImage").value = '';
-
-//     document.getElementById("addRecipeForm").style.display = 'none';
-// }
-// //if the below works delete the one above addnewrecipe function
-// async function addNewRecipe() {
-//     const dishName = document.getElementById("dishName").value;
-//     const dishOrigin = document.getElementById("dishOrigin").value;
-//     const dishDescription = document.getElementById("dishDescription").value;
-//     const dishIngredients = document.getElementById("dishIngredients").value;
-//     const dishSteps = document.getElementById("dishSteps").value;
-//     const dishCategory = document.getElementById("dishCategory").value;
-//     const dishComplexity = document.getElementById("dishComplexity").value;
-//     const dishPrepTime = document.getElementById("dishPrepTime").value;
-//     const dishRating = document.getElementById("dishRating").value;
-//     const dishChefRecommended = document.getElementById("dishChefRecommended").value;
-//     const dishImage = document.getElementById("dishImage").files[0]; // Use files[0] to get the selected file
-
-//     const jsonData = {
-//         function: 'addNewRecipe', // Use the existing function name
-//         dishName: dishName,
-//         dishOrigin: dishOrigin,
-//         dishDescription: dishDescription,
-//         dishIngredients: functions.convertToJSONArray(dishIngredients),
-//         dishSteps: dishSteps,
-//         dishCategory: dishCategory,
-//         dishComplexity: dishComplexity,
-//         dishPrepTime: dishPrepTime,
-//         dishRating: dishRating,
-//         dishChefRecommended: dishChefRecommended,
-//         dishImage: null // Placeholder, will be updated if there is an image
-//     };
-
-//     if (dishImage) {
-//         const base64Image = await convertImageToBase64(dishImage);
-//         jsonData.dishImage = base64Image; // Include the image data
-//     }
-
-//     await apiCalls.addNewRecipe(jsonData);
-//     addRecipeRows(); // Refresh the recipe list
-
-
-//     // Clear and hide the form after adding the recipe
-//     resetAddRecipeForm();
-// }
-
-
-
-
-
-// document.getElementById('addNewRecipe')?.addEventListener('click', () => {
-//     document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
-//         ? document.getElementById("toggleFormButton").innerText = "Cancel"
-//         : document.getElementById("toggleFormButton").innerText = "+ Add Recipe"
-//         addNewRecipe();   
-//     alert("add reipe button clicked")
-// });
-
-
-//if the below works remove the above-------------------88888888888************************
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     document.getElementById("addStepButton").addEventListener("click", addStepField);
-
-//     document.getElementById('addNewRecipe')?.addEventListener('click', () => {
-//         document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
-//             ? document.getElementById("toggleFormButton").innerText = "Cancel"
-//             : document.getElementById("toggleFormButton").innerText = "+ Add Recipe"
-//             addNewRecipe();   
-//         alert("add reipe button clicked")
-//     });
-
-//     function addStepField() {
-//         const stepsContainer = document.getElementById("stepsContainer");
-//         const stepNumber = stepsContainer.children.length + 1;
-
-//         const stepDiv = document.createElement("div");
-//         stepDiv.classList.add("step");
-//         stepDiv.innerHTML = `
-//             <h4>Step ${stepNumber}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required>
-//             <textarea class="stepDescription" placeholder="Description" required></textarea>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-//     }
-
-//     async function addNewRecipe() {
-//         const dishName = document.getElementById("dishName").value;
-//         const dishOrigin = document.getElementById("dishOrigin").value;
-//         const dishDescription = document.getElementById("dishDescription").value;
-//         const dishIngredients = document.getElementById("dishIngredients").value;
-//         const dishCategory = document.getElementById("dishCategory").value;
-//         const dishComplexity = document.getElementById("dishComplexity").value;
-//         const dishPrepTime = document.getElementById("dishPrepTime").value;
-//         const dishRating = document.getElementById("dishRating").value;
-//         const dishChefRecommended = document.getElementById("dishChefRecommended").value;
-//         const dishImage = document.getElementById("dishImage").files[0];
-
-//         const stepsElements = document.querySelectorAll("#stepsContainer .step");
-//         const dishSteps = Array.from(stepsElements).map((stepElement, index) => ({
-//             step: index + 1,
-//             title: stepElement.querySelector(".stepTitle").value,
-//             description: stepElement.querySelector(".stepDescription").value,
-//         }));
-
-//         const jsonData = {
-//             function: 'addNewRecipe',
-//             dishName: dishName,
-//             dishOrigin: dishOrigin,
-//             dishDescription: dishDescription,
-//             dishIngredients: functions.convertToJSONArray(dishIngredients),
-//             dishSteps: JSON.stringify(dishSteps),
-//             dishCategory: dishCategory,
-//             dishComplexity: dishComplexity,
-//             dishPrepTime: dishPrepTime,
-//             dishRating: dishRating,
-//             dishChefRecommended: dishChefRecommended,
-//             dishImage: null
-//         };
-
-//         if (dishImage) {
-//             const base64Image = await convertImageToBase64(dishImage);
-//             jsonData.dishImage = base64Image;
-//         }
-
-//         await apiCalls.addNewRecipe(jsonData);
-//         addRecipeRows(); // Refresh the recipe list
-
-//         resetAddRecipeForm();
-//     }
-
-//     function resetAddRecipeForm() {
-//         document.getElementById("dishName").value = "";
-//         document.getElementById("dishOrigin").selectedIndex = 0;
-//         document.getElementById("dishDescription").value = "";
-//         document.getElementById("dishIngredients").value = "";
-//         document.getElementById("dishCategory").selectedIndex = 0;
-//         document.getElementById("dishComplexity").selectedIndex = 0;
-//         document.getElementById("dishPrepTime").value = "";
-//         document.getElementById("dishRating").selectedIndex = 0;
-//         document.getElementById("dishChefRecommended").selectedIndex = 0;
-//         document.getElementById("dishImage").value = "";
-
-//         // Clear steps
-//         const stepsContainer = document.getElementById("stepsContainer");
-//         while (stepsContainer.firstChild) {
-//             stepsContainer.removeChild(stepsContainer.firstChild);
-//         }
-//     }
-// });
-
-
-//if the below works remove the above-------------------88888888888************************
-
-
-
-
-
-
-
-
-
-
-
-// Function to edit recipe
-// function editRecipe(recipe) {
-//     const editPopup = document.getElementById('editRecipePopup');
-//     const overlay = document.getElementById('overlay');
-//     const countryMap = {
-//         'india': 1,
-//         'china': 2,
-//         'italy': 3,
-//         'france': 4,
-//         'russia': 5,
-//         'moldova': 6
-//     };
-//     const complexityMap = {
-//         'very easy': 1,
-//         'easy': 2,
-//         'medium': 3,
-//         'hard': 4,
-//         'very hard': 5
-//     };
-//     const categoryMap = {
-//         'non-vegetarian': 1,
-//         'vegetarian': 2
-//     };
-
-//     document.getElementById('editRecipeId').value = recipe.dish_id;
-//     document.getElementById('editDishName').value = recipe.dish_name;
-//     document.getElementById('editDishOrigin').value = countryMap[recipe.origin_country];
-//     document.getElementById('editDishDescription').value = recipe.dish_recipe_description;
-
-//     // Handle ingredients
-//     const ingredientsContainer = document.getElementById('editIngredientsContainer');
-//     ingredientsContainer.innerHTML = ''; // Clear previous ingredients
-//     const ingredients = JSON.parse(recipe.dish_ingredients);
-//     ingredients.forEach(ingredient => {
-//         const ingredientDiv = document.createElement('div');
-//         ingredientDiv.classList.add('ingredient');
-//         ingredientDiv.innerHTML = `
-//             <textarea class="ingredientDescription" placeholder="Ingredient" required>${ingredient}</textarea>
-//             <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientsContainer.appendChild(ingredientDiv);
-
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     });
-
-//     // Handle steps
-//     const stepsContainer = document.getElementById('editStepsContainer');
-//     stepsContainer.innerHTML = ''; // Clear previous steps
-//     const steps = JSON.parse(recipe.dish_steps);
-//     steps.forEach((step, index) => {
-//         const stepDiv = document.createElement('div');
-//         stepDiv.classList.add('step');
-//         stepDiv.innerHTML = `
-//             <h4>Step ${index + 1}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required value="${step.title}">
-//             <textarea class="stepDescription" placeholder="Description" required>${step.description}</textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateEditStepNumbers();
-//         });
-//     });
-
-//     document.getElementById('editDishCategory').value = categoryMap[recipe.category_name];
-//     document.getElementById('editDishComplexity').value = complexityMap[recipe.complexity_name];
-//     document.getElementById('editDishPrepTime').value = recipe.dish_prep_time;
-//     document.getElementById('editDishRating').value = Math.floor(recipe.dish_rating);
-
-//     editPopup.classList.add('active');
-//     overlay.classList.add('active');
-// }
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     document.getElementById("addStepButton").addEventListener("click", addStepField);
-//     document.getElementById("addIngredientButton").addEventListener("click", addIngredientField);
-
-//     document.getElementById("addEditIngredientButton").addEventListener("click", addEditIngredientField);
-//     document.getElementById("addEditStepButton").addEventListener("click", addEditStepField);
-
-//     document.getElementById('addNewRecipe')?.addEventListener('click', () => {
-//         document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
-//             ? document.getElementById("toggleFormButton").innerText = "Cancel"
-//             : document.getElementById("toggleFormButton").innerText = "+ Add Recipe";
-//         addNewRecipe();   
-//         alert("Add recipe button clicked");
-//     });
-
-//     function addIngredientField() {
-//         const ingredientsContainer = document.getElementById("ingredientsContainer");
-//         const ingredientDiv = document.createElement("div");
-//         ingredientDiv.classList.add("ingredient");
-//         ingredientDiv.innerHTML = `
-//             <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
-//             <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientsContainer.appendChild(ingredientDiv);
-
-//         // Add event listener for the remove button
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     }
-
-//     function addStepField() {
-//         const stepsContainer = document.getElementById("stepsContainer");
-//         const stepNumber = stepsContainer.children.length + 1;
-
-//         const stepDiv = document.createElement("div");
-//         stepDiv.classList.add("step");
-//         stepDiv.innerHTML = `
-//             <h4>Step ${stepNumber}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required>
-//             <textarea class="stepDescription" placeholder="Description" required></textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         // Add event listener for the remove button
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateStepNumbers();
-//         });
-//     }
-
-//     function addEditIngredientField() {
-//         const ingredientsContainer = document.getElementById("editIngredientsContainer");
-//         const ingredientDiv = document.createElement("div");
-//         ingredientDiv.classList.add("ingredient");
-//         ingredientDiv.innerHTML = `
-//             <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
-//             <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientsContainer.appendChild(ingredientDiv);
-
-//         // Add event listener for the remove button
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     }
-
-//     function addEditStepField() {
-//         const stepsContainer = document.getElementById("editStepsContainer");
-//         const stepNumber = stepsContainer.children.length + 1;
-
-//         const stepDiv = document.createElement("div");
-//         stepDiv.classList.add("step");
-//         stepDiv.innerHTML = `
-//             <h4>Step ${stepNumber}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required>
-//             <textarea class="stepDescription" placeholder="Description" required></textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         // Add event listener for the remove button
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateEditStepNumbers();
-//         });
-//     }
-
-//     function updateStepNumbers() {
-//         const steps = document.querySelectorAll("#stepsContainer .step");
-//         steps.forEach((step, index) => {
-//             step.querySelector("h4").innerText = `Step ${index + 1}`;
-//         });
-//     }
-
-//     function updateEditStepNumbers() {
-//         const steps = document.querySelectorAll("#editStepsContainer .step");
-//         steps.forEach((step, index) => {
-//             step.querySelector("h4").innerText = `Step ${index + 1}`;
-//         });
-//     }
-// });
-
-// // Function to edit recipe
-// function editRecipe(recipe) {
-//     const editPopup = document.getElementById('editRecipePopup');
-//     const overlay = document.getElementById('overlay');
-//     const countryMap = {
-//         'india': 1,
-//         'china': 2,
-//         'italy': 3,
-//         'france': 4,
-//         'russia': 5,
-//         'moldova': 6
-//     };
-//     const complexityMap = {
-//         'very easy': 1,
-//         'easy': 2,
-//         'medium': 3,
-//         'hard': 4,
-//         'very hard': 5
-//     };
-//     const categoryMap = {
-//         'non-vegetarian': 1,
-//         'vegetarian': 2
-//     };
-
-//     document.getElementById('editRecipeId').value = recipe.dish_id;
-//     document.getElementById('editDishName').value = recipe.dish_name;
-//     document.getElementById('editDishOrigin').value = countryMap[recipe.origin_country];
-//     document.getElementById('editDishDescription').value = recipe.dish_recipe_description;
-
-//     // Handle ingredients
-//     const ingredientsContainer = document.getElementById('editIngredientsContainer');
-//     ingredientsContainer.innerHTML = ''; // Clear previous ingredients
-//     const ingredients = JSON.parse(recipe.dish_ingredients);
-//     ingredients.forEach(ingredient => {
-//         const ingredientDiv = document.createElement('div');
-//         ingredientDiv.classList.add('ingredient');
-//         ingredientDiv.innerHTML = `
-//             <textarea class="ingredientDescription" placeholder="Ingredient" required>${ingredient}</textarea>
-//             <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientsContainer.appendChild(ingredientDiv);
-
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     });
-
-//     // Handle steps
-//     const stepsContainer = document.getElementById('editStepsContainer');
-//     stepsContainer.innerHTML = ''; // Clear previous steps
-//     const steps = JSON.parse(recipe.dish_steps);
-//     steps.forEach((step, index) => {
-//         const stepDiv = document.createElement('div');
-//         stepDiv.classList.add('step');
-//         stepDiv.innerHTML = `
-//             <h4>Step ${index + 1}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required value="${step.title}">
-//             <textarea class="stepDescription" placeholder="Description" required>${step.description}</textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateEditStepNumbers();
-//         });
-//     });
-
-//     document.getElementById('editDishCategory').value = categoryMap[recipe.category_name];
-//     document.getElementById('editDishComplexity').value = complexityMap[recipe.complexity_name];
-//     document.getElementById('editDishPrepTime').value = recipe.dish_prep_time;
-//     document.getElementById('editDishRating').value = Math.floor(recipe.dish_rating);
-
-//     editPopup.classList.add('active');
-//     overlay.classList.add('active');
-// }
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     // Add event listeners for adding steps and ingredients
-//     document.getElementById("addStepButton")?.addEventListener("click", addStepField);
-//     document.getElementById("addIngredientButton")?.addEventListener("click", addIngredientField);
-
-//     document.getElementById("addEditStepButton")?.addEventListener("click", addEditStepField);
-//     document.getElementById("addEditIngredientButton")?.addEventListener("click", addEditIngredientField);
-
-//     document.getElementById('addNewRecipe')?.addEventListener('click', () => {
-//         const toggleButton = document.getElementById("toggleFormButton");
-//         toggleButton.innerText = (toggleButton.innerText === "+ Add Recipe") ? "Cancel" : "+ Add Recipe";
-//         addNewRecipe();
-//     });
-
-//     // Function to add an ingredient field for new recipe
-//     function addIngredientField() {
-//         const ingredientsContainer = document.getElementById("ingredientsContainer");
-//         const ingredientDiv = document.createElement("div");
-//         ingredientDiv.classList.add("ingredient");
-//         ingredientDiv.innerHTML = `
-//             <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
-//             <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientsContainer.appendChild(ingredientDiv);
-
-//         // Add event listener for the remove button
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     }
-
-//     // Function to add a step field for new recipe
-//     function addStepField() {
-//         const stepsContainer = document.getElementById("stepsContainer");
-//         const stepNumber = stepsContainer.children.length + 1;
-
-//         const stepDiv = document.createElement("div");
-//         stepDiv.classList.add("step");
-//         stepDiv.innerHTML = `
-//             <h4>Step ${stepNumber}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required>
-//             <textarea class="stepDescription" placeholder="Description" required></textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         // Add event listener for the remove button
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateStepNumbers();
-//         });
-//     }
-
-//     // Function to add an ingredient field for edit recipe
-//     function addEditIngredientField() {
-//         const ingredientsContainer = document.getElementById("editIngredientsContainer");
-//         const ingredientDiv = document.createElement("div");
-//         ingredientDiv.classList.add("ingredient");
-//         ingredientDiv.innerHTML = `
-//             <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
-//             <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientsContainer.appendChild(ingredientDiv);
-
-//         // Add event listener for the remove button
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     }
-
-//     // Function to add a step field for edit recipe
-//     function addEditStepField() {
-//         const stepsContainer = document.getElementById("editStepsContainer");
-//         const stepNumber = stepsContainer.children.length + 1;
-
-//         const stepDiv = document.createElement("div");
-//         stepDiv.classList.add("step");
-//         stepDiv.innerHTML = `
-//             <h4>Step ${stepNumber}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required>
-//             <textarea class="stepDescription" placeholder="Description" required></textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         // Add event listener for the remove button
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateEditStepNumbers();
-//         });
-//     }
-
-//     // Function to update step numbers for new recipe
-//     function updateStepNumbers() {
-//         const steps = document.querySelectorAll("#stepsContainer .step");
-//         steps.forEach((step, index) => {
-//             step.querySelector("h4").innerText = `Step ${index + 1}`;
-//         });
-//     }
-
-//     // Function to update step numbers for edit recipe
-//     function updateEditStepNumbers() {
-//         const steps = document.querySelectorAll("#editStepsContainer .step");
-//         steps.forEach((step, index) => {
-//             step.querySelector("h4").innerText = `Step ${index + 1}`;
-//         });
-//     }
-// });
-
-// // Function to edit recipe
-// function editRecipe(recipe) {
-//     const editPopup = document.getElementById('editRecipePopup');
-//     const overlay = document.getElementById('overlay');
-//     const countryMap = {
-//         'india': 1,
-//         'china': 2,
-//         'italy': 3,
-//         'france': 4,
-//         'russia': 5,
-//         'moldova': 6
-//     };
-//     const complexityMap = {
-//         'very easy': 1,
-//         'easy': 2,
-//         'medium': 3,
-//         'hard': 4,
-//         'very hard': 5
-//     };
-//     const categoryMap = {
-//         'non-vegetarian': 1,
-//         'vegetarian': 2
-//     };
-
-//     document.getElementById('editRecipeId').value = recipe.dish_id;
-//     document.getElementById('editDishName').value = recipe.dish_name;
-//     document.getElementById('editDishOrigin').value = countryMap[recipe.origin_country];
-//     document.getElementById('editDishDescription').value = recipe.dish_recipe_description;
-
-//     // Handle ingredients
-//     const ingredientsContainer = document.getElementById('editIngredientsContainer');
-//     ingredientsContainer.innerHTML = ''; // Clear previous ingredients
-//     const ingredients = JSON.parse(recipe.dish_ingredients);
-//     ingredients.forEach(ingredient => {
-//         const ingredientDiv = document.createElement('div');
-//         ingredientDiv.classList.add('ingredient');
-//         ingredientDiv.innerHTML = `
-//             <textarea class="ingredientDescription" placeholder="Ingredient" required>${ingredient}</textarea>
-//             <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientsContainer.appendChild(ingredientDiv);
-
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     });
-
-//     // Handle steps
-//     const stepsContainer = document.getElementById('editStepsContainer');
-//     stepsContainer.innerHTML = ''; // Clear previous steps
-//     const steps = JSON.parse(recipe.dish_steps);
-//     steps.forEach((step, index) => {
-//         const stepDiv = document.createElement('div');
-//         stepDiv.classList.add('step');
-//         stepDiv.innerHTML = `
-//             <h4>Step ${index + 1}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required value="${step.title}">
-//             <textarea class="stepDescription" placeholder="Description" required>${step.description}</textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateEditStepNumbers();
-//         });
-//     });
-
-//     document.getElementById('editDishCategory').value = categoryMap[recipe.category_name];
-//     document.getElementById('editDishComplexity').value = complexityMap[recipe.complexity_name];
-//     document.getElementById('editDishPrepTime').value = recipe.dish_prep_time;
-//     document.getElementById('editDishRating').value = Math.floor(recipe.dish_rating);
-
-//     editPopup.classList.add('active');
-//     overlay.classList.add('active');
-// }
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     document.getElementById("addStepButton").addEventListener("click", addStepField);
-
-
-//     document.getElementById("addIngredientButton").addEventListener("click", addIngredientField)
-
-
-
-//     document.getElementById('addNewRecipe')?.addEventListener('click', () => {
-//         document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
-//             ? document.getElementById("toggleFormButton").innerText = "Cancel"
-//             : document.getElementById("toggleFormButton").innerText = "+ Add Recipe";
-//         addNewRecipe();   
-//         alert("Add recipe button clicked");
-//     });
-
-
-//     function addIngredientField() {
-//         const ingredientContainer = document.getElementById("ingredientsContainer");
-//         const ingredientDiv = document.createElement("div");
-//         ingredientDiv.classList.add("ingredient");
-//         ingredientDiv.innerHTML = `
-//         <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
-//         <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientContainer.appendChild(ingredientDiv);
-        
-//         // Add event listener for the remove button
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     }
-
-//     function addStepField() {
-//         const stepsContainer = document.getElementById("stepsContainer");
-//         const stepNumber = stepsContainer.children.length + 1;
-
-//         const stepDiv = document.createElement("div");
-//         stepDiv.classList.add("step");
-//         stepDiv.innerHTML = `
-//             <h4>Step ${stepNumber}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required>
-//             <textarea class="stepDescription" placeholder="Description" required></textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         // Add event listener for the remove button
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateStepNumbers();
-//         });
-//     }
-
-//     async function addNewRecipe() {
-//         const dishName = document.getElementById("dishName").value;
-//         const dishOrigin = document.getElementById("dishOrigin").value;
-//         const dishDescription = document.getElementById("dishDescription").value;
-//         const dishCategory = document.getElementById("dishCategory").value;
-//         const dishComplexity = document.getElementById("dishComplexity").value;
-//         const dishPrepTime = document.getElementById("dishPrepTime").value;
-//         const dishRating = document.getElementById("dishRating").value;
-//         const dishChefRecommended = document.getElementById("dishChefRecommended").value;
-//         const dishImage = document.getElementById("dishImage").files[0];
-
-
-
-//         const ingredientsElements = document.querySelectorAll("#ingredientsContainer .ingredientDescription");
-//         const dishIngredients = Array.from(ingredientsElements).map(input => input.value);
-
-
-
-
-//         const stepsElements = document.querySelectorAll("#stepsContainer .step");
-//         const dishSteps = Array.from(stepsElements).map((stepElement, index) => ({
-//             step: index + 1,
-//             title: stepElement.querySelector(".stepTitle").value,
-//             description: stepElement.querySelector(".stepDescription").value,
-//         }));
-
-//         const jsonData = {
-//             function: 'addNewRecipe',
-//             dishName: dishName,
-//             dishOrigin: dishOrigin,
-//             dishDescription: dishDescription,
-//             // dishIngredients: functions.convertToJSONArray(dishIngredients),
-//             dishIngredients: dishIngredients,
-//             dishSteps: JSON.stringify(dishSteps),
-//             dishCategory: dishCategory,
-//             dishComplexity: dishComplexity,
-//             dishPrepTime: dishPrepTime,
-//             dishRating: dishRating,
-//             dishChefRecommended: dishChefRecommended,
-//             dishImage: null
-//         };
-
-//         if (dishImage) {
-//             const base64Image = await convertImageToBase64(dishImage);
-//             jsonData.dishImage = base64Image;
-//         }
-
-//         await apiCalls.addNewRecipe(jsonData);
-//         addRecipeRows(); // Refresh the recipe list
-
-//         resetAddRecipeForm();
-//     }
-
-//     function resetAddRecipeForm() {
-//         document.getElementById("dishName").value = "";
-//         document.getElementById("dishOrigin").selectedIndex = 0;
-//         document.getElementById("dishDescription").value = "";
-//         // document.getElementById("dishIngredients").value = "";
-//         document.getElementById("dishCategory").selectedIndex = 0;
-//         document.getElementById("dishComplexity").selectedIndex = 0;
-//         document.getElementById("dishPrepTime").value = "";
-//         document.getElementById("dishRating").selectedIndex = 0;
-//         document.getElementById("dishChefRecommended").selectedIndex = 0;
-//         document.getElementById("dishImage").value = "";
-
-//         // Clear steps
-//         const stepsContainer = document.getElementById("stepsContainer");
-//         while (stepsContainer.firstChild) {
-//             stepsContainer.removeChild(stepsContainer.firstChild);
-//         }
-
-//         const ingredientsContainer = document.getElementById("ingredientsContainer");
-//         while (ingredientsContainer.firstChild){
-//             ingredientsContainer.removeChild(ingredientsContainer.firstChild);
-//         }
-//     }
-
-//     function updateStepNumbers() {
-//         const steps = document.querySelectorAll("#stepsContainer .step");
-//         steps.forEach((step, index) => {
-//             step.querySelector("h4").innerText = `Step ${index + 1}`;
-//         });
-//     }
-// });
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     // Add event listeners for adding steps and ingredients
-//     document.getElementById("addStepButton")?.addEventListener("click", addStepField);
-//     document.getElementById("addIngredientButton")?.addEventListener("click", addIngredientField);
-//     document.getElementById("addEditStepButton")?.addEventListener("click", addEditStepField);
-//     document.getElementById("addEditIngredientButton")?.addEventListener("click", addEditIngredientField);
-
-//     // Event listener for add new recipe button
-//     document.getElementById('addNewRecipe')?.addEventListener('click', () => {
-//         const toggleButton = document.getElementById("toggleFormButton");
-//         toggleButton.innerText = (toggleButton.innerText === "+ Add Recipe") ? "Cancel" : "+ Add Recipe";
-//         addNewRecipe();
-//     });
-
-//     // Function to add an ingredient field for new recipe
-//     function addIngredientField() {
-//         const ingredientsContainer = document.getElementById("ingredientsContainer");
-//         const ingredientDiv = document.createElement("div");
-//         ingredientDiv.classList.add("ingredient");
-//         ingredientDiv.innerHTML = `
-//             <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
-//             <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientsContainer.appendChild(ingredientDiv);
-
-//         // Add event listener for the remove button
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     }
-
-//     // Function to add a step field for new recipe
-//     function addStepField() {
-//         const stepsContainer = document.getElementById("stepsContainer");
-//         const stepNumber = stepsContainer.children.length + 1;
-
-//         const stepDiv = document.createElement("div");
-//         stepDiv.classList.add("step");
-//         stepDiv.innerHTML = `
-//             <h4>Step ${stepNumber}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required>
-//             <textarea class="stepDescription" placeholder="Description" required></textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         // Add event listener for the remove button
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateStepNumbers();
-//         });
-//     }
-
-//     // Function to add an ingredient field for edit recipe
-//     function addEditIngredientField() {
-//         const ingredientsContainer = document.getElementById("editIngredientsContainer");
-//         const ingredientDiv = document.createElement("div");
-//         ingredientDiv.classList.add("ingredient");
-//         ingredientDiv.innerHTML = `
-//             <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
-//             <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientsContainer.appendChild(ingredientDiv);
-
-//         // Add event listener for the remove button
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     }
-
-//     // Function to add a step field for edit recipe
-//     function addEditStepField() {
-//         const stepsContainer = document.getElementById("editStepsContainer");
-//         const stepNumber = stepsContainer.children.length + 1;
-
-//         const stepDiv = document.createElement("div");
-//         stepDiv.classList.add("step");
-//         stepDiv.innerHTML = `
-//             <h4>Step ${stepNumber}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required>
-//             <textarea class="stepDescription" placeholder="Description" required></textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         // Add event listener for the remove button
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateEditStepNumbers();
-//         });
-//     }
-
-//     // Function to update step numbers for new recipe
-//     function updateStepNumbers() {
-//         const steps = document.querySelectorAll("#stepsContainer .step");
-//         steps.forEach((step, index) => {
-//             step.querySelector("h4").innerText = `Step ${index + 1}`;
-//         });
-//     }
-
-//     // Function to update step numbers for edit recipe
-//     function updateEditStepNumbers() {
-//         const steps = document.querySelectorAll("#editStepsContainer .step");
-//         steps.forEach((step, index) => {
-//             step.querySelector("h4").innerText = `Step ${index + 1}`;
-//         });
-//     }
-// });
-
-// // Function to edit recipe
-// function editRecipe(recipe) {
-//     const editPopup = document.getElementById('editRecipePopup');
-//     const overlay = document.getElementById('overlay');
-//     const countryMap = {
-//         'india': 1,
-//         'china': 2,
-//         'italy': 3,
-//         'france': 4,
-//         'russia': 5,
-//         'moldova': 6
-//     };
-//     const complexityMap = {
-//         'very easy': 1,
-//         'easy': 2,
-//         'medium': 3,
-//         'hard': 4,
-//         'very hard': 5
-//     };
-//     const categoryMap = {
-//         'non-vegetarian': 1,
-//         'vegetarian': 2
-//     };
-
-//     document.getElementById('editRecipeId').value = recipe.dish_id;
-//     document.getElementById('editDishName').value = recipe.dish_name;
-//     document.getElementById('editDishOrigin').value = countryMap[recipe.origin_country];
-//     document.getElementById('editDishDescription').value = recipe.dish_recipe_description;
-
-//     // Handle ingredients
-//     const ingredientsContainer = document.getElementById('editIngredientsContainer');
-//     ingredientsContainer.innerHTML = ''; // Clear previous ingredients
-//     const ingredients = JSON.parse(recipe.dish_ingredients);
-//     ingredients.forEach(ingredient => {
-//         const ingredientDiv = document.createElement('div');
-//         ingredientDiv.classList.add('ingredient');
-//         ingredientDiv.innerHTML = `
-//             <textarea class="ingredientDescription" placeholder="Ingredient" required>${ingredient}</textarea>
-//             <button type="button" class="removeIngredientButton">Remove</button>
-//         `;
-//         ingredientsContainer.appendChild(ingredientDiv);
-
-//         ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-//             ingredientDiv.remove();
-//         });
-//     });
-
-//     // Handle steps
-//     const stepsContainer = document.getElementById('editStepsContainer');
-//     stepsContainer.innerHTML = ''; // Clear previous steps
-//     const steps = JSON.parse(recipe.dish_steps);
-//     steps.forEach((step, index) => {
-//         const stepDiv = document.createElement('div');
-//         stepDiv.classList.add('step');
-//         stepDiv.innerHTML = `
-//             <h4>Step ${index + 1}</h4>
-//             <input type="text" class="stepTitle" placeholder="Title" required value="${step.title}">
-//             <textarea class="stepDescription" placeholder="Description" required>${step.description}</textarea>
-//             <button type="button" class="removeStepButton">Remove</button>
-//         `;
-//         stepsContainer.appendChild(stepDiv);
-
-//         stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-//             stepDiv.remove();
-//             updateEditStepNumbers();
-//         });
-//     });
-
-//     document.getElementById('editDishCategory').value = categoryMap[recipe.category_name];
-//     document.getElementById('editDishComplexity').value = complexityMap[recipe.complexity_name];
-//     document.getElementById('editDishPrepTime').value = recipe.dish_prep_time;
-//     document.getElementById('editDishRating').value = Math.floor(recipe.dish_rating);
-
-//     editPopup.classList.add('active');
-//     overlay.classList.add('active');
-// }
-
-
 document.addEventListener("DOMContentLoaded", () => {
     // Add event listeners for adding steps and ingredients
     document.getElementById("addStepButton")?.addEventListener("click", addStepField);
@@ -1729,6 +687,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event listener for add new recipe button
     document.getElementById('addNewRecipe')?.addEventListener('click', () => {
+
+        const form = document.getElementById("addRecipeForm");
+        form.style.display = form.style.display === "none" ? "block" : "none";
+    
+
         const toggleButton = document.getElementById("toggleFormButton");
         toggleButton.innerText = (toggleButton.innerText === "+ Add Recipe") ? "Cancel" : "+ Add Recipe";
         addNewRecipe();
@@ -1945,7 +908,7 @@ async function addNewRecipe() {
     };
 
     if (dishImage) {
-        const base64Image = await convertImageToBase64(dishImage);
+        const base64Image = await functions.convertImageToBase64(dishImage);
         jsonData.dishImage = base64Image;
     }
 
@@ -1979,23 +942,3 @@ function resetAddRecipeForm() {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-function convertImageToBase64(imageFile) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result.split(',')[1]);
-        reader.onerror = (error) => reject(error);
-        reader.readAsDataURL(imageFile);
-    });
-}
