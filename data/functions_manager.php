@@ -1,6 +1,6 @@
 <?php
 // Enable error reporting for debugging
-ini_set('memory_limit', '256M');
+ini_set('memory_limit', '512M');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -469,10 +469,10 @@ function viewRecipe($conn, $id)
 function editRecipe($conn, $data)
 {
     $sql = "UPDATE recipes SET dish_name=?, dish_origin_id=?, dish_recipe_description=?, dish_ingredients=?, dish_complexity_id=?, 
-    dish_prep_time=?, dish_category_id=?, dish_rating=? WHERE dish_id=?";
+    dish_prep_time=?, dish_category_id=?, dish_rating=?, dish_steps = ? WHERE dish_id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        'sissiiiii',
+        'sissiiiisi',
         $data['dishName'],
         $data['dishOrigin'],
         $data['dishDescription'],
@@ -481,6 +481,7 @@ function editRecipe($conn, $data)
         $data['dishPrepTime'],
         $data['dishCategory'],
         $data['dishRating'],
+        $data['dishSteps'],
         $data['dishId']
     );
 
