@@ -1,18 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import * as apiCalls from './apiCalls.js';
 import * as functions from './functions.js';
 import * as commonController from './commonController.js';
@@ -107,83 +92,7 @@ export function addRecipeRow(recipe) {
     row.querySelector('.delete-btn').addEventListener('click', () => confirmAction('Delete recipe?', 'deleteRecipe', recipe.dish_id));
 }
 
-// async function updateRecipe() {
-//     const dishId = document.getElementById('editRecipeId').value;
-//     const dishName = document.getElementById('editDishName').value;
-//     const dishOrigin = document.getElementById('editDishOrigin').value;
-//     const dishDescription = document.getElementById('editDishDescription').value;
-//     const dishIngredients = document.getElementById('editDishIngredients').value;
-//     const dishSteps = document.getElementById('editDishSteps').value;
-//     const dishCategory = document.getElementById('editDishCategory').value;
-//     const dishComplexity = document.getElementById('editDishComplexity').value;
-//     const dishPrepTime = document.getElementById('editDishPrepTime').value;
-//     const dishRating = document.getElementById('editDishRating').value;
-//     const dishImage = document.getElementById('editDishImage').files[0];
 
-//     const reader = new FileReader();
-
-//     reader.onloadend = function () {
-//         const base64Image = reader.result ? reader.result.split(',')[1] : null;
-
-//         const jsonData = {
-//             function: 'editRecipe',
-//             dishId: dishId,
-//             dishName: dishName,
-//             dishOrigin: dishOrigin,
-//             dishDescription: dishDescription,
-//             dishIngredients: functions.convertToJSONArray(dishIngredients),
-//             dishSteps: dishSteps,
-//             dishCategory: dishCategory,
-//             dishComplexity: dishComplexity,
-//             dishPrepTime: dishPrepTime,
-//             dishRating: dishRating,
-//             dishImage: base64Image
-//         };
-
-//         apiCalls.editRecipe(jsonData).then(() => {
-//             document.getElementById('editRecipePopup').classList.remove('active');
-//             document.getElementById('overlay').classList.remove('active');
-//             addRecipeRows(); // Refresh the recipe list
-//         }).catch(error => {
-//             console.error('Error updating recipe:', error);
-//         });
-//     };
-
-//     reader.onerror = function (error) {
-//         console.error('Error reading file:', error);
-//     };
-
-//     if (dishImage) {
-//         reader.readAsDataURL(dishImage);
-//     } else {
-//         // No image selected, proceed without reading file
-//         const jsonData = {
-//             function: 'editRecipe',
-//             dishId: dishId,
-//             dishName: dishName,
-//             dishOrigin: dishOrigin,
-//             dishDescription: dishDescription,
-//             dishIngredients: functions.convertToJSONArray(dishIngredients),
-//             dishSteps: dishSteps,
-//             dishCategory: dishCategory,
-//             dishComplexity: dishComplexity,
-//             dishPrepTime: dishPrepTime,
-//             dishRating: dishRating,
-//             dishImage: null
-//         };
-
-//         apiCalls.editRecipe(jsonData).then(() => {
-//             document.getElementById('editRecipePopup').classList.remove('active');
-//             document.getElementById('overlay').classList.remove('active');
-//             addRecipeRows(); // Refresh the recipe list
-//         }).catch(error => {
-//             console.error('Error updating recipe:', error);
-//         });
-//     }
-// }
-
-
-//if the below works delete the above
 async function updateRecipe() {
     const dishId = document.getElementById('editRecipeId').value;
     const dishName = document.getElementById('editDishName').value;
@@ -266,52 +175,6 @@ async function updateRecipe() {
         });
     }
 }
-
-
-
-
-
-
-// Function to edit recipe
-// function editRecipe(recipe) {
-//     const editPopup = document.getElementById('editRecipePopup');
-//     const overlay = document.getElementById('overlay');
-//     const countryMap = {
-//         'india': 1,
-//         'china': 2,
-//         'italy': 3,
-//         'france': 4,
-//         'russia': 5,
-//         'moldova': 6
-//     };
-//     const complexityMap = {
-//         'very easy': 1,
-//         'easy': 2,
-//         'medium': 3,
-//         'hard': 4,
-//         'very hard': 5
-//     };
-//     const categoryMap = {
-//         'non-vegetarian': 1,
-//         'vegetarian': 2
-//     };
-
-//     document.getElementById('editRecipeId').value = recipe.dish_id;
-//     document.getElementById('editDishName').value = recipe.dish_name;
-//     document.getElementById('editDishOrigin').value = countryMap[recipe.origin_country];
-//     document.getElementById('editDishDescription').value = recipe.dish_recipe_description;
-//     document.getElementById('editDishIngredients').value = JSON.parse(recipe.dish_ingredients).join(', ');
-//     document.getElementById('editDishSteps').value = recipe.dish_steps;
-//     document.getElementById('editDishCategory').value = categoryMap[recipe.category_name];
-//     document.getElementById('editDishComplexity').value = complexityMap[recipe.complexity_name];
-//     document.getElementById('editDishPrepTime').value = recipe.dish_prep_time;
-//     document.getElementById('editDishRating').value = Math.floor(recipe.dish_rating);
-
-//     editPopup.classList.add('active');
-//     overlay.classList.add('active');
-// }
-
-//to delete the above if the below work fine
 
 
 // Function to update step numbers in edit form
@@ -1878,7 +1741,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ingredientDiv.classList.add("ingredient");
         ingredientDiv.innerHTML = `
             <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
-            <button type="button" class="removeIngredientButton">Remove</button>
+            <button type="button" class="removeIngredientButton steptIngredientsButton">Remove</button>
         `;
         ingredientsContainer.appendChild(ingredientDiv);
 
@@ -1896,10 +1759,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const stepDiv = document.createElement("div");
         stepDiv.classList.add("step");
         stepDiv.innerHTML = `
-            <h4>Step ${stepNumber}</h4>
+            <p>Step ${stepNumber}</p>
             <input type="text" class="stepTitle" placeholder="Title" required>
             <textarea class="stepDescription" placeholder="Description" required></textarea>
-            <button type="button" class="removeStepButton">Remove</button>
+            <button type="button" class="removeStepButton steptIngredientsButton">Remove</button>
         `;
         stepsContainer.appendChild(stepDiv);
 
@@ -2038,6 +1901,7 @@ function editRecipe(recipe) {
     document.getElementById('editDishComplexity').value = complexityMap[recipe.complexity_name];
     document.getElementById('editDishPrepTime').value = recipe.dish_prep_time;
     document.getElementById('editDishRating').value = Math.floor(recipe.dish_rating);
+    document.getElementById('editChefRecommended').value = recipe.dish_chef_recommended;
 
     editPopup.classList.add('active');
     overlay.classList.add('active');

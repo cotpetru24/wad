@@ -54,12 +54,12 @@
                         <div class="filter-group">
                             <select id="recipeOriginFilter">
                                 <option value="">All Countries</option>
-                                <option value="india">Indian</option>
-                                <option value="china">Chinese</option>
-                                <option value="italy">Italian</option>
-                                <option value="france">French</option>
-                                <option value="russia">Russian</option>
-                                <option value="moldova">Moldovan</option>
+                                <option value="india">India</option>
+                                <option value="china">China</option>
+                                <option value="italy">Italy</option>
+                                <option value="france">France</option>
+                                <option value="russia">Russia</option>
+                                <option value="moldova">Moldova</option>
                             </select>
                             <select id="recipeComplexityFilter">
                                 <option value="">All Complexities</option>
@@ -181,7 +181,7 @@
         <input type="text" id="dishName" placeholder="Dish name here" required>
     </div>
     <div class="form-group">
-        <label for="dishOrigin">Origin</label>
+        <label for="dishOrigin">Origin:</label>
         <select id="dishOrigin" required>
             <option value="" disabled selected>Select Origin</option>
             <option value="1">India</option>
@@ -205,14 +205,14 @@
     <div class="form-group">
         <label>Dish Ingredients:</label>
         <div id="ingredientsContainer"></div>
-        <button type="button" id="addIngredientButton">+ Add Ingredient</button>
+        <button type="button" class = "steptIngredientsButton" id="addIngredientButton">+ Add Ingredient</button>
     </div>
 
 
 
 
     <div class="form-group">
-        <label for="dishCategory">Dish Category</label>
+        <label for="dishCategory">Dish Category:</label>
         <select id="dishCategory" required>
             <option value="" disabled selected>Select Category</option>
             <option value="1">non-vegetarian</option>
@@ -262,9 +262,9 @@
     
     <!-- Steps Section -->
     <div class="form-group">
-        <label>Steps</label>
+        <label>Steps:</label>
         <div id="stepsContainer"></div>
-        <button type="button" id="addStepButton">+ Add Step</button>
+        <button class="steptIngredientsButton" type="button" id="addStepButton">+ Add Step</button>
     </div>
 
     <button class="button" id="addNewRecipe">+ Save Recipe</button>
@@ -556,6 +556,15 @@
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="editChefRecommended">Chef Recommended</label>
+                <select id="editChefRecommended">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="0">Don't Know</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
                 </select>
             </div>
             <div class="form-group">
