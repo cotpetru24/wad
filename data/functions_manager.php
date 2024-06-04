@@ -539,5 +539,33 @@ function authenticateUser($conn, $data){
 }
 
 
+// Fucntion to retrive messages from db
+function getUsersList($conn)
+{
+    $sql = "SELECT * FROM users 
+            ORDER BY user_email ASC";
+    $stmt = $conn->prepare($sql);
+    $result = $conn->query($sql);
+    if ($stmt->execute()) {
+        if ($result) {
+            $results = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($results, $row);
+            }
+
+            echo json_encode($results);
+        } else {
+            $noResults = [];
+            echo json_encode($noResults);
+        }
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error getting users: " . $stmt->error]);
+    }
+    $stmt->close();
+}
+
+
+
+
 
 ?>

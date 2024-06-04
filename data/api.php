@@ -30,6 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'getMessagesList':
                 getMessagesList($conn);
                 break;
+            case 'getUsersList':
+                getUsersList($conn);
+                break;
             default:
                 $response = ["status" => "error", "message" => "Invalid function"];
                 echo json_encode($response);
@@ -83,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'registerUser':
                 registerUser($conn, $data);
                 break;
+
             default:
                 $response = ["status" => "error", "message" => "Invalid function"];
                 echo json_encode($response);

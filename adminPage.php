@@ -29,7 +29,7 @@ check_user_session('admin'); // Only admin users can access
             </div>
             <nav>
                 <div id="nav">
-                    <button id="homeButton" onclick="location.href='./index.html'"></button>
+                    <button id="homeButton" onclick="location.href='./index.php'"></button>
                     <!-- <button>Register</button> -->
                     <button>Log Out</button>
                     <button onclick="location.href='/adminPage.html'">Admin Page</button>

@@ -446,6 +446,103 @@ async function listMessages() {
     }
 }
 
+
+
+
+
+
+
+
+
+function addUserRow(user) {
+    const userList = document.getElementById('usersList');
+    const row = document.createElement('tr');
+    row.id = user.user_id;
+
+    // Create a unique ID for the button and image
+
+    row.innerHTML = `
+        <td>${user.sender_name} ${user.user_surname}</td>
+        <td>${user.user_email}</td>
+        <td>${user.user_type}</td>
+        <td class="actions">
+            <button class="read-btn">Read</button>
+            <button class="delete-btn">Delete</button>
+        </td>
+    `;
+
+    // Append the new row to the messages list
+    userList.appendChild(row);
+
+
+
+
+    // Set event handlers for the buttons
+
+    row.querySelector('.delete-btn').addEventListener('click', () => {
+        confirmAction('Delete User?', 'deleteUser', user.user_id, () => {
+            listUsers();  // Refresh the message list after deleting the message
+        });
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function listUsers() {
+    try {
+        const usersList = document.getElementById("usersList");
+        if (usersList) {
+            usersList.innerHTML = "";
+            const users = await apiCalls.getUsersList();
+            users.forEach(user => addUserRow(user));
+        } else {
+            console.error("Element with ID 'usersList' not found.");
+        }
+    } catch (error) {
+        console.error("Error fetching users:", error);
+    }
+}
+
+
+
+
+
+
+
+// Listing messages in the messages tab/admin page
+const usersTab = document.getElementById("usersTab");
+if (usersTab) {
+    usersTab.addEventListener('click', async () => {
+        await listUsers();
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Toggle Add Recipe Form
 document.getElementById("toggleFormButton").addEventListener("click", function () {
     const form = document.getElementById("addRecipeForm");
@@ -558,26 +655,36 @@ function addMessageRow(message) {
 
 
 
-// Function to add a user row to the table
-function addUserRow(user) {
-    const usersList = document.getElementById('usersList');
-    const row = document.createElement('tr');
+// // Function to add a user row to the table
+// function addUserRow(user) {
+//     const usersList = document.getElementById('usersList');
+//     const row = document.createElement('tr');
 
-    row.innerHTML = `
-                <td>${user.name}</td>
-                <td>${user.email}</td>
-                <td>${user.role}</td>
-                <td class="actions">
-                    <button onclick="editUser(${JSON.stringify(user)})">Edit</button>
-                    <button onclick="confirmAction('Reset password?', 'resetPassword', ${user.id})">Reset Password</button>
-                    <button onclick="confirmAction('Disable user?', 'disableUser', ${user.id})">Disable</button>
-                    <button onclick="confirmAction('Unlock user?', 'unlockUser', ${user.id})">Unlock</button>
-                    <button onclick="confirmAction('Delete user?', 'deleteUser', ${user.id})">Delete</button>
-                </td>
-            `;
+//     row.innerHTML = `
+//                 <td>${user.name}</td>
+//                 <td>${user.email}</td>
+//                 <td>${user.role}</td>
+//                 <td class="actions">
+//                     <button onclick="editUser(${JSON.stringify(user)})">Edit</button>
+//                     <button onclick="confirmAction('Reset password?', 'resetPassword', ${user.id})">Reset Password</button>
+//                     <button onclick="confirmAction('Disable user?', 'disableUser', ${user.id})">Disable</button>
+//                     <button onclick="confirmAction('Unlock user?', 'unlockUser', ${user.id})">Unlock</button>
+//                     <button onclick="confirmAction('Delete user?', 'deleteUser', ${user.id})">Delete</button>
+//                 </td>
+//             `;
 
-    usersList.appendChild(row);
-}
+//     usersList.appendChild(row);
+// }
+
+
+
+
+
+
+
+
+
+
 
 // Function to edit user
 function editUser(user) {

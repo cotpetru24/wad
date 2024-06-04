@@ -13,7 +13,7 @@
 // this is the old one in case the above doesn't work use this onw
 // export async function getRecipes(){
 //     try{
-//         const response = await fetch("http://localhost/data/index.php");
+//         const response = await fetch("http://localhost/data/api.php");
 //         if (!response.ok) {
 //             throw new Error(`HTTP error! status: ${response.status}`);
 //         }
@@ -37,7 +37,7 @@ export async function getRecipes(filterCriteria = {}) {
             }
         }
 
-        const response = await fetch(`http://localhost/data/index.php?${param.toString()}`,
+        const response = await fetch(`http://localhost/data/api.php?${param.toString()}`,
             {
                 method: "GET",
                 headers: {
@@ -70,7 +70,7 @@ export async function addNewRecipe(jsonData) {
         }
         jsonData.function = "addNewRecipe";
 
-        const response = await fetch("http://localhost/data/index.php",
+        const response = await fetch("http://localhost/data/api.php",
             {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -98,7 +98,7 @@ export async function addNewRecipe(jsonData) {
 export async function viewRecipe(recipe_ID) {
     try {
         const param = new URLSearchParams({ "function": "viewRecipe", "recipeID": "recipe_ID" });
-        const recipeData = await fetch("http://localhost/data/index.php", { method: "POST", body: param });
+        const recipeData = await fetch("http://localhost/data/api.php", { method: "POST", body: param });
     }
     catch (error) {
         console.log("error retrieving data " + error)
@@ -110,7 +110,7 @@ export async function sendMessage(jsonData) {
     try {
         jsonData.function = "sendMessage";
 
-        const response = await fetch("http://localhost/data/index.php",
+        const response = await fetch("http://localhost/data/api.php",
             { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(jsonData) });
 
         if (!response.ok) {
@@ -157,7 +157,7 @@ export async function getMessages() {
         const param = new URLSearchParams({ "function": "getMessagesList" });
 
 
-        const response = await fetch(`http://localhost/data/index.php?${param.toString()}`,
+        const response = await fetch(`http://localhost/data/api.php?${param.toString()}`,
             {
                 method: "GET",
                 headers: {
@@ -176,6 +176,33 @@ export async function getMessages() {
     }
 }
 
+
+// get messages function - API call
+export async function getUsersList() {
+    try {
+        const param = new URLSearchParams({ "function": "getUsersList" });
+
+
+        const response = await fetch(`http://localhost/data/api.php?${param.toString()}`,
+            {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const users = await response.json();
+        return users;
+    }
+    catch (error) {
+        console.log("Error getting users:", error);
+    }
+}
+
+
 // delete message fucntion - API call
 export async function deleteMessage(messageId) {
     try {
@@ -183,7 +210,7 @@ export async function deleteMessage(messageId) {
             "function": "deleteMessage",
             "messageId": messageId
         };
-        const response = await fetch("http://localhost/data/index.php", {
+        const response = await fetch("http://localhost/data/api.php", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -203,7 +230,7 @@ export async function deleteMessage(messageId) {
 export async function editRecipe(jsonData) {
     try {
         jsonData.function = "editRecipe";
-        const response = await fetch("http://localhost/data/index.php",
+        const response = await fetch("http://localhost/data/api.php",
             {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -266,7 +293,7 @@ export async function deleteRecipe(recipeId) {
             "function": "deleteRecipe",
             "recipeId": recipeId
         };
-        const response = await fetch("http://localhost/data/index.php", {
+        const response = await fetch("http://localhost/data/api.php", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -293,7 +320,7 @@ export async function searchRecipes(searchCriteria) {
             "criteria": searchCriteria
         };
 
-        const response = await fetch(`http://localhost/data/index.php`, {
+        const response = await fetch(`http://localhost/data/api.php`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -320,7 +347,7 @@ export async function searchMessages(searchCriteria) {
             "criteria": searchCriteria
         };
 
-        const response = await fetch(`http://localhost/data/index.php`, {
+        const response = await fetch(`http://localhost/data/api.php`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -350,7 +377,7 @@ export async function filterMessages(filterCriteria) {
             "criteria": filterCriteria
         };
 
-        const response = await fetch(`http://localhost/data/index.php`, {
+        const response = await fetch(`http://localhost/data/api.php`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -378,7 +405,7 @@ export async function flagUnflagMessage(messageId) {
             "message_id": messageId
         };
 
-        const response = await fetch(`http://localhost/data/index.php`, {
+        const response = await fetch(`http://localhost/data/api.php`, {
             method: "POST",
             headers: {
                 'Content-Type': 'appliction/json'
@@ -406,7 +433,7 @@ export async function markMessageAsRead(messageId) {
             "message_id": messageId
         };
 
-        const response = await fetch(`http://localhost/data/index.php`, {
+        const response = await fetch(`http://localhost/data/api.php`, {
             method: "POST",
             headers: {
                 'Content-Type': "application/json"

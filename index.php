@@ -47,8 +47,7 @@ require 'data/sessionChecker.php';
                     <button onclick="location.href='data/logout.php'">logout</button>
                     <button onclick="location.href='auth.html'">Register</button>
                     <button onclick="location.href='auth.html'">Login</button>
-                    <button onclick="location.href='adminPage.php'">Admin Page
-                    </button>
+                    <button onclick="location.href='adminPage.php'">Admin Page</button>
                 </div>
                 <div id="searchDiv">
                     <input type="search" id="indexRecipeSearchBox" placeholder="Search recipes...">
