@@ -8,200 +8,6 @@ error_reporting(E_ALL);
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-// function getRecipesList($conn, $filterCriteria = [])
-// {
-//     // $sql = "SELECT * FROM recipes WHERE 1=1";
-//     $sql = "SELECT 
-//     recipes.dish_id, 
-//     recipes.dish_name, 
-//     origin.origin_country, 
-//     recipes.dish_recipe_description, 
-//     category.category_name, 
-//     complexity.complexity_name,
-//     recipes.dish_prep_time, 
-//     recipes.dish_img, 
-//     recipes.dish_upload_date_time, 
-//     recipes.dish_rating,  
-//     recipes.dish_ingredients,
-//     recipes.dish_steps
-//     FROM recipes
-//     INNER JOIN category ON recipes.dish_category_id = category.category_id
-//     INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
-//     INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
-//     WHERE 1=1;";
-//     // ORDER BY recipes.dish_id ASC;";
-
-//     $paramTypes = '';
-//     $paramValues = [];
-//     if (!empty($filterCriteria)) {
-//         foreach ($filterCriteria as $key => $value) {
-//             $sql .= " AND $key=?";
-//             $paramTypes .= 's'; // Assuming all parameters are strings; change as necessary
-//             $paramValues[] = $value;
-//         }
-//     }
-
-//     $stmt = $conn->prepare($sql);
-
-//     if (!empty($paramValues)) {
-//         $stmt->bind_param($paramTypes, ...$paramValues);
-//     }
-
-//     $stmt->execute();
-//     $result = $stmt->get_result();
-
-//     if ($result->num_rows > 0) {
-//         $results = [];
-//         while ($row = $result->fetch_assoc()) {
-//             if (!empty($row['dish_img'])) {
-//                 $dishImgData = $row['dish_img'];
-//                 $row['dish_img'] = 'data:image/jpeg;base64,' . base64_encode($dishImgData);
-//             }
-//             array_push($results, $row);
-//         }
-//         echo json_encode($results);
-//     } else {
-//         $noResults = [
-//             [
-//                 "recipe_id" => "0",
-//                 "dish_name" => "No results",
-//                 "dish_recipe_description" => "No recipes to list",
-//                 "dish_ingredients" => "No ingredients",
-//                 "dish_complexity_id" => "1",
-//                 "dish_prep_time" => "0"
-//             ]
-//         ];
-//         echo json_encode($noResults);
-//     }
-
-//     $stmt->close();
-// }
-
-
-// function getRecipesList($conn, $filterCriteria = [])
-// {
-//     $sql = "SELECT 
-//         recipes.dish_id, 
-//         recipes.dish_name, 
-//         origin.origin_country, 
-//         recipes.dish_recipe_description, 
-//         category.category_name, 
-//         complexity.complexity_name,
-//         recipes.dish_prep_time, 
-//         recipes.dish_img, 
-//         recipes.dish_upload_date_time, 
-//         recipes.dish_rating,  
-//         recipes.dish_ingredients,
-//         recipes.dish_steps,
-//         recipes.dish_chef_recommended
-//         FROM recipes
-//         INNER JOIN category ON recipes.dish_category_id = category.category_id
-//         INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
-//         INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
-//         WHERE 1=1";
-
-//     $paramTypes = '';
-//     $paramValues = [];
-
-//     // Adding filter criteria to the SQL query
-//     if (!empty($filterCriteria)) {
-//         foreach ($filterCriteria as $key => $value) {
-//             if ($key !== 'function') {
-//                 // Validate column names to prevent SQL injection
-//                 $allowedColumns = ['dish_chef_recommended', 'dish_origin_id', 'origin_country', 'dish_rating', 'dish_prep_time', 'category_name', 'complexity_name', 'origin_country'];
-//                 $keyParts = explode('.', $key);
-//                 // Handle keys with two parts
-//                 if (count($keyParts) == 2 && in_array($keyParts[1], $allowedColumns)) {
-//                     $sql .= " AND {$keyParts[1]}=?";
-//                     // Handle keys with one part
-//                 } elseif (count($keyParts) == 1 && in_array($keyParts[0], $allowedColumns)) {
-//                     $sql .= " AND {$keyParts[0]}=?";
-//                 } else {
-//                     // Skip invalid keys
-//                     continue;
-//                 }
-//                 // Dynamically determine parameter type
-//                 if (is_int($value)) {
-//                     $paramTypes .= 'i';
-//                 } elseif (is_float($value)) {
-//                     $paramTypes .= 'd';
-//                 } elseif (is_string($value)) {
-//                     $paramTypes .= 's';
-//                 } else {
-//                     // Default to string if type is not determined
-//                     $paramTypes .= 's';
-//                 }
-
-//                 $paramValues[] = $value;
-
-//             }
-//         }
-//     }
-
-//     $sql .= " ORDER BY recipes.dish_id ASC";
-
-//     $stmt = $conn->prepare($sql);
-//     if ($stmt === false) {
-//         echo json_encode(["status" => "error", "message" => "Failed to prepare SQL statement"]);
-//         return;
-//     }
-
-//     if (!empty($paramValues)) {
-//         $stmt->bind_param($paramTypes, ...$paramValues);
-//     }
-
-//     $stmt->execute();
-//     $result = $stmt->get_result();
-
-//     if ($result->num_rows > 0) {
-//         $results = [];
-//         while ($row = $result->fetch_assoc()) {
-//             if (!empty($row['dish_img'])) {
-//                 $dishImgData = $row['dish_img'];
-//                 $row['dish_img'] = 'data:image/jpeg;base64,' . base64_encode($dishImgData);
-//             }
-//             array_push($results, $row);
-//         }
-//         echo json_encode($results);
-//     } else {
-//         $noResults = [
-//             [
-//                 "recipe_id" => "0",
-//                 "dish_name" => "No results",
-//                 "dish_recipe_description" => "No recipes to list",
-//                 "dish_ingredients" => "No ingredients",
-//                 "dish_complexity_id" => "1",
-//                 "dish_prep_time" => "0"
-//             ]
-//         ];
-//         echo json_encode($noResults);
-//     }
-
-//     $stmt->close();
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//if this works delete the above
-
 function getRecipesList($conn, $filterCriteria = [])
 {
     $sql = "SELECT 
@@ -515,73 +321,8 @@ function editRecipe($conn, $data)
         echo json_encode(['status' => 'error', 'message' => 'Error adding recipe: ' . $stmt->error]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // if ($stmt->execute()) {
-    //     echo json_encode(['status' => 'success', 'message' => 'Recipe edited successfully']);
-    // } else {
-    //     echo json_encode(['status' => 'error', 'message' => 'Error editing recipe: ' . $stmt->error]);
-    // }
-
     $stmt->close();
 }
-
-
-
-
-// //Function to insert an image in db
-// function insertImage($conn, $base64Image)
-// {
-//     // Decode the Base64 encoded image
-//     $binaryData = base64_decode($base64Image);
-
-//     if ($binaryData === false) {
-//         echo json_encode(["status" => "error", "message" => "Base64 decoding failed"]);
-//         return;
-//     }
-
-//     // Prepare the SQL statement to update the image in the database
-//     $stmt = $conn->prepare("UPDATE recipes SET dish_img = ? WHERE dish_id = 2");
-
-//     // Bind the binary data to the prepared statement
-//     $null = NULL;
-//     $stmt->bind_param("b", $null);
-//     $stmt->send_long_data(0, $binaryData);
-
-//     if ($stmt->execute()) {
-//         echo json_encode(["status" => "success", "message" => "Image uploaded successfully"]);
-//     } else {
-//         echo json_encode(["status" => "error", "message" => "Failed to upload image: " . $stmt->error]);
-//     }
-//     $stmt->close();
-// }
-
-
-
-
 
 
 function searchRecipes($conn, $criteria)
@@ -728,4 +469,56 @@ function filterMessages($conn, $data)
         echo json_encode(["status" => "error", "message" => "Error executing query: " . $stmt->error]);
     }
     $stmt->close();
+}
+
+
+function registerUser($conn, $data){
+    $sql = "INSERT INTO users (user_name, user_surname, user_email, user_password_hash) 
+    VALUES ( ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+    // $userRole = 'user'; // Default role for registered users
+    $stmt->bind_param("ssss", 
+        $data['name'],
+        $data['surname'],
+        $data['email'],
+        $hashedPassword,
+        // $userRole
+        );
+
+    if ($stmt->execute()) {
+        error_log("User registered successfully.");
+        echo json_encode(['status' => 'success', 'message' => 'User registered successfully']);
+    } else {
+        error_log("Error registering user: " . $stmt->error);
+        echo json_encode(['status' => 'error', 'message' => 'Error registering user: ' . $stmt->error]);
+    }
+
+    $stmt->close();
+}
+
+
+function authenticateUser($conn, $data){
+    $sql = "SELECT user_id, user_password_hash, user_type FROM users WHERE user_email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $data['email']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows == 1){
+        $user = $result->fetch_assoc();
+        if (password_verify($data['password'], $user['user_password_hash'])){
+            session_start();
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['user_type'] = $user['user_type'];
+            echo json_encode(['status' => 'success', 'message' => 'Login successful']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Invalid password']);
+        }
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'User not found']);
+    }
+
+    $stmt->close();
+
 }

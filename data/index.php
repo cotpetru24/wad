@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -56,9 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'viewRecipe':
                 viewRecipe($conn, $data['recipeID']);
                 break;
-            // case 'insertImage':
-            //     insertImage($conn, $data['image']);
-            //     break;
             case 'sendMessage':
                 sendMessage($conn, $data);
                 break;
@@ -77,9 +77,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'markMessageAsRead':
                 markMessageAsRead($conn, $data);
                 break;
-
             case 'flagUnflagMessage':
                 flagUnflagMessage($conn, $data);
+                break;
+            case 'registerUser':
+                registerUser($conn, $data);
                 break;
             default:
                 $response = ["status" => "error", "message" => "Invalid function"];
