@@ -95,6 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'searchUsers':
                 searchUsers($conn, $data);
                 break;
+            case 'editUser':
+                editUser($conn, $data);
+                break;
     
 
                 

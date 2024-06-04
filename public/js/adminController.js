@@ -454,37 +454,6 @@ async function listMessages() {
 
 
 
-function addUserRow(user) {
-    const userList = document.getElementById('usersList');
-    const row = document.createElement('tr');
-    row.id = user.user_id;
-
-    // Create a unique ID for the button and image
-
-    row.innerHTML = `
-        <td>${user.user_name} ${user.user_surname}</td>
-        <td>${user.user_email}</td>
-        <td>${user.user_type}</td>
-        <td class="actions">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-        </td>
-    `;
-
-    // Append the new row to the messages list
-    userList.appendChild(row);
-
-
-
-
-    // Set event handlers for the buttons
-
-    row.querySelector('.delete-btn').addEventListener('click', () => {
-        confirmAction('Delete User?', 'deleteUser', user.user_id, () => {
-            listUsers();  // Refresh the message list after deleting the message
-        });
-    });
-}
 
 
 
@@ -500,20 +469,6 @@ function addUserRow(user) {
 
 
 
-async function listUsers() {
-    try {
-        const usersList = document.getElementById("usersList");
-        if (usersList) {
-            usersList.innerHTML = "";
-            const users = await apiCalls.getUsersList();
-            users.forEach(user => addUserRow(user));
-        } else {
-            console.error("Element with ID 'usersList' not found.");
-        }
-    } catch (error) {
-        console.error("Error fetching users:", error);
-    }
-}
 
 
 
@@ -521,15 +476,6 @@ async function listUsers() {
 
 
 
-
-
-// Listing messages in the messages tab/admin page
-const usersTab = document.getElementById("usersTab");
-if (usersTab) {
-    usersTab.addEventListener('click', async () => {
-        await listUsers();
-    });
-}
 
 
 
@@ -688,49 +634,6 @@ function addMessageRow(message) {
 
 
 
-// Function to edit user
-function editUser(user) {
-    const editUserPopup = document.getElementById('editUserPopup');
-    const overlay = document.getElementById('overlay');
-    document.getElementById('editUserId').value = user.id;
-    document.getElementById('editUserName').value = user.name;
-    document.getElementById('editUserEmail').value = user.email;
-    document.getElementById('editUserPassword').value = ''; // Do not prefill password
-    document.getElementById('editUserRole').value = user.role;
-
-    editUserPopup.classList.add('active');
-    overlay.classList.add('active');
-}
-
-// Save changes button event listener for users
-document.getElementById('saveUserChangesButton').addEventListener('click', updateUser);
-
-// Function to update user
-async function updateUser() {
-    const userId = document.getElementById('editUserId').value;
-    const userName = document.getElementById('editUserName').value;
-    const userEmail = document.getElementById('editUserEmail').value;
-    const userPassword = document.getElementById('editUserPassword').value;
-    const userRole = document.getElementById('editUserRole').value;
-
-    const jsonData = {
-        function: 'editUser',
-        userId: userId,
-        userName: userName,
-        userEmail: userEmail,
-        userPassword: userPassword,
-        userRole: userRole
-    };
-
-    try {
-        await apiCalls.editUser(jsonData);
-        document.getElementById('editUserPopup').classList.remove('active');
-        document.getElementById('overlay').classList.remove('active');
-        addUserRows(); // Refresh the user list
-    } catch (error) {
-        console.error('Error updating user:', error);
-    }
-}
 
 // Tabs functionality ///////////////************ the same is in common controller - should remove this one */
 export function tabsController() {
@@ -1362,6 +1265,7 @@ async function handleUserSearch(searchCriteria) {
         console.error("Error fetching users:", error);
     }
 
+}
 
 
 
@@ -1369,5 +1273,210 @@ async function handleUserSearch(searchCriteria) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Function to edit user
+function editUser(user) {
+    const editPopup = document.getElementById('editUserPopup');
+    const overlay = document.getElementById('overlay');
+
+    document.getElementById('editUserId').value = user.user_id;
+    document.getElementById('editUserName').value = user.user_name;
+    document.getElementById('editUserSurname').value = user.user_surname;
+
+    document.getElementById('editUserEmail').value = user.user_email;
+    document.getElementById('editUserPassword').value = "";
+    document.getElementById('editUserRole').value = user.user_type;
+
+    editPopup.classList.add('active');
+    overlay.classList.add('active');
+}
+
+
+
+
+
+
+
+
+
+
+
+// Save changes button event listener for users
+document.getElementById('saveUserChangesButton').addEventListener('click', updateUser);
+
+async function updateUser() {
+    const userId = document.getElementById('editUserId').value;
+    const userName = document.getElementById('editUserName').value;
+    const userSurname = document.getElementById('editUserSurname').value;
+    const userEmail = document.getElementById('editUserEmail').value;
+    const userPassword = document.getElementById('editUserPassword').value;
+    const userRole = document.getElementById('editUserRole').value;
+
+
+    const jsonData = {
+        function: 'editUser',
+        userId: userId,
+        userName: userName,
+        userSurname: userSurname,
+        userEmail: userEmail,
+        userPassword: userPassword,
+        userRole: userRole
+    };
+
+    try {
+        await apiCalls.editUser(jsonData);
+        document.getElementById('editUserPopup').classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
+        listUsers(); // Refresh the user list
+    } catch (error) {
+        console.error('Error updating user:', error);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function addUserRow(user) {
+    const userList = document.getElementById('usersList');
+    const row = document.createElement('tr');
+    row.id = user.user_id;
+
+    // Create a unique ID for the button and image
+
+    row.innerHTML = `
+        <td>${user.user_name} ${user.user_surname}</td>
+        <td>${user.user_email}</td>
+        <td>${user.user_type}</td>
+        <td class="actions">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+        </td>
+    `;
+
+    // Append the new row to the messages list
+    userList.appendChild(row);
+
+
+
+
+    // Set event handlers for the buttons
+
+    row.querySelector('.delete-btn').addEventListener('click', () => {
+        confirmAction('Delete User?', 'deleteUser', user.user_id, () => {
+            listUsers();  // Refresh the users list after deleting the user
+        });
+    });
+    row.querySelector('.edit-btn').addEventListener('click', () => editUser(user));
 
 }
+
+
+
+
+async function listUsers() {
+    try {
+        const usersList = document.getElementById("usersList");
+        if (usersList) {
+            usersList.innerHTML = "";
+            const users = await apiCalls.getUsersList();
+            users.forEach(user => addUserRow(user));
+        } else {
+            console.error("Element with ID 'usersList' not found.");
+        }
+    } catch (error) {
+        console.error("Error fetching users:", error);
+    }
+}
+
+
+
+
+
+
+
+
+
+// Listing messages in the messages tab/admin page
+const usersTab = document.getElementById("usersTab");
+if (usersTab) {
+    usersTab.addEventListener('click', async () => {
+        await listUsers();
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

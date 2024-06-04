@@ -29,9 +29,12 @@ check_user_session('admin'); // Only admin users can access
             </div>
             <nav>
                 <div id="nav">
+                <?php if (isUserLoggedIn()): ?>
+        <h3 id="greeting">Hi <?= $_SESSION['user_name'] ?>!</h3>
+<?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
                     <!-- <button>Register</button> -->
-                    <button>Log Out</button>
+                    <button onclick="location.href='data/logout.php'">Logout</button>
                     <button onclick="location.href='/adminPage.php'">Admin Page</button>
                 </div>
             </nav>
@@ -258,9 +261,11 @@ check_user_session('admin'); // Only admin users can access
                 <div class="container">
                     <div class="search-filter">
                         <input type="search" id="userSearchBox" placeholder="Search users...">
-                        <button id="adminUsersSearch">Search</button>
-                        <button id="showAllUsers">Show All</button>
 
+                        <div class="adminSearchShowBtnDiv">
+                            <button id="adminUsersSearch">Search</button>
+                            <button id="showAllUsers">Show All</button>
+                        </div>
                         <div class="filter-group">
                             <select id="userRoleFilter">
                                 <option value="">All Roles</option>
@@ -432,23 +437,42 @@ check_user_session('admin'); // Only admin users can access
             <!-- Message details go here -->
         </div>
     </div>
+
+
+
+
+
+
+
+
+
     <div class="popup" id="editUserPopup">
         <div class="popupHeader">
             <h2>Edit User</h2>
             <button class="closeButton" id="closeEditUserPopup">&times;</button>
         </div>
         <div id="editUserContent">
+            <input type="hidden" id="editUserId">
+
             <!-- Edit form goes here -->
             <div class="form-group">
                 <label for="editUserName">Name:</label>
                 <input type="text" id="editUserName" placeholder="User name here">
             </div>
+
+            <div class="form-group">
+                <label for="editUserSurname">Surname:</label>
+                <input type="text" id="editUserSurname" placeholder="User surname here">
+            </div>
+
+
+
             <div class="form-group">
                 <label for="editUserEmail">Email:</label>
                 <input type="email" id="editUserEmail" placeholder="User email here">
             </div>
             <div class="form-group">
-                <label for="editUserPassword">Password:</label>
+                <label for="editUserPassword">Password (leave blank to keep the current password):</label>
                 <input type="password" id="editUserPassword" placeholder="User password here">
             </div>
             <div class="form-group">
@@ -461,6 +485,19 @@ check_user_session('admin'); // Only admin users can access
             <button class="button" id="saveUserChangesButton">Save Changes</button>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="popup" id="confirmActionPopup">
         <div class="popupHeader">
             <h2>Confirm Action</h2>

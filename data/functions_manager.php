@@ -515,7 +515,7 @@ function registerUser($conn, $data){
 }
 
 function authenticateUser($conn, $data){
-    $sql = "SELECT user_id, user_password_hash, user_type FROM users WHERE user_email = ?";
+    $sql = "SELECT user_id, user_password_hash, user_type, user_name FROM users WHERE user_email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $data['email']);
     $stmt->execute();
@@ -525,7 +525,8 @@ function authenticateUser($conn, $data){
         $user = $result->fetch_assoc();
         if (password_verify($data['password'], $user['user_password_hash'])){
             $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['user_type'] = $user['user_type']; // Updated to match the database column
+            $_SESSION['user_type'] = $user['user_type'];
+            $_SESSION['user_name'] = $user['user_name'];
             return ['status' => 'success', 'message' => 'Login successful'];
         } else {
             $response = ['status' => 'error', 'message' => 'Invalid password'];
@@ -651,6 +652,79 @@ function searchUsers($conn, $criteria)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function editUser($conn, $data) {
+    $passwordClause = "";
+    $types = 'ssssi'; // Parameter types: string, string, string, string, integer
+    $params = [
+        $data['userName'],
+        $data['userSurname'],
+        $data['userEmail'],
+        $data['userRole'],
+        $data['userId']
+    ];
+
+    // If password is provided and not null, add it to the SQL and parameters
+    if (!empty($data['userPassword'])) {
+        $hashedPassword = password_hash($data['userPassword'], PASSWORD_DEFAULT);
+        $passwordClause = ", user_password_hash=?";
+        $types = 'sssssi'; // Adjust parameter types to include the password
+        array_splice($params, 4, 0, $hashedPassword); // Insert password at the correct position
+    }
+
+    $sql = "UPDATE users SET 
+            user_name=?, 
+            user_surname=?, 
+            user_email=?, 
+            user_type=?"
+            . $passwordClause . 
+            " WHERE user_id=?";
+
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        error_log("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+        echo json_encode(['status' => 'error', 'message' => 'Prepare failed: ' . $conn->error]);
+        return;
+    }
+
+    // Bind the parameters dynamically
+    $stmt->bind_param($types, ...$params);
+
+    if ($stmt->execute()) {
+        error_log("User updated successfully.");
+        echo json_encode(['status' => 'success', 'message' => 'User updated successfully']);
+    } else {
+        error_log("Error updating user: " . $stmt->error);
+        echo json_encode(['status' => 'error', 'message' => 'Error updating user: ' . $stmt->error]);
+    }
+
+    $stmt->close();
+}
 
 
 

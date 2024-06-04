@@ -43,7 +43,11 @@ require 'data/sessionChecker.php';
             </div>
             <nav>
                 <div id="nav">
-                    <button id="homeButton"></button>
+                <?php if (isUserLoggedIn()): ?>
+        <h3 id="greeting">Hi <?= $_SESSION['user_name'] ?>!</h3>
+<?php endif; ?>
+
+                    <button id="homeButton" onclick="location.href='./index.php'"></button>
                     <!-- <button onclick="location.href='data/logout.php'">logout</button>
                     <button onclick="location.href='auth.html'">Register</button>
                     <button onclick="location.href='auth.html'">Login</button>
@@ -51,13 +55,13 @@ require 'data/sessionChecker.php';
 
 
                     <?php if (isUserLoggedIn()): ?>
-    <button onclick="location.href='data/logout.php'">Logout</button>
+                <button onclick="location.href='data/logout.php'">Logout</button>
 <?php else: ?>
-    <button onclick="location.href='auth.html'">Login</button>
+                <button onclick="location.href='auth.html'">Login</button>
 <?php endif; ?>
 
 <?php if (isAdmin()): ?>
-    <button onclick="location.href='adminPage.php'">Admin Page</button>
+                <button onclick="location.href='adminPage.php'">Admin Page</button>
 <?php endif; ?>
                 </div>
                 <div id="searchDiv">

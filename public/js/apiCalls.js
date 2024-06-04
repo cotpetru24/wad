@@ -568,3 +568,29 @@ export async function searchUsers(searchCriteria) {
         return [];
     }
 }
+
+
+
+
+export async function editUser(jsonData) {
+    try {
+        jsonData.function = "editUser";
+        const response = await fetch("http://localhost/data/api.php",
+            {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(jsonData)
+            }
+        );
+        if (!response.ok) {
+            throw new Error(`http error! status: , ${response.status}`);
+        }
+        const responseData = await response.json();
+        console.log(`changes saved successfully`, responseData);
+    }
+
+    catch (error) {
+        console.log("error saving changes" + error);
+    }
+
+}

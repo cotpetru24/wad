@@ -157,7 +157,7 @@ nav {
 #nav button {
   background-color: transparent;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border: none;
   text-align: center;
   font-size: 16px;
@@ -261,11 +261,12 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: 50px;
 }
 
-#footer {
+#footer
+{
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -275,6 +276,21 @@ nav {
   justify-content: space-between;
   width: 100%;
   min-height: 300px;
+  background-color: #0c0723;
+  color: white;
+  margin-top: 30px;
+}
+
+#authFooter {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  border-top: 4px solid #9b59b6;
+  justify-content: space-between;
+  width: 100%;
+  /* min-height: 300px; */
   background-color: #0c0723;
   color: white;
   margin-top: 30px;
@@ -314,6 +330,8 @@ nav {
 }
 
 #getInTouchBtn:hover,
+#loginBtn:hover,
+#registerBtn:hover,
 .recipeFooterDiv button:hover,
 #adminRecipesFilter:hover,
 #adminRecipesSearch:hover,
@@ -322,12 +340,14 @@ nav {
 #adminMessagesFilter:hover,
 #adminUsersSearch:hover,
 #adminUsersFilter:hover,
-#adminRecipesClearFilters:hover {
+#adminRecipesClearFilters:hover,
+#showAllUsers:hover,
+#adminUsersSearch:hover {
   background: #0c0723;
   color: #9b59b6;
 }
 
-.contactFormDiv {
+.contactFormDiv{
   position: fixed;
   top: 50%;
   left: 50%;
@@ -338,6 +358,21 @@ nav {
   border: 2px solid #9b59b6;
   border-radius: 7px;
   z-index: 10;
+  background-color: white;
+  width: 500px;
+  max-width: 80%;
+}
+
+
+.authDiv {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 200ms ease-in-out;
+  color: #0c0723;
+  border: 2px solid #9b59b6;
+  border-radius: 7px;
   background-color: white;
   width: 500px;
   max-width: 80%;
@@ -390,7 +425,9 @@ nav {
   opacity: 1;
 }
 
-.contactForm form {
+.contactForm form,
+#loginForm,
+#registerForm {
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -410,7 +447,8 @@ nav {
   border-radius: 4px;
 }
 
-.contactForm button.sendButton {
+.contactForm button.sendButton
+{
   padding: 10px 20px;
   background-color: #9b59b6;
   color: white;
@@ -419,6 +457,9 @@ nav {
   cursor: pointer;
   font-size: 16px;
 }
+
+
+
 
 .contactForm button.sendButton:hover {
   background-color: #0c0723;
@@ -515,7 +556,10 @@ td img {
 #adminMessagesFilter,
 #adminUsersSearch,
 #adminUsersFilter,
-#adminRecipesClearFilters {
+#adminRecipesClearFilters,
+#showAllUsers
+
+{
   background-color: #9b59b6;
   color: white;
   border: none;
@@ -647,7 +691,8 @@ td img {
   width: 40%;
 }
 
-#editRecipePopup {
+#editRecipePopup,
+#editUserPopup {
   /* position: fixed;
   top: 50%;
   left: 50%;*/
@@ -663,6 +708,13 @@ td img {
   /* transition: none; */
 
   transform: translate(-50%, -50%); 
+}
+
+
+#editUserPopup {
+
+  width: 50%;
+
 }
 
 /* 
@@ -1085,7 +1137,9 @@ padding-left: 5%;
 #adminMessagesShowAll,
 #adminMessagesSearch,
 #adminRecipesSearch,
-#adminRecipesClearFilters
+#adminRecipesClearFilters,
+#showAllUsers,
+#adminUsersSearch
  {
   margin: 10px;
 }
@@ -1105,7 +1159,9 @@ padding-left: 5%;
 }
 
 #messageSearchBox,
-#recipeSearchBox {
+#recipeSearchBox,
+#userSearchBox
+{
   -webkit-appearance: none;
   -moz-appearance: none;
   border: 1px solid #ccc;
@@ -1212,3 +1268,46 @@ cursor: pointer;
 .expandedRecipeTd {
   column-span: 8;
 }
+
+#greeting{
+  color: #f9f9f9;
+  padding-right: 50px;
+}
+
+#loginRegisterHeader{
+  height:35px;
+}
+
+.authDiv {
+  box-shadow: 0 0 10px rgb(0 0 0 / 42%);
+
+}.authDiv button {
+  padding: 10px 20px;
+  background-color: #9b59b6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+
+#loginBtn,
+#registerBtn{
+  background: #9b59b6;
+  color: #0c0723;
+  border: 1px solid #9b59b6;
+  border-radius: 7px;
+  cursor: pointer;
+  padding: 5px;
+  margin-top: 30px;
+  /* width: 250px; */
+}
+
+
+/* @media screen and (max-width: 1500px) {
+  #tabsDiv {
+flex-direction: column;
+  }
+} */

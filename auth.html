@@ -8,7 +8,10 @@
     <script>
         function showForm(formType) {
             document.getElementById('loginForm').style.display = formType === 'login' ? 'block' : 'none';
-            document.getElementById('registerForm').style.display = formType === 'register' ? 'block' : 'none';
+            // document.getElementById('registerForm').style.display = formType === 'register' ? 'block' : 'none';
+
+            document.getElementById('registerDiv').style.display = formType === 'register' ? 'block' : 'none';
+            
         }
 
         async function handleFormSubmit(event, formType) {
@@ -48,29 +51,66 @@
 <body>
     <div id="wrapper">
         <header>
-            <h1>Auth</h1>
-            <button onclick="showForm('login')">Login</button>
-            <button onclick="showForm('register')">Register</button>
+            <a href="index.php"><img id="headerLogo" src="./public/img/logo.jpg" alt="logo" /></a>
+
+            <nav>
+                <div id="nav">
+                    <button id="homeButton" onclick="location.href='./index.php'"></button>
+
+                    <button  onclick="showForm('login')">Login</button>
+                    <button  onclick="showForm('register')">Register</button>
+                </div>
+
+            </nav>
         </header>
         <main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <!-- Login Form -->
-            <div id="loginForm">
-                <form method="POST">
-                    <div class="form-group">
+            <div class="authDiv" >
+                <div class="contactFormHeader" id="loginRegisterHeader">
+                    <h2>Login</h2>
+                </div>
+                <form id="loginForm" method="POST">
+                    
+                    <div class="form-group inputDiv" >
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group inputDiv">
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" required>
                     </div>
-                    <button type="submit">Login</button>
+                    <button id="loginBtn" type="submit">Login</button>
                 </form>
             </div>
 
+            
             <!-- Register Form -->
-            <div id="registerForm">
-                <form method="POST">
+            <div  class="authDiv" id="registerDiv">
+                <div class="contactFormHeader" id="loginRegisterHeader">
+                    <h2>Register</h2>
+                </div>
+                <form id="registerForm" method="POST">
                     <div class="form-group">
                         <label for="name">First Name:</label>
                         <input type="text" id="name" name="name" required>
@@ -91,10 +131,19 @@
                         <label for="confirm_password">Confirm Password:</label>
                         <input type="password" id="confirm_password" name="confirm_password" required>
                     </div>
-                    <button type="submit">Register</button>
+                    <button id="registerBtn" type="submit">Register</button>
                 </form>
             </div>
         </main>
+        <footer id="authFooter">
+            <div id="footerDiv">
+                <img id="footerLogo" src="public/img/logo.jpg" alt="logo" />
+            </div>
+            <p id="copyright">
+                &copy; <span id="year"></span> STU124543. All rights reserved.
+            </p>
+
+        </footer>
     </div>
 </body>
 </html>
