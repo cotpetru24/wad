@@ -8,6 +8,29 @@ error_reporting(E_ALL);
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
+// Add this function to check if the session has started
+function ensure_session_start() {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+}
+
+// Ensure the session is started at the beginning
+ensure_session_start();
+
+error_log(print_r($_SESSION, true)); // Log session data for debugging
+
+function check_user_session($role = null) {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: index.php");
+        exit();
+    }
+
+    if ($role && $_SESSION['user_type'] !== $role) {
+        header("Location: index.php");
+        exit();
+    }
+}
 function getRecipesList($conn, $filterCriteria = [])
 {
     $sql = "SELECT 
@@ -472,31 +495,24 @@ function filterMessages($conn, $data)
 }
 
 
+
 function registerUser($conn, $data){
-    $sql = "INSERT INTO users (user_name, user_surname, user_email, user_password_hash) 
-    VALUES ( ?, ?, ?, ?)";
+    $sql = "INSERT INTO users (user_name, user_surname, user_email, user_password_hash) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
-    // $userRole = 'user'; // Default role for registered users
-    $stmt->bind_param("ssss", 
-        $data['name'],
-        $data['surname'],
-        $data['email'],
-        $hashedPassword,
-        // $userRole
-        );
+    $stmt->bind_param("ssss", $data['name'], $data['surname'], $data['email'], $hashedPassword);
 
     if ($stmt->execute()) {
         error_log("User registered successfully.");
-        echo json_encode(['status' => 'success', 'message' => 'User registered successfully']);
+        $response = ['status' => 'success', 'message' => 'User registered successfully'];
     } else {
         error_log("Error registering user: " . $stmt->error);
-        echo json_encode(['status' => 'error', 'message' => 'Error registering user: ' . $stmt->error]);
+        $response = ['status' => 'error', 'message' => 'Error registering user: ' . $stmt->error];
     }
 
     $stmt->close();
+    return $response;
 }
-
 
 function authenticateUser($conn, $data){
     $sql = "SELECT user_id, user_password_hash, user_type FROM users WHERE user_email = ?";
@@ -508,17 +524,20 @@ function authenticateUser($conn, $data){
     if($result->num_rows == 1){
         $user = $result->fetch_assoc();
         if (password_verify($data['password'], $user['user_password_hash'])){
-            session_start();
             $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['user_type'] = $user['user_type'];
-            echo json_encode(['status' => 'success', 'message' => 'Login successful']);
+            $_SESSION['user_type'] = $user['user_type']; // Updated to match the database column
+            return ['status' => 'success', 'message' => 'Login successful'];
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Invalid password']);
+            $response = ['status' => 'error', 'message' => 'Invalid password'];
         }
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'User not found']);
+        $response = ['status' => 'error', 'message' => 'User not found'];
     }
 
     $stmt->close();
-
+    return $response;
 }
+
+
+
+?>
