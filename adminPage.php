@@ -32,7 +32,7 @@ check_user_session('admin'); // Only admin users can access
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
                     <!-- <button>Register</button> -->
                     <button>Log Out</button>
-                    <button onclick="location.href='/adminPage.html'">Admin Page</button>
+                    <button onclick="location.href='/adminPage.php'">Admin Page</button>
                 </div>
             </nav>
         </header>
@@ -257,8 +257,10 @@ check_user_session('admin'); // Only admin users can access
             <div id="usersSection" class="contentSection" style="display: none;">
                 <div class="container">
                     <div class="search-filter">
-                        <input type="text" id="userSearchBox" placeholder="Search users...">
+                        <input type="search" id="userSearchBox" placeholder="Search users...">
                         <button id="adminUsersSearch">Search</button>
+                        <button id="showAllUsers">Show All</button>
+
                         <div class="filter-group">
                             <select id="userRoleFilter">
                                 <option value="">All Roles</option>
@@ -268,7 +270,7 @@ check_user_session('admin'); // Only admin users can access
                             <button id="adminUsersFilter">Filter</button>
                         </div>
                     </div>
-                    <button class="button" id="toggleUserFormButton">+ Add User</button>
+                    <!-- <button class="button" id="toggleUserFormButton">+ Add User</button>
                     <div class="addUser" id="addUserForm" style="display: none;">
                         <h2>Add New User</h2>
                         <div class="form-group">
@@ -291,7 +293,7 @@ check_user_session('admin'); // Only admin users can access
                             </select>
                         </div>
                         <button class="button">+ Add User</button>
-                    </div>
+                    </div> -->
                     <table>
                         <thead>
                             <tr>

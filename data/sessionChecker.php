@@ -19,4 +19,12 @@ function check_user_session($role = null) {
 
     error_log("User is logged in and has the required role.");
 }
+
+function isUserLoggedIn() {
+    return isset($_SESSION['user_id']);
+}
+
+function isAdmin() {
+    return isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin';
+}
 ?>

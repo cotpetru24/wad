@@ -568,4 +568,94 @@ function getUsersList($conn)
 
 
 
+
+
+
+
+
+function deleteUser($conn, $userId)
+{
+    // error_log("deleteUser called with userId: $userId");
+    $sql = 'DELETE FROM users WHERE user_id = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $userId['userId']);
+    if ($stmt->execute()) {
+        error_log("user deleted successfully.");
+        echo json_encode(['status' => 'success', 'message' => 'user deleted successfully']);
+    } else {
+        error_log("Error deleting user: " . $stmt->error);
+        echo json_encode(['status' => 'error', 'message' => 'Error deleting user: ' . $stmt->error]);
+    }
+
+    $stmt->close();
+}
+
+
+
+function filterUsers($conn, $data)
+{
+    $sql = "SELECT * FROM users
+            WHERE user_type = ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $data['criteria']);
+
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $results = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($results, $row);
+            }
+            echo json_encode($results);
+        } else {
+            $noResults = [];
+            echo json_encode($noResults);
+        }
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error executing query: " . $stmt->error]);
+    }
+    $stmt->close();
+}
+
+
+
+function searchUsers($conn, $criteria)
+{
+    $sql = "SELECT * FROM users
+    WHERE user_email LIKE ? OR CONCAT(user_name, ' ', user_surname) LIKE ?
+    ORDER BY user_name ASC";
+
+
+    $stmt = $conn->prepare($sql);
+    $searchCriteria = '%' . $criteria['criteria'] . '%';
+    $stmt->bind_param('ss', $searchCriteria, $searchCriteria);
+
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $results = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($results, $row);
+            }
+            echo json_encode($results);
+        } else {
+            $noResults = [];
+            echo json_encode($noResults);
+        }
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error executing query: " . $stmt->error]);
+    }
+    $stmt->close();
+}
+
+
+
+
+
+
+
+
+
+
 ?>

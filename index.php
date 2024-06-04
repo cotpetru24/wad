@@ -44,10 +44,21 @@ require 'data/sessionChecker.php';
             <nav>
                 <div id="nav">
                     <button id="homeButton"></button>
-                    <button onclick="location.href='data/logout.php'">logout</button>
+                    <!-- <button onclick="location.href='data/logout.php'">logout</button>
                     <button onclick="location.href='auth.html'">Register</button>
                     <button onclick="location.href='auth.html'">Login</button>
-                    <button onclick="location.href='adminPage.php'">Admin Page</button>
+                    <button onclick="location.href='adminPage.php'">Admin Page</button> -->
+
+
+                    <?php if (isUserLoggedIn()): ?>
+    <button onclick="location.href='data/logout.php'">Logout</button>
+<?php else: ?>
+    <button onclick="location.href='auth.html'">Login</button>
+<?php endif; ?>
+
+<?php if (isAdmin()): ?>
+    <button onclick="location.href='adminPage.php'">Admin Page</button>
+<?php endif; ?>
                 </div>
                 <div id="searchDiv">
                     <input type="search" id="indexRecipeSearchBox" placeholder="Search recipes...">

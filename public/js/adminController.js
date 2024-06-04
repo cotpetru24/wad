@@ -367,15 +367,15 @@ function confirmAction(message, action, id, callback) {
                 await disableUser(id);
             } else if (action === 'unlockUser') {
                 await unlockUser(id);
-            } else if (action === 'deleteUser') {
-                await deleteUser(id);
+            // } else if (action === 'deleteUser') {
+            //     await deleteUser(id);
             } else if (action === 'deleteRecipe') {
                 await apiCalls.deleteRecipe(id);
                 addRecipeRows(); // Refresh the recipe list
             } else if (action === 'deleteMessage') {
                 await apiCalls.deleteMessage(id);
-            } else if (action === 'resetPassword') {
-                await resetPassword(id);
+            } else if (action === 'deleteUser') {
+                await apiCalls.deleteUser(id);
             }
             confirmPopup.classList.remove('active');
             overlay.classList.remove('active');
@@ -462,11 +462,11 @@ function addUserRow(user) {
     // Create a unique ID for the button and image
 
     row.innerHTML = `
-        <td>${user.sender_name} ${user.user_surname}</td>
+        <td>${user.user_name} ${user.user_surname}</td>
         <td>${user.user_email}</td>
         <td>${user.user_type}</td>
         <td class="actions">
-            <button class="read-btn">Read</button>
+            <button class="edit-btn">Edit</button>
             <button class="delete-btn">Delete</button>
         </td>
     `;
@@ -521,6 +521,8 @@ async function listUsers() {
 
 
 
+
+
 // Listing messages in the messages tab/admin page
 const usersTab = document.getElementById("usersTab");
 if (usersTab) {
@@ -565,11 +567,11 @@ document.getElementById("toggleFormButton").addEventListener("click", function (
     // : (document.getElementById("toggleFormButton").innerText ="+ Add Recipe", resetAddRecipeForm())
 });
 
-// Toggle Add User Form
-document.getElementById("toggleUserFormButton").addEventListener("click", function () {
-    const form = document.getElementById("addUserForm");
-    form.style.display = form.style.display === "none" ? "block" : "none";
-});
+// // Toggle Add User Form
+// document.getElementById("toggleUserFormButton").addEventListener("click", function () {
+//     const form = document.getElementById("addUserForm");
+//     form.style.display = form.style.display === "none" ? "block" : "none";
+// });
 
 
 
@@ -1206,3 +1208,166 @@ function resetAddRecipeForm() {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+//Filter users function + event listener
+async function filterUsers() {
+    try {
+        const userRole = document.getElementById('userRoleFilter').value;
+        const usersList = document.getElementById("usersList");
+
+
+        if (userRole && usersList) {
+            usersList.innerHTML = "";
+            const filterResults = await apiCalls.filterUsers(userRole);
+
+            if (filterResults.length === 0) {
+                const noUsersRow = document.createElement('tr');
+                noUsersRow.classList.add('noResultsRow');
+                const noUsersCell = document.createElement('td');
+                noUsersCell.classList.add('noResultsFound');
+
+                noUsersCell.colSpan = 4; // Adjust based on the number of columns in your table
+                noUsersCell.textContent = 'No Users found';
+                noUsersRow.appendChild(noUsersCell);
+                usersList.appendChild(noUsersRow);
+            } else {
+                filterResults.forEach(result => addUserRow(result));
+            }
+        } else if (!userRole) {
+            await listUsers();
+        }
+        else {
+            console.error("No users found .");
+        }
+    } catch (error) {
+        console.error("Error fetching users:", error);
+    }
+}
+document.getElementById('adminUsersFilter')?.addEventListener('click', () => {
+    filterUsers();
+});
+
+// document.getElementById('showAllUsers')?.addEventListener('click', () => {
+//     listUsers();
+    
+// });
+
+
+
+// list all users and clear search input
+const showAllUsers = document.getElementById("showAllUsers");
+if (showAllUsers) {
+    showAllUsers.addEventListener('click', async () => {
+        const usersSearchInput = document.getElementById("userSearchBox");
+        const usersRoleFilter = document.getElementById("userRoleFilter");
+        usersRoleFilter.value = ""; // Clear the input box
+        if (usersSearchInput) {
+            usersSearchInput.value = ""; // Clear the input box
+        }
+        listUsers();
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const searchButton = document.getElementById('adminUsersSearch');
+    const searchInput = document.getElementById('userSearchBox');
+
+    if (searchButton) {
+        searchButton.addEventListener('click', () => {
+            const searchCriteria = searchInput.value;
+            handleUserSearch(searchCriteria);
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const searchCriteria = searchInput.value;
+                handleUserSearch(searchCriteria);
+            }
+        });
+    }
+});
+
+
+
+
+
+
+// Function to handle the search
+async function handleUserSearch(searchCriteria) {
+
+    try {
+        const usersList = document.getElementById("usersList");
+        const users = await apiCalls.searchUsers(searchCriteria);
+
+
+
+
+        if (users && usersList) {
+            usersList.innerHTML = "";
+            if (users.length === 0) {
+                const noUsersRow = document.createElement('tr');
+                noUsersRow.classList.add('noResultsRow');
+                const noUsersCell = document.createElement('td');
+                noUsersCell.classList.add('noResultsFound');
+
+                noUsersCell.colSpan = 4; // Adjust based on the number of columns in your table
+                noUsersCell.textContent = 'No Users found';
+                noUsersRow.appendChild(noUsersCell);
+                usersList.appendChild(noUsersRow);
+            } else {
+                users.forEach(user => addUserRow(user));
+            }
+        } else if (!users) {
+            await listUsers();
+        }
+        else {
+            console.error("No users found .");
+        }
+    } catch (error) {
+        console.error("Error fetching users:", error);
+    }
+
+
+
+
+
+
+
+
+
+}

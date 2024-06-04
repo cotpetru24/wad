@@ -86,6 +86,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'registerUser':
                 registerUser($conn, $data);
                 break;
+            case 'deleteUser':
+                deleteUser($conn, $data);
+                break;
+            case 'filterUsers':
+                filterUsers($conn, $data);
+                break;
+            case 'searchUsers':
+                searchUsers($conn, $data);
+                break;
+    
+
+                
 
             default:
                 $response = ["status" => "error", "message" => "Invalid function"];

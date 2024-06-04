@@ -227,6 +227,53 @@ export async function deleteMessage(messageId) {
 }
 
 
+
+
+
+
+// delete user fucntion - API call
+export async function deleteUser(userId) {
+    try {
+        const data = {
+            "function": "deleteUser",
+            "userId": userId
+        };
+        const response = await fetch("http://localhost/data/api.php", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        getUsersList();
+    } catch (error) {
+        console.log("Error deleting user:", error);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export async function editRecipe(jsonData) {
     try {
         jsonData.function = "editRecipe";
@@ -447,5 +494,77 @@ export async function markMessageAsRead(messageId) {
     }
     catch (error) {
         console.log("Error marking message as read:", error)
+    }
+}
+
+
+
+
+
+
+
+
+
+filterUsers
+
+
+
+//filterMessages function
+export async function filterUsers(filterCriteria) {
+    try {
+        const data = {
+            "function": "filterUsers",
+            "criteria": filterCriteria
+        };
+
+        const response = await fetch(`http://localhost/data/api.php`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const users = await response.json();
+        //addRecipes(recipes);
+        return users;
+    } catch (error) {
+        console.log("Error retrieving data: " + error);
+    }
+}
+
+
+
+
+//searchUsers function
+export async function searchUsers(searchCriteria) {
+    try {
+        const data = {
+            "function": "searchUsers",
+            "criteria": searchCriteria
+        };
+
+        const response = await fetch(`http://localhost/data/api.php`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const users = await response.json();
+        //addRecipes(recipes);
+        return users;
+    } catch (error) {
+        console.log("Error retrieving data: " + error);
+        return [];
     }
 }
