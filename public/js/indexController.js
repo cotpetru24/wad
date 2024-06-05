@@ -466,8 +466,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // ---------------------------------------------------------------------------------------------------------------
 const favouritesButton = document.getElementById('viewFavourites');
 if (favouritesButton) {
-    favouritesButton.addEventListener('click', function () {
-        getFavourites(userId);
+    favouritesButton.addEventListener('click', function() {
+        if (!isLoggedIn) {
+            window.location.href = 'auth.php';
+        } else {
+            getFavourites(userId);
+        }
     });
 }
 

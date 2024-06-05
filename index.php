@@ -59,9 +59,7 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
                     <h3 id="greeting">Hi <?= ucwords($_SESSION['user_name'])?>!</h3>
                 <?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
-                <?php if (isUserLoggedIn()) : ?>
                     <button id="viewFavourites" >My Fovourites</button>
-                <?php endif; ?>
                 <?php if (isUserLoggedIn()): ?>
                     <button onclick="location.href='data/logout.php'">Logout</button>
                 <?php else: ?>
