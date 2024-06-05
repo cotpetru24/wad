@@ -44,25 +44,20 @@ require 'data/sessionChecker.php';
             <nav>
                 <div id="nav">
                 <?php if (isUserLoggedIn()): ?>
-        <h3 id="greeting">Hi <?= $_SESSION['user_name'] ?>!</h3>
-<?php endif; ?>
-
+                    <h3 id="greeting">Hi <?= $_SESSION['user_name'] ?>!</h3>
+                <?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
-                    <!-- <button onclick="location.href='data/logout.php'">logout</button>
-                    <button onclick="location.href='auth.html'">Register</button>
+                <?php if (isUserLoggedIn()) : ?>
+                    <button id="viewFavourites" >Fovourites</button>
+                <?php endif; ?>
+                <?php if (isUserLoggedIn()): ?>
+                    <button onclick="location.href='data/logout.php'">Logout</button>
+                <?php else: ?>
                     <button onclick="location.href='auth.html'">Login</button>
-                    <button onclick="location.href='adminPage.php'">Admin Page</button> -->
-
-
-                    <?php if (isUserLoggedIn()): ?>
-                <button onclick="location.href='data/logout.php'">Logout</button>
-<?php else: ?>
-                <button onclick="location.href='auth.html'">Login</button>
-<?php endif; ?>
-
-<?php if (isAdmin()): ?>
-                <button onclick="location.href='adminPage.php'">Admin Page</button>
-<?php endif; ?>
+                <?php endif; ?>
+                <?php if (isAdmin()): ?>
+                    <button onclick="location.href='adminPage.php'">Admin Page</button>
+                <?php endif; ?>
                 </div>
                 <div id="searchDiv">
                     <input type="search" id="indexRecipeSearchBox" placeholder="Search recipes...">

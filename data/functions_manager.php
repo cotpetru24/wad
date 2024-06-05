@@ -728,7 +728,73 @@ function editUser($conn, $data) {
 
 
 
+// Fucntion to retrive favourite dishes from db
+function getFavourites($conn, $data)
+{
+    $sql = "SELECT recipes.* FROM recipes
+    RIGHT JOIN favourites ON favourites.dish_id = recipes.dish_id
+    WHERE favourites.user_id = ?
+    ORDER BY recipes.dish_name ASC";
 
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $data['user_id']);
+    $result = $conn->query($sql);
+    if ($stmt->execute()) {
+        if ($result) {
+            $results = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($results, $row);
+            }
+
+            echo json_encode($results);
+        } else {
+            $noResults = [];
+            echo json_encode($noResults);
+        }
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error getting recipes: " . $stmt->error]);
+    }
+    $stmt->close();
+}
+
+
+
+
+
+
+
+function addFavourite($conn, $data){
+    $sql = "INSERT INTO favourites (user_id, dish_id) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $data['user_id'], $data['dish_id']);
+
+    if ($stmt->execute()) {
+        error_log("favourite added successfully.");
+        $response = ['status' => 'success', 'message' => 'favourite added successfully'];
+    } else {
+        error_log("Error registering user: " . $stmt->error);
+        $response = ['status' => 'error', 'message' => 'Error adding favourite: ' . $stmt->error];
+    }
+
+    $stmt->close();
+    return $response;
+}
+
+function removeFavourite($conn, $data)
+{
+    $sql = 'DELETE FROM favourites WHERE user_id = ? AND dish_id = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ii', $data['user_id'], $data['dish_id']);
+    if ($stmt->execute()) {
+        error_log("favourite removed successfully.");
+        echo json_encode(['status' => 'success', 'message' => 'favourite removed successfully.']);
+    } else {
+        error_log("Error deleting message: " . $stmt->error);
+        echo json_encode(['status' => 'error', 'message' => 'Error removing favourite: ' . $stmt->error]);
+    }
+
+    $stmt->close();
+}
 
 
 
