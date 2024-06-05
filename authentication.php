@@ -19,13 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ];
         $response = authenticateUser($conn, $login_data);
 
-        if ($response['status'] == 'success') {
-            // Start the session and set session variables
-            session_start();
-            $_SESSION['user_id'] = $response['user_id'];
-            $_SESSION['user_name'] = $response['user_name'];
-        }
-
     } elseif (isset($_POST['register'])) {
         // Registration logic
         $name = $_POST['name'];
@@ -44,16 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'password' => $password
             ];
             $response = registerUser($conn, $register_data);
-
-            if ($response['status'] == 'success') {
-                // Start the session and set session variables
-                session_start();
-                $_SESSION['user_id'] = $response['user_id'];
-                $_SESSION['user_name'] = $response['user_name'];
-            }
         }
     }
 }
 
 echo json_encode($response);
-?>
+

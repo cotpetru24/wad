@@ -59,37 +59,6 @@ export async function getRecipes(filterCriteria = {}) {
 
 
 
-async function handleFormSubmit(event, formType) {
-    event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
-    formData.append(formType, '1');
-
-    const response = await fetch('data/authentication.php', {
-        method: 'POST',
-        body: formData
-    });
-
-    const result = await response.json();
-
-    if (result.status === 'success') {
-        alert(result.message);
-        window.location.href = formType === 'login' ? 'index.php' : 'data/authentication.php';
-    } else {
-        alert(result.message);
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
 
 // add new recipe function - API call
 export async function addNewRecipe(jsonData) {
@@ -624,59 +593,4 @@ export async function editUser(jsonData) {
         console.log("error saving changes" + error);
     }
 
-}
-
-
-//filterMessages function
-export async function getFavourites(user) {
-    try {
-        const data = {
-            "function": "getFavourites",
-            "criteria": user
-        };
-
-        const response = await fetch(`http://localhost/data/api.php`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const favourites = await response.json();
-        return favourites;
-    } catch (error) {
-        console.log("Error retrieving data: " + error);
-    }
-}
-
-
-
-//filterMessages function
-export async function addFavourite(user_id, dish_id) {
-    try {
-        const data = {
-            "function": "addFavourite",
-            "user_id": user_id,
-            "dish_id":dish_id
-        };
-
-        const response = await fetch(`http://localhost/data/api.php`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-            throw new Error(`http error! status: ${response.status}`);
-        }
-    } catch (error) {
-        console.log("Error adding to favourites:", error);
-    }
 }
