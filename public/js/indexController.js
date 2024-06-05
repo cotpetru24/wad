@@ -470,6 +470,8 @@ if (favouritesButton) {
         if (!isLoggedIn) {
             window.location.href = 'auth.php';
         } else {
+            document.querySelector('.tabSelected')?.classList.remove('tabSelected');
+
             getFavourites(userId);
         }
     });
