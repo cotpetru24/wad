@@ -1,5 +1,12 @@
 <?php
 require 'data/sessionChecker.php';
+
+
+// For debugging: Print session data
+var_dump($_SESSION);
+$isLoggedIn = isset($_SESSION['user_id']);
+$user_id = $isLoggedIn ? $_SESSION['user_id'] : null;
+$user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
 ?>
 
 
@@ -12,6 +19,11 @@ require 'data/sessionChecker.php';
     <link rel="icon" href="/public/img/tab_logo.png" type="image/png" />
     <title>Cookking Creations</title>
     <link rel="stylesheet" href="public/css/style.css" />
+    <script>
+        // Set the isLoggedIn variable based on session data
+        const isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
+        const userId = <?php echo json_encode($user_id); ?>;
+    </script>
 </head>
 
 <body>
@@ -53,7 +65,7 @@ require 'data/sessionChecker.php';
                 <?php if (isUserLoggedIn()): ?>
                     <button onclick="location.href='data/logout.php'">Logout</button>
                 <?php else: ?>
-                    <button onclick="location.href='auth.html'">Login</button>
+                    <button onclick="location.href='auth.php'">Login</button>
                 <?php endif; ?>
                 <?php if (isAdmin()): ?>
                     <button onclick="location.href='adminPage.php'">Admin Page</button>

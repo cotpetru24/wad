@@ -2,6 +2,22 @@ import * as apiCalls from './apiCalls.js';
 import * as functions from './functions.js';
 import * as commonController from './commonController.js'
 
+
+
+
+
+// Ensure the variable is available globally
+console.log(isLoggedIn);
+console.log(userId);
+
+
+
+
+
+
+
+
+
 //add current year to footer copyright 
 document.getElementById('year').textContent = new Date().getFullYear();
 

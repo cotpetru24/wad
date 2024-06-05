@@ -594,3 +594,77 @@ export async function editUser(jsonData) {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//filterMessages function
+
+export async function getFavourites(user) {
+    try {
+        const data = {
+            "function": "getFavourites",
+            "user": user
+        };
+        const response = await fetch(`http://localhost/data/api.php`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const favourites = await response.json();
+        return favourites;
+    } catch (error) {
+        console.log("Error retrieving data: " + error);
+    }
+}
+
+
+
+
+//filterMessages function
+
+export async function addFavourite(user_id, dish_id) {
+    try {
+        const data = {
+            "function": "addFavourite",
+            "user_id": user_id,
+            "dish_id": dish_id
+        };
+        const response = await fetch(`http://localhost/data/api.php`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`http error! status: ${response.status}`);
+        }
+    } catch (error) {
+        console.log("Error adding to favourites:", error);
+    }
+}

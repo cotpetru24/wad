@@ -1,3 +1,17 @@
+<?php
+session_start(); // Start the session
+
+
+// For debugging: Print session data
+var_dump($_SESSION);
+
+
+// Check if the user is logged in
+$isLoggedIn = isset($_SESSION['user_id']);
+$user_id = $isLoggedIn ? $_SESSION['user_id'] : null;
+$user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,47 +20,12 @@
     <title>Auth</title>
     <link rel="stylesheet" href="public/css/style.css">
     <script>
-        function showForm(formType) {
-            document.getElementById('loginForm').style.display = formType === 'login' ? 'block' : 'none';
-            // document.getElementById('registerForm').style.display = formType === 'register' ? 'block' : 'none';
-
-            document.getElementById('registerDiv').style.display = formType === 'register' ? 'block' : 'none';
-            
-        }
-
-        async function handleFormSubmit(event, formType) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            formData.append(formType, '1');
-
-            const response = await fetch('authentication.php', {
-                method: 'POST',
-                body: formData
-            });
-
-            const result = await response.json();
-
-            if (result.status === 'success') {
-                alert(result.message);
-                window.location.href = formType === 'login' ? 'index.php' : 'authentication.php';
-            } else {
-                alert(result.message);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('loginForm').addEventListener('submit', function(event) {
-                handleFormSubmit(event, 'login');
-            });
-
-            document.getElementById('registerForm').addEventListener('submit', function(event) {
-                handleFormSubmit(event, 'register');
-            });
-
-            showForm('login'); // Default to login form
-        });
+        // Set the isLoggedIn variable based on session data
+        const isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
+        const userId = <?php echo json_encode($user_id); ?>;
     </script>
+    <script src="public/js/authController.js" type="module" defer></script>
+
 </head>
 <body>
     <div id="wrapper">

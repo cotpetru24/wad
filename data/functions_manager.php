@@ -728,18 +728,74 @@ function editUser($conn, $data) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Fucntion to retrive favourite dishes from db
 function getFavourites($conn, $data)
 {
-    $sql = "SELECT recipes.* FROM recipes
+    $sql = "SELECT recipes.*
+    FROM recipes
     RIGHT JOIN favourites ON favourites.dish_id = recipes.dish_id
     WHERE favourites.user_id = ?
     ORDER BY recipes.dish_name ASC";
 
+
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $data['user_id']);
-    $result = $conn->query($sql);
+    $stmt->bind_param("i", $data['user']);
+    // $result = $conn->query($sql);
     if ($stmt->execute()) {
+        $result = $stmt->get_result();
         if ($result) {
             $results = [];
             while ($row = $result->fetch_assoc()) {
