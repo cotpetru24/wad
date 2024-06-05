@@ -36,8 +36,15 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
                 <div id="nav">
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
 
-                    <button  onclick="showForm('login')">Login</button>
-                    <button  onclick="showForm('register')">Register</button>
+                    <!-- <button  onclick="showForm('login')">Login</button>
+                    <button  onclick="showForm('register')">Register</button> -->
+
+                    <button  id="authLoginBtn">Login</button>
+                    <button  id="authRegisterBtn">Register</button>
+
+
+
+
                 </div>
 
             </nav>

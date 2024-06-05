@@ -56,11 +56,11 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
             <nav>
                 <div id="nav">
                 <?php if (isUserLoggedIn()): ?>
-                    <h3 id="greeting">Hi <?= $_SESSION['user_name'] ?>!</h3>
+                    <h3 id="greeting">Hi <?= ucwords($_SESSION['user_name'])?>!</h3>
                 <?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
                 <?php if (isUserLoggedIn()) : ?>
-                    <button id="viewFavourites" >Fovourites</button>
+                    <button id="viewFavourites" >My Fovourites</button>
                 <?php endif; ?>
                 <?php if (isUserLoggedIn()): ?>
                     <button onclick="location.href='data/logout.php'">Logout</button>

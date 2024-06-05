@@ -22,7 +22,7 @@ async function handleFormSubmit(event, formType) {
 
     if (result.status === 'success') {
         alert(result.message);
-        window.location.href = formType === 'login' ? 'index.php' : 'authentication.php';
+        window.location.href = formType === 'login' ? 'index.php' : 'auth.php';
     } else {
         alert(result.message);
     }
@@ -38,4 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     showForm('login'); // Default to login form
+});
+
+
+
+document.getElementById('authLoginBtn').addEventListener('click', function () {
+    showForm('login')
+});
+document.getElementById('authRegisterBtn').addEventListener('click', function () {
+    showForm('register')
 });
