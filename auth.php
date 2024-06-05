@@ -1,98 +1,48 @@
+<?php
+session_start(); // Start the session
+
+// Check if the user is logged in
+$isLoggedIn = isset($_SESSION['user_id']);
+$user_id = $isLoggedIn ? $_SESSION['user_id'] : null;
+$user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth</title>
     <link rel="stylesheet" href="public/css/style.css">
-    <script>
-        function showForm(formType) {
-            document.getElementById('loginForm').style.display = formType === 'login' ? 'block' : 'none';
-            // document.getElementById('registerForm').style.display = formType === 'register' ? 'block' : 'none';
+    <script src="public/js/authController.js" type="module" defer>
 
-            document.getElementById('registerDiv').style.display = formType === 'register' ? 'block' : 'none';
-            
-        }
-
-        async function handleFormSubmit(event, formType) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            formData.append(formType, '1');
-
-            const response = await fetch('authentication.php', {
-                method: 'POST',
-                body: formData
-            });
-
-            const result = await response.json();
-
-            if (result.status === 'success') {
-                alert(result.message);
-                window.location.href = formType === 'login' ? 'index.php' : 'authentication.php';
-            } else {
-                alert(result.message);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('loginForm').addEventListener('submit', function(event) {
-                handleFormSubmit(event, 'login');
-            });
-
-            document.getElementById('registerForm').addEventListener('submit', function(event) {
-                handleFormSubmit(event, 'register');
-            });
-
-            showForm('login'); // Default to login form
-        });
+        // Set the isLoggedIn variable based on session data
+        const isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
     </script>
 </head>
+
 <body>
     <div id="wrapper">
         <header>
             <a href="index.php"><img id="headerLogo" src="./public/img/logo.jpg" alt="logo" /></a>
-
             <nav>
                 <div id="nav">
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
-
-                    <button  onclick="showForm('login')">Login</button>
-                    <button  onclick="showForm('register')">Register</button>
+                    <button onclick="authController.showForm('login')">Login</button>
+                    <button onclick="authController.showForm('register')">Register</button>
                 </div>
-
             </nav>
         </header>
         <main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <!-- Login Form -->
-            <div class="authDiv" >
+            <div class="authDiv" id="loginDiv">
                 <div class="contactFormHeader" id="loginRegisterHeader">
                     <h2>Login</h2>
                 </div>
                 <form id="loginForm" method="POST">
-                    
-                    <div class="form-group inputDiv" >
+
+                    <div class="form-group inputDiv">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
                     </div>
@@ -104,9 +54,8 @@
                 </form>
             </div>
 
-            
             <!-- Register Form -->
-            <div  class="authDiv" id="registerDiv">
+            <div class="authDiv" id="registerDiv" style="display: none;">
                 <div class="contactFormHeader" id="loginRegisterHeader">
                     <h2>Register</h2>
                 </div>
@@ -142,8 +91,8 @@
             <p id="copyright">
                 &copy; <span id="year"></span> STU124543. All rights reserved.
             </p>
-
         </footer>
     </div>
 </body>
+
 </html>

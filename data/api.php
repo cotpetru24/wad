@@ -98,7 +98,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'editUser':
                 editUser($conn, $data);
                 break;
-    
+            case 'getFavourites':
+                getFavourites($conn, $data);
+                break;
+            case 'addFavourite':
+                addFavourite($conn, $data);
+                break;
+            case 'removeFavourite':
+                removeFavourite($conn, $data);
+                break;
 
                 
 

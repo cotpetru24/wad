@@ -2,6 +2,15 @@
 require 'data/sessionChecker.php';
 ?>
 
+<!-- //do add this and test
+session_start(); // Ensure the session is started
+
+// Check if the user is logged in
+$isLoggedIn = isset($_SESSION['user_id']);
+$user_id = $isLoggedIn ? $_SESSION['user_id'] : null;
+$user_name = $isLoggedIn ? $_SESSION['user_name'] : null; -->
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +21,16 @@ require 'data/sessionChecker.php';
     <link rel="icon" href="/public/img/tab_logo.png" type="image/png" />
     <title>Cookking Creations</title>
     <link rel="stylesheet" href="public/css/style.css" />
+
+
+
+
+    <!-- to addthis and test -->
+    <!-- <script>
+        // Pass PHP session user_id and login status to JavaScript
+        const userId = <?php echo json_encode($user_id); ?>;
+        const isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
+    </script> -->
 </head>
 
 <body>
@@ -43,31 +62,25 @@ require 'data/sessionChecker.php';
             </div>
             <nav>
                 <div id="nav">
-                <?php if (isUserLoggedIn()): ?>
-        <h3 id="greeting">Hi <?= $_SESSION['user_name'] ?>!</h3>
-<?php endif; ?>
-
+                    <?php if (isUserLoggedIn()) : ?>
+                        <h3 id="greeting">Hi <?= $_SESSION['user_name'] ?>!</h3>
+                    <?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
-                    <!-- <button onclick="location.href='data/logout.php'">logout</button>
-                    <button onclick="location.href='auth.html'">Register</button>
-                    <button onclick="location.href='auth.html'">Login</button>
-                    <button onclick="location.href='adminPage.php'">Admin Page</button> -->
-
-
-                    <?php if (isUserLoggedIn()): ?>
-                <button onclick="location.href='data/logout.php'">Logout</button>
-<?php else: ?>
-                <button onclick="location.href='auth.html'">Login</button>
-<?php endif; ?>
-
-<?php if (isAdmin()): ?>
-                <button onclick="location.href='adminPage.php'">Admin Page</button>
-<?php endif; ?>
+                    <?php if (isUserLoggedIn()) : ?>
+                        <button id="viewFavourites" >Fovourites</button>
+                    <?php endif; ?>
+                    <?php if (isUserLoggedIn()) : ?>
+                        <button onclick="location.href='data/logout.php'">Logout</button>
+                    <?php else : ?>
+                        <button onclick="location.href='auth.php'">Login</button>
+                    <?php endif; ?>
+                    <?php if (isAdmin()) : ?>
+                        <button onclick="location.href='adminPage.php'">Admin Page</button>
+                    <?php endif; ?>
                 </div>
                 <div id="searchDiv">
                     <input type="search" id="indexRecipeSearchBox" placeholder="Search recipes...">
                     <button id="indexRecipesSearch"></button>
-
                 </div>
             </nav>
         </header>
@@ -114,11 +127,9 @@ require 'data/sessionChecker.php';
             <p id="copyright">
                 &copy; <span id="year"></span> STU124543. All rights reserved.
             </p>
-
         </footer>
     </div>
     <script src="public/js/indexController.js" type="module" defer></script>
-
 </body>
 
 </html>
