@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo json_encode($response);
         exit();
     }
-} 
+}
 
 // POST method API calls
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -77,11 +77,11 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case 'deleteMessage':
                 deleteMessage($conn, $data['messageId']);
                 break;
-            case 'searchMessages': 
+            case 'searchMessages':
                 searchMessages($conn, $data);
                 break;
             case 'searchRecipes':
-                searchRecipes($conn,$data);
+                searchRecipes($conn, $data);
                 break;
             case 'filterMessages':
                 filterMessages($conn, $data);
@@ -133,4 +133,3 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
-?>
