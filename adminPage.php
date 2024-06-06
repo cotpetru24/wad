@@ -1,8 +1,9 @@
 <?php
 require 'data/sessionChecker.php';
-check_user_session('admin'); // Only admin users can access
 
-// Continue with your HTML content
+//Checking if user is of type 'admin' as only admins users should have access to this page
+check_user_session('admin');
+
 ?>
 
 
@@ -29,11 +30,11 @@ check_user_session('admin'); // Only admin users can access
             </div>
             <nav>
                 <div id="nav">
-                <?php if (isUserLoggedIn()): ?>
-        <h3 id="greeting">Hi <?= $_SESSION['user_name'] ?>!</h3>
-<?php endif; ?>
+                    <!-- Greeting users by their name -->
+                    <?php if (isUserLoggedIn()) : ?>
+                        <h3 id="greeting">Hi <?= $_SESSION['user_name'] ?>!</h3>
+                    <?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
-                    <!-- <button>Register</button> -->
                     <button onclick="location.href='data/logout.php'">Logout</button>
                     <button onclick="location.href='/adminPage.php'">Admin Page</button>
                 </div>
@@ -44,19 +45,10 @@ check_user_session('admin'); // Only admin users can access
                 <div class="container">
                     <div class="search-filter">
                         <input type="search" id="recipeSearchBox" placeholder="Search recipes...">
-
-
                         <div class="adminSearchShowBtnDiv">
                             <button id="adminRecipesSearch">Search</button>
                             <button id="adminRecipesClearFilters"> Show All</button>
-
-
-                            <!-- <button id="adminMessagesShowAll">Show All</button> -->
                         </div>
-
-
-
-
                         <div class="filter-group">
                             <select id="recipeOriginFilter">
                                 <option value="">All Countries</option>
@@ -92,7 +84,6 @@ check_user_session('admin'); // Only admin users can access
                                 <option value=">240">Over 4 hours</option>
                             </select>
                             <button id="adminRecipesFilter">Filter</button>
-
                         </div>
                     </div>
                     <button class="button" id="toggleFormButton">+ Add Recipe</button>
@@ -116,42 +107,21 @@ check_user_session('admin'); // Only admin users can access
                         </div>
                         <div class="form-group">
                             <label for="dishDescription">Dish Description:</label>
-
                             <textarea class="inputclass" id="dishDescription" placeholder="Dish description here" required></textarea>
-
-
-                            <!-- <input type="text" id="dishDescription" placeholder="Dish description here" required> -->
                         </div>
-                        <!-- Steps Section -->
+                        <!-- Ingredients will go in this section -->
                         <div class="form-group">
                             <label>Dish Ingredients:</label>
                             <div id="ingredientsContainer"></div>
                             <button type="button" class="steptIngredientsButton" id="addIngredientButton">+ Add
                                 Ingredient</button>
                         </div>
-
-
-
-
-
-
-                        <!-- Steps Section -->
+                        <!-- Steps will go in this section -->
                         <div class="form-group">
                             <label>Steps:</label>
                             <div id="stepsContainer"></div>
                             <button class="steptIngredientsButton" type="button" id="addStepButton">+ Add Step</button>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
                         <div class="form-group">
                             <label for="dishCategory">Dish Category:</label>
                             <select id="dishCategory" required>
@@ -200,9 +170,6 @@ check_user_session('admin'); // Only admin users can access
                             <label for="dishImage">Dish Image:</label>
                             <input type="file" id="dishImage">
                         </div>
-
-
-
                         <button class="button" id="addNewRecipe">+ Save Recipe</button>
                     </div>
                     <table>
@@ -219,7 +186,7 @@ check_user_session('admin'); // Only admin users can access
                             </tr>
                         </thead>
                         <tbody id="adminRecipesList">
-                            <!-- Recipe rows go here -->
+                            <!-- Recipe rows will go here -->
                         </tbody>
                     </table>
                 </div>
@@ -252,7 +219,7 @@ check_user_session('admin'); // Only admin users can access
                             </tr>
                         </thead>
                         <tbody id="messagesList">
-                            <!-- Message rows go here -->
+                            <!-- Message rows will go here -->
                         </tbody>
                     </table>
                 </div>
@@ -261,7 +228,6 @@ check_user_session('admin'); // Only admin users can access
                 <div class="container">
                     <div class="search-filter">
                         <input type="search" id="userSearchBox" placeholder="Search users...">
-
                         <div class="adminSearchShowBtnDiv">
                             <button id="adminUsersSearch">Search</button>
                             <button id="showAllUsers">Show All</button>
@@ -275,30 +241,6 @@ check_user_session('admin'); // Only admin users can access
                             <button id="adminUsersFilter">Filter</button>
                         </div>
                     </div>
-                    <!-- <button class="button" id="toggleUserFormButton">+ Add User</button>
-                    <div class="addUser" id="addUserForm" style="display: none;">
-                        <h2>Add New User</h2>
-                        <div class="form-group">
-                            <label for="userName">Name:</label>
-                            <input type="text" id="userName" placeholder="User name here">
-                        </div>
-                        <div class="form-group">
-                            <label for="userEmail">Email:</label>
-                            <input type="email" id="userEmail" placeholder="User email here">
-                        </div>
-                        <div class="form-group">
-                            <label for="userPassword">Password:</label>
-                            <input type="password" id="userPassword" placeholder="User password here">
-                        </div>
-                        <div class="form-group">
-                            <label for="userRole">Role:</label>
-                            <select id="userRole">
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                            </select>
-                        </div>
-                        <button class="button">+ Add User</button>
-                    </div> -->
                     <table>
                         <thead>
                             <tr>
@@ -309,14 +251,13 @@ check_user_session('admin'); // Only admin users can access
                             </tr>
                         </thead>
                         <tbody id="usersList">
-                            <!-- User rows go here -->
+                            <!-- Users rows will go here -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </main>
         <footer class="admin-footer">
-            <!-- to check why this is not diplayed correctly -->
             <p id="copyright">
                 &copy; <span id="year"></span> STU124543. All rights reserved.
             </p>
@@ -356,13 +297,7 @@ check_user_session('admin'); // Only admin users can access
             </div>
             <div class="form-group">
                 <label for="editDishDescription">Dish Description:</label>
-
                 <textarea class="inputclass" id="editDishDescription" placeholder="Dish description here" required></textarea>
-
-
-
-
-                <!-- <input type="text" id="editDishDescription" placeholder="Dish description here"> -->
             </div>
             <div class="form-group">
                 <label for="editIngredientsContainer">Dish Ingredients:</label>
@@ -424,28 +359,15 @@ check_user_session('admin'); // Only admin users can access
             <button class="button" id="saveEditButton">Save Changes</button>
         </div>
     </div>
-
-
-
-
     <div class="popup" id="viewMessagePopup">
         <div class="popupHeader">
             <h2>Message Details</h2>
             <button class="closeButton" id="closeViewMessagePopup">&times;</button>
         </div>
         <div id="viewMessageContent">
-            <!-- Message details go here -->
+            <!-- Message details will go here -->
         </div>
     </div>
-
-
-
-
-
-
-
-
-
     <div class="popup" id="editUserPopup">
         <div class="popupHeader">
             <h2>Edit User</h2>
@@ -453,20 +375,14 @@ check_user_session('admin'); // Only admin users can access
         </div>
         <div id="editUserContent">
             <input type="hidden" id="editUserId">
-
-            <!-- Edit form goes here -->
             <div class="form-group">
                 <label for="editUserName">Name:</label>
                 <input type="text" id="editUserName" placeholder="User name here">
             </div>
-
             <div class="form-group">
                 <label for="editUserSurname">Surname:</label>
                 <input type="text" id="editUserSurname" placeholder="User surname here">
             </div>
-
-
-
             <div class="form-group">
                 <label for="editUserEmail">Email:</label>
                 <input type="email" id="editUserEmail" placeholder="User email here">
@@ -485,19 +401,6 @@ check_user_session('admin'); // Only admin users can access
             <button class="button" id="saveUserChangesButton">Save Changes</button>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="popup" id="confirmActionPopup">
         <div class="popupHeader">
             <h2>Confirm Action</h2>
