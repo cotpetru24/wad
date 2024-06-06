@@ -11,7 +11,7 @@ async function handleFormSubmit(event, formType) {
     const formData = new FormData(form);
     formData.append(formType, '1');
 
-    const response = await fetch('authentication.php', {
+    const response = await fetch('authApi.php', {
         method: 'POST',
         body: formData
     });
