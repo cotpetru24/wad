@@ -38,8 +38,6 @@ header {
   width: 100%;
   height: 200px;
   background-color: #0c0723;
-  /* #E67E22;*/
-  /*#94618e;*/
   border-bottom: 5px solid #9b59b6;
 }
 
@@ -48,7 +46,6 @@ main {
   flex-direction: column;
   flex-grow: 1;
   width: 100%;
-  /* height: 100vh; */
   align-items: center;
 }
 
@@ -66,14 +63,10 @@ main {
 .dishImage {
   height: 400px;
   width: 266px;
-  /* border: 2px dashed red; */
-  /* padding: 15px; */
   margin: 10px;
 }
 
 .dishImage img {
-  /* max-height:  100%;
-  max-width : 266px; */
   max-height: 400px;
   max-width: 266px;
   object-fit: scale-down;
@@ -90,14 +83,12 @@ main {
 
 .recipeDetails {
   border-bottom: 1px solid #9b59b6;
-  /* padding: 15px; */
   margin: 10px;
   margin-left: 20px;
 }
 
 .recipeFooterDiv {
   border-top: 1px solid #9b59b6;
-  /* padding: 15px; */
   margin: 10px;
   margin-left: 20px;
 }
@@ -145,13 +136,9 @@ nav {
 #searchForm {
   display: flex;
   width: 100%;
-  /* commented the below when trying to fix the display issue */
-  /* width: 370px; */
   align-items: center;
   padding-right: 30px;
 }
-
-/* input[type="search"] { */
 
 
 #nav button {
@@ -265,8 +252,7 @@ nav {
   height: 50px;
 }
 
-#footer
-{
+#footer {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -290,7 +276,6 @@ nav {
   border-top: 4px solid #9b59b6;
   justify-content: space-between;
   width: 100%;
-  /* min-height: 300px; */
   background-color: #0c0723;
   color: white;
   margin-top: 30px;
@@ -347,7 +332,7 @@ nav {
   color: #9b59b6;
 }
 
-.contactFormDiv{
+.contactFormDiv {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -447,8 +432,7 @@ nav {
   border-radius: 4px;
 }
 
-.contactForm button.sendButton
-{
+.contactForm button.sendButton {
   padding: 10px 20px;
   background-color: #9b59b6;
   color: white;
@@ -502,13 +486,9 @@ td {
   border: 1px solid #9b59b6;
   padding: 10px;
   text-align: left;
-  /* height: 100px; Fixed height */
   overflow: hidden;
-  /* Hides overflowed content */
   text-overflow: ellipsis;
-  /* Adds ellipsis to overflowed text */
   white-space: nowrap;
-  /* Prevents text from wrapping */
   vertical-align: middle;
 }
 
@@ -518,9 +498,7 @@ th {
 }
 
 td {
-  /* min-height: 50px;  Adjust this value as needed */
   vertical-align: middle;
-  /* This ensures content is centered vertically */
 }
 
 
@@ -530,7 +508,6 @@ td img {
 }
 
 .actions {
-  /* display: flex; */
   white-space: nowrap;
   gap: 10px;
   text-align: center;
@@ -542,10 +519,8 @@ td img {
 #actionsTh {
   padding: 10px;
   text-align: left;
-  /* height: 100px; Fixed height */
   width: auto;
   white-space: nowrap;
-  /* Prevents text from wrapping */
 }
 
 .actions button,
@@ -557,9 +532,7 @@ td img {
 #adminUsersSearch,
 #adminUsersFilter,
 #adminRecipesClearFilters,
-#showAllUsers
-
-{
+#showAllUsers {
   background-color: #9b59b6;
   color: white;
   border: none;
@@ -579,20 +552,6 @@ td img {
   align-items: center;
   flex-direction: column;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .contentSection {
   width: 100%;
@@ -666,7 +625,6 @@ td img {
   position: fixed;
   top: 50%;
   left: 50%;
-  /* transform: translate(-50%, -50%); */
   visibility: hidden;
   transition: 200ms ease-in-out;
   color: #0c0723;
@@ -681,33 +639,21 @@ td img {
 }
 
 
-#confirmActionPopup{
+#confirmActionPopup {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* transition: none; */
-/* height: 40%; */
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
   width: 40%;
 }
 
 #editRecipePopup,
 #editUserPopup {
-  /* position: fixed;
-  top: 50%;
-  left: 50%;*/
-  
-  /* width: 80%; */
   max-height: 90%;
-  /* background-color: white; */
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
-  /* border-radius: 8px; */
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* transition: none; */
-
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
 }
 
 
@@ -717,10 +663,6 @@ td img {
 
 }
 
-/* 
-#editRecipePopupHeader h2 {
-  margin: 0;
-} */
 
 #closeEditPopup {
   background: none;
@@ -734,25 +676,6 @@ td img {
   overflow-y: auto;
   flex: 1;
 }
-
-/* .form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group input,
-.form-group select,
-.steptIngredientsButton {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 5px;
-  box-sizing: border-box;
-} */
-
 
 
 .popup.active {
@@ -800,7 +723,7 @@ td img {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  transform: translateZ(0); /* This helps to force GPU rendering */
+  transform: translateZ(0);
 }
 
 .popup .form-group textarea {
@@ -812,15 +735,13 @@ td img {
 }
 
 .search-filter {
-
-
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-direction: row;
-    align-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-direction: row;
+  align-content: space-between;
 }
 
 .search-filter input[type="text"] {
@@ -907,15 +828,10 @@ td img {
   font-size: 14px;
 }
 
-
-
-
 .recipeFooterInfoDiv {
-
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* justify-content: space-between; */
   align-items: center;
   padding-right: 30px;
   padding-top: 5px;
@@ -945,7 +861,6 @@ span {
   height: auto;
   -webkit-line-clamp: unset;
   transition: height 0.3s ease;
-
 }
 
 .recipeParagraphDiv ol,
@@ -983,13 +898,10 @@ ul {
 
 .fixed-cell {
   width: 200px;
-  /* Set your desired fixed width */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* display: inline-block; Ensures the element respects the width */
   max-width: 200px;
-  /* Ensures the element respects the width */
 }
 
 
@@ -1004,13 +916,9 @@ ul {
   border-radius: 5px;
   background-color: #fff;
   display: block;
-  /* Ensures the content is treated as a block element */
   word-wrap: break-word;
-  /* Ensures long words break to fit within the container */
   word-break: break-word;
-  /* Ensures long words break to fit within the container */
   white-space: normal;
-  /* Allows the text to wrap normally */
 }
 
 .expanded-content h3 {
@@ -1020,23 +928,12 @@ ul {
 .expanded-content p {
   margin-left: 20px;
   margin-right: 20px;
-  /* padding-top: 15px; */
   text-align: justify;
-  /* Add some spacing between paragraphs for better readability */
 }
 
 .expanded-content ol {
-padding-left: 5%;
+  padding-left: 5%;
 }
-
-
-
-
-
-
-
-
-
 
 .modal {
   display: none;
@@ -1089,9 +986,7 @@ padding-left: 5%;
 
 .flag-pink {
   background-image: url(/public/img/icons8-flag-pink.png);
-  /* background-image: url(/public/img/icons8-home-26_hover.png); */
   width: 20px;
-  /* Adjust the width and height as needed */
   height: 20px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -1102,7 +997,6 @@ padding-left: 5%;
 .flag-grey {
   background-image: url(/public/img/icons8-flag-grey.png);
   width: 20px;
-  /* Adjust the width and height as needed */
   height: 20px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -1113,14 +1007,12 @@ padding-left: 5%;
 .flag-purple {
   background-image: url(/public/img/icons8-flag-purple.png);
   width: 20px;
-  /* Adjust the width and height as needed */
   height: 20px;
   background-size: contain;
   background-repeat: no-repeat;
   border: none;
   cursor: pointer;
 }
-
 
 .unread-message-row {
   background-color: #eeebed;
@@ -1130,8 +1022,6 @@ padding-left: 5%;
 .adminSearchShowBtnDiv {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; /* Distributes space between flex items */
-  /* height: 100%; Ensure the container has a height to see the effect */
 }
 
 #adminMessagesShowAll,
@@ -1139,8 +1029,7 @@ padding-left: 5%;
 #adminRecipesSearch,
 #adminRecipesClearFilters,
 #showAllUsers,
-#adminUsersSearch
- {
+#adminUsersSearch {
   margin: 10px;
 }
 
@@ -1160,8 +1049,7 @@ padding-left: 5%;
 
 #messageSearchBox,
 #recipeSearchBox,
-#userSearchBox
-{
+#userSearchBox {
   -webkit-appearance: none;
   -moz-appearance: none;
   border: 1px solid #ccc;
@@ -1206,8 +1094,8 @@ padding-left: 5%;
   margin-top: 5px;
 
 
-  backface-visibility: hidden;  /* Add this line */
-  -webkit-font-smoothing: antialiased;  /* Add this line */
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .stepDescription {
@@ -1226,7 +1114,6 @@ padding-left: 5%;
   border-radius: 4px;
 }
 
-
 .inputclass {
 
   height: 6em;
@@ -1235,22 +1122,12 @@ padding-left: 5%;
 .steptIngredientsButton:hover,
 .removeIngredientButton:hover,
 .removeStepButton:hover {
-background: #0c0723;
-color: #9b59b6;
-/* border: 1px solid #9b59b6; */
-border-radius: 7px;
-cursor: pointer;
+  background: #0c0723;
+  color: #9b59b6;
+  border-radius: 7px;
+  cursor: pointer;
 }
 
-/* #file-upload-button {
-  background-color: #9b59b6;
-  color: white;
-  border: none;
-  padding: 5px 5px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
-} */
 
 .step {
   margin-top: 5px;
@@ -1269,19 +1146,20 @@ cursor: pointer;
   column-span: 8;
 }
 
-#greeting{
+#greeting {
   color: #f9f9f9;
   padding-right: 50px;
 }
 
-#loginRegisterHeader{
-  height:35px;
+#loginRegisterHeader {
+  height: 35px;
 }
 
 .authDiv {
   box-shadow: 0 0 10px rgb(0 0 0 / 42%);
+}
 
-}.authDiv button {
+.authDiv button {
   padding: 10px 20px;
   background-color: #9b59b6;
   color: white;
@@ -1294,7 +1172,7 @@ cursor: pointer;
 
 
 #loginBtn,
-#registerBtn{
+#registerBtn {
   background: #9b59b6;
   color: #0c0723;
   border: 1px solid #9b59b6;
@@ -1302,12 +1180,4 @@ cursor: pointer;
   cursor: pointer;
   padding: 5px;
   margin-top: 30px;
-  /* width: 250px; */
 }
-
-
-/* @media screen and (max-width: 1500px) {
-  #tabsDiv {
-flex-direction: column;
-  }
-} */

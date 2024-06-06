@@ -1,12 +1,7 @@
 <?php
-session_start(); // Start the session
+session_start();
 
-
-// For debugging: Print session data
-// var_dump($_SESSION);
-
-
-// Check if the user is logged in
+// Checking if user is logged in
 $isLoggedIn = isset($_SESSION['user_id']);
 $user_id = $isLoggedIn ? $_SESSION['user_id'] : null;
 $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
@@ -14,71 +9,42 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth</title>
     <link rel="stylesheet" href="public/css/style.css">
     <script>
-        // Set the isLoggedIn variable based on session data
+        // Setting user session variables
         const isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
         const userId = <?php echo json_encode($user_id); ?>;
     </script>
     <script src="public/js/authController.js" type="module" defer></script>
 
 </head>
+
 <body>
     <div id="wrapper">
         <header>
             <a href="index.php"><img id="headerLogo" src="./public/img/logo.jpg" alt="logo" /></a>
-
             <nav>
                 <div id="nav">
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
-
-                    <!-- <button  onclick="showForm('login')">Login</button>
-                    <button  onclick="showForm('register')">Register</button> -->
-
-                    <button  id="authLoginBtn">Login</button>
-                    <button  id="authRegisterBtn">Register</button>
-
-
-
-
+                    <button id="authLoginBtn">Login</button>
+                    <button id="authRegisterBtn">Register</button>
                 </div>
-
             </nav>
         </header>
         <main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <!-- Login Form -->
-            <div class="authDiv" >
+            <div class="authDiv">
                 <div class="contactFormHeader" id="loginRegisterHeader">
                     <h2>Login</h2>
                 </div>
                 <form id="loginForm" method="POST">
-                    
-                    <div class="form-group inputDiv" >
+
+                    <div class="form-group inputDiv">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
                     </div>
@@ -90,9 +56,8 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
                 </form>
             </div>
 
-            
             <!-- Register Form -->
-            <div  class="authDiv" id="registerDiv">
+            <div class="authDiv" id="registerDiv">
                 <div class="contactFormHeader" id="loginRegisterHeader">
                     <h2>Register</h2>
                 </div>
@@ -128,8 +93,8 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
             <p id="copyright">
                 &copy; <span id="year"></span> STU124543. All rights reserved.
             </p>
-
         </footer>
     </div>
 </body>
+
 </html>

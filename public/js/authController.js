@@ -1,12 +1,10 @@
-
+//Function to switch between login and register form
 function showForm(formType) {
     document.getElementById('loginForm').style.display = formType === 'login' ? 'block' : 'none';
-    // document.getElementById('registerForm').style.display = formType === 'register' ? 'block' : 'none';
-
     document.getElementById('registerDiv').style.display = formType === 'register' ? 'block' : 'none';
-    
 }
 
+//Function that handles the login and register api calls
 async function handleFormSubmit(event, formType) {
     event.preventDefault();
     const form = event.target;
@@ -28,20 +26,21 @@ async function handleFormSubmit(event, formType) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
+//Event listeners to submit the login or refister form
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
         handleFormSubmit(event, 'login');
     });
 
-    document.getElementById('registerForm').addEventListener('submit', function(event) {
+    document.getElementById('registerForm').addEventListener('submit', function (event) {
         handleFormSubmit(event, 'register');
     });
 
-    showForm('login'); // Default to login form
+    showForm('login');
 });
 
 
-
+//Event listener to switch between login and register forms
 document.getElementById('authLoginBtn').addEventListener('click', function () {
     showForm('login')
 });
