@@ -3,7 +3,7 @@ require 'data/sessionChecker.php';
 
 
 // For debugging: Print session data
-var_dump($_SESSION);
+// var_dump($_SESSION);
 $isLoggedIn = isset($_SESSION['user_id']);
 $user_id = $isLoggedIn ? $_SESSION['user_id'] : null;
 $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
@@ -59,7 +59,7 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
                     <h3 id="greeting">Hi <?= ucwords($_SESSION['user_name'])?>!</h3>
                 <?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
-                    <button id="viewFavourites" >My Fovourites</button>
+                    <button id="viewFavourites" >My Favourites</button>
                 <?php if (isUserLoggedIn()): ?>
                     <button onclick="location.href='data/logout.php'">Logout</button>
                 <?php else: ?>

@@ -70,7 +70,8 @@ function addRecipes(recipesList) {
 
         //Fav Btn
         let recipeAddFavBtn = document.createElement("button")
-        recipeAddFavBtn.id = recipe.dish_id;
+        // recipeAddFavBtn.id = recipe.dish_id;
+        recipeAddFavBtn.dataset.recipeId = recipe.dish_id;
         let recipeHeadingBtnDiv = document.createElement("div")
         recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
 
@@ -219,13 +220,22 @@ function addRecipes(recipesList) {
             expandBtn.textContent = recipeDescriptionParDiv.classList.contains("expanded") ? "Collapse" : "Expand";
         });
 
-
+        recipeAddFavBtn.dataset.recipeId
 
         //calls addfavourite function in api calls------------------------------------------------
-        recipeAddFavBtn.addEventListener("click", ()=>{
-            apiCalls.addFavourite(recipeAddFavBtn.id)
-        })
+        // recipeAddFavBtn.addEventListener("click", ()=>{
+        //     const recipeId = parseInt(recipeAddFavBtn.id, 10);
+        //     apiCalls.addFavourite(userId,recipeId)
+        // })
 
+        recipeAddFavBtn.addEventListener("click", () => {
+            const recipeId = parseInt(recipeAddFavBtn.dataset.recipeId, 10); // Parse the stored data
+            if (!isNaN(recipeId)) {
+                apiCalls.addFavourite(userId, recipeId);
+            } else {
+                console.error('Invalid recipe ID');
+            }
+        });
 
 
         list.appendChild(recipeDiv);
@@ -478,22 +488,67 @@ if (favouritesButton) {
 }
 
 
+// async function getFavourites(userId) {
+//     const recipesList = document.getElementById('recipesList');
+//     if (!userId) {
+//         // recipesList.innerText = "Please log in to view your favourites.";
+//         return;
+//     }
+
+//     const results = await apiCalls.getFavourites(userId);
+
+//     // console.log(results);
+//     recipesList.innerText = "";
+//     if (results.length === 0) {
+//         const noResultsIndex = document.createElement('h2');
+//         noResultsIndex.classList.add('noResultsIndex');
+//         noResultsIndex.innerHTML = 'No Recipes Found';
+//         recipesList.appendChild(noResultsIndex);
+//     } else {
+//         addRecipes(results);
+//     }
+
+// }
+
+
+
+
 async function getFavourites(userId) {
     const recipesList = document.getElementById('recipesList');
-    if (!userId) {
-        recipesList.innerText = "Please log in to view your favourites.";
-        return;
-    }
+    
+    // if (!userId) {
+    //     console.log('there is no userid')
+    //     // recipesList.innerText = "Please log in to view your favourites.";
+    //     return;
+    // }
 
-    const results = await apiCalls.getFavourites(userId);
-    recipesList.innerText = "";
-    if (results.length === 0) {
-        const noResultsIndex = document.createElement('h2');
-        noResultsIndex.classList.add('noResultsIndex');
-        noResultsIndex.innerHTML = 'No Recipes Found';
-        recipesList.appendChild(noResultsIndex);
-    } else {
-        addRecipes(results);
-    }
+    try {
+        const response = await apiCalls.getFavourites(userId);
+        // if(!response){
+        //     throw new Error('there is no response from apiCalls.getFavourites(userId), response is:', response)
+        // }else {
+        //     console.log(response);
+        // }
+        // if (response.status !== 'success') {
+        //     throw new Error(response.message || 'Failed to fetch favourites');
+        // }
 
+        // const results = response.data;
+
+        // Clear current recipes list
+        recipesList.innerText = "";
+
+        if (!response) {
+            const noResultsIndex = document.createElement('h2');
+            noResultsIndex.classList.add('noResultsIndex');
+            noResultsIndex.innerHTML = 'No Recipes Found';
+            recipesList.appendChild(noResultsIndex);
+        } else {
+            addRecipes(response);
+        }
+
+    } catch (error) {
+        console.error('Error fetching favourites:', error);
+        recipesList.innerText = "An error occurred while fetching your favourites.";
+    }
 }

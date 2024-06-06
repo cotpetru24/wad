@@ -616,6 +616,33 @@ export async function editUser(jsonData) {
 
 //filterMessages function
 
+// export async function getFavourites(user) {
+//     try {
+//         const data = {
+//             "function": "getFavourites",
+//             "user": user
+//         };
+//         const response = await fetch(`http://localhost/data/api.php`, {
+//             method: "POST",
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(data)
+//         });
+
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+
+//         const favourites = await response.json();
+//         console.log(favourites);
+//         return favourites;
+//     } catch (error) {
+//         console.log("Error retrieving data: " + error);
+//     }
+// }
+
+
 export async function getFavourites(user) {
     try {
         const data = {
@@ -630,6 +657,12 @@ export async function getFavourites(user) {
             body: JSON.stringify(data)
         });
 
+
+        // if (response.ok) {
+        //     console.log('response = ',await response.json());
+
+        //     throw new Error(`response is ok! status: ${response.status}`);
+        // }
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -637,7 +670,8 @@ export async function getFavourites(user) {
         const favourites = await response.json();
         return favourites;
     } catch (error) {
-        console.log("Error retrieving data: " + error);
+        console.error("Error retrieving data: ", error);
+        return { status: 'error', message: error.message };
     }
 }
 

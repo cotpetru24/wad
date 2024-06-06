@@ -3,7 +3,7 @@ session_start(); // Start the session
 
 
 // For debugging: Print session data
-var_dump($_SESSION);
+// var_dump($_SESSION);
 
 
 // Check if the user is logged in
