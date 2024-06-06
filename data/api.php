@@ -60,7 +60,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($data['function'])) {
         switch ($data['function']) {
             case 'deleteRecipe':
-                deleteRecipe($conn, $data['recipeId']);
+                deleteRecipe($conn, $data);
                 break;
             case 'addNewRecipe':
                 addNewRecipe($conn, $data);
@@ -69,13 +69,13 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 editRecipe($conn, $data);
                 break;
             case 'viewRecipe':
-                viewRecipe($conn, $data['recipeID']);
+                viewRecipe($conn, $data);
                 break;
             case 'sendMessage':
                 sendMessage($conn, $data);
                 break;
             case 'deleteMessage':
-                deleteMessage($conn, $data['messageId']);
+                deleteMessage($conn, $data);
                 break;
             case 'searchMessages':
                 searchMessages($conn, $data);

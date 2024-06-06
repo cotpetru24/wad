@@ -25,7 +25,8 @@ header("Content-Type: application/json");
 
 
 // Function to check if a SESSSION has been started, and if not start a SESSION
-function ensure_session_start() {
+function ensure_session_start()
+{
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
@@ -35,11 +36,12 @@ function ensure_session_start() {
 ensure_session_start();
 
 // Logging session data for debugging
-error_log(print_r($_SESSION, true)); 
+error_log(print_r($_SESSION, true));
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /// not sure if this is needed++++++++++++++++++++++++++++++++++++++++++++
-function check_user_session($role = null) {
+function check_user_session($role = null)
+{
     if (!isset($_SESSION['user_id'])) {
         header("Location: index.php");
         exit();
@@ -104,8 +106,8 @@ function getRecipesList($conn, $filterCriteria = [])
                 if (count($keyParts) == 2 && in_array($keyParts[1], $allowedColumns)) {
                     $column = $keyParts[1];
                 }
-                
-                    // Handling single filter criteria
+
+                // Handling single filter criteria
                 elseif (count($keyParts) == 1 && in_array($keyParts[0], $allowedColumns)) {
                     $column = $keyParts[0];
                 }
@@ -125,7 +127,7 @@ function getRecipesList($conn, $filterCriteria = [])
                         $sql .= " AND {$column} {$operator} ?";
                         $paramValues[] = $prepTimeValue;
                         $paramTypes .= 'i';
-                    } 
+                    }
                     // Ignoring filter key if key is not valid
                     else {
                         continue;
@@ -180,7 +182,7 @@ function getRecipesList($conn, $filterCriteria = [])
             array_push($results, $row);
         }
         echo json_encode($results);
-    } 
+    }
 
     //If there are no results retun a empty array
     else {
@@ -202,14 +204,14 @@ function getMessagesList($conn)
     if ($stmt->execute()) {
         if ($result) {
             $results = [];
-            
+
             // Appending query results to $results assoc array
             while ($row = $result->fetch_assoc()) {
                 array_push($results, $row);
             }
 
             echo json_encode($results);
-        } 
+        }
 
         //If there are no results retun a empty array
         else {
@@ -224,12 +226,12 @@ function getMessagesList($conn)
 
 
 // Function to delete a message from DB
-function deleteMessage($conn, $messageId)
+function deleteMessage($conn, $data)
 {
-    error_log("deleteMessage called with messageId: $messageId");
+    error_log("deleteMessage called with messageId: " .$data['messageId']);
     $sql = 'DELETE FROM messages WHERE message_id = ?';
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $messageId);
+    $stmt->bind_param('i', $data['messageId']);
     if ($stmt->execute()) {
         error_log("Message deleted successfully.");
         echo json_encode(['status' => 'success', 'message' => 'Message deleted successfully']);
@@ -243,11 +245,11 @@ function deleteMessage($conn, $messageId)
 
 
 // Function to delete a recipe from DB
-function deleteRecipe($conn, $id)
+function deleteRecipe($conn, $data)
 {
     $sql = 'DELETE FROM recipes WHERE dish_id = ?';
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $id);
+    $stmt->bind_param('i', $data['recipeId']);
     if ($stmt->execute()) {
         echo json_encode(['status' => 'success', 'message' => 'Recipe removed successfully']);
     } else {
@@ -339,12 +341,12 @@ function addNewRecipe($conn, $data)
 
 ////////////// to check if this is used or not
 //if not delete it
-function viewRecipe($conn, $id)
+function viewRecipe($conn, $data)
 {
     $sql = "SELECT recipe_id, dish_name, dish_recipe_description, dish_ingredients, dish_complexity_id, dish_prep_time FROM recipes
     WHERE recipe_id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $id);
+    $stmt->bind_param('i', $data['recipeID']);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -478,7 +480,7 @@ function searchRecipes($conn, $criteria)
             array_push($results, $row);
         }
         echo json_encode($results);
-    } 
+    }
 
     //If there are no results retun a empty array
     else {
@@ -512,7 +514,7 @@ function searchMessages($conn, $criteria)
             }
             echo json_encode($results);
         }
-        
+
         //If there are no results retun a empty array
         else {
             $noResults = [];
@@ -587,7 +589,7 @@ function filterMessages($conn, $data)
                 array_push($results, $row);
             }
             echo json_encode($results);
-        } 
+        }
 
         //If there are no results retun a empty array
         else {
@@ -602,7 +604,8 @@ function filterMessages($conn, $data)
 
 
 // Function to register a user / add a new user to DB
-function registerUser($conn, $data){
+function registerUser($conn, $data)
+{
     $sql = "INSERT INTO users (user_name, user_surname, user_email, user_password_hash) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
@@ -624,18 +627,19 @@ function registerUser($conn, $data){
 
 
 // Function to authenticate a user
-function authenticateUser($conn, $data){
+function authenticateUser($conn, $data)
+{
     $sql = "SELECT user_id, user_password_hash, user_type, user_name FROM users WHERE user_email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $data['email']);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if($result->num_rows == 1){
+    if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
 
         // Verifying password hash and appending user_id, user_type and user_name to $_SESSION assoc array
-        if (password_verify($data['password'], $user['user_password_hash'])){
+        if (password_verify($data['password'], $user['user_password_hash'])) {
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['user_type'] = $user['user_type'];
             $_SESSION['user_name'] = $user['user_name'];
@@ -669,8 +673,8 @@ function getUsersList($conn)
             }
 
             echo json_encode($results);
-        } 
-        
+        }
+
         //If there are no results retun a empty array
         else {
             $noResults = [];
@@ -720,8 +724,8 @@ function filterUsers($conn, $data)
                 array_push($results, $row);
             }
             echo json_encode($results);
-        } 
-        
+        }
+
         //If there are no results retun a empty array
         else {
             $noResults = [];
@@ -756,8 +760,8 @@ function searchUsers($conn, $criteria)
                 array_push($results, $row);
             }
             echo json_encode($results);
-        } 
-        
+        }
+
         //If there are no results retun a empty array
         else {
             $noResults = [];
@@ -772,7 +776,8 @@ function searchUsers($conn, $criteria)
 
 //to check if this works-------------------------------------=====================
 // Function to edit user details
-function editUser($conn, $data) {
+function editUser($conn, $data)
+{
     $passwordClause = "";
     $types = 'ssssi';
     $params = [
@@ -798,8 +803,8 @@ function editUser($conn, $data) {
             user_surname=?, 
             user_email=?, 
             user_type=?"
-            . $passwordClause . 
-            " WHERE user_id=?";
+        . $passwordClause .
+        " WHERE user_id=?";
 
     $stmt = $conn->prepare($sql);
 
@@ -834,9 +839,25 @@ function editUser($conn, $data) {
 // Fucntion to retrive users's favourite dishes from DB
 function getFavourites($conn, $data)
 {
-    $sql = "SELECT recipes.*
+    $sql = "SELECT 
+    recipes.dish_id, 
+    recipes.dish_name, 
+    origin.origin_country, 
+    recipes.dish_recipe_description, 
+    category.category_name, 
+    complexity.complexity_name,
+    recipes.dish_prep_time, 
+    recipes.dish_img, 
+    recipes.dish_upload_date_time, 
+    recipes.dish_rating,  
+    recipes.dish_ingredients,
+    recipes.dish_steps,
+    recipes.dish_chef_recommended
     FROM recipes
-    INNER  JOIN favourites ON recipes.dish_id = favourites.dish_id
+    INNER JOIN category ON recipes.dish_category_id = category.category_id
+    INNER JOIN complexity ON recipes.dish_complexity_id = complexity.complexity_id
+    INNER JOIN origin ON recipes.dish_origin_id = origin.origin_id
+    INNER JOIN favourites ON recipes.dish_id = favourites.dish_id
     WHERE favourites.user_id = ?
     ORDER BY recipes.dish_name ASC";
 
@@ -846,10 +867,10 @@ function getFavourites($conn, $data)
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $results = [];
-    
+
             // Appending query results to $results assoc array
             while ($row = $result->fetch_assoc()) {
-    
+
                 //If dish_img not null encod it to base64
                 if (!empty($row['dish_img'])) {
                     $dishImgData = $row['dish_img'];
@@ -858,8 +879,8 @@ function getFavourites($conn, $data)
                 array_push($results, $row);
             }
             echo json_encode($results);
-        } 
-        
+        }
+
         //If there are no results retun a empty array
         else {
             $noResults = [];
@@ -873,7 +894,8 @@ function getFavourites($conn, $data)
 
 
 // Function to add a favourite recipe for a user
-function addFavourite($conn, $data){
+function addFavourite($conn, $data)
+{
     $sql = "INSERT INTO favourites (user_id, dish_id) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $data['user_id'], $data['dish_id']);
@@ -892,7 +914,7 @@ function addFavourite($conn, $data){
 
 
 
-    
+
     //not sure if this is needed--------------------------------------------------------------------------------------------------------------
     // return $response;
 }

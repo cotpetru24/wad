@@ -810,7 +810,7 @@ td img {
   background-size: 30px 30px;
   background-position: center;
   background-repeat: no-repeat;
-  display: inline-block;
+  /* display: inline-block; */
   position: relative;
   padding-bottom: 2px;
   border: none;
@@ -1214,7 +1214,7 @@ ul {
   width: 250px; */
   width: 100px;
   font-weight: bolder;
-  position: absolute;
+  /* position: absolute; */
     top: 0;
     right: 0;
 }

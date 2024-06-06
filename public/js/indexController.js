@@ -68,41 +68,9 @@ async function addRecipes(recipesList) {
         let recipeHeadingH2Div = document.createElement("div")
         recipeHeadingH2Div.appendChild(recipeHeading);
 
-        //Fav Btn
-        let recipeAddFavBtn = document.createElement("button")
-        // recipeAddFavBtn.id = recipe.dish_id;
-        recipeAddFavBtn.dataset.recipeId = recipe.dish_id;
-        recipeAddFavBtn.classList.add('showRecipeFavBtn')
+        //Fav Btns
 
 
-
-
-
-
-
-        // .recipeHeadDiv .removeRecipeFavBtn {
-        //     height: auto;
-        //     width: auto;
-        //     background-color: transparent;
-        //     background-image: none;
-        //     background-size: auto;
-        //     background-position: center;
-        //     background-repeat: no-repeat;
-        //     display: inline-block;
-        //     position: relative;
-        //     padding-bottom: 2px;
-        //     border: none;
-        //     background: #9b59b6;
-        //     color: #0c0723;
-        //     border: 1px solid #9b59b6;
-        //     border-radius: 7px;
-        //     cursor: pointer;
-        //     padding: 5px;
-        //     margin-top: 30px;
-        //     width: 250px;
-        //     width: 100px;
-        //     font-weight: bolder;
-        //   }
 
 
 
@@ -120,12 +88,43 @@ async function addRecipes(recipesList) {
 
 
 
+
+
+
+
+
+
+        let recipeAddFavBtn = document.createElement("button")
+        // recipeAddFavBtn.id = recipe.dish_id;
+        recipeAddFavBtn.dataset.recipeId = recipe.dish_id;
+        recipeAddFavBtn.classList.add('showRecipeFavBtn')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         let recipeHeadingBtnDiv = document.createElement("div")
         recipeHeadingBtnDiv.classList.add('favDiv')
-        recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
 
 
         recipeHeadingBtnDiv.appendChild(removeRecipeFavBtn);
+        recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
+
 
 
 
