@@ -1,26 +1,27 @@
 <?php
-require 'data/functions_manager.php'; // Ensure the session check function is included
+require 'data/functions_manager.php';
 require 'data/db_connect.php';
 
-header("Content-Type: application/json"); // Ensure the response is JSON
+header("Content-Type: application/json");
 
-$response = ['status' => 'error', 'message' => 'Invalid request']; // Default response
+$response = ['status' => 'error', 'message' => 'Invalid request'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // Login API call
     if (isset($_POST['login'])) {
-        // Login logic
         $email = $_POST['email'];
         $password = $_POST['password'];
-
-        // Call the authenticateUser function
         $login_data = [
             'email' => $email,
             'password' => $password
         ];
         $response = authenticateUser($conn, $login_data);
 
-    } elseif (isset($_POST['register'])) {
-        // Registration logic
+    } 
+    
+    // Register API call
+    elseif (isset($_POST['register'])) {
         $name = $_POST['name'];
         $surname = $_POST['surname'];
         $email = $_POST['reg_email'];
@@ -41,5 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+// Sending the api response back
 echo json_encode($response);
 
