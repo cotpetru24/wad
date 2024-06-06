@@ -5,9 +5,7 @@ session_start();
 error_log(print_r($_SESSION, true));
 
 
-// Function to check if user is logged in
-// And user_type matches the requred type/role
-// Redirecting user to index.php
+// Function to check the $_SESSION for a user
 function check_user_session($role = null)
 {
     // Check if user is logged in
