@@ -285,6 +285,39 @@ function addRecipes(recipesList) {
 }
 
 
+
+
+
+// removeRecipeFavBtn.addEventListener("click", () => {
+//     const recipeId = parseInt(removeRecipeFavBtn.dataset.recipeId, 10); // Parse the stored data
+//     if (!isNaN(recipeId)) {
+//         (async () => {
+//             await apiCalls.removeFavourite(userId, recipeId);
+//             getFavourites(userId);
+//         })();
+    
+    
+//     } else {
+//         console.error('Invalid recipe ID');
+//     }
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Overlay for pop up dialog boxes
 const overlay = document.getElementById('overlay');
 const contactForm = document.getElementById('contactFormDiv');
@@ -580,10 +613,10 @@ async function getFavourites(userId) {
         // Clear current recipes list
         recipesList.innerText = "";
 
-        if (!response) {
+        if (!response || response.length === 0) {
             const noResultsIndex = document.createElement('h2');
             noResultsIndex.classList.add('noResultsIndex');
-            noResultsIndex.innerHTML = 'No Recipes Found';
+            noResultsIndex.innerHTML = 'You don\'t have any favourite recipes added.';
             recipesList.appendChild(noResultsIndex);
         } else {
             addRecipes(response);
@@ -594,3 +627,15 @@ async function getFavourites(userId) {
         recipesList.innerText = "An error occurred while fetching your favourites.";
     }
 }
+
+
+// if (searchResults.) {
+
+//     const noResultsIndex = document.createElement('h2');
+//     noResultsIndex.classList.add('noResultsIndex');
+//     noResultsIndex.innerHTML = 'No Recipes Found'
+
+//     recipesList.appendChild(noResultsIndex);
+// } else {
+//     addRecipes(searchResults);
+// }
