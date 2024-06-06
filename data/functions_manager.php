@@ -834,54 +834,29 @@ function editUser($conn, $data) {
 // Fucntion to retrive users's favourite dishes from DB
 function getFavourites($conn, $data)
 {
-    error_log("getFavourites called with data: " . json_encode($data));
-
     $sql = "SELECT recipes.*
     FROM recipes
     INNER  JOIN favourites ON recipes.dish_id = favourites.dish_id
     WHERE favourites.user_id = ?
     ORDER BY recipes.dish_name ASC";
 
-
-
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $data['user']);
-    // $result = $conn->query($sql);
     if ($stmt->execute()) {
         $result = $stmt->get_result();
-        if ($result && $result->num_rows > 0) {
-
-
-
-            error_log("Result is: " . print_r($result, true));
-
-
-
-
+        if ($result->num_rows > 0) {
             $results = [];
-
-
-///to sort out how the image is added
-
-
-
+    
             // Appending query results to $results assoc array
             while ($row = $result->fetch_assoc()) {
+    
+                //If dish_img not null encod it to base64
+                if (!empty($row['dish_img'])) {
+                    $dishImgData = $row['dish_img'];
+                    $row['dish_img'] = 'data:image/jpeg;base64,' . base64_encode($dishImgData);
+                }
                 array_push($results, $row);
             }
-
-
-
-                    // Log each row's data to error_log
-                    foreach ($results as $row) {
-                        error_log("Row data: " . print_r($row, true));
-                    }
-
-
-
-
-
-
             echo json_encode($results);
         } 
         
@@ -895,105 +870,6 @@ function getFavourites($conn, $data)
     }
     $stmt->close();
 }
-
-// function getFavourites($conn, $data)
-// {
-//     $response = ['status' => 'error', 'message' => 'Invalid request']; // Default response
-
-//     $sql = "SELECT recipes.*
-//             FROM recipes
-//             RIGHT JOIN favourites ON favourites.dish_id = recipes.dish_id
-//             WHERE favourites.user_id = ?
-//             ORDER BY recipes.dish_name ASC";
-
-//     if ($stmt = $conn->prepare($sql)) {
-//         $stmt->bind_param("i", $data['user']);
-        
-//         if ($stmt->execute()) {
-//             $result = $stmt->get_result();
-            
-//             if ($result && $result->num_rows > 0) {
-//                 $results = [];
-//                 while ($row = $result->fetch_assoc()) {
-//                     $results[] = $row;
-//                 }
-//                 $response = ['status' => 'success', 'data' => $results];
-//             } else {
-//                 $response = ['status' => 'success', 'data' => []];
-//             }
-//         } else {
-//             $response = ['status' => 'error', 'message' => 'Error executing query: ' . $stmt->error];
-//         }
-        
-//         $stmt->close();
-//     } else {
-//         $response = ['status' => 'error', 'message' => 'Error preparing statement: ' . $conn->error];
-//     }
-
-//     echo json_encode($response);
-// }
-
-
-// function getFavourites($conn, $data)
-// {
-//     $response = ['status' => 'error', 'message' => 'Invalid request']; // Default response
-
-//     // Debug: Log the function call
-//     error_log("getFavourites called with data: " . json_encode($data));
-
-//     $sql = "SELECT recipes.*
-//             FROM recipes
-//             RIGHT JOIN favourites ON favourites.dish_id = recipes.dish_id
-//             WHERE favourites.user_id = ?
-//             ORDER BY recipes.dish_name ASC";
-
-//     if ($stmt = $conn->prepare($sql)) {
-//         error_log("SQL prepared successfully");
-
-//         $stmt->bind_param("i", $data['user']);
-        
-//         if ($stmt->execute()) {
-//             error_log("SQL executed successfully");
-
-//             $result = $stmt->get_result();
-            
-//             if ($result) {
-//                 error_log("Result fetched successfully");
-//                 error_log("Result is: " . print_r($result, true));
-
-
-//                 if ($result->num_rows > 0) {
-//                     $results = [];
-//                     while ($row = $result->fetch_assoc()) {
-//                         $results[] = $row;
-//                     }
-//                     $response = ['status' => 'success', 'data' => $results];
-//                 } else {
-//                     $response = ['status' => 'success', 'data' => []];
-//                 }
-//             } else {
-//                 error_log("Failed to fetch result");
-//                 $response = ['status' => 'error', 'message' => 'Failed to fetch result'];
-//             }
-//         } else {
-//             error_log("Error executing query: " . $stmt->error);
-//             $response = ['status' => 'error', 'message' => 'Error executing query: ' . $stmt->error];
-//         }
-        
-//         $stmt->close();
-//     } else {
-//         error_log("Error preparing statement: " . $conn->error);
-//         $response = ['status' => 'error', 'message' => 'Error preparing statement: ' . $conn->error];
-//     }
-
-//     // Debug: Log the response before sending it
-//     error_log("getFavourites response: " . json_encode($response));
-
-//     echo json_encode($response);
-// }
-
-
-
 
 
 // Function to add a favourite recipe for a user
@@ -1016,8 +892,9 @@ function addFavourite($conn, $data){
 
 
 
+    
     //not sure if this is needed--------------------------------------------------------------------------------------------------------------
-    return $response;
+    // return $response;
 }
 
 

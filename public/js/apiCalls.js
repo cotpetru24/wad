@@ -702,3 +702,29 @@ export async function addFavourite(user_id, dish_id) {
         console.log("Error adding to favourites:", error);
     }
 }
+
+
+
+//filterMessages function
+export async function removeFavourite(user_id, dish_id) {
+    try {
+        const data = {
+            "function": "removeFavourite",
+            "user_id": user_id,
+            "dish_id": dish_id
+        };
+        const response = await fetch(`http://localhost/data/api.php`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`http error! status: ${response.status}`);
+        }
+    } catch (error) {
+        console.log("Error adding to favourites:", error);
+    }
+}

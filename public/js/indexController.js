@@ -72,8 +72,35 @@ function addRecipes(recipesList) {
         let recipeAddFavBtn = document.createElement("button")
         // recipeAddFavBtn.id = recipe.dish_id;
         recipeAddFavBtn.dataset.recipeId = recipe.dish_id;
+
+
+
+
+
+
+
+
+
+
+        let removeRecipeFavBtn = document.createElement("button");
+        removeRecipeFavBtn.dataset.recipeId = recipe.dish_id;
+        removeRecipeFavBtn.innerText="remove fav";
+
+
+
+
+
+
+
         let recipeHeadingBtnDiv = document.createElement("div")
         recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
+
+
+        recipeHeadingBtnDiv.appendChild(removeRecipeFavBtn);
+
+
+
+
 
         //Recipe Heading Div
         let recipeHeadingDiv = document.createElement("div");
@@ -232,6 +259,21 @@ function addRecipes(recipesList) {
             const recipeId = parseInt(recipeAddFavBtn.dataset.recipeId, 10); // Parse the stored data
             if (!isNaN(recipeId)) {
                 apiCalls.addFavourite(userId, recipeId);
+
+            } else {
+                console.error('Invalid recipe ID');
+            }
+        });
+
+        removeRecipeFavBtn.addEventListener("click", () => {
+            const recipeId = parseInt(removeRecipeFavBtn.dataset.recipeId, 10); // Parse the stored data
+            if (!isNaN(recipeId)) {
+                (async () => {
+                    await apiCalls.removeFavourite(userId, recipeId);
+                    getFavourites(userId);
+                })();
+            
+            
             } else {
                 console.error('Invalid recipe ID');
             }
