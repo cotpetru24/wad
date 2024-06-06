@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Checking if user is logged in
+// Checking if user is logged in and setting session varriables
 $isLoggedIn = isset($_SESSION['user_id']);
 $user_id = $isLoggedIn ? $_SESSION['user_id'] : null;
 $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
@@ -16,7 +16,7 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
     <title>Auth</title>
     <link rel="stylesheet" href="public/css/style.css">
     <script>
-        // Setting user session variables
+        // Converting php session variables to js const
         const isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
         const userId = <?php echo json_encode($user_id); ?>;
     </script>

@@ -1,9 +1,7 @@
 <?php
 require 'data/sessionChecker.php';
 
-
-// For debugging: Print session data
-// var_dump($_SESSION);
+// Checking if user is logged in and setting session varriables
 $isLoggedIn = isset($_SESSION['user_id']);
 $user_id = $isLoggedIn ? $_SESSION['user_id'] : null;
 $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
@@ -20,7 +18,7 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
     <title>Cookking Creations</title>
     <link rel="stylesheet" href="public/css/style.css" />
     <script>
-        // Set the isLoggedIn variable based on session data
+        // Converting php session variables to js const
         const isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
         const userId = <?php echo json_encode($user_id); ?>;
     </script>
@@ -55,29 +53,28 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
             </div>
             <nav>
                 <div id="nav">
-                <?php if (isUserLoggedIn()): ?>
-                    <h3 id="greeting">Hi <?= ucwords($_SESSION['user_name'])?>!</h3>
-                <?php endif; ?>
+                    <?php if (isUserLoggedIn()) : ?>
+                        <h3 id="greeting">Hi <?= ucwords($_SESSION['user_name']) ?>!</h3>
+                    <?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
-                    <button id="viewFavourites" >My Favourites</button>
-                <?php if (isUserLoggedIn()): ?>
-                    <button onclick="location.href='data/logout.php'">Logout</button>
-                <?php else: ?>
-                    <button onclick="location.href='auth.php'">Login</button>
-                <?php endif; ?>
-                <?php if (isAdmin()): ?>
-                    <button onclick="location.href='adminPage.php'">Admin Page</button>
-                <?php endif; ?>
+                    <button id="viewFavourites">My Favourites</button>
+                    <?php if (isUserLoggedIn()) : ?>
+                        <button onclick="location.href='data/logout.php'">Logout</button>
+                    <?php else : ?>
+                        <button onclick="location.href='auth.php'">Login</button>
+                    <?php endif; ?>
+                    <?php if (isAdmin()) : ?>
+                        <button onclick="location.href='adminPage.php'">Admin Page</button>
+                    <?php endif; ?>
                 </div>
                 <div id="searchDiv">
                     <input type="search" id="indexRecipeSearchBox" placeholder="Search recipes...">
                     <button id="indexRecipesSearch"></button>
-
                 </div>
             </nav>
         </header>
         <main id="recipesList">
-            <!-- Recipes go here -->
+            <!-- Recipes will go here -->
         </main>
         <footer id="footer">
             <div id="footerDiv">
@@ -119,11 +116,9 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
             <p id="copyright">
                 &copy; <span id="year"></span> STU124543. All rights reserved.
             </p>
-
         </footer>
     </div>
     <script src="public/js/indexController.js" type="module" defer></script>
-
 </body>
 
 </html>
