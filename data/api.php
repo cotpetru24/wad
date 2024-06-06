@@ -5,23 +5,29 @@ session_start();
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
-// Enable error reporting for debugging
+// Enabling error reporting 
+// and
+// Logging the request method and paramenter
+// For debugging and development purposes
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-header("Content-Type: application/json");
-require "db_connect.php";
-require_once "functions_manager.php";
-
-// Log the request method and parameters
 error_log("Request method: " . $_SERVER['REQUEST_METHOD']);
 error_log("GET data: " . print_r($_GET, true));
 
+
+require "db_connect.php";
+require_once "functions_manager.php";
+
+
 $response = [];
 
+// GET method API calls
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+    //Switch to determin which function to execute
     if (isset($_GET['function'])) {
         switch ($_GET['function']) {
             case 'getRecipesList':
@@ -43,11 +49,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo json_encode($response);
         exit();
     }
-} else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+} 
+
+// POST method API calls
+else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = file_get_contents("php://input");
     $data = json_decode($input, true);
     error_log("POST data: " . print_r($data, true));
 
+    //Switch to determin which function to execute
     if (isset($data['function'])) {
         switch ($data['function']) {
             case 'deleteRecipe':
@@ -98,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'editUser':
                 editUser($conn, $data);
                 break;
-                
             case 'getFavourites':
                 getFavourites($conn, $data);
                 break;
@@ -108,12 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             case 'removeFavourite':
                 removeFavourite($conn, $data);
                 break;
-
-
-    
-
-                
-
             default:
                 $response = ["status" => "error", "message" => "Invalid function"];
                 echo json_encode($response);
