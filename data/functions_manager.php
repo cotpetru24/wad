@@ -860,6 +860,11 @@ function getFavourites($conn, $data)
 
             $results = [];
 
+
+///to sort out how the image is added
+
+
+
             // Appending query results to $results assoc array
             while ($row = $result->fetch_assoc()) {
                 array_push($results, $row);
