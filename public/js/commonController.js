@@ -5,6 +5,9 @@ export function tabsController() {
     tabButtonArray.forEach((tabButton, index) => {
         tabButton.addEventListener('click', () => {
             document.querySelector('.tabSelected')?.classList.remove('tabSelected');
+            document.querySelector("#favHeaderDiv")?.classList.add('hideFavHeader');
+            // document.querySelectorAll(".hideRemoveRecipeFavBtn")?.classList.add
+
             tabButton.classList.add('tabSelected');
             contentSections.forEach((section, sectionIndex) => {
                 section.style.display = sectionIndex === index ? 'block' : 'none';
@@ -12,15 +15,7 @@ export function tabsController() {
         });
     });
 
-    // const searchButtonIndex = document.getElementById('searchButton');
-    // if (searchButtonIndex) {
-    //     searchButtonIndex.addEventListener('click', () => {
-    //         const currentSelectedTab = document.querySelector('.tabSelected');
-    //         if (currentSelectedTab) {
-    //             currentSelectedTab.classList.remove('tabSelected');
-    //         }
-    //     });
-    // }
+    
 }
 
 

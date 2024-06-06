@@ -73,8 +73,14 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
                 </div>
             </nav>
         </header>
-        <main id="recipesList">
-            <!-- Recipes will go here -->
+<main>
+        <!-- <main id="main"> -->
+            <div id="favHeaderDiv" class="hideFavHeader">
+                <h2 class="favHeader">My Favourites</h2>
+            </div>
+            <div id="recipesList">
+                <!-- Recipes will go here -->
+            </div>
         </main>
         <footer id="footer">
             <div id="footerDiv">

@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (window.location.pathname.includes('index.html')) {
         try {
             const recipes = await apiCalls.getRecipes({ "dish_chef_recommended": "1" });
-            addRecipes(recipes);
+            await addRecipes(recipes);
         } catch (error) {
             console.error("Error loading recipes:", error);
         }
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 //function to add recipes to index.html
-function addRecipes(recipesList) {
+async function addRecipes(recipesList) {
 
     const list = document.getElementById("recipesList");
     //clear current tasks
@@ -72,11 +72,37 @@ function addRecipes(recipesList) {
         let recipeAddFavBtn = document.createElement("button")
         // recipeAddFavBtn.id = recipe.dish_id;
         recipeAddFavBtn.dataset.recipeId = recipe.dish_id;
+        recipeAddFavBtn.classList.add('showRecipeFavBtn')
 
 
 
 
 
+
+
+        // .recipeHeadDiv .removeRecipeFavBtn {
+        //     height: auto;
+        //     width: auto;
+        //     background-color: transparent;
+        //     background-image: none;
+        //     background-size: auto;
+        //     background-position: center;
+        //     background-repeat: no-repeat;
+        //     display: inline-block;
+        //     position: relative;
+        //     padding-bottom: 2px;
+        //     border: none;
+        //     background: #9b59b6;
+        //     color: #0c0723;
+        //     border: 1px solid #9b59b6;
+        //     border-radius: 7px;
+        //     cursor: pointer;
+        //     padding: 5px;
+        //     margin-top: 30px;
+        //     width: 250px;
+        //     width: 100px;
+        //     font-weight: bolder;
+        //   }
 
 
 
@@ -84,7 +110,9 @@ function addRecipes(recipesList) {
 
         let removeRecipeFavBtn = document.createElement("button");
         removeRecipeFavBtn.dataset.recipeId = recipe.dish_id;
-        removeRecipeFavBtn.innerText="remove fav";
+        removeRecipeFavBtn.classList.add("hideRemoveRecipeFavBtn")
+        removeRecipeFavBtn.classList.add("removeRecipeFavBtn")
+        removeRecipeFavBtn.innerText="Remove from Favourites";
 
 
 
@@ -93,6 +121,7 @@ function addRecipes(recipesList) {
 
 
         let recipeHeadingBtnDiv = document.createElement("div")
+        recipeHeadingBtnDiv.classList.add('favDiv')
         recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
 
 
@@ -270,7 +299,15 @@ function addRecipes(recipesList) {
             if (!isNaN(recipeId)) {
                 (async () => {
                     await apiCalls.removeFavourite(userId, recipeId);
-                    getFavourites(userId);
+                    await getFavourites(userId);
+
+                    const remFavBtns = document.querySelectorAll(".hideRemoveRecipeFavBtn");
+                    remFavBtns.forEach(remFavBtn => remFavBtn.classList.remove('hideRemoveRecipeFavBtn'));
+        
+                    const addFavBtns = document.querySelectorAll(".showRecipeFavBtn");
+                    addFavBtns.forEach(addFavBtn => addFavBtn.classList.add('hideAddRecipeFavBtn'));
+        
+
                 })();
             
             
@@ -495,9 +532,14 @@ closeContactForm.addEventListener('click', () => { toggleContactForm(false); });
 //search recipes function + event listener => index page
 async function searchRecipesIndex() {
     // const search = document.getElementById("search-box").value;
+    // document.querySelector("#favHeaderDiv")?.classList.remove('showFavHeader');
+
+
     const recipesList = document.getElementById('recipesList');
     const search = document.getElementById("indexRecipeSearchBox").value;
     let searchResults = await apiCalls.searchRecipes(search);
+    document.querySelector("#favHeaderDiv")?.classList.add('hideFavHeader');
+
     recipesList.innerText = "";
 
     if (searchResults.length === 0) {
@@ -554,10 +596,24 @@ if (favouritesButton) {
     favouritesButton.addEventListener('click', function() {
         if (!isLoggedIn) {
             window.location.href = 'auth.php';
-        } else {
+        } else { (async () =>{ 
             document.querySelector('.tabSelected')?.classList.remove('tabSelected');
+            document.querySelector("#favHeaderDiv")?.classList.remove('hideFavHeader');
 
-            getFavourites(userId);
+
+
+           await getFavourites(userId);
+
+
+
+            const remFavBtns = document.querySelectorAll(".hideRemoveRecipeFavBtn");
+            remFavBtns.forEach(remFavBtn => remFavBtn.classList.remove('hideRemoveRecipeFavBtn'));
+
+            const addFavBtns = document.querySelectorAll(".showRecipeFavBtn");
+            addFavBtns.forEach(addFavBtn => addFavBtn.classList.add('hideAddRecipeFavBtn'));
+
+        })()
+            
         }
     });
 }
@@ -591,26 +647,10 @@ if (favouritesButton) {
 async function getFavourites(userId) {
     const recipesList = document.getElementById('recipesList');
     
-    // if (!userId) {
-    //     console.log('there is no userid')
-    //     // recipesList.innerText = "Please log in to view your favourites.";
-    //     return;
-    // }
 
     try {
         const response = await apiCalls.getFavourites(userId);
-        // if(!response){
-        //     throw new Error('there is no response from apiCalls.getFavourites(userId), response is:', response)
-        // }else {
-        //     console.log(response);
-        // }
-        // if (response.status !== 'success') {
-        //     throw new Error(response.message || 'Failed to fetch favourites');
-        // }
 
-        // const results = response.data;
-
-        // Clear current recipes list
         recipesList.innerText = "";
 
         if (!response || response.length === 0) {
@@ -620,6 +660,7 @@ async function getFavourites(userId) {
             recipesList.appendChild(noResultsIndex);
         } else {
             addRecipes(response);
+
         }
 
     } catch (error) {
@@ -627,15 +668,3 @@ async function getFavourites(userId) {
         recipesList.innerText = "An error occurred while fetching your favourites.";
     }
 }
-
-
-// if (searchResults.) {
-
-//     const noResultsIndex = document.createElement('h2');
-//     noResultsIndex.classList.add('noResultsIndex');
-//     noResultsIndex.innerHTML = 'No Recipes Found'
-
-//     recipesList.appendChild(noResultsIndex);
-// } else {
-//     addRecipes(searchResults);
-// }

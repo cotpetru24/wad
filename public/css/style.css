@@ -41,7 +41,8 @@ header {
   border-bottom: 5px solid #9b59b6;
 }
 
-main {
+main, 
+#recipesList {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -303,7 +304,8 @@ nav {
   width: 250px;
 }
 
-.recipeFooterDiv button {
+.recipeFooterDiv button
+ {
   width: 100px;
   font-weight: bolder;
 }
@@ -1180,4 +1182,70 @@ ul {
   cursor: pointer;
   padding: 5px;
   margin-top: 30px;
+}
+
+.hideFavHeader,
+.hideRemoveRecipeFavBtn,
+.hideAddRecipeFavBtn {
+  /* display: none; */
+  visibility: hidden;
+}
+
+
+.recipeHeadDiv .removeRecipeFavBtn {
+  height: auto;
+  /* width: auto;
+  background-color: transparent;
+  background-image: none;
+  background-size: auto; */
+  background-position: center;
+  /* background-repeat: no-repeat; */
+  display: inline-block;
+  position: relative;
+  /* padding-bottom: 2px;
+  border: none; */
+  background: #9b59b6;
+  color: #0c0723;
+  border: 1px solid #9b59b6;
+  border-radius: 7px;
+  cursor: pointer;
+  padding: 5px;
+  /* margin-top: 30px;
+  width: 250px; */
+  width: 100px;
+  font-weight: bolder;
+  position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+.recipeHeadDiv .removeRecipeFavBtn:hover{
+background: #0c0723;
+color: #9b59b6;
+}
+
+.favDiv{
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-content: space-around;
+  align-items: baseline;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+}
+
+
+#favHeaderDiv{
+  width: 70%;
+  margin: 30px;
+  margin-top: 40px;
+}
+
+.favHeader {
+  padding-bottom: 10px;
+  border-bottom: 3px solid #ccc;
+  font-size: 36px;
+  font-weight: 700;
+  color: #0c0723;
 }
