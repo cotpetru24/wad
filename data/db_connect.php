@@ -1,11 +1,10 @@
 <?php
-
 $servername = "localhost";
 $username = "root";
 $password = "123456789";
 $database = "recipes";
 
-//create the connection
+//Connecting to SQL server
 $conn = new mysqli($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
