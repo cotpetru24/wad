@@ -94,16 +94,7 @@ export async function addNewRecipe(jsonData) {
 
 
 
-// view recipe function - API call
-export async function viewRecipe(recipe_ID) {
-    try {
-        const param = new URLSearchParams({ "function": "viewRecipe", "recipeID": "recipe_ID" });
-        const recipeData = await fetch("http://localhost/data/api.php", { method: "POST", body: param });
-    }
-    catch (error) {
-        console.log("error retrieving data " + error)
-    }
-}
+
 
 // send message function - API call
 export async function sendMessage(jsonData) {

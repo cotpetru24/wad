@@ -38,32 +38,6 @@ ensure_session_start();
 // Logging session data for debugging
 error_log(print_r($_SESSION, true));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/// not sure if this is needed++++++++++++++++++++++++++++++++++++++++++++
-function check_user_session($role = null)
-{
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: index.php");
-        exit();
-    }
-
-    if ($role && $_SESSION['user_type'] !== $role) {
-        header("Location: index.php");
-        exit();
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

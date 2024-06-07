@@ -267,15 +267,6 @@ check_user_session('admin');
         </footer>
     </div>
     <div id="overlay"></div>
-    <div class="popup" id="previewRecipePopup">
-        <div class="popupHeader">
-            <h2>Recipe Preview</h2>
-            <button class="closeButton" id="closePreviewPopup">&times;</button>
-        </div>
-        <div id="previewRecipeContent">
-            <!-- Preview content goes here -->
-        </div>
-    </div>
     <div class="popup" id="editRecipePopup">
         <div class="popupHeader">
             <h2>Edit Recipe</h2>
@@ -360,15 +351,6 @@ check_user_session('admin');
                 <input type="file" id="editDishImage">
             </div>
             <button class="button" id="saveEditButton">Save Changes</button>
-        </div>
-    </div>
-    <div class="popup" id="viewMessagePopup">
-        <div class="popupHeader">
-            <h2>Message Details</h2>
-            <button class="closeButton" id="closeViewMessagePopup">&times;</button>
-        </div>
-        <div id="viewMessageContent">
-            <!-- Message details will go here -->
         </div>
     </div>
     <div class="popup" id="editUserPopup">

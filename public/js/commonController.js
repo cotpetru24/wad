@@ -6,31 +6,29 @@ export function tabsController() {
         tabButton.addEventListener('click', () => {
             document.querySelector('.tabSelected')?.classList.remove('tabSelected');
             document.querySelector("#favHeaderDiv")?.classList.add('hideFavHeader');
-            // document.querySelectorAll(".hideRemoveRecipeFavBtn")?.classList.add
-
             tabButton.classList.add('tabSelected');
             contentSections.forEach((section, sectionIndex) => {
                 section.style.display = sectionIndex === index ? 'block' : 'none';
             });
         });
-    });  
+    });
 }
 
 
-// Function to expand table rows for adminpage
+// Function to expand table rows for adminPage
 export function toggleExpand(event) {
     const button = event.target;
     const row = button.closest('tr');
     const expandedRow = row.nextElementSibling;
-    
+
     if (expandedRow && expandedRow.style.display === 'none') {
         expandedRow.style.display = 'table-row';
-        button.textContent = expandedRow.classList.contains('message-expanded-row') 
-        ? 'Close' : 'Collapse';    
+        button.textContent = expandedRow.classList.contains('message-expanded-row')
+            ? 'Close' : 'Collapse';
     } else if (expandedRow) {
         expandedRow.style.display = 'none';
-        button.textContent = expandedRow.classList.contains('message-expanded-row') 
-        ? 'Read' : 'Expand';    
+        button.textContent = expandedRow.classList.contains('message-expanded-row')
+            ? 'Read' : 'Expand';
     }
 }
 

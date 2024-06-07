@@ -17,8 +17,8 @@ error_log("Request method: " . $_SERVER['REQUEST_METHOD']);
 error_log("GET data: " . print_r($_GET, true));
 
 
-require "db_connect.php";
-require_once "functions_manager.php";
+require "dbConnect.php";
+require_once "functionsManager.php";
 
 
 $response = [];
@@ -26,7 +26,7 @@ $response = [];
 // GET method API calls
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    //Switch to determin which function to execute
+    //Switch to determine which function to execute
     if (isset($_GET['function'])) {
         switch ($_GET['function']) {
             case 'getRecipesList':
@@ -56,7 +56,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode($input, true);
     error_log("POST data: " . print_r($data, true));
 
-    //Switch to determin which function to execute
+    //Switch to determine which function to execute
     if (isset($data['function'])) {
         switch ($data['function']) {
             case 'deleteRecipe':
@@ -67,9 +67,6 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 break;
             case 'editRecipe':
                 editRecipe($conn, $data);
-                break;
-            case 'viewRecipe':
-                viewRecipe($conn, $data);
                 break;
             case 'sendMessage':
                 sendMessage($conn, $data);

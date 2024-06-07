@@ -2,7 +2,7 @@
 export function formatDishRating(rating) {
     const yellowStar = '<img class="ratingStars" src="/public/img/icons8-star-filled-30-yellow.png" alt="Yellow Star" />';
     const grayStar = '<img class="ratingStars" src="/public/img/icons8-star-filled-30-gray.png" alt="Gray Star" />';
-    return yellowStar.repeat(rating) + grayStar.repeat(5-rating);
+    return yellowStar.repeat(rating) + grayStar.repeat(5 - rating);
 }
 
 
@@ -25,20 +25,14 @@ export function formatPrepTime(prepTime) {
 
 
 // Function to convert a string to JSON array
-export function convertToJSONArray(string, delimiter = ','){
-    let array = string.split(delimiter).map(item=>item.trim());
+export function convertToJSONArray(string, delimiter = ',') {
+    let array = string.split(delimiter).map(item => item.trim());
     let jsonArray = JSON.stringify(array);
     return jsonArray;
 }
 
-// export function swapFlagImage(flagIcon) {
-//     const currentSrc = flagIcon.src;
-//     const newSrc = currentSrc.includes('flag-pink.png') ? 'public/img/icons8-flag-grey.png' : 'public/img/icons8-flag-pink.png';
-//     flagIcon.src = newSrc;
-// }
 
-
-// Functon to change the CSS class messages flag
+// Function to change the CSS class for messages flag
 export function toggleFlagClass(flagButton) {
     if (flagButton.classList.contains('flag-pink')) {
         flagButton.classList.remove('flag-pink');

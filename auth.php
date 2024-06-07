@@ -13,7 +13,7 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auth</title>
+    <title>Login/Register</title>
     <link rel="stylesheet" href="public/css/style.css">
     <script>
         // Converting php session variables to js const
@@ -21,7 +21,6 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
         const userId = <?php echo json_encode($user_id); ?>;
     </script>
     <script src="public/js/authController.js" type="module" defer></script>
-
 </head>
 
 <body id="authBody">

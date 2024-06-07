@@ -1,6 +1,6 @@
 <?php
-require 'data/functions_manager.php';
-require 'data/db_connect.php';
+require 'data/functionsManager.php';
+require 'data/dbConnect.php';
 
 header("Content-Type: application/json");
 
