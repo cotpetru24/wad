@@ -284,6 +284,11 @@ async function addRecipes(recipesList) {
         // })
 
         recipeAddFavBtn.addEventListener("click", (event) => {
+            if (!userId) {
+                window.location.href = 'auth.php';
+                return;
+            }
+
             const recipeId = parseInt(recipeAddFavBtn.dataset.recipeId, 10); // Parse the stored data
             if (!isNaN(recipeId)) {
                 apiCalls.addFavourite(userId, recipeId);
@@ -294,7 +299,7 @@ async function addRecipes(recipesList) {
                 const favNotification = document.getElementById('favNotification');
 
             // Set the position of the notification to the click coordinates
-            favNotification.style.top = (event.clientY-70) + 'px';
+            favNotification.style.top = (event.clientY-0) + 'px';
             favNotification.style.left = (event.clientX-70) + 'px';
 
                 favNotification.classList.add('show');
