@@ -11,21 +11,12 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin: 0;
   padding: 0;
   background-color: white;
 }
 
 button {
   font-family: inherit;
-}
-
-header,
-footer,
-p,
-nav,
-button {
-  margin: 0;
 }
 
 header {
@@ -52,11 +43,7 @@ main,
 
 #authBody {
   background-color: rgba(0, 0, 0, 0.5);
-
 }
-
-
-
 
 .recipe {
   display: flex;
@@ -65,8 +52,6 @@ main,
   border-radius: 7px;
   width: 70%;
   margin-top: 30px;
-
-
 }
 
 .dishImage {
@@ -79,7 +64,6 @@ main,
   max-height: 400px;
   max-width: 266px;
   object-fit: scale-down;
-
 }
 
 .recipeDescription {
@@ -139,7 +123,6 @@ nav {
 #searchDiv {
   display: flex;
   justify-content: flex-end;
-
 }
 
 #searchForm {
@@ -358,7 +341,6 @@ nav {
   max-width: 80%;
 }
 
-
 .authDiv {
   position: fixed;
   top: 50%;
@@ -457,7 +439,6 @@ nav {
   background-color: #0c0723;
 }
 
-
 .tabsDiv {
   display: flex;
   flex-direction: row;
@@ -506,8 +487,6 @@ td img {
   gap: 10px;
   text-align: center;
   overflow: visible;
-
-
 }
 
 #actionsTh {
@@ -550,7 +529,6 @@ td img {
 .contentSection {
   width: 100%;
 }
-
 
 .contentSection h2 {
   margin-bottom: 20px;
@@ -632,7 +610,6 @@ td img {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-
 #confirmActionPopup {
   overflow: hidden;
   display: flex;
@@ -650,11 +627,9 @@ td img {
   transform: translate(-50%, -50%);
 }
 
-
 #editUserPopup {
   width: 50%;
 }
-
 
 #closeEditPopup {
   background: none;
@@ -668,7 +643,6 @@ td img {
   overflow-y: auto;
   flex: 1;
 }
-
 
 .popup.active {
   visibility: visible;
@@ -800,7 +774,6 @@ td img {
   background-size: 30px 30px;
   background-position: center;
   background-repeat: no-repeat;
-  /* display: inline-block; */
   position: relative;
   padding-bottom: 2px;
   border: none;
@@ -860,7 +833,6 @@ ul {
   padding-left: 5%;
 }
 
-
 .recipe h2 {
   color: #9b59b6;
 }
@@ -887,7 +859,6 @@ ul {
   display: inline;
 }
 
-
 .fixed-cell {
   width: 200px;
   white-space: nowrap;
@@ -895,7 +866,6 @@ ul {
   text-overflow: ellipsis;
   max-width: 200px;
 }
-
 
 .recipe-expanded-row,
 .message-expanded-row {
@@ -965,7 +935,6 @@ ul {
 .flag-button {
   border: none;
   background-color: transparent;
-
 }
 
 .flag-button img {
@@ -1107,7 +1076,6 @@ ul {
 }
 
 .inputclass {
-
   height: 6em;
 }
 
@@ -1120,14 +1088,12 @@ ul {
   cursor: pointer;
 }
 
-
 .step {
   margin-top: 5px;
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
-
 }
 
 .step p {
@@ -1162,7 +1128,6 @@ ul {
   width: 100%;
 }
 
-
 #loginBtn,
 #registerBtn {
   background: #9b59b6;
@@ -1173,8 +1138,6 @@ ul {
   padding: 5px;
   margin-top: 30px;
 }
-
-
 
 .toggleLoginRegister {
   display: flex;
@@ -1187,7 +1150,6 @@ ul {
 .toggleLoginRegister p {
   font-size: 14px;
 }
-
 
 #authRegisterBtn,
 #authLoginBtn {
@@ -1205,35 +1167,22 @@ ul {
   color: #0c0723;
 }
 
-
 .recipeHeadDiv .removeRecipeFavBtn {
   height: auto;
-  /* width: auto;
-  background-color: transparent;
-  background-image: none;
-  background-size: auto; */
   background-position: center;
-  /* background-repeat: no-repeat; */
-  /* display: inline-block; */
   position: relative;
-  /* padding-bottom: 2px;
-  border: none; */
   background: #9b59b6;
   color: #0c0723;
   border: 1px solid #9b59b6;
   border-radius: 7px;
   cursor: pointer;
   padding: 5px;
-  /* margin-top: 30px;
-  width: 250px; */
   width: 100px;
   font-weight: bolder;
-  /* position: absolute; */
   top: 0;
   right: 0;
   margin-bottom: 10px;
 }
-
 
 .recipeHeadDiv .removeRecipeFavBtn:hover {
   background: #0c0723;
@@ -1250,7 +1199,6 @@ ul {
   justify-content: space-evenly;
 }
 
-
 #favHeaderDiv {
   width: 70%;
   margin: 30px;
@@ -1259,21 +1207,17 @@ ul {
 
 .favHeader {
   padding-bottom: 10px;
-  /* border-bottom: 3px solid #ccc; */
   font-size: 36px;
   font-weight: 700;
   color: #9b59b6;
   text-align: center;
 }
 
-
 .hideFavHeader,
 .hideRemoveRecipeFavBtn,
 .hideAddRecipeFavBtn {
   display: none;
-  /* visibility: hidden; */
 }
-
 
 .favNotification {
   display: none;
@@ -1281,14 +1225,12 @@ ul {
   top: 20px;
   right: 20px;
   background-color: #0c0723;
-  /* color: white; */
   padding: 10px;
   border-radius: 7px;
   border: 1px solid #9b59b6;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   width: 150px;
-
 }
 
 .favNotification.show {
