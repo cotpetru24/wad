@@ -41,7 +41,7 @@ header {
   border-bottom: 5px solid #9b59b6;
 }
 
-main, 
+main,
 #recipesList {
   display: flex;
   flex-direction: column;
@@ -313,8 +313,7 @@ nav {
   width: 250px;
 }
 
-.recipeFooterDiv button
- {
+.recipeFooterDiv button {
   width: 100px;
   font-weight: bolder;
 }
@@ -1230,18 +1229,18 @@ ul {
   width: 100px;
   font-weight: bolder;
   /* position: absolute; */
-    top: 0;
-    right: 0;
-    margin-bottom: 10px;
+  top: 0;
+  right: 0;
+  margin-bottom: 10px;
 }
 
 
-.recipeHeadDiv .removeRecipeFavBtn:hover{
-background: #0c0723;
-color: #9b59b6;
+.recipeHeadDiv .removeRecipeFavBtn:hover {
+  background: #0c0723;
+  color: #9b59b6;
 }
 
-.favDiv{
+.favDiv {
   position: relative;
   height: 100%;
   display: flex;
@@ -1252,7 +1251,7 @@ color: #9b59b6;
 }
 
 
-#favHeaderDiv{
+#favHeaderDiv {
   width: 70%;
   margin: 30px;
   margin-top: 40px;
@@ -1271,7 +1270,7 @@ color: #9b59b6;
 .hideFavHeader,
 .hideRemoveRecipeFavBtn,
 .hideAddRecipeFavBtn {
-  display: none; 
+  display: none;
   /* visibility: hidden; */
 }
 
@@ -1286,10 +1285,10 @@ color: #9b59b6;
   padding: 10px;
   border-radius: 7px;
   border: 1px solid #9b59b6;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   width: 150px;
-  
+
 }
 
 .favNotification.show {

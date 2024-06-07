@@ -53,18 +53,18 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
             </div>
             <nav>
                 <div id="nav">
-                    <?php if (isUserLoggedIn()): ?>
-                                    <h3 id="greeting">Hi <?= ucwords($_SESSION['user_name']) ?>!</h3>
+                    <?php if (isUserLoggedIn()) : ?>
+                        <h3 id="greeting">Hi <?= ucwords($_SESSION['user_name']) ?>!</h3>
                     <?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
                     <button id="viewFavourites">My Favourites</button>
-                    <?php if (isUserLoggedIn()): ?>
-                                    <button onclick="location.href='data/logout.php'">Logout</button>
-                    <?php else: ?>
-                                    <button onclick="location.href='auth.php'">Login</button>
+                    <?php if (isUserLoggedIn()) : ?>
+                        <button onclick="location.href='data/logout.php'">Logout</button>
+                    <?php else : ?>
+                        <button onclick="location.href='auth.php'">Login</button>
                     <?php endif; ?>
-                    <?php if (isAdmin()): ?>
-                                    <button onclick="location.href='adminPage.php'">Admin Page</button>
+                    <?php if (isAdmin()) : ?>
+                        <button onclick="location.href='adminPage.php'">Admin Page</button>
                     <?php endif; ?>
                 </div>
                 <div id="searchDiv">
@@ -73,25 +73,18 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
                 </div>
             </nav>
         </header>
-<main>
-        <!-- <main id="main"> -->
+        <main>
+            <!-- <main id="main"> -->
             <div id="favHeaderDiv" class="hideFavHeader">
                 <h2 class="favHeader">My Favourites</h2>
             </div>
             <div id="recipesList">
                 <!-- Recipes will go here -->
             </div>
-
-
-            <!-- Favourite added notification -->
             <div class="favNotification" id="favNotification">
+                <!-- Favourite added notification -->
                 <p>Recipe added to favourites</p>
             </div>
-
-
-
-
-
         </main>
         <footer id="footer">
             <div id="footerDiv">
