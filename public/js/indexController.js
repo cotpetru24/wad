@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-
+//this is the old function, incase the one below doesnt worl
 //function to add recipes to index.html
 async function addRecipes(recipesList) {
 
@@ -320,6 +320,191 @@ async function addRecipes(recipesList) {
     });
 }
 
+
+
+
+
+// async function addRecipes(recipesList) {
+//     const list = document.getElementById("recipesList");
+//     list.innerText = "";
+
+//     const fragment = document.createDocumentFragment(); // Use DocumentFragment for batch updates
+
+//     recipesList.forEach((recipe) => {
+//         // Create elements
+//         const recipeImg = document.createElement("img");
+//         recipeImg.src = recipe.dish_img || 'public/img/image_coming_soon_with_camera_text.jpg';
+//         const recipeImgDiv = document.createElement("div");
+//         recipeImgDiv.appendChild(recipeImg);
+
+//         const recipeHeading = document.createElement("h2");
+//         recipeHeading.innerHTML = recipe.dish_name;
+//         const recipeHeadingH2Div = document.createElement("div");
+//         recipeHeadingH2Div.appendChild(recipeHeading);
+
+//         const removeRecipeFavBtn = document.createElement("button");
+//         removeRecipeFavBtn.dataset.recipeId = recipe.dish_id;
+//         removeRecipeFavBtn.classList.add("hideRemoveRecipeFavBtn", "removeRecipeFavBtn");
+//         removeRecipeFavBtn.innerText = "Remove from Favourites";
+
+//         const recipeAddFavBtn = document.createElement("button");
+//         recipeAddFavBtn.dataset.recipeId = recipe.dish_id;
+//         recipeAddFavBtn.classList.add('showRecipeFavBtn');
+
+//         const recipeHeadingBtnDiv = document.createElement("div");
+//         recipeHeadingBtnDiv.classList.add('favDiv');
+//         recipeHeadingBtnDiv.appendChild(removeRecipeFavBtn);
+//         recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
+
+//         const recipeHeadingDiv = document.createElement("div");
+//         recipeHeadingDiv.appendChild(recipeHeadingH2Div);
+//         recipeHeadingDiv.appendChild(recipeHeadingBtnDiv);
+
+//         const recipeRating = document.createElement("h3");
+//         recipeRating.innerHTML = functions.formatDishRating(recipe.dish_rating);
+
+//         const recipeNonvegetarianVegetarian = document.createElement("h3");
+//         recipeNonvegetarianVegetarian.innerHTML = functions.toTitleCase(recipe.category_name);
+//         recipeNonvegetarianVegetarian.classList.add(recipe.category_name.toLowerCase() === "vegetarian" ? "vegetarian" : "non-vegetarian");
+
+//         const recipeSubheadingDiv = document.createElement("div");
+//         recipeSubheadingDiv.appendChild(recipeRating);
+//         recipeSubheadingDiv.appendChild(recipeNonvegetarianVegetarian);
+
+//         const recipeHeadDiv = document.createElement("div");
+//         recipeHeadDiv.appendChild(recipeHeadingDiv);
+//         recipeHeadDiv.appendChild(recipeSubheadingDiv);
+
+//         const prepTimeHeading = document.createElement('h3');
+//         prepTimeHeading.innerHTML = "Prep Time";
+
+//         const prepTime = document.createElement("h4");
+//         prepTime.innerHTML = functions.formatPrepTime(recipe.dish_prep_time);
+
+//         const prepTimeDiv = document.createElement("div");
+//         prepTimeDiv.appendChild(prepTimeHeading);
+//         prepTimeDiv.appendChild(prepTime);
+
+//         const dificultyHeading = document.createElement('h3');
+//         dificultyHeading.innerHTML = "Difficulty";
+
+//         const dificulty = document.createElement('h4');
+//         dificulty.innerHTML = functions.toTitleCase(recipe.complexity_name);
+
+//         const dificultyDiv = document.createElement('div');
+//         dificultyDiv.appendChild(dificultyHeading);
+//         dificultyDiv.appendChild(dificulty);
+
+//         const recipeInfoDiv = document.createElement('div');
+//         recipeInfoDiv.appendChild(prepTimeDiv);
+//         recipeInfoDiv.appendChild(dificultyDiv);
+
+//         const expandBtn = document.createElement('button');
+//         expandBtn.textContent = "Expand";
+
+//         const recipeActionsDiv = document.createElement('div');
+//         recipeActionsDiv.appendChild(expandBtn);
+
+//         const recipeFooterDiv = document.createElement('div');
+//         recipeFooterDiv.appendChild(recipeInfoDiv);
+//         recipeFooterDiv.appendChild(recipeActionsDiv);
+
+//         const recipeDescriptionParDiv = document.createElement("div");
+//         const recipeDescriptionPar = document.createElement("p");
+//         recipeDescriptionPar.innerHTML = recipe.dish_recipe_description;
+//         recipeDescriptionParDiv.appendChild(recipeDescriptionPar);
+
+//         if (recipe.dish_ingredients) {
+//             const recipeIngredientsHeader = document.createElement("h3");
+//             recipeIngredientsHeader.innerHTML = "Ingredients:";
+
+//             const ingredientsList = document.createElement("ul");
+//             JSON.parse(recipe.dish_ingredients).forEach(value => {
+//                 const listItem = document.createElement("li");
+//                 listItem.textContent = value;
+//                 ingredientsList.appendChild(listItem);
+//             });
+
+//             recipeDescriptionParDiv.appendChild(recipeIngredientsHeader);
+//             recipeDescriptionParDiv.appendChild(ingredientsList);
+//         }
+
+//         if (recipe.dish_steps) {
+//             const recipeStepsHeader = document.createElement("h3");
+//             recipeStepsHeader.innerHTML = "Instructions";
+
+//             const recipeSteps = document.createElement("ol");
+//             JSON.parse(recipe.dish_steps).forEach(step => {
+//                 const recipeStep = document.createElement("li");
+//                 const stepTitle = document.createElement("strong");
+//                 stepTitle.textContent = step.title + ":";
+
+//                 const stepDescription = document.createElement("span");
+//                 stepDescription.textContent = step.description;
+
+//                 recipeStep.appendChild(stepTitle);
+//                 recipeStep.appendChild(stepDescription);
+//                 recipeSteps.appendChild(recipeStep);
+//             });
+
+//             recipeDescriptionParDiv.appendChild(recipeStepsHeader);
+//             recipeDescriptionParDiv.appendChild(recipeSteps);
+//         }
+
+//         const recipeDescriptionDiv = document.createElement('div');
+//         recipeDescriptionDiv.appendChild(recipeHeadDiv);
+//         recipeDescriptionDiv.appendChild(recipeDescriptionParDiv);
+//         recipeDescriptionDiv.appendChild(recipeFooterDiv);
+
+//         const recipeDiv = document.createElement('div');
+//         recipeDiv.id = "recipe_ID" + recipe.recipe_id;
+//         recipeDiv.appendChild(recipeImgDiv);
+//         recipeDiv.appendChild(recipeDescriptionDiv);
+
+//         recipeDiv.classList.add("recipe");
+//         recipeImgDiv.classList.add("dishImage");
+//         recipeDescriptionDiv.classList.add("recipeDescription");
+//         recipeHeadDiv.classList.add("recipeDetails");
+//         recipeFooterDiv.classList.add("recipeFooterDiv");
+//         recipeHeadingDiv.classList.add("recipeHeadDiv");
+//         recipeSubheadingDiv.classList.add("recipeHeadDiv");
+//         recipeInfoDiv.classList.add("recipeHeadDiv", "recipeFooterInfoInnerDivs");
+//         dificultyDiv.classList.add("recipeFooterInfoDiv");
+//         prepTimeDiv.classList.add("recipeFooterInfoDiv");
+//         recipeDescriptionParDiv.classList.add("recipeParagraphDiv");
+
+//         expandBtn.addEventListener("click", () => {
+//             recipeDescriptionParDiv.classList.toggle("expanded");
+//             expandBtn.textContent = recipeDescriptionParDiv.classList.contains("expanded") ? "Collapse" : "Expand";
+//         });
+
+//         recipeAddFavBtn.addEventListener("click", () => {
+//             const recipeId = parseInt(recipeAddFavBtn.dataset.recipeId, 10);
+//             if (!isNaN(recipeId)) {
+//                 apiCalls.addFavourite(userId, recipeId);
+//             } else {
+//                 console.error('Invalid recipe ID');
+//             }
+//         });
+
+//         removeRecipeFavBtn.addEventListener("click", async () => {
+//             const recipeId = parseInt(removeRecipeFavBtn.dataset.recipeId, 10);
+//             if (!isNaN(recipeId)) {
+//                 await apiCalls.removeFavourite(userId, recipeId);
+//                 await getFavourites(userId);
+
+//                 document.querySelectorAll(".hideRemoveRecipeFavBtn").forEach(btn => btn.classList.remove('hideRemoveRecipeFavBtn'));
+//                 document.querySelectorAll(".showRecipeFavBtn").forEach(btn => btn.classList.add('hideAddRecipeFavBtn'));
+//             } else {
+//                 console.error('Invalid recipe ID');
+//             }
+//         });
+
+//         fragment.appendChild(recipeDiv);
+//     });
+
+//     list.appendChild(fragment); // Append fragment to the DOM
+// }
 
 
 
@@ -666,4 +851,16 @@ async function getFavourites(userId) {
         console.error('Error fetching favourites:', error);
         recipesList.innerText = "An error occurred while fetching your favourites.";
     }
+}
+
+
+
+
+
+
+try {
+    const recipes = await apiCalls.getRecipes({ "dish_chef_recommended": "1" });
+    await addRecipes(recipes);
+} catch (error) {
+    console.error("Error loading recipes:", error);
 }
