@@ -477,7 +477,6 @@ nav {
 
 table {
   width: 80%;
-  /* table-layout: fixed; */
   border-spacing: 5px;
   border-collapse: collapse;
   margin-top: 20px;
@@ -660,9 +659,7 @@ td img {
 
 
 #editUserPopup {
-
   width: 50%;
-
 }
 
 
