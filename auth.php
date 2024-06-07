@@ -31,8 +31,12 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
             <nav>
                 <div id="nav">
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
-                    <button id="authLoginBtn">Login</button>
-                    <button id="authRegisterBtn">Register</button>
+                    <!-- <button id="authRegisterBtn">Register</button> -->
+
+
+
+
+
                 </div>
             </nav>
         </header>
@@ -52,8 +56,17 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" required>
                     </div>
+
+
+
+
                     <button id="loginBtn" type="submit">Login</button>
                 </form>
+
+                <div class="toggleLoginRegister">
+                        <p>Don't have an account ?</p>
+                    <button id="authRegisterBtn">Register</button>
+                    </div>
             </div>
 
             <!-- Register Form -->
@@ -82,8 +95,23 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
                         <label for="confirm_password">Confirm Password:</label>
                         <input type="password" id="confirm_password" name="confirm_password" required>
                     </div>
+
+
+
+
+
+
+
                     <button id="registerBtn" type="submit">Register</button>
                 </form>
+
+
+                <div class="toggleLoginRegister">
+                        <p>Already have an account ?</p>
+                        <button id="authLoginBtn">Login</button>
+                    </div>
+
+
             </div>
         </main>
         <footer id="authFooter">

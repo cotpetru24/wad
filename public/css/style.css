@@ -1177,6 +1177,35 @@ ul {
 
 
 
+.toggleLoginRegister {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  padding-bottom: 20px;
+  justify-content: center;
+}
+
+.toggleLoginRegister p {
+  font-size: 14px;
+}
+
+
+#authRegisterBtn,
+#authLoginBtn {
+  border: none;
+  background-color: transparent;
+  color: #9b59b6;
+  font-size: 14px;
+  font-weight: 900;
+  width: 80px;
+  padding: unset;
+}
+
+#authRegisterBtn:hover,
+#authLoginBtn:hover {
+  color: #0c0723;
+}
+
 
 .recipeHeadDiv .removeRecipeFavBtn {
   height: auto;
