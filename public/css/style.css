@@ -276,7 +276,8 @@ nav {
   margin-top: 30px;
 }
 
-#authFooter {
+#authFooter,
+#adminFooter {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -453,25 +454,10 @@ nav {
 }
 
 
-
-
 .contactForm button.sendButton:hover {
   background-color: #0c0723;
 }
 
-.admin-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 5px 0;
-  font-size: 14px;
-  border-top: 4px solid #9b59b6;
-  width: 100%;
-  background-color: #0c0723;
-  color: white;
-  height: 50px;
-}
 
 .tabsDiv {
   display: flex;
@@ -1258,4 +1244,32 @@ color: #9b59b6;
 .hideAddRecipeFavBtn {
   display: none; 
   /* visibility: hidden; */
+}
+
+
+.favNotification {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #0c0723;
+  /* color: white; */
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid #9b59b6;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  width: 150px;
+  
+}
+
+.favNotification.show {
+  display: block;
+}
+
+.favNotification p {
+  font-size: 12px;
+  font-weight: 900;
+  color: #9b59b6;
+  text-align: center;
 }

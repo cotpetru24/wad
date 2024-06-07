@@ -257,7 +257,10 @@ check_user_session('admin');
                 </div>
             </div>
         </main>
-        <footer class="admin-footer">
+        <footer id="adminFooter">
+            <div id="footerDiv">
+                <img id="footerLogo" src="public/img/logo.jpg" alt="logo" />
+            </div>
             <p id="copyright">
                 &copy; <span id="year"></span> STU124543. All rights reserved.
             </p>

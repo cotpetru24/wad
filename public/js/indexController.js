@@ -283,10 +283,34 @@ async function addRecipes(recipesList) {
         //     apiCalls.addFavourite(userId,recipeId)
         // })
 
-        recipeAddFavBtn.addEventListener("click", () => {
+        recipeAddFavBtn.addEventListener("click", (event) => {
             const recipeId = parseInt(recipeAddFavBtn.dataset.recipeId, 10); // Parse the stored data
             if (!isNaN(recipeId)) {
                 apiCalls.addFavourite(userId, recipeId);
+
+
+
+
+                const favNotification = document.getElementById('favNotification');
+
+            // Set the position of the notification to the click coordinates
+            favNotification.style.top = (event.clientY-70) + 'px';
+            favNotification.style.left = (event.clientX-70) + 'px';
+
+                favNotification.classList.add('show');
+    
+                setTimeout(function() {
+                    favNotification.classList.remove('show');
+                }, 1500); // 3 seconds
+
+
+
+
+
+
+
+
+
 
             } else {
                 console.error('Invalid recipe ID');
@@ -599,6 +623,7 @@ sendMsgBtn.addEventListener("click", (event) => {
 
 
 
+// const closeFavAddedAlert = document.getElementById("closeFavAddedBtn")
 
 
 
