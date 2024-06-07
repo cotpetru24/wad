@@ -4,13 +4,15 @@ import * as commonController from './commonController.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Check if the current URL includes "adminPage.html"
-    if (window.location.pathname.includes('adminPage.html')) {
+    if (window.location.pathname.includes('adminPage.php')) {
         addRecipeRows();
     }
     commonController.tabsController();
 });
 
-async function addRecipeRows(filter = {}) {
+
+
+async function addRecipeRows(filter = []) {
     const recipes = await apiCalls.getRecipes(filter);
     const recipesList = document.getElementById('adminRecipesList');
     recipesList.innerHTML = ''; // Clear existing rows before adding new ones
@@ -30,6 +32,7 @@ async function addRecipeRows(filter = {}) {
     }
 }
 
+addRecipeRows();
 
 
 // export function addRecipeRow(recipe) {
@@ -1460,7 +1463,9 @@ if (usersTab) {
 
 
 
-
+if (window.location.pathname.includes('adminPage.php')) {
+    addRecipeRows();
+}
 
 
 
