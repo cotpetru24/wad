@@ -26,7 +26,7 @@ async function handleFormSubmit(event, formType) {
     }
 }
 
-//Event listeners to submit the login or refister form
+//Event listeners to submit the login or register form
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('loginForm').addEventListener('submit', function (event) {
         handleFormSubmit(event, 'login');

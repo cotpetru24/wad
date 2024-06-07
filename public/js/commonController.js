@@ -1,4 +1,4 @@
-// Tabs functionality
+// Function to control tabs selection and tabs content visibility
 export function tabsController() {
     const contentSections = document.querySelectorAll('.contentSection');
     const tabButtonArray = document.querySelectorAll('.tabs');
@@ -13,15 +13,14 @@ export function tabsController() {
                 section.style.display = sectionIndex === index ? 'block' : 'none';
             });
         });
-    });
-
-    
+    });  
 }
 
 
+// Function to expand table rows for adminpage
 export function toggleExpand(event) {
-    const button = event.target; // Get the target button from the event
-    const row = button.closest('tr'); // Ensure button is a DOM element and get the closest tr
+    const button = event.target;
+    const row = button.closest('tr');
     const expandedRow = row.nextElementSibling;
     
     if (expandedRow && expandedRow.style.display === 'none') {
