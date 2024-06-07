@@ -36,7 +36,6 @@ check_user_session('admin');
                     <?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
                     <button onclick="location.href='data/logout.php'">Logout</button>
-                    <button onclick="location.href='/adminPage.php'">Admin Page</button>
                 </div>
             </nav>
         </header>

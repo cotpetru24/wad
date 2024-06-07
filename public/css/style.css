@@ -205,9 +205,7 @@ nav {
   transition: 0.1s;
 }
 
-#homeButton {
-  height: 100%;
-  width: auto;
+#nav #homeButton {
   background-image: url(/public/img/home_icon.png);
   background-size: 17px 17px;
   background-position: center;
@@ -215,6 +213,7 @@ nav {
   display: inline-block;
   position: relative;
   padding-bottom: 2px;
+  margin-right: 10px;
 }
 
 #homeButton:hover {

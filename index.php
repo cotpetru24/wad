@@ -58,13 +58,13 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
                     <?php endif; ?>
                     <button id="homeButton" onclick="location.href='./index.php'"></button>
                     <button id="viewFavourites">My Favourites</button>
+                    <?php if (isAdmin()) : ?>
+                        <button onclick="location.href='adminPage.php'">Admin Page</button>
+                    <?php endif; ?>
                     <?php if (isUserLoggedIn()) : ?>
                         <button onclick="location.href='data/logout.php'">Logout</button>
                     <?php else : ?>
-                        <button onclick="location.href='auth.php'">Login</button>
-                    <?php endif; ?>
-                    <?php if (isAdmin()) : ?>
-                        <button onclick="location.href='adminPage.php'">Admin Page</button>
+                        <button onclick="location.href='auth.php'">Login / Register</button>
                     <?php endif; ?>
                 </div>
                 <div id="searchDiv">
