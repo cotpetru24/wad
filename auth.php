@@ -24,7 +24,7 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
 
 </head>
 
-<body>
+<body id="authBody">
     <div id="wrapper">
         <header>
             <a href="index.php"><img id="headerLogo" src="./public/img/logo.jpg" alt="logo" /></a>
