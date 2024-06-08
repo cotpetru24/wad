@@ -20,7 +20,6 @@ async function handleFormSubmit(event, formType) {
     const result = await response.json();
 
     if (result.status === 'success') {
-        alert(result.message);
         window.location.href = formType === 'login' ? 'index.php' : 'auth.php';
     } else {
         alert(result.message);

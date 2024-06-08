@@ -559,7 +559,7 @@ function authenticateUser($conn, $data)
             $_SESSION['user_name'] = $user['user_name'];
             return ['status' => 'success', 'message' => 'Login successful'];
         } else {
-            $response = ['status' => 'error', 'message' => 'Invalid password'];
+            $response = ['status' => 'error', 'message' => 'Password Incorrect'];
         }
     } else {
         $response = ['status' => 'error', 'message' => 'User not found'];
