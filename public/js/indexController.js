@@ -585,7 +585,7 @@ if (favouritesButton) {
 
 // Calling getRecipes() and tabsController() once all the necessary DOM elements 
 // Have been created to listing all the recommended recipes - Recomended Recipes Tab
-// And toggling tabs CSS classes
+// And toggling tabs CSS classes 
 try {
     const recipes = await apiCalls.getRecipes({ "dish_chef_recommended": "1" });
     await addRecipes(recipes);
