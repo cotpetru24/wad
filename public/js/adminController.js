@@ -144,42 +144,7 @@ async function updateRecipe() {
     const dishPrepTime = document.getElementById('editDishPrepTime').value;
     const dishRating = document.getElementById('editDishRating').value;
     const dishImage = document.getElementById('editDishImage').files[0];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    const dishChefRecommended = document.getElementById('editChefRecommended').value;
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+    const dishChefRecommended = document.getElementById('editChefRecommended').value;   
     const ingredientsElements = document.querySelectorAll("#editIngredientsContainer .ingredientDescription");
     const dishIngredients = Array.from(ingredientsElements).map(input => input.value);
 
@@ -922,6 +887,10 @@ function editRecipe(recipe) {
     document.getElementById('editDishPrepTime').value = recipe.dish_prep_time;
     document.getElementById('editDishRating').value = Math.floor(recipe.dish_rating);
     document.getElementById('editChefRecommended').value = recipe.dish_chef_recommended;
+
+
+    document.getElementById('editDishImage').value = '';
+
 
     editPopup.classList.add('active');
     overlay.classList.add('active');
