@@ -21,6 +21,9 @@ async function handleFormSubmit(event, formType) {
 
     if (result.status === 'success') {
         window.location.href = formType === 'login' ? 'index.php' : 'auth.php';
+    } else if (result.status === 'registrationSuccess') {
+        alert(result.message);
+        window.location.href = formType === 'login' ? 'index.php' : 'auth.php';
     } else {
         alert(result.message);
     }

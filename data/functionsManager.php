@@ -529,7 +529,7 @@ function registerUser($conn, $data)
 
     if ($stmt->execute()) {
         error_log("User registered successfully.");
-        $response = ['status' => 'success', 'message' => 'User registered successfully'];
+        $response = ['status' => 'registrationSuccess', 'message' => 'User registered successfully'];
     } else {
         error_log("Error registering user: " . $stmt->error);
         $response = ['status' => 'error', 'message' => 'Error registering user: ' . $stmt->error];
