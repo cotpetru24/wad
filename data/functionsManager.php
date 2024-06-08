@@ -7,24 +7,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Function to check if a SESSSION has been started, and if not start a SESSION
+// Function to check if a SESSSION has been started, and if not start a new SESSION
 function ensure_session_start()
 {
     if (session_status() == PHP_SESSION_NONE) {
@@ -32,13 +20,13 @@ function ensure_session_start()
     }
 }
 
+
 // Ensure the session is started at the beginning
 ensure_session_start();
 
-// Logging session data for debugging
+
+// Logging session data for debugging and development purposes
 error_log(print_r($_SESSION, true));
-
-
 
 
 // Function to retrieve all recipes from DB or filtered recipes
@@ -148,7 +136,7 @@ function getRecipesList($conn, $filterCriteria = [])
         // Appending query results to $results assoc array
         while ($row = $result->fetch_assoc()) {
 
-            //If dish_img not null encod it to base64
+            //If not !dish_img encod it to base64
             if (!empty($row['dish_img'])) {
                 $dishImgData = $row['dish_img'];
                 $row['dish_img'] = 'data:image/jpeg;base64,' . base64_encode($dishImgData);
@@ -158,7 +146,7 @@ function getRecipesList($conn, $filterCriteria = [])
         echo json_encode($results);
     }
 
-    //If there are no results retun a empty array
+    //If there are no results, return an empty array
     else {
         $noResults = [];
         echo json_encode($noResults);
@@ -168,7 +156,7 @@ function getRecipesList($conn, $filterCriteria = [])
 }
 
 
-// Function to retrieve all messages from DB
+// Function to retrieve all the messages from DB
 function getMessagesList($conn)
 {
     $sql = "SELECT * FROM messages 
@@ -187,7 +175,7 @@ function getMessagesList($conn)
             echo json_encode($results);
         }
 
-        //If there are no results retun a empty array
+        //If there are no results, return an empty array
         else {
             $noResults = [];
             echo json_encode($noResults);
@@ -202,7 +190,7 @@ function getMessagesList($conn)
 // Function to delete a message from DB
 function deleteMessage($conn, $data)
 {
-    error_log("deleteMessage called with messageId: " .$data['messageId']);
+    error_log("deleteMessage called with messageId: " . $data['messageId']);
     $sql = 'DELETE FROM messages WHERE message_id = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $data['messageId']);
@@ -250,7 +238,7 @@ function sendMessage($conn, $data)
 }
 
 
-//Function to add a new recipe
+//Function to add a new recipe/ save recipe to DB
 function addNewRecipe($conn, $data)
 {
     $sql = 'INSERT INTO recipes (
@@ -275,7 +263,7 @@ function addNewRecipe($conn, $data)
     if ($stmt->execute()) {
         $lastInsertedId = $stmt->insert_id;
 
-        //If dish_img has been uploaded decode the Base64 encoded image before storing it
+        //If dish_img has been uploaded decode Base64 encoded image before storing it
         if (isset($data['dishImage']) && $data['dishImage']) {
             $base64Image = $data['dishImage'];
             $binaryData = base64_decode($base64Image);
@@ -285,7 +273,7 @@ function addNewRecipe($conn, $data)
                 return;
             }
 
-            // Preparing the SQL statement to update the image in the database for the last inserted row
+            // Preparing the SQL statement to update the image in DB for the last inserted row
             $stmt = $conn->prepare("UPDATE recipes SET dish_img = ? WHERE dish_id = ?");
             $null = NULL;
             $stmt->bind_param("bi", $null, $lastInsertedId);
@@ -305,54 +293,6 @@ function addNewRecipe($conn, $data)
 
     $stmt->close();
 }
-
-
-
-
-
-
-
-
-////////////// to check if this is used or not
-//if not delete it
-function viewRecipe($conn, $data)
-{
-    $sql = "SELECT recipe_id, dish_name, dish_recipe_description, dish_ingredients, dish_complexity_id, dish_prep_time FROM recipes
-    WHERE recipe_id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $data['recipeID']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows == 1) {
-        echo json_encode($result->fetch_assoc());
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Error retrieving recipe: ' . $stmt->error]);
-    }
-
-    $stmt->close();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //Function to edit a recipe that is already stored in DB
@@ -377,7 +317,7 @@ function editRecipe($conn, $data)
 
     if ($stmt->execute()) {
 
-        //If dish_img has been uploaded decode the Base64 encoded image before storing it
+        //If dish_img has been uploaded decode Base64 encoded image before storing it
         if (isset($data['dishImage']) && $data['dishImage']) {
             $base64Image = $data['dishImage'];
             $binaryData = base64_decode($base64Image);
@@ -456,7 +396,7 @@ function searchRecipes($conn, $criteria)
         echo json_encode($results);
     }
 
-    //If there are no results retun a empty array
+    //If there are no results, return an empty array
     else {
         $noResults = [];
         echo json_encode($noResults);
@@ -489,7 +429,7 @@ function searchMessages($conn, $criteria)
             echo json_encode($results);
         }
 
-        //If there are no results retun a empty array
+        //If there are no results, return an empty array
         else {
             $noResults = [];
             echo json_encode($noResults);
@@ -521,7 +461,6 @@ function flagUnflagMessage($conn, $data)
     }
 
     $stmt->close();
-
 }
 
 
@@ -565,7 +504,7 @@ function filterMessages($conn, $data)
             echo json_encode($results);
         }
 
-        //If there are no results retun a empty array
+        // If there are no results, return an empty array
         else {
             $noResults = [];
             echo json_encode($noResults);
@@ -583,7 +522,7 @@ function registerUser($conn, $data)
     $sql = "INSERT INTO users (user_name, user_surname, user_email, user_password_hash) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
-    // Hashing the password before storing it in DB
+    // Hashing the password before storing it in the DB
     $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
     $stmt->bind_param("ssss", $data['name'], $data['surname'], $data['email'], $hashedPassword);
 
@@ -630,7 +569,7 @@ function authenticateUser($conn, $data)
 }
 
 
-// Fucntion to retrive users from DB
+// Function to retrive all the users from DB
 function getUsersList($conn)
 {
     $sql = "SELECT * FROM users 
@@ -649,7 +588,7 @@ function getUsersList($conn)
             echo json_encode($results);
         }
 
-        //If there are no results retun a empty array
+        // If there are no results, return an empty array
         else {
             $noResults = [];
             echo json_encode($noResults);
@@ -700,7 +639,7 @@ function filterUsers($conn, $data)
             echo json_encode($results);
         }
 
-        //If there are no results retun a empty array
+        // If there are no results, return an empty array
         else {
             $noResults = [];
             echo json_encode($noResults);
@@ -736,7 +675,7 @@ function searchUsers($conn, $criteria)
             echo json_encode($results);
         }
 
-        //If there are no results retun a empty array
+        // If there are no results, return an empty array
         else {
             $noResults = [];
             echo json_encode($noResults);
@@ -748,7 +687,6 @@ function searchUsers($conn, $criteria)
 }
 
 
-//to check if this works-------------------------------------=====================
 // Function to edit user details
 function editUser($conn, $data)
 {
@@ -803,14 +741,7 @@ function editUser($conn, $data)
 }
 
 
-
-
-
-
-
-
-
-// Fucntion to retrive users's favourite dishes from DB
+// Function to retrive users's favourite recipes from DB
 function getFavourites($conn, $data)
 {
     $sql = "SELECT 
@@ -845,7 +776,7 @@ function getFavourites($conn, $data)
             // Appending query results to $results assoc array
             while ($row = $result->fetch_assoc()) {
 
-                //If dish_img not null encod it to base64
+                // If dish_img not null encod it to base64
                 if (!empty($row['dish_img'])) {
                     $dishImgData = $row['dish_img'];
                     $row['dish_img'] = 'data:image/jpeg;base64,' . base64_encode($dishImgData);
@@ -855,7 +786,7 @@ function getFavourites($conn, $data)
             echo json_encode($results);
         }
 
-        //If there are no results retun a empty array
+        // If there are no results, return an empty array
         else {
             $noResults = [];
             echo json_encode($noResults);
@@ -883,18 +814,10 @@ function addFavourite($conn, $data)
     }
 
     $stmt->close();
-
-
-
-
-
-
-    //not sure if this is needed--------------------------------------------------------------------------------------------------------------
-    // return $response;
 }
 
 
-// Function to remove a recipe from user's favourites list
+// Function to remove a recipe from a user's favourites list
 function removeFavourite($conn, $data)
 {
     $sql = 'DELETE FROM favourites WHERE user_id = ? AND dish_id = ?';

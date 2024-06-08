@@ -4,6 +4,7 @@ function showForm(formType) {
     document.getElementById('registerDiv').style.display = formType === 'register' ? 'block' : 'none';
 }
 
+
 //Function that handles the login and register api calls
 async function handleFormSubmit(event, formType) {
     event.preventDefault();
@@ -26,7 +27,8 @@ async function handleFormSubmit(event, formType) {
     }
 }
 
-//Event listeners to submit the login or register form
+
+//Event listeners for login and register submit forms
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('loginForm').addEventListener('submit', function (event) {
         handleFormSubmit(event, 'login');
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-//Event listener to switch between login and register forms
+//Event listener for toggling between login and register forms
 document.getElementById('authLoginBtn').addEventListener('click', function () {
     showForm('login')
 });

@@ -1,32 +1,4 @@
-
-
-// function to add tasks using a JSON data source
-
-
-// const addButton = document.getElementById("addTask");
-// const input = document.getElementById("newTaskText");
-// addButton.addEventListener("click", ()=>{addTask()});
-// input.addEventListener("keypress", (k=>{if(k.key==="Enter") {addButton.click()}}));
-
-
-// 
-// this is the old one in case the above doesn't work use this onw
-// export async function getRecipes(){
-//     try{
-//         const response = await fetch("http://localhost/data/api.php");
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! status: ${response.status}`);
-//         }
-//         const recipes = await response.json();
-//         addRecipes(recipes);
-//     }
-//     catch(error){
-//         console.log("Error retrieving data: " + error);
-//     }
-// }
-
-
-// get recipes function - API call
+// API call - Function to retrieve all recipes from DB or filtered recipes
 export async function getRecipes(filterCriteria = {}) {
     try {
         const param = new URLSearchParams({ "function": "getRecipesList" });
@@ -48,23 +20,19 @@ export async function getRecipes(filterCriteria = {}) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const recipes = await response.json();
-        //addRecipes(recipes);
         return recipes;
     }
     catch (error) {
         return [];
-        console.log("Error retrieving data: " + error);
     }
 }
 
 
-
-
-// add new recipe function - API call
+// API call - Function to add a new recipe/ save recipe to DB
 export async function addNewRecipe(jsonData) {
     try {
 
-        // Convert dish_ingredients to a JSON string if it's an array
+        // Converting dish_ingredients to a JSON string if it's an array
         if (Array.isArray(jsonData.dishIngredients)) {
             jsonData.dishIngredients = JSON.stringify(jsonData.dishIngredients);
         }
@@ -84,7 +52,6 @@ export async function addNewRecipe(jsonData) {
 
         const responseData = await response.json();
         console.log(`recipe added successfully:`, responseData)
-        // getRecipes();
     }
     catch (error) {
         console.log("error saving recipe: " + error);
@@ -92,11 +59,7 @@ export async function addNewRecipe(jsonData) {
 }
 
 
-
-
-
-
-// send message function - API call
+// API call - Function to save a message in DB
 export async function sendMessage(jsonData) {
     try {
         jsonData.function = "sendMessage";
@@ -110,7 +73,6 @@ export async function sendMessage(jsonData) {
 
         const responseData = await response.json();
         console.log(`Message sent successfully:`, responseData)
-        // alert('Message sent successfully!');
     }
     catch (error) {
         console.log("Error sending message:", error);
@@ -118,36 +80,10 @@ export async function sendMessage(jsonData) {
 }
 
 
-//to check is the below is used---->>>>>>> if no, to remove it
-
-
-// Function to view message
-// export function addMessage(message) {
-//     const viewMessagePopup = document.getElementById('viewMessagePopup');
-//     const overlay = document.getElementById('overlay');
-//     const viewMessageContent = document.getElementById('viewMessageContent');
-
-//     viewMessageContent.innerHTML = `
-//                 <p><strong>Name:</strong> ${message.name}</p>
-//                 <p><strong>Email:</strong> ${message.email}</p>
-//                 <p><strong>Message:</strong> ${message.content}</p>
-//                 <p><strong>Date:</strong> ${message.date}</p>
-//                 <p><strong>Status:</strong> ${message.read ? 'Read' : 'Unread'}</p>
-//             `;
-
-//     viewMessagePopup.classList.add('active');
-//     overlay.classList.add('active');
-// }
-
-// sampleMessages.forEach(addMessageRow);
-
-
-// get messages function - API call
+// API call - Function to retrieve all the messages from DB
 export async function getMessages() {
     try {
         const param = new URLSearchParams({ "function": "getMessagesList" });
-
-
         const response = await fetch(`http://localhost/data/api.php?${param.toString()}`,
             {
                 method: "GET",
@@ -168,12 +104,10 @@ export async function getMessages() {
 }
 
 
-// get messages function - API call
+// API call - Function to retrive all the users from DB
 export async function getUsersList() {
     try {
         const param = new URLSearchParams({ "function": "getUsersList" });
-
-
         const response = await fetch(`http://localhost/data/api.php?${param.toString()}`,
             {
                 method: "GET",
@@ -194,7 +128,7 @@ export async function getUsersList() {
 }
 
 
-// delete message fucntion - API call
+// API call - Function to delete a message from DB
 export async function deleteMessage(messageId) {
     try {
         const data = {
@@ -218,11 +152,7 @@ export async function deleteMessage(messageId) {
 }
 
 
-
-
-
-
-// delete user fucntion - API call
+// API call - Function to delete a user from DB
 export async function deleteUser(userId) {
     try {
         const data = {
@@ -246,25 +176,7 @@ export async function deleteUser(userId) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// API call - Function to edit a recipe that is already stored in DB
 export async function editRecipe(jsonData) {
     try {
         jsonData.function = "editRecipe";
@@ -281,12 +193,27 @@ export async function editRecipe(jsonData) {
         const responseData = await response.json();
         console.log(`changes saved successfully`, responseData);
     }
-
     catch (error) {
         console.log("error saving changes" + error);
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -324,7 +251,30 @@ export function addRecipeRow(recipe) {
 }
 
 
-// delete message fucntion - API call
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// API call - Function to delete a recipe from DB
 export async function deleteRecipe(recipeId) {
     try {
         const data = {
@@ -348,9 +298,7 @@ export async function deleteRecipe(recipeId) {
 }
 
 
-
-
-//searchRecipes function
+// API call - Function to search recipes by dish_name
 export async function searchRecipes(searchCriteria) {
     try {
         const data = {
@@ -377,7 +325,8 @@ export async function searchRecipes(searchCriteria) {
     }
 }
 
-//searchMessages function
+
+// API call - Function to search mesages by sender_name or sender_email
 export async function searchMessages(searchCriteria) {
     try {
         const data = {
@@ -398,7 +347,6 @@ export async function searchMessages(searchCriteria) {
         }
 
         const messages = await response.json();
-        //addRecipes(recipes);
         return messages;
     } catch (error) {
         console.log("Error retrieving data: " + error);
@@ -407,7 +355,7 @@ export async function searchMessages(searchCriteria) {
 }
 
 
-//filterMessages function
+// API call - Function to filter messages based on message_read
 export async function filterMessages(filterCriteria) {
     try {
         const data = {
@@ -428,14 +376,14 @@ export async function filterMessages(filterCriteria) {
         }
 
         const messages = await response.json();
-        //addRecipes(recipes);
         return messages;
     } catch (error) {
         console.log("Error retrieving data: " + error);
     }
 }
 
-//flagUnflagMessage function
+
+// API call - Function to flag or unflag a message
 export async function flagUnflagMessage(messageId) {
     try {
         const data = {
@@ -462,8 +410,8 @@ export async function flagUnflagMessage(messageId) {
 
 }
 
-//function to mark a message as read
 
+// API call - Function to mark a message as read
 export async function markMessageAsRead(messageId) {
     try {
         const data = {
@@ -489,18 +437,7 @@ export async function markMessageAsRead(messageId) {
 }
 
 
-
-
-
-
-
-
-
-filterUsers
-
-
-
-//filterMessages function
+// API call - Function to filter users based on user_type / role
 export async function filterUsers(filterCriteria) {
     try {
         const data = {
@@ -521,7 +458,6 @@ export async function filterUsers(filterCriteria) {
         }
 
         const users = await response.json();
-        //addRecipes(recipes);
         return users;
     } catch (error) {
         console.log("Error retrieving data: " + error);
@@ -529,9 +465,7 @@ export async function filterUsers(filterCriteria) {
 }
 
 
-
-
-//searchUsers function
+// API call - Function to search users based on name or email address
 export async function searchUsers(searchCriteria) {
     try {
         const data = {
@@ -552,7 +486,6 @@ export async function searchUsers(searchCriteria) {
         }
 
         const users = await response.json();
-        //addRecipes(recipes);
         return users;
     } catch (error) {
         console.log("Error retrieving data: " + error);
@@ -561,8 +494,7 @@ export async function searchUsers(searchCriteria) {
 }
 
 
-
-
+// API call - Function to edit user details
 export async function editUser(jsonData) {
     try {
         jsonData.function = "editUser";
@@ -579,61 +511,13 @@ export async function editUser(jsonData) {
         const responseData = await response.json();
         console.log(`changes saved successfully`, responseData);
     }
-
     catch (error) {
         console.log("error saving changes" + error);
     }
-
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//filterMessages function
-
-// export async function getFavourites(user) {
-//     try {
-//         const data = {
-//             "function": "getFavourites",
-//             "user": user
-//         };
-//         const response = await fetch(`http://localhost/data/api.php`, {
-//             method: "POST",
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(data)
-//         });
-
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! status: ${response.status}`);
-//         }
-
-//         const favourites = await response.json();
-//         console.log(favourites);
-//         return favourites;
-//     } catch (error) {
-//         console.log("Error retrieving data: " + error);
-//     }
-// }
-
-
+// API call - Function to retrive users's favourite recipes from DB
 export async function getFavourites(user) {
     try {
         const data = {
@@ -647,17 +531,9 @@ export async function getFavourites(user) {
             },
             body: JSON.stringify(data)
         });
-
-
-        // if (response.ok) {
-        //     console.log('response = ',await response.json());
-
-        //     throw new Error(`response is ok! status: ${response.status}`);
-        // }
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-
         const favourites = await response.json();
         return favourites;
     } catch (error) {
@@ -667,10 +543,7 @@ export async function getFavourites(user) {
 }
 
 
-
-
-//filterMessages function
-
+// API call - Function to add a favourite recipe for a user
 export async function addFavourite(user_id, dish_id) {
     try {
         const data = {
@@ -695,8 +568,7 @@ export async function addFavourite(user_id, dish_id) {
 }
 
 
-
-//filterMessages function
+// API call - Function to remove a recipe from a user's favourites list
 export async function removeFavourite(user_id, dish_id) {
     try {
         const data = {
