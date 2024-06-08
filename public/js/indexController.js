@@ -13,21 +13,6 @@ console.log(userId);
 document.getElementById('year').textContent = new Date().getFullYear();
 
 
-// Waiting for DOM to fully load and calling getRecipes() to
-// Listing all the recommended recipes - Recomended Recipes Tab
-document.addEventListener('DOMContentLoaded', async () => {
-    if (window.location.pathname.includes('index.html')) {
-        try {
-            const recipes = await apiCalls.getRecipes({ "dish_chef_recommended": "1" });
-            await addRecipes(recipes);
-        } catch (error) {
-            console.error("Error loading recipes:", error);
-        }
-    }
-    commonController.tabsController();
-});
-
-
 // Function to list recipes on index.php
 async function addRecipes(recipesList) {
 
@@ -316,21 +301,6 @@ function toggleContactForm(show) {
 getInTouchBtn.addEventListener('click', () => { toggleContactForm(true); });
 closeContactForm.addEventListener('click', () => { toggleContactForm(false); });
 
-
-
-
-
-// const sendMsgBtn = document.getElementById("sentMsgBtn");
-// sendMsgBtn.addEventListener("click", (event) => {
-//     event.preventDefault();
-//     const name = document.getElementById("name").value;
-//     const email = document.getElementById("email").value;
-//     const message = document.getElementById("message").value;
-
-// });
-
-
-
 document.addEventListener('DOMContentLoaded', (event) => {
     const sentMsgBtn = document.getElementById("sentMsgBtn");
     const customAlertModal = document.getElementById("customAlert");
@@ -538,43 +508,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Event listener for My Favourites button
-// And checking if user is logged in
-const favouritesButton = document.getElementById('viewFavourites');
-if (favouritesButton) {
-    favouritesButton.addEventListener('click', function () {
-
-
-        // If user is not logged in redirect to login or register
-        if (!isLoggedIn) {
-            window.location.href = 'auth.php';
-        }
-        else {
-            (async () => {
-
-
-                // Unselect the selected tab on index.php
-                // Displaying My Favourites header
-                document.querySelector('.tabSelected')?.classList.remove('tabSelected');
-                document.querySelector("#favHeaderDiv")?.classList.remove('hideFavHeader');
-
-
-                // Calling getFavourites() to retrieve user's favourite recipes 
-                await getFavourites(userId);
-
-
-                // Hiding add to favourites button and showing remove from favourites button
-                // when displaying user's favourite recipes
-                const remFavBtns = document.querySelectorAll(".hideRemoveRecipeFavBtn");
-                remFavBtns.forEach(remFavBtn => remFavBtn.classList.remove('hideRemoveRecipeFavBtn'));
-                const addFavBtns = document.querySelectorAll(".showRecipeFavBtn");
-                addFavBtns.forEach(addFavBtn => addFavBtn.classList.add('hideAddRecipeFavBtn'));
-            })()
-        }
-    });
-}
-
-
 // Function to retrieve and display user's favourite recipes
 async function getFavourites(userId) {
     const recipesList = document.getElementById('recipesList');
@@ -613,15 +546,51 @@ async function getFavourites(userId) {
 }
 
 
+// Event listener for My Favourites button
+// And checking if user is logged in
+const favouritesButton = document.getElementById('viewFavourites');
+if (favouritesButton) {
+    favouritesButton.addEventListener('click', function () {
 
 
+        // If user is not logged in redirect to login or register
+        if (!isLoggedIn) {
+            window.location.href = 'auth.php';
+        }
+        else {
+            (async () => {
 
 
-/// to test if this is needed
+                // Unselect the selected tab on index.php
+                // Displaying My Favourites header
+                document.querySelector('.tabSelected')?.classList.remove('tabSelected');
+                document.querySelector("#favHeaderDiv")?.classList.remove('hideFavHeader');
 
+
+                // Calling getFavourites() to retrieve user's favourite recipes 
+                await getFavourites(userId);
+
+
+                // Hiding add to favourites button and showing remove from favourites button
+                // when displaying user's favourite recipes
+                const remFavBtns = document.querySelectorAll(".hideRemoveRecipeFavBtn");
+                remFavBtns.forEach(remFavBtn => remFavBtn.classList.remove('hideRemoveRecipeFavBtn'));
+                const addFavBtns = document.querySelectorAll(".showRecipeFavBtn");
+                addFavBtns.forEach(addFavBtn => addFavBtn.classList.add('hideAddRecipeFavBtn'));
+            })()
+        }
+    });
+}
+
+
+// Calling getRecipes() and tabsController() once all the necessary DOM elements 
+// Have been created to listing all the recommended recipes - Recomended Recipes Tab
+// And toggling tabs CSS classes
 try {
     const recipes = await apiCalls.getRecipes({ "dish_chef_recommended": "1" });
     await addRecipes(recipes);
-} catch (error) {
+    commonController.tabsController();
+} 
+catch (error) {
     console.error("Error loading recipes:", error);
 }
