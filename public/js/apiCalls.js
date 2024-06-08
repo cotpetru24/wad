@@ -145,7 +145,6 @@ export async function deleteMessage(messageId) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        getMessages();
     } catch (error) {
         console.log("Error deleting message:", error);
     }
@@ -169,7 +168,6 @@ export async function deleteUser(userId) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        getUsersList();
     } catch (error) {
         console.log("Error deleting user:", error);
     }
@@ -199,81 +197,6 @@ export async function editRecipe(jsonData) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export async function addRecipeRows() {
-    const recipes = await getRecipes({ "dish_chef_recommended": "1" });
-    recipes.forEach(recipe => addRecipeRow(recipe));
-
-}
-
-//Function to add a recipe row to the table
-export function addRecipeRow(recipe) {
-    const recipesList = document.getElementById('adminRecipesList');
-
-
-    const row = document.createElement('tr');
-
-    row.innerHTML = `
-                <td>${recipe.name}</td>
-                <td>${recipe.description}</td>
-                <td>${recipe.category}</td>
-                <td>${recipe.name}</td>
-                <td>${recipe.complexity}</td>
-                <td>${recipe.prepTime}</td>
-                <td>${recipe.rating}</td>
-                <td><img src="${recipe.image}" alt="Dish Image"></td>
-                <td class="actions" id="actionsTh">
-                    <button onclick="previewRecipe(${JSON.stringify(recipe)})">Preview</button>
-                    <button onclick="editRecipe(${JSON.stringify(recipe)})">Edit</button>
-                    <button onclick="confirmAction('Delete recipe?', 'deleteRecipe', ${recipe.id})">Delete</button>
-                </td>
-            `;
-
-    recipesList.appendChild(row);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // API call - Function to delete a recipe from DB
 export async function deleteRecipe(recipeId) {
     try {
@@ -291,7 +214,6 @@ export async function deleteRecipe(recipeId) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        addRecipeRows();
     } catch (error) {
         console.log("Error deleting recipe:", error);
     }
@@ -402,7 +324,6 @@ export async function flagUnflagMessage(messageId) {
         if (!response.ok) {
             throw new Error(`http error! status: ${response.status}`);
         }
-        getMessages();
     } catch (error) {
         console.log("Error deleting message:", error);
     }

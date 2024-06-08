@@ -377,8 +377,13 @@ function confirmAction(message, action, id, callback) {
                 addRecipeRows(); // Refresh the recipe list
             } else if (action === 'deleteMessage') {
                 await apiCalls.deleteMessage(id);
+
+                await apiCalls.getMessages();
+
+
             } else if (action === 'deleteUser') {
                 await apiCalls.deleteUser(id);
+                await apiCalls.getUsersList();
             }
             confirmPopup.classList.remove('active');
             overlay.classList.remove('active');
@@ -566,6 +571,8 @@ function addMessageRow(message) {
     row.querySelector('.flag-button').addEventListener('click', () => {
         functions.toggleFlagClass(flagButton);
         apiCalls.flagUnflagMessage(message.message_id);
+        // apiCalls.getMessages();
+
     });
 
     // Create and append the expanded row
