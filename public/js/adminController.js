@@ -35,128 +35,6 @@ async function addRecipeRows(filter = []) {
 addRecipeRows();
 
 
-// export function addRecipeRow(recipe) {
-//     const recipesList = document.getElementById('adminRecipesList');
-//     const row = document.createElement('tr');
-//     row.classList.add('recipe-row');
-
-//     row.innerHTML = `
-//         <td>${recipe.dish_name}</td>
-//         <td>${functions.toTitleCase(recipe.origin_country)}</td>
-//         <td>${functions.toTitleCase(recipe.category_name)}</td>
-//         <td>${functions.toTitleCase(recipe.complexity_name)}</td>
-//         <td>${functions.formatPrepTime(recipe.dish_prep_time)}</td>
-//         <td>${recipe.dish_rating}</td>
-//         <td><img src="${recipe.dish_img ? recipe.dish_img : 'public/img/image_coming_soon_with_camera_text.jpg'}" alt="Dish Image"></td>
-//         <td class="actions" id="actionsTh">
-//             <button class="expand-btn">Expand</button>
-//             <button class="edit-btn">Edit</button>
-//             <button class="delete-btn">Delete</button>
-//         </td>
-//     `;
-
-
-//     // <td class="fixed-cell">${recipe.dish_recipe_description}</td>
-//     // <td class="fixed-cell">${JSON.parse(recipe.dish_ingredients).join(', ')}</td>
-
-
-//     const expandedRow = document.createElement('tr');
-//     const expandedRowData = document.createElement('td')
-//     expandedRowData.classList.add('expandedRecipeTd')
-//     const expandedContent = document.createElement('div')
-//     expandedContent.classList.add('expanded-content')
-
-//     expandedRowData.appendChild(expandedContent);
-//     expandedRow.appendChild(expandedContent);
-
-//     expandedRow.classList.add('recipe-expanded-row');
-//     expandedRow.style.display = 'none';
-//     const chefRecommendedText = recipe.dish_chef_recommended === 1 ? "Yes" : "No";
-
-//     const expandedRowRecipeDescription = document.createElement('h3');
-//     expandedRowRecipeDescription.innerText = "Description:";
-//     expandedRowData.appendChild(expandedRowRecipeDescription);
-
-
-//     const descriptionParagraph = document.createElement('p');
-//     descriptionParagraph.innerText = ${ recipe.dish_recipe_description };
-//     expandedRowData.appendChild(descriptionParagraph);
-
-//     //Ingredients
-//     if (recipe.dish_ingredients) {
-//         let recipeIngredientsHeader = document.createElement("h3");
-//         recipeIngredientsHeader.innerHTML = "Ingredients:";
-//         let ingredientsList = document.createElement("ul");
-//         const dishIngredientsArray = JSON.parse(recipe.dish_ingredients);
-//         dishIngredientsArray.forEach(value => {
-//             let listItem = document.createElement("li");
-//             listItem.textContent = value;
-//             ingredientsList.appendChild(listItem);
-//         });
-
-//         expandedRowData.appendChild(recipeIngredientsHeader);
-//         expandedRowData.appendChild(ingredientsList);
-//     }
-
-
-
-
-
-//     //Steps
-//     if (recipe.dish_steps) {
-//         let recipeStepsHeader = document.createElement("h3");
-//         recipeStepsHeader.innerHTML = "Instructions";
-//         let recipeSteps = document.createElement("ol");
-//         const dishSteps = JSON.parse(recipe.dish_steps);
-//         dishSteps.forEach(step => {
-//             let recipeStep = document.createElement("li");
-//             let stepTitle = document.createElement("strong");
-//             stepTitle.textContent = step.title + ":";
-//             let stepDescription = document.createElement("span");
-//             stepDescription.textContent = step.description;
-
-//             recipeStep.appendChild(stepTitle);
-//             recipeStep.appendChild(stepDescription);
-//             recipeSteps.appendChild(recipeStep);
-//         }
-//         )
-//         expandedRowData.appendChild(recipeStepsHeader);
-//         expandedRowData.appendChild(recipeSteps);
-//     }
-
-//     // expandedRow.innerHTML = `
-//     //     <td colspan="8">
-//     //         <div class="expanded-content">
-//     //             <h3>Description:</h3>
-//     //             <p>${recipe.dish_recipe_description}</p>
-//     //             // <h3>Ingredients:</h3>
-//     //             // <p>${JSON.parse(recipe.dish_ingredients).join(', ')}</p>
-//     //             <h3>Steps:</h3>
-//     //             <p>${recipe.dish_steps}</p>
-
-
-//     //             <h3>Chef Recommended: ${chefRecommendedText}</h3>
-
-//     //             <h3>Recipe added: ${recipe.dish_upload_date_time}</h3>
-
-//     //         </div>
-//     //     </td>
-//     // `;
-
-
-
-//     recipesList.appendChild(row);
-//     recipesList.appendChild(expandedRow);
-
-//     // Attach event listeners
-//     row.querySelector('.expand-btn').addEventListener('click', commonController.toggleExpand);
-//     row.querySelector('.edit-btn').addEventListener('click', () => editRecipe(recipe));
-//     row.querySelector('.delete-btn').addEventListener('click', () => confirmAction('Delete recipe?', 'deleteRecipe', recipe.dish_id));
-// }
-
-
-//if the below works fine delete the above.
-
 export function addRecipeRow(recipe) {
     const recipesList = document.getElementById('adminRecipesList');
     const row = document.createElement('tr');
@@ -267,6 +145,41 @@ async function updateRecipe() {
     const dishRating = document.getElementById('editDishRating').value;
     const dishImage = document.getElementById('editDishImage').files[0];
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const dishChefRecommended = document.getElementById('editChefRecommended').value;
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     const ingredientsElements = document.querySelectorAll("#editIngredientsContainer .ingredientDescription");
     const dishIngredients = Array.from(ingredientsElements).map(input => input.value);
 
@@ -294,6 +207,7 @@ async function updateRecipe() {
             dishComplexity: dishComplexity,
             dishPrepTime: dishPrepTime,
             dishRating: dishRating,
+            dishChefRecommended: dishChefRecommended,
             dishImage: base64Image
         };
 
@@ -326,6 +240,7 @@ async function updateRecipe() {
             dishComplexity: dishComplexity,
             dishPrepTime: dishPrepTime,
             dishRating: dishRating,
+            dishChefRecommended: dishChefRecommended,
             dishImage: null
         };
 
@@ -517,15 +432,7 @@ document.getElementById("toggleFormButton").addEventListener("click", function (
 
 
 
-    // ? (document.getElementById("toggleFormButton").innerText ="Cancel", resetAddRecipeForm())
-    // : (document.getElementById("toggleFormButton").innerText ="+ Add Recipe", resetAddRecipeForm())
 });
-
-// // Toggle Add User Form
-// document.getElementById("toggleUserFormButton").addEventListener("click", function () {
-//     const form = document.getElementById("addUserForm");
-//     form.style.display = form.style.display === "none" ? "block" : "none";
-// });
 
 
 
@@ -613,33 +520,6 @@ function addMessageRow(message) {
 
 
 
-// // Function to add a user row to the table
-// function addUserRow(user) {
-//     const usersList = document.getElementById('usersList');
-//     const row = document.createElement('tr');
-
-//     row.innerHTML = `
-//                 <td>${user.name}</td>
-//                 <td>${user.email}</td>
-//                 <td>${user.role}</td>
-//                 <td class="actions">
-//                     <button onclick="editUser(${JSON.stringify(user)})">Edit</button>
-//                     <button onclick="confirmAction('Reset password?', 'resetPassword', ${user.id})">Reset Password</button>
-//                     <button onclick="confirmAction('Disable user?', 'disableUser', ${user.id})">Disable</button>
-//                     <button onclick="confirmAction('Unlock user?', 'unlockUser', ${user.id})">Unlock</button>
-//                     <button onclick="confirmAction('Delete user?', 'deleteUser', ${user.id})">Delete</button>
-//                 </td>
-//             `;
-
-//     usersList.appendChild(row);
-// }
-
-
-
-
-
-
-
 
 
 
@@ -689,8 +569,6 @@ async function searchRecipesAdmin() {
 
 
 
-    // searchResults.forEach(result => addRecipeRow(result)); ---------------- commented but not sure if this is needed
-    // addRecipeRows(searchResults);
 }
 
 
@@ -1169,10 +1047,7 @@ document.getElementById('adminUsersFilter')?.addEventListener('click', () => {
     filterUsers();
 });
 
-// document.getElementById('showAllUsers')?.addEventListener('click', () => {
-//     listUsers();
-    
-// });
+
 
 
 
@@ -1189,25 +1064,6 @@ if (showAllUsers) {
         listUsers();
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1280,48 +1136,6 @@ async function handleUserSearch(searchCriteria) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Function to edit user
 function editUser(user) {
     const editPopup = document.getElementById('editUserPopup');
@@ -1338,13 +1152,6 @@ function editUser(user) {
     editPopup.classList.add('active');
     overlay.classList.add('active');
 }
-
-
-
-
-
-
-
 
 
 
@@ -1380,16 +1187,6 @@ async function updateUser() {
         console.error('Error updating user:', error);
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 function addUserRow(user) {
@@ -1445,13 +1242,6 @@ async function listUsers() {
 }
 
 
-
-
-
-
-
-
-
 // Listing messages in the messages tab/admin page
 const usersTab = document.getElementById("usersTab");
 if (usersTab) {
@@ -1461,34 +1251,8 @@ if (usersTab) {
 }
 
 
-
-
-
-
-
-
-
-
-
 if (window.location.pathname.includes('adminPage.php')) {
     addRecipeRows();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

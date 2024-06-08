@@ -299,10 +299,10 @@ function addNewRecipe($conn, $data)
 function editRecipe($conn, $data)
 {
     $sql = "UPDATE recipes SET dish_name=?, dish_origin_id=?, dish_recipe_description=?, dish_ingredients=?, dish_complexity_id=?, 
-    dish_prep_time=?, dish_category_id=?, dish_rating=?, dish_steps = ? WHERE dish_id=?";
+    dish_prep_time=?, dish_category_id=?, dish_rating=?, dish_steps = ?, dish_chef_recommended = ? WHERE dish_id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        'sissiiiisi',
+        'sissiiiisii',
         $data['dishName'],
         $data['dishOrigin'],
         $data['dishDescription'],
@@ -312,6 +312,7 @@ function editRecipe($conn, $data)
         $data['dishCategory'],
         $data['dishRating'],
         $data['dishSteps'],
+        $data['dishChefRecommended'],
         $data['dishId']
     );
 

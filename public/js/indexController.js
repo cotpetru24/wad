@@ -3,19 +3,9 @@ import * as functions from './functions.js';
 import * as commonController from './commonController.js'
 
 
-
-
-
 // Ensure the variable is available globally
 console.log(isLoggedIn);
 console.log(userId);
-
-
-
-
-
-
-
 
 
 //add current year to footer copyright 
@@ -37,7 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-//this is the old function, incase the one below doesnt worl
 //function to add recipes to index.html
 async function addRecipes(recipesList) {
 
@@ -46,8 +35,6 @@ async function addRecipes(recipesList) {
     list.innerText = "";
 
     recipesList.forEach((recipe) => {
-        // alert('add recipes function has been called, this is the search result:'+ recipesList );
-        // console.log(recipesList);
 
         //////----------Recipe img div---------\\\\\\\
         let recipeImg = document.createElement("img");
@@ -68,13 +55,6 @@ async function addRecipes(recipesList) {
         let recipeHeadingH2Div = document.createElement("div")
         recipeHeadingH2Div.appendChild(recipeHeading);
 
-        //Fav Btns
-
-
-
-
-
-
 
         let removeRecipeFavBtn = document.createElement("button");
         removeRecipeFavBtn.dataset.recipeId = recipe.dish_id;
@@ -83,39 +63,9 @@ async function addRecipes(recipesList) {
         removeRecipeFavBtn.innerText="Remove from Favourites";
 
 
-
-
-
-
-
-
-
-
-
-
-
         let recipeAddFavBtn = document.createElement("button")
-        // recipeAddFavBtn.id = recipe.dish_id;
         recipeAddFavBtn.dataset.recipeId = recipe.dish_id;
         recipeAddFavBtn.classList.add('showRecipeFavBtn')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         let recipeHeadingBtnDiv = document.createElement("div")
@@ -124,9 +74,6 @@ async function addRecipes(recipesList) {
 
         recipeHeadingBtnDiv.appendChild(removeRecipeFavBtn);
         recipeHeadingBtnDiv.appendChild(recipeAddFavBtn);
-
-
-
 
 
 
@@ -277,11 +224,6 @@ async function addRecipes(recipesList) {
 
         recipeAddFavBtn.dataset.recipeId
 
-        //calls addfavourite function in api calls------------------------------------------------
-        // recipeAddFavBtn.addEventListener("click", ()=>{
-        //     const recipeId = parseInt(recipeAddFavBtn.id, 10);
-        //     apiCalls.addFavourite(userId,recipeId)
-        // })
 
         recipeAddFavBtn.addEventListener("click", (event) => {
             if (!userId) {
@@ -307,13 +249,6 @@ async function addRecipes(recipesList) {
                 setTimeout(function() {
                     favNotification.classList.remove('show');
                 }, 1500); // 3 seconds
-
-
-
-
-
-
-
 
 
 
@@ -348,8 +283,6 @@ async function addRecipes(recipesList) {
         list.appendChild(recipeDiv);
     });
 }
-
-
 
 
 
@@ -595,44 +528,7 @@ sendMsgBtn.addEventListener("click", (event) => {
     const email = document.getElementById("email").value;
     const message = document.getElementById("message").value;
 
-    // //checking if all fields are field in
-    // if (!name || !email || !message){
-    //     alert ("Please fill in the required fields.");
-    //     return;
-    // }
-
-    // // Validate email field
-    // const emailValidation = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!emailValidation.test(email)) {
-    //     alert("Please enter a valid email address.");
-    //     return;
     });
-
-//     const jsonData = {
-//         name: name,
-//         email: email,
-//         message: message
-//     };
-
-//     apiCalls.sendMessage(jsonData);
-
-//     document.getElementById('name').value = '';
-//     document.getElementById('email').value = '';
-//     document.getElementById('message').value = '';
-//     toggleContactForm(false);
-// });
-
-
-
-
-
-
-
-// const closeFavAddedAlert = document.getElementById("closeFavAddedBtn")
-
-
-
-
 
 
 
@@ -766,9 +662,6 @@ closeContactForm.addEventListener('click', () => { toggleContactForm(false); });
 
 //search recipes function + event listener => index page
 async function searchRecipesIndex() {
-    // const search = document.getElementById("search-box").value;
-    // document.querySelector("#favHeaderDiv")?.classList.remove('showFavHeader');
-
 
     const recipesList = document.getElementById('recipesList');
     const search = document.getElementById("indexRecipeSearchBox").value;
@@ -788,15 +681,6 @@ async function searchRecipesIndex() {
         addRecipes(searchResults);
     }
 }
-
-
-
-
-// document.getElementById('indexRecipesSearch')?.addEventListener('click', () => {
-//     searchRecipesIndex();
-//     document.querySelector('.tabSelected')?.classList.remove('tabSelected');
-// });
-
 
 
 
@@ -852,30 +736,6 @@ if (favouritesButton) {
         }
     });
 }
-
-
-// async function getFavourites(userId) {
-//     const recipesList = document.getElementById('recipesList');
-//     if (!userId) {
-//         // recipesList.innerText = "Please log in to view your favourites.";
-//         return;
-//     }
-
-//     const results = await apiCalls.getFavourites(userId);
-
-//     // console.log(results);
-//     recipesList.innerText = "";
-//     if (results.length === 0) {
-//         const noResultsIndex = document.createElement('h2');
-//         noResultsIndex.classList.add('noResultsIndex');
-//         noResultsIndex.innerHTML = 'No Recipes Found';
-//         recipesList.appendChild(noResultsIndex);
-//     } else {
-//         addRecipes(results);
-//     }
-
-// }
-
 
 
 
