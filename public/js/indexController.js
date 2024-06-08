@@ -681,6 +681,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         apiCalls.sendMessage(jsonData);
 
+
+
+        const messsageNotification = document.getElementById('messsageNotification');
+
+               // Calculate the center position
+               const left = (window.innerWidth / 2) - (messsageNotification.offsetWidth / 2);
+               const top = (window.innerHeight / 2) - (messsageNotification.offsetHeight / 2);
+               
+               // Set the position
+               messsageNotification.style.left = left + 'px';
+               messsageNotification.style.top = top + 'px';
+
+        messsageNotification.classList.add('show');
+
+            setTimeout(function() {
+                messsageNotification.classList.remove('show');
+            }, 1000); // 3 seconds
+
+
+
+
         document.getElementById('name').value = '';
         document.getElementById('email').value = '';
         document.getElementById('message').value = '';

@@ -1218,11 +1218,10 @@ ul {
   display: none;
 }
 
-.favNotification {
+.favNotification,
+.messsageNotification {
   display: none;
   position: fixed;
-  top: 20px;
-  right: 20px;
   background-color: #0c0723;
   padding: 10px;
   border-radius: 7px;
@@ -1230,9 +1229,17 @@ ul {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   width: 150px;
+  transform: translate(-50%, -50%);
+  transition: all 0.05s ease-in-out;
 }
 
-.favNotification.show {
+.messsageNotification {
+  width: 450px;
+  height: 150px;
+}
+
+.favNotification.show,
+.messsageNotification.show {
   display: block;
 }
 
@@ -1242,3 +1249,11 @@ ul {
   color: #9b59b6;
   text-align: center;
 }
+
+.messsageNotification h2 {
+  padding-top: 40px;
+  font-weight: 900;
+  color: #9b59b6;
+  text-align: center;
+}
+

@@ -85,6 +85,10 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
                 <!-- Favourite added notification -->
                 <p>Recipe added to favourites</p>
             </div>
+            <div class="messsageNotification" id="messsageNotification">
+                <!-- Message sent notification -->
+                <h2>Message Sent</h2>
+            </div>
         </main>
         <footer id="footer">
             <div id="footerDiv">
