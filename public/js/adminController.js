@@ -234,7 +234,103 @@ function updateEditStepNumbers() {
 
 
 // Save changes button event listener
-document.getElementById('saveEditButton').addEventListener('click', updateRecipe);
+// document.getElementById('saveEditButton').addEventListener('click', () =>{ 
+    
+    
+    
+//     const changesSavedNotification = document.getElementById('changesSavedNotification');
+
+//     // Calculate the center position
+//     const left = (window.innerWidth / 2) - (changesSavedNotification.offsetWidth / 2);
+//     const top = (window.innerHeight / 2) - (changesSavedNotification.offsetHeight / 2);
+    
+//     // Set the position
+//     changesSavedNotification.style.left = left + 'px';
+//     changesSavedNotification.style.top = top + 'px';
+
+//     changesSavedNotification.classList.add('show');
+
+//  setTimeout(function() {
+//     changesSavedNotification.classList.remove('show');
+//  }, 1000); // 3 seconds
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//     updateRecipe());
+
+// }
+
+
+
+
+
+// Save changes button event listener
+document.getElementById('saveEditButton').addEventListener('click', () => {
+    const changesSavedNotification = document.getElementById('changesSavedNotification');
+
+    // Calculate the center position
+    const left = (window.innerWidth / 2) - (changesSavedNotification.offsetWidth / 2);
+    const top = (window.innerHeight / 2) - (changesSavedNotification.offsetHeight / 2);
+
+    // Set the position
+    changesSavedNotification.style.left = left + 'px';
+    changesSavedNotification.style.top = top + 'px';
+
+    changesSavedNotification.classList.add('show');
+
+    setTimeout(() => {
+        changesSavedNotification.classList.remove('show');
+    }, 1000); // 1 second
+
+    // Call updateRecipe function
+    updateRecipe();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Function to show confirmation popup
 function confirmAction(message, action, id, callback) {
@@ -710,6 +806,32 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event listener for add new recipe button
     document.getElementById('addNewRecipe')?.addEventListener('click', () => {
 
+
+
+
+
+        const recipeAddedNotification = document.getElementById('recipeAddedNotification');
+
+               // Calculate the center position
+               const left = (window.innerWidth / 2) - (recipeAddedNotification.offsetWidth / 2);
+               const top = (window.innerHeight / 2) - (recipeAddedNotification.offsetHeight / 2);
+               
+               // Set the position
+               recipeAddedNotification.style.left = left + 'px';
+               recipeAddedNotification.style.top = top + 'px';
+
+               recipeAddedNotification.classList.add('show');
+
+            setTimeout(function() {
+                recipeAddedNotification.classList.remove('show');
+            }, 1000); // 3 seconds
+
+
+
+
+
+
+
         const form = document.getElementById("addRecipeForm");
         form.style.display = form.style.display === "none" ? "block" : "none";
 
@@ -1125,8 +1247,71 @@ function editUser(user) {
 
 
 
-// Save changes button event listener for users
-document.getElementById('saveUserChangesButton').addEventListener('click', updateUser);
+// // Save changes button event listener for users
+// document.getElementById('saveUserChangesButton').addEventListener('click', updateUser);
+
+
+
+
+
+
+
+// Save changes button event listener
+document.getElementById('saveUserChangesButton').addEventListener('click', () => {
+    const changesSavedNotification = document.getElementById('changesSavedNotification');
+
+    // Calculate the center position
+    const left = (window.innerWidth / 2) - (changesSavedNotification.offsetWidth / 2);
+    const top = (window.innerHeight / 2) - (changesSavedNotification.offsetHeight / 2);
+
+    // Set the position
+    changesSavedNotification.style.left = left + 'px';
+    changesSavedNotification.style.top = top + 'px';
+
+    changesSavedNotification.classList.add('show');
+
+    setTimeout(() => {
+        changesSavedNotification.classList.remove('show');
+    }, 1000); // 1 second
+
+    // Call updateRecipe function
+    updateUser();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function updateUser() {
     const userId = document.getElementById('editUserId').value;

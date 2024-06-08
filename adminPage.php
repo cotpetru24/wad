@@ -255,6 +255,14 @@ check_user_session('admin');
                     </table>
                 </div>
             </div>
+            <div class="recipeAddedNotification" id="recipeAddedNotification">
+                <!-- Recipe added notification -->
+                <h2>Recipe Added</h2>
+            </div>
+            <div class="changesSavedNotification" id="changesSavedNotification">
+                <!-- Changes saved notification -->
+                <h2>Changes Saved</h2>
+            </div>
         </main>
         <footer id="adminFooter">
             <div id="footerDiv">

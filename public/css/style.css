@@ -1219,7 +1219,9 @@ ul {
 }
 
 .favNotification,
-.messsageNotification {
+.messsageNotification,
+.recipeAddedNotification,
+.changesSavedNotification {
   display: none;
   position: fixed;
   background-color: #0c0723;
@@ -1233,13 +1235,17 @@ ul {
   transition: all 0.05s ease-in-out;
 }
 
-.messsageNotification {
+.messsageNotification,
+.recipeAddedNotification,
+.changesSavedNotification {
   width: 450px;
   height: 150px;
 }
 
 .favNotification.show,
-.messsageNotification.show {
+.messsageNotification.show,
+.recipeAddedNotification.show,
+.changesSavedNotification.show {
   display: block;
 }
 
@@ -1250,7 +1256,9 @@ ul {
   text-align: center;
 }
 
-.messsageNotification h2 {
+.messsageNotification h2,
+.recipeAddedNotification h2,
+.changesSavedNotification {
   padding-top: 40px;
   font-weight: 900;
   color: #9b59b6;
