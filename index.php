@@ -16,6 +16,7 @@ $user_name = $isLoggedIn ? $_SESSION['user_name'] : null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/public/img/tab_logo.png" type="image/png" />
     <title>Cookking Creations</title>
+    <link rel="icon" type="image/x-icon" href="/public/img/favicon.ico">
     <link rel="stylesheet" href="public/css/style.css" />
     <script>
         // Converting php session variables to js const
