@@ -2,44 +2,15 @@ import * as apiCalls from './apiCalls.js';
 import * as functions from './functions.js';
 import * as commonController from './commonController.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
-    // Check if the current URL includes "adminPage.html"
-    if (window.location.pathname.includes('adminPage.php')) {
-        addRecipeRows();
-    }
-    commonController.tabsController();
-});
 
-
-
-async function addRecipeRows(filter = []) {
-    const recipes = await apiCalls.getRecipes(filter);
-    const recipesList = document.getElementById('adminRecipesList');
-    recipesList.innerHTML = ''; // Clear existing rows before adding new ones
-
-    if (recipes.length === 0) {
-        const noRecipesRow = document.createElement('tr');
-        noRecipesRow.classList.add('noResultsRow');
-        const noRecipesCell = document.createElement('td');
-        noRecipesCell.classList.add('noResultsFound');
-
-        noRecipesCell.colSpan = 8;
-        noRecipesCell.textContent = 'No Recipes found';
-        noRecipesRow.appendChild(noRecipesCell);
-        recipesList.appendChild(noRecipesRow);
-    } else {
-        recipes.forEach(recipe => addRecipeRow(recipe));
-    }
-}
-
-addRecipeRows();
-
-
+// Function to append a row to adminPage.php recipes table
 export function addRecipeRow(recipe) {
     const recipesList = document.getElementById('adminRecipesList');
+
+
+    // Creating table row for recipe
     const row = document.createElement('tr');
     row.classList.add('recipe-row');
-
     row.innerHTML = `
         <td>${recipe.dish_name}</td>
         <td>${functions.toTitleCase(recipe.origin_country)}</td>
@@ -55,6 +26,8 @@ export function addRecipeRow(recipe) {
         </td>
     `;
 
+
+    // Creating expanded table row for recipe
     const expandedRow = document.createElement('tr');
     const expandedRowData = document.createElement('td');
     expandedRowData.classList.add('expandedRecipeTd');
@@ -78,7 +51,9 @@ export function addRecipeRow(recipe) {
     descriptionParagraph.innerText = recipe.dish_recipe_description;
     expandedContent.appendChild(descriptionParagraph);
 
+
     // Ingredients
+    // Listing each ingredient as separate list item
     if (recipe.dish_ingredients) {
         let recipeIngredientsHeader = document.createElement("h3");
         recipeIngredientsHeader.innerHTML = "Ingredients:";
@@ -94,7 +69,9 @@ export function addRecipeRow(recipe) {
         expandedContent.appendChild(ingredientsList);
     }
 
+
     // Steps
+    // Listing each step name and step description as separate list items
     if (recipe.dish_steps) {
         let recipeStepsHeader = document.createElement("h3");
         recipeStepsHeader.innerHTML = "Instructions:";
@@ -123,18 +100,56 @@ export function addRecipeRow(recipe) {
     recipeAddedHeader.innerText = "Recipe added: " + recipe.dish_upload_date_time;
     expandedContent.appendChild(recipeAddedHeader);
 
+
+    // Appending table row and expanded table row to recipes table
     recipesList.appendChild(row);
     recipesList.appendChild(expandedRow);
 
-    // Attach event listeners
+    // Event listeners for Expand, Edit and Delete buttons
     row.querySelector('.expand-btn').addEventListener('click', commonController.toggleExpand);
     row.querySelector('.edit-btn').addEventListener('click', () => editRecipe(recipe));
     row.querySelector('.delete-btn').addEventListener('click', () => confirmAction('Delete recipe?', 'deleteRecipe', recipe.dish_id));
 }
 
 
+// Function to append all or filtered recipes to adminPage.php
+// Recipes table
+async function addRecipeRows(filter = []) {
 
+
+    // Calling getRecipes to retrieve the recipes from DB 
+    const recipes = await apiCalls.getRecipes(filter);
+    const recipesList = document.getElementById('adminRecipesList');
+
+    // Clear the current rows    
+    recipesList.innerHTML = '';
+
+
+    // Displaying No recipe found if there are no search results
+    if (recipes.length === 0) {
+        const noRecipesRow = document.createElement('tr');
+        noRecipesRow.classList.add('noResultsRow');
+        const noRecipesCell = document.createElement('td');
+        noRecipesCell.classList.add('noResultsFound');
+        noRecipesCell.colSpan = 8;
+        noRecipesCell.textContent = 'No Recipes found';
+        noRecipesRow.appendChild(noRecipesCell);
+        recipesList.appendChild(noRecipesRow);
+    } 
+    
+
+    // Calling addRecipeRow() to list the search results
+    else {
+        recipes.forEach(recipe => addRecipeRow(recipe));
+    }
+}
+
+
+// Function to amend/update a recipe
 async function updateRecipe() {
+
+
+    // Getting field values / recipe details
     const dishId = document.getElementById('editRecipeId').value;
     const dishName = document.getElementById('editDishName').value;
     const dishOrigin = document.getElementById('editDishOrigin').value;
@@ -157,9 +172,13 @@ async function updateRecipe() {
 
     const reader = new FileReader();
 
+
+    // Storing recipe data when image has been uploaded
     reader.onloadend = function () {
         const base64Image = reader.result ? reader.result.split(',')[1] : null;
 
+
+        // Storing recipe data into JSON 
         const jsonData = {
             function: 'editRecipe',
             dishId: dishId,
@@ -176,10 +195,18 @@ async function updateRecipe() {
             dishImage: base64Image
         };
 
+
+        // Calling editRecipe() and passing recipe data to update the recipe in DB
         apiCalls.editRecipe(jsonData).then(() => {
+
+
+            // Closing Edit Recipe popup and removing overlay
             document.getElementById('editRecipePopup').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
-            addRecipeRows(); // Refresh the recipe list
+
+
+            // Calling addRecipeRows() to refresh the recipes list
+            addRecipeRows();
         }).catch(error => {
             console.error('Error updating recipe:', error);
         });
@@ -189,10 +216,17 @@ async function updateRecipe() {
         console.error('Error reading file:', error);
     };
 
+
     if (dishImage) {
         reader.readAsDataURL(dishImage);
-    } else {
-        // No image selected, proceed without reading file
+    } 
+    
+    
+    // Storing recipe data when image has not been uploaded
+    else {
+        // If no image has been selected, proceed without reading file
+        // and store recipe data into JSON 
+
         const jsonData = {
             function: 'editRecipe',
             dishId: dishId,
@@ -209,68 +243,22 @@ async function updateRecipe() {
             dishImage: null
         };
 
+
+        // Calling editRecipe() and passing recipe data to update the recipe in DB
         apiCalls.editRecipe(jsonData).then(() => {
+
+
+            // Closing Edit Recipe popup and removing overlay
             document.getElementById('editRecipePopup').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
-            addRecipeRows(); // Refresh the recipe list
-        }).catch(error => {
+
+
+            // Calling addRecipeRows() to refresh the recipes list
+            addRecipeRows();
             console.error('Error updating recipe:', error);
         });
     }
 }
-
-
-// Function to update step numbers in edit form
-function updateEditStepNumbers() {
-    const steps = document.querySelectorAll("#editStepsContainer .step");
-    steps.forEach((step, index) => {
-        step.querySelector("p").innerText = `Step ${index + 1}`;
-    });
-}
-
-
-
-
-
-
-// Save changes button event listener
-// document.getElementById('saveEditButton').addEventListener('click', () =>{ 
-    
-    
-    
-//     const changesSavedNotification = document.getElementById('changesSavedNotification');
-
-//     // Calculate the center position
-//     const left = (window.innerWidth / 2) - (changesSavedNotification.offsetWidth / 2);
-//     const top = (window.innerHeight / 2) - (changesSavedNotification.offsetHeight / 2);
-    
-//     // Set the position
-//     changesSavedNotification.style.left = left + 'px';
-//     changesSavedNotification.style.top = top + 'px';
-
-//     changesSavedNotification.classList.add('show');
-
-//  setTimeout(function() {
-//     changesSavedNotification.classList.remove('show');
-//  }, 1000); // 3 seconds
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//     updateRecipe());
-
-// }
-
-
-
 
 
 // Save changes button event listener
@@ -296,43 +284,7 @@ document.getElementById('saveEditButton').addEventListener('click', () => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Function to show confirmation popup
+// Function to show and handle the confirmation popup
 function confirmAction(message, action, id, callback) {
     const confirmPopup = document.getElementById('confirmActionPopup');
     const overlay = document.getElementById('overlay');
@@ -342,27 +294,36 @@ function confirmAction(message, action, id, callback) {
     confirmMessage.textContent = message;
     yesButton.onclick = async function () {
         try {
-            if (action === 'disableUser') {
-                await disableUser(id);
-            } else if (action === 'unlockUser') {
-                await unlockUser(id);
-            // } else if (action === 'deleteUser') {
-            //     await deleteUser(id);
-            } else if (action === 'deleteRecipe') {
+
+            if (action === 'deleteRecipe') {
+                // Calling deleteRecipe() to delete the recipe
                 await apiCalls.deleteRecipe(id);
-                addRecipeRows(); // Refresh the recipe list
-            } else if (action === 'deleteMessage') {
+                // Calling addRecipeRows() to refresh the recipes list
+                addRecipeRows();
+            } 
+
+            
+            else if (action === 'deleteMessage') {
+                 // Calling deleteMessage() to delete the message
                 await apiCalls.deleteMessage(id);
-
+                // Calling getMessages() to refresh the messages list
                 await apiCalls.getMessages();
+            } 
 
-
-            } else if (action === 'deleteUser') {
+            
+            else if (action === 'deleteUser') {
+                // Calling deleteUser() to delete the user
                 await apiCalls.deleteUser(id);
+                // Calling getUsersList() to refresh the users list
                 await apiCalls.getUsersList();
             }
+
+
+            // Closing confirmation popup and removing overlay
             confirmPopup.classList.remove('active');
             overlay.classList.remove('active');
+
+
             // Call the callback function after the action
             if (typeof callback === 'function') {
                 callback();
@@ -372,25 +333,20 @@ function confirmAction(message, action, id, callback) {
         }
     };
 
+
+
+    // Displaying confirmation popup and overlay
     confirmPopup.classList.add('active');
     overlay.classList.add('active');
 }
 
-// Function to close popups
-document.getElementById('closePreviewPopup')?.addEventListener('click', () => {
-    document.getElementById('previewRecipePopup')?.classList.remove('active');
-    document.getElementById('overlay')?.classList.remove('active');
-});
 
+// Event listeners for confirmation popup
 document.getElementById('closeEditPopup')?.addEventListener('click', () => {
     document.getElementById('editRecipePopup')?.classList.remove('active');
     document.getElementById('overlay')?.classList.remove('active');
 });
 
-document.getElementById('closeViewMessagePopup')?.addEventListener('click', () => {
-    document.getElementById('viewMessagePopup')?.classList.remove('active');
-    document.getElementById('overlay')?.classList.remove('active');
-});
 
 document.getElementById('closeEditUserPopup')?.addEventListener('click', () => {
     document.getElementById('editUserPopup')?.classList.remove('active');
@@ -407,7 +363,8 @@ document.getElementById('confirmActionNoButton')?.addEventListener('click', () =
     document.getElementById('overlay')?.classList.remove('active');
 });
 
-// Listing messages in the messages tab/admin page
+
+// Calling listMessages() when user selects the messages tab
 const messagesTab = document.getElementById("messagesTab");
 if (messagesTab) {
     messagesTab.addEventListener('click', async () => {
@@ -415,96 +372,38 @@ if (messagesTab) {
     });
 }
 
-async function listMessages() {
-    try {
-        const messagesList = document.getElementById("messagesList");
-        if (messagesList) {
-            messagesList.innerHTML = "";
-            const messages = await apiCalls.getMessages();
-            messages.forEach(message => addMessageRow(message));
-        } else {
-            console.error("Element with ID 'messagesList' not found.");
-        }
-    } catch (error) {
-        console.error("Error fetching messages:", error);
-    }
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Toggle Add Recipe Form
+// Toggling Add Recipe Form
 document.getElementById("toggleFormButton").addEventListener("click", function () {
     const form = document.getElementById("addRecipeForm");
     form.style.display = form.style.display === "none" ? "block" : "none";
-    // document.getElementById("toggleFormButton").innerText === "+ Add Recipe"
-    //     ? document.getElementById("toggleFormButton").innerText = "Cancel"
-    //     : document.getElementById("toggleFormButton").innerText = "+ Add Recipe"
 
+
+    // Toggling + Add Recipe button text 
     const toggleButton = document.getElementById("toggleFormButton");
     if (toggleButton.innerText === "+ Add Recipe") {
         toggleButton.innerText = "Cancel";
     } else {
         toggleButton.innerText = "+ Add Recipe";
+
+        // Clearing add recipe form
         resetAddRecipeForm();
     }
-
-
-
 });
 
 
-
-// Function to add a message row to the table
+// Function to append a row to adminPage.php messages table
 function addMessageRow(message) {
     const messagesList = document.getElementById('messagesList');
+
+
+    // Creating table row for message and adding CSS class based on read unread
     const row = document.createElement('tr');
     row.classList.add(message.message_read == 1 ? 'read-message-row' : 'unread-message-row');
     row.id = message.message_id;
 
-    // Create a unique ID for the button and image
+
+    // Adding mesage_id to flag button so that message can be fragged / unflagged
     const flagButtonId = `flag-button-${message.message_id}`;
 
     row.innerHTML = `
@@ -521,10 +420,12 @@ function addMessageRow(message) {
         </td>
     `;
 
-    // Append the new row to the messages list
+
+    // Appending table row to messages table
     messagesList.appendChild(row);
 
-    // Add hover functionality to the flag button
+
+    // Flag button hover functionality
     const flagButton = document.getElementById(flagButtonId);
 
     flagButton.addEventListener('mouseenter', () => {
@@ -535,17 +436,18 @@ function addMessageRow(message) {
         flagButton.classList.remove('flag-purple');
     });
 
-    // Add click event listener for the flag button to swap classes
+
+    // Event listener for the flag button to swap classes
     row.querySelector('.flag-button').addEventListener('click', () => {
         functions.toggleFlagClass(flagButton);
         apiCalls.flagUnflagMessage(message.message_id);
-        // apiCalls.getMessages();
 
     });
 
-    // Create and append the expanded row
+
+    // Creating expanded message table row and adding CSS classes
     const expandedRow = document.createElement('tr');
-    expandedRow.classList.add('message-expanded-row'); // to change the name
+    expandedRow.classList.add('message-expanded-row');
     expandedRow.style.display = 'none';
 
     expandedRow.innerHTML = `
@@ -558,62 +460,83 @@ function addMessageRow(message) {
         </td>
     `;
 
+
+    // Appending expanded messages table row
     messagesList.appendChild(expandedRow);
 
-    // Set event handlers for the buttons
+
+    // Event listener for message read button
     row.querySelector('.read-btn').addEventListener('click', (event) => {
         if (row.classList.contains('unread-message-row')) {
             row.classList.remove('unread-message-row');
             row.classList.add('read-message-row');
         };
+
+
+        // Calling toggleExpand() toggle message expanded row CSS classes
         commonController.toggleExpand(event);
+
+
+        // Caling markMessageAsRead() to set the message as read in DB
         apiCalls.markMessageAsRead(message.message_id);
     });
 
+
+    // Event listener for message read button
     row.querySelector('.delete-btn').addEventListener('click', () => {
+
+
+        // Calling confirmAction() to display confirmation popup
         confirmAction('Delete message?', 'deleteMessage', message.message_id, () => {
-            listMessages();  // Refresh the message list after deleting the message
+
+            // Calling listMessages() to refresh messages list.
+            listMessages()
         });
     });
 }
 
 
+// Function to list messages on adminPage.php messages table
+async function listMessages() {
+    try {
+        const messagesList = document.getElementById("messagesList");
+        if (messagesList) {
 
 
+            // Clear the current rows    
+            messagesList.innerHTML = "";
 
 
+            // Calling getMessages() to retrieve messages from DB 
+            const messages = await apiCalls.getMessages();
 
 
-
-
-// Tabs functionality ///////////////************ the same is in common controller - should remove this one */
-export function tabsController() {
-    const contentSections = document.querySelectorAll('.contentSection');
-    const tabButtonArray = document.querySelectorAll('.tabs');
-    tabButtonArray.forEach((tabButton, index) => {
-        tabButton.addEventListener('click', () => {
-            document.querySelector('.tabSelected')?.classList.remove('tabSelected');
-            tabButton.classList.add('tabSelected');
-            contentSections.forEach((section, sectionIndex) => {
-                section.style.display = sectionIndex === index ? 'block' : 'none';
-            });
-        });
-    });
+            // Calling addMessageRow() to append each messages
+            messages.forEach(message => addMessageRow(message));
+        } else {
+            console.error("Element with ID 'messagesList' not found.");
+        }
+    } catch (error) {
+        console.error("Error fetching messages:", error);
+    }
 }
 
 
-
-
-//search recipes function + event listener => admin page
+// Function to search recipes (adminPage.php)
 async function searchRecipesAdmin() {
     const search = document.getElementById("recipeSearchBox").value;
     const recipesList = document.getElementById('adminRecipesList');
-    let searchResults = await apiCalls.searchRecipes(search);
-    recipesList.innerHTML = ''; // Clear existing rows before adding new ones
 
 
+    // Calling searchRecipes() to search for recipes based on the search riteria
+    const searchResults = await apiCalls.searchRecipes(search);
 
 
+    // Clearing the recipes rows before displaying  the search results
+    recipesList.innerHTML = '';
+
+
+    // Displaying No recipe found if there are no search results
     if (searchResults.length === 0) {
         const noRecipesRow = document.createElement('tr');
         noRecipesRow.classList.add('noResultsRow');
@@ -624,15 +547,18 @@ async function searchRecipesAdmin() {
         noRecipesCell.textContent = 'No Recipes found';
         noRecipesRow.appendChild(noRecipesCell);
         recipesList.appendChild(noRecipesRow);
-    } else {
+    } 
+    
+
+    // Calling addRecipeRow() to list the search results
+    else {
         searchResults.forEach(result => addRecipeRow(result));
     }
-
-
-
 }
 
 
+// Event listener for adminPage.php recipes search button
+// And calling searchRecipesAdmin() to search for recipes
 document.addEventListener("DOMContentLoaded", () => {
     const searchButton = document.getElementById('adminRecipesSearch')
     const searchInput = document.getElementById('recipeSearchBox');
@@ -653,9 +579,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
-// Filter recipes function + event listener
+// Function to filter recipes
 async function filterRecipes() {
     const recipeCategory = document.getElementById('recipeOriginFilter').value;
     const recipeComplexity = document.getElementById('recipeComplexityFilter').value;
@@ -664,41 +588,66 @@ async function filterRecipes() {
 
     let filterCriteria = { "origin_country": recipeCategory, "complexity_name": recipeComplexity, "dish_prep_time": recipePrepTime, "dish_rating": recipeRating };
 
+
+    // Calling addRecipeRows() to list the results
     addRecipeRows(filterCriteria)
 }
+
+
+// Event listener for recipes filter button
 document.getElementById('adminRecipesFilter')?.addEventListener('click', () => {
+
+
+    // Calling filterRecipes() to filter and list filtered recipes    
     filterRecipes();
 });
 
-//Removing filters
+
+// Event listener for show all button recipes tab
 document.getElementById('adminRecipesClearFilters')?.addEventListener('click', function () {
     const filterSelects = document.querySelectorAll('.filter-group select');
     const searchInput = document.getElementById('recipeSearchBox');
-    searchInput.value = '',
+
+
+    // Clearing search input
+    searchInput.value = '';
+
+
+        // Resetting filters to default values
         filterSelects.forEach(function (select) {
             select.value = '';
         });
+
+    // Calling addRecipeRows() to refresh recipes list  
     addRecipeRows();
 });
 
 
-
-// Function to display messages
-function displayMessages(messages) {
+// Function to display messages search results
+function displaySearchMessages(messages) {
     const messagesList = document.getElementById('messagesList');
+
+
+    // Clearing the messges list before displaying  the search results
     messagesList.innerHTML = ''; // Clear the list first
 
+
+    // Displaying No messages found if there are no search results
     if (messages.length === 0) {
         const noMessagesRow = document.createElement('tr');
         noMessagesRow.classList.add('noResultsRow');
         const noMessagesCell = document.createElement('td');
         noMessagesCell.classList.add('noResultsFound');
 
-        noMessagesCell.colSpan = 5; // Adjust based on the number of columns in your table
+        noMessagesCell.colSpan = 5;
         noMessagesCell.textContent = 'No Messages found';
         noMessagesRow.appendChild(noMessagesCell);
         messagesList.appendChild(noMessagesRow);
-    } else {
+    } 
+    
+    
+    // Calling addMessageRow() to list the search results
+    else {
         messages.forEach(message => {
             addMessageRow(message);
         });
@@ -706,7 +655,17 @@ function displayMessages(messages) {
 }
 
 
+// Function to handle messages search functionality
+// Calling searchMessages() to get search results
+// And calling displaySearchMessages() to display the results
+async function handleSearch(searchCriteria) {
+    const messages = await apiCalls.searchMessages(searchCriteria);
+    displaySearchMessages(messages);
+}
 
+
+// Event listener for adminPage.php messages tab search button 
+// And calling handleSearch() to search messages
 document.addEventListener("DOMContentLoaded", () => {
     const searchButton = document.getElementById('adminMessagesSearch');
     const searchInput = document.getElementById('messageSearchBox');
@@ -729,19 +688,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
-
-
-// Function to handle the search
-async function handleSearch(searchCriteria) {
-    const messages = await apiCalls.searchMessages(searchCriteria);
-    displayMessages(messages);
-}
-
-
-
-//Filter messages function + event listener
+// Function to filter messages
 async function filterMessages() {
     try {
         const messageStatus = document.getElementById('messageReadFilter').value;
@@ -749,23 +696,39 @@ async function filterMessages() {
 
 
         if (messageStatus && messagesList) {
+
+
+            // Clearing the messges list before displaying filtered results
             messagesList.innerHTML = "";
+
+
+            // Calling filterMessages() to get messages based on filter value
             const filterResults = await apiCalls.filterMessages(messageStatus);
 
+
+            // Displaying No messages found if there are no filtered results
             if (filterResults.length === 0) {
                 const noMessagesRow = document.createElement('tr');
                 noMessagesRow.classList.add('noResultsRow');
                 const noMessagesCell = document.createElement('td');
                 noMessagesCell.classList.add('noResultsFound');
 
-                noMessagesCell.colSpan = 5; // Adjust based on the number of columns in your table
+                noMessagesCell.colSpan = 5;
                 noMessagesCell.textContent = 'No Messages found';
                 noMessagesRow.appendChild(noMessagesCell);
                 messagesList.appendChild(noMessagesRow);
-            } else {
+            } 
+            
+            
+            // Calling addMessageRow() to list filtered results
+            else {
                 filterResults.forEach(result => addMessageRow(result));
             }
+
         } else if (!messageStatus) {
+
+
+            // Calling listMessages() to listing all the messaeges if there are no filters set
             await listMessages();
         }
         else {
@@ -775,166 +738,194 @@ async function filterMessages() {
         console.error("Error fetching messages:", error);
     }
 }
+
+
+// Event listener for messages filter button
 document.getElementById('adminMessagesFilter')?.addEventListener('click', () => {
+
+    // Calling filterMessages() to filter and list filtered messages    
     filterMessages();
 });
 
 
-// list all messages and clear search input
+// Event listener for show all button messages tab
 const showAllMessages = document.getElementById("adminMessagesShowAll");
 if (showAllMessages) {
     showAllMessages.addEventListener('click', async () => {
         const messagesSearchInput = document.getElementById("messageSearchBox");
         const messageReadFilter = document.getElementById("messageReadFilter");
-        messageReadFilter.value = ""; // Clear the input box
+
+
+        // Resetting filters to default values
+        messageReadFilter.value = "";
+
+
+        // Clearing search input
         if (messagesSearchInput) {
-            messagesSearchInput.value = ""; // Clear the input box
+            messagesSearchInput.value = "";
         }
+
+
+        // Calling listMessages() to refresh messages list  
         await listMessages();
     });
 }
 
 
+// Function to add an ingredient field for a new recipe
+function addIngredientField() {
+    const ingredientsContainer = document.getElementById("ingredientsContainer");
+    const ingredientDiv = document.createElement("div");
+    ingredientDiv.classList.add("ingredient");
+    ingredientDiv.innerHTML = `
+        <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
+        <button type="button" class="removeIngredientButton steptIngredientsButton">Remove</button>
+    `;
+    ingredientsContainer.appendChild(ingredientDiv);
 
+    // Event listener for ingredient remove button
+    ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
+        ingredientDiv.remove();
+    });
+}
+
+
+// Function to add a step field for a new recipe
+function addStepField() {
+    const stepsContainer = document.getElementById("stepsContainer");
+    const stepNumber = stepsContainer.children.length + 1;
+
+    const stepDiv = document.createElement("div");
+    stepDiv.classList.add("step");
+    stepDiv.innerHTML = `
+        <p>Step ${stepNumber}</p>
+        <input type="text" class="stepTitle" placeholder="Title" required>
+        <textarea class="stepDescription" placeholder="Description" required></textarea>
+        <button type="button" class="removeStepButton steptIngredientsButton">Remove</button>
+    `;
+    stepsContainer.appendChild(stepDiv);
+
+    // Event listener for step remove button
+    stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
+        stepDiv.remove();
+        updateStepNumbers();
+    });
+}
+
+
+// Function to add an ingredient field for edit recipe popup form
+function addEditIngredientField() {
+    const ingredientsContainer = document.getElementById("editIngredientsContainer");
+    const ingredientDiv = document.createElement("div");
+    ingredientDiv.classList.add("ingredient");
+    ingredientDiv.innerHTML = `
+        <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
+        <button type="button" class="removeIngredientButton">Remove</button>
+    `;
+    ingredientsContainer.appendChild(ingredientDiv);
+
+    // Event listener for ingredient remove button
+    ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
+        ingredientDiv.remove();
+    });
+}
+
+
+// Function to add a step field for edit recipe popupform
+function addEditStepField() {
+    const stepsContainer = document.getElementById("editStepsContainer");
+    const stepNumber = stepsContainer.children.length + 1;
+
+    const stepDiv = document.createElement("div");
+    stepDiv.classList.add("step");
+    stepDiv.innerHTML = `
+        <p>Step ${stepNumber}</p>
+        <input type="text" class="stepTitle" placeholder="Title" required>
+        <textarea class="stepDescription" placeholder="Description" required></textarea>
+        <button type="button" class="removeStepButton">Remove</button>
+    `;
+    stepsContainer.appendChild(stepDiv);
+
+    // Event listener for step remove button
+    stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
+        stepDiv.remove();
+        updateEditStepNumbers();
+    });
+}
+
+
+// Function to update step numbers for new recipe 
+// When adding or removing steps
+function updateStepNumbers() {
+    const steps = document.querySelectorAll("#stepsContainer .step");
+    steps.forEach((step, index) => {
+        step.querySelector("p").innerText = `Step ${index + 1}`;
+    });
+}
+
+
+// Function to update step numbers for edit recipe popup form
+// When adding or removing steps
+function updateEditStepNumbers() {
+    const steps = document.querySelectorAll("#editStepsContainer .step");
+    steps.forEach((step, index) => {
+        step.querySelector("p").innerText = `Step ${index + 1}`;
+    });
+}
+
+
+// Event listeners for add / remove step and ingredient
 document.addEventListener("DOMContentLoaded", () => {
-    // Add event listeners for adding steps and ingredients
     document.getElementById("addStepButton")?.addEventListener("click", addStepField);
     document.getElementById("addIngredientButton")?.addEventListener("click", addIngredientField);
     document.getElementById("addEditStepButton")?.addEventListener("click", addEditStepField);
     document.getElementById("addEditIngredientButton")?.addEventListener("click", addEditIngredientField);
-
-    // Event listener for add new recipe button
-    document.getElementById('addNewRecipe')?.addEventListener('click', () => {
-
-
-
-
-
-        const recipeAddedNotification = document.getElementById('recipeAddedNotification');
-
-               // Calculate the center position
-               const left = (window.innerWidth / 2) - (recipeAddedNotification.offsetWidth / 2);
-               const top = (window.innerHeight / 2) - (recipeAddedNotification.offsetHeight / 2);
-               
-               // Set the position
-               recipeAddedNotification.style.left = left + 'px';
-               recipeAddedNotification.style.top = top + 'px';
-
-               recipeAddedNotification.classList.add('show');
-
-            setTimeout(function() {
-                recipeAddedNotification.classList.remove('show');
-            }, 1000); // 3 seconds
-
-
-
-
-
-
-
-        const form = document.getElementById("addRecipeForm");
-        form.style.display = form.style.display === "none" ? "block" : "none";
-
-
-        const toggleButton = document.getElementById("toggleFormButton");
-        toggleButton.innerText = (toggleButton.innerText === "+ Add Recipe") ? "Cancel" : "+ Add Recipe";
-        addNewRecipe();
-    });
-
-    // Function to add an ingredient field for new recipe
-    function addIngredientField() {
-        const ingredientsContainer = document.getElementById("ingredientsContainer");
-        const ingredientDiv = document.createElement("div");
-        ingredientDiv.classList.add("ingredient");
-        ingredientDiv.innerHTML = `
-            <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
-            <button type="button" class="removeIngredientButton steptIngredientsButton">Remove</button>
-        `;
-        ingredientsContainer.appendChild(ingredientDiv);
-
-        // Add event listener for the remove button
-        ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-            ingredientDiv.remove();
-        });
-    }
-
-    // Function to add a step field for new recipe
-    function addStepField() {
-        const stepsContainer = document.getElementById("stepsContainer");
-        const stepNumber = stepsContainer.children.length + 1;
-
-        const stepDiv = document.createElement("div");
-        stepDiv.classList.add("step");
-        stepDiv.innerHTML = `
-            <p>Step ${stepNumber}</p>
-            <input type="text" class="stepTitle" placeholder="Title" required>
-            <textarea class="stepDescription" placeholder="Description" required></textarea>
-            <button type="button" class="removeStepButton steptIngredientsButton">Remove</button>
-        `;
-        stepsContainer.appendChild(stepDiv);
-
-        // Add event listener for the remove button
-        stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-            stepDiv.remove();
-            updateStepNumbers();
-        });
-    }
-
-    // Function to add an ingredient field for edit recipe
-    function addEditIngredientField() {
-        const ingredientsContainer = document.getElementById("editIngredientsContainer");
-        const ingredientDiv = document.createElement("div");
-        ingredientDiv.classList.add("ingredient");
-        ingredientDiv.innerHTML = `
-            <textarea class="ingredientDescription" placeholder="Ingredient" required></textarea>
-            <button type="button" class="removeIngredientButton">Remove</button>
-        `;
-        ingredientsContainer.appendChild(ingredientDiv);
-
-        // Add event listener for the remove button
-        ingredientDiv.querySelector(".removeIngredientButton").addEventListener("click", () => {
-            ingredientDiv.remove();
-        });
-    }
-
-    // Function to add a step field for edit recipe
-    function addEditStepField() {
-        const stepsContainer = document.getElementById("editStepsContainer");
-        const stepNumber = stepsContainer.children.length + 1;
-
-        const stepDiv = document.createElement("div");
-        stepDiv.classList.add("step");
-        stepDiv.innerHTML = `
-            <p>Step ${stepNumber}</p>
-            <input type="text" class="stepTitle" placeholder="Title" required>
-            <textarea class="stepDescription" placeholder="Description" required></textarea>
-            <button type="button" class="removeStepButton">Remove</button>
-        `;
-        stepsContainer.appendChild(stepDiv);
-
-        // Add event listener for the remove button
-        stepDiv.querySelector(".removeStepButton").addEventListener("click", () => {
-            stepDiv.remove();
-            updateEditStepNumbers();
-        });
-    }
-
-    // Function to update step numbers for new recipe
-    function updateStepNumbers() {
-        const steps = document.querySelectorAll("#stepsContainer .step");
-        steps.forEach((step, index) => {
-            step.querySelector("p").innerText = `Step ${index + 1}`;
-        });
-    }
-
-    // Function to update step numbers for edit recipe
-    function updateEditStepNumbers() {
-        const steps = document.querySelectorAll("#editStepsContainer .step");
-        steps.forEach((step, index) => {
-            step.querySelector("p").innerText = `Step ${index + 1}`;
-        });
-    }
 });
+
+
+// Event listener for add new recipe button
+document.getElementById('addNewRecipe')?.addEventListener('click', () => {
+
+
+    // Notification to prompt user that new recipe hass been added
+    // Setting the position of the notification to the middle of the screen
+    const recipeAddedNotification = document.getElementById('recipeAddedNotification');
+
+
+    // Calculate the center position
+    const left = (window.innerWidth / 2) - (recipeAddedNotification.offsetWidth / 2);
+    const top = (window.innerHeight / 2) - (recipeAddedNotification.offsetHeight / 2);
+    
+
+    // Set the position
+    recipeAddedNotification.style.left = left + 'px';
+    recipeAddedNotification.style.top = top + 'px';
+
+
+    // Changing adding CSS class to notification
+    recipeAddedNotification.classList.add('show');
+
+
+    // Notification timeout
+    setTimeout(function() {
+        recipeAddedNotification.classList.remove('show');
+    }, 1000);
+
+
+    // Toggling add new recipe form visibility
+    const form = document.getElementById("addRecipeForm");
+    form.style.display = form.style.display === "none" ? "block" : "none";
+
+
+    // Toggling add recipe button text 
+    const toggleButton = document.getElementById("toggleFormButton");
+    toggleButton.innerText = (toggleButton.innerText === "+ Add Recipe") ? "Cancel" : "+ Add Recipe";
+
+
+    // Calling addNewRecipe() to store the new recipe in DB 
+    addNewRecipe();
+});
+
 
 // Function to edit recipe
 function editRecipe(recipe) {
@@ -960,12 +951,15 @@ function editRecipe(recipe) {
         'vegetarian': 2
     };
 
+
+    // Filling the edit recipe form with recipe data stored in DB
     document.getElementById('editRecipeId').value = recipe.dish_id;
     document.getElementById('editDishName').value = recipe.dish_name;
     document.getElementById('editDishOrigin').value = countryMap[recipe.origin_country];
     document.getElementById('editDishDescription').value = recipe.dish_recipe_description;
 
-    // Handle ingredients
+
+    // Handling ingredients
     const ingredientsContainer = document.getElementById('editIngredientsContainer');
     ingredientsContainer.innerHTML = ''; // Clear previous ingredients
     const ingredients = JSON.parse(recipe.dish_ingredients);
@@ -983,7 +977,8 @@ function editRecipe(recipe) {
         });
     });
 
-    // Handle steps
+
+    // Handling steps
     const stepsContainer = document.getElementById('editStepsContainer');
     stepsContainer.innerHTML = ''; // Clear previous steps
     const steps = JSON.parse(recipe.dish_steps);
@@ -1009,16 +1004,16 @@ function editRecipe(recipe) {
     document.getElementById('editDishPrepTime').value = recipe.dish_prep_time;
     document.getElementById('editDishRating').value = Math.floor(recipe.dish_rating);
     document.getElementById('editChefRecommended').value = recipe.dish_chef_recommended;
-
-
     document.getElementById('editDishImage').value = '';
 
 
+    // Changing visibility for overlay and edit recipe popup
     editPopup.classList.add('active');
     overlay.classList.add('active');
 }
 
-// Existing addNewRecipe function, if not included already
+
+// Function to add / store a new recipe in the DB
 async function addNewRecipe() {
     const dishName = document.getElementById("dishName").value;
     const dishOrigin = document.getElementById("dishOrigin").value;
@@ -1040,6 +1035,8 @@ async function addNewRecipe() {
         description: stepElement.querySelector(".stepDescription").value,
     }));
 
+
+    // Storing add recipe form data into JSON 
     const jsonData = {
         function: 'addNewRecipe',
         dishName: dishName,
@@ -1055,18 +1052,30 @@ async function addNewRecipe() {
         dishImage: null
     };
 
+
+    // If dish image uploaded / added
+    // Encoding the uploaded image to base64
+    // Adding the encoded image to JSON
     if (dishImage) {
         const base64Image = await functions.convertImageToBase64(dishImage);
         jsonData.dishImage = base64Image;
     }
 
-    await apiCalls.addNewRecipe(jsonData);
-    addRecipeRows(); // Refresh the recipe list
 
+    // Calling addNewRecipe() to store the new recipe in teh DB
+    await apiCalls.addNewRecipe(jsonData);
+
+
+    // Calling addRecipeRows() to refresh the recipes list
+    addRecipeRows();
+
+
+    //Calling resetAddRecipeForm() to clear the add new recipe form input
     resetAddRecipeForm();
 }
 
-// Existing resetAddRecipeForm function, if not included already
+
+// Function to clear / reset the add new recipe form input
 function resetAddRecipeForm() {
     document.getElementById("dishName").value = "";
     document.getElementById("dishOrigin").selectedIndex = 0;
@@ -1078,17 +1087,37 @@ function resetAddRecipeForm() {
     document.getElementById("dishChefRecommended").selectedIndex = 0;
     document.getElementById("dishImage").value = "";
 
-    // Clear steps
+
+    // Removing the steps
     const stepsContainer = document.getElementById("stepsContainer");
     while (stepsContainer.firstChild) {
         stepsContainer.removeChild(stepsContainer.firstChild);
     }
 
+
+    // Removing the ingredients
     const ingredientsContainer = document.getElementById("ingredientsContainer");
     while (ingredientsContainer.firstChild) {
         ingredientsContainer.removeChild(ingredientsContainer.firstChild);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1405,8 +1434,14 @@ if (usersTab) {
 }
 
 
+
+// Calling getRecipes() and tabsController() once all the necessary DOM elements 
+// Have been created to listing all the recommended recipes - Recomended Recipes Tab
+// And toggling tabs CSS classes 
 if (window.location.pathname.includes('adminPage.php')) {
     addRecipeRows();
+    commonController.tabsController();
+
 }
 
 

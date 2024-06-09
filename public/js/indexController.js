@@ -20,7 +20,7 @@ async function addRecipes(recipesList) {
     // Clear the current list
     list.innerText = "";
 
-    // Create list item for each recipe
+    // Creating list item for each recipe
     recipesList.forEach((recipe) => {
 
         //////----------Recipe img div---------\\\\\\\
@@ -590,7 +590,7 @@ try {
     const recipes = await apiCalls.getRecipes({ "dish_chef_recommended": "1" });
     await addRecipes(recipes);
     commonController.tabsController();
-} 
+}
 catch (error) {
     console.error("Error loading recipes:", error);
 }
