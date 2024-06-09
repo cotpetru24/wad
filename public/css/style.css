@@ -9,8 +9,8 @@ body {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   display: flex;
-  flex-direction: column;
   height: 100%;
+  width: 100%;
   padding: 0;
   background-color: white;
 }
@@ -72,6 +72,7 @@ main,
   justify-content: space-between;
   width: 100%;
   height: 100%;
+  word-break: break-all;
 }
 
 .recipeDetails {
@@ -99,6 +100,7 @@ nav {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100%;
 }
 
 #tabsDiv {
@@ -1265,3 +1267,20 @@ ul {
   text-align: center;
 }
 
+@media (max-width: 1500px) {
+  #popular,
+  #indian,
+  #moldovan,
+  #russian,
+  #french,
+  #italian,
+  #chinese {
+      content: "";
+      width: 50px;
+      color: transparent;
+  }
+
+  .tabs {
+    padding: 10px 10px;
+  }
+}
