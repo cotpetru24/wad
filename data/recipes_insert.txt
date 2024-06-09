@@ -1,0 +1,1299 @@
+INSERT INTO recipes (dish_name, dish_origin_id, dish_recipe_description, dish_category_id, dish_ingredients, dish_complexity_id, dish_prep_time, dish_steps)
+VALUES 
+-- Butter Chicken
+(
+    'Butter Chicken', 
+    1,
+    'Butter Chicken, also known as Murgh Makhani, is a beloved Indian dish that has gained international acclaim for its tantalizing flavors and rich, creamy texture. Originating from the Indian subcontinent, this dish beautifully marries tender, marinated chicken with a luscious tomato-based gravy, creating a culinary masterpiece that is both comforting and indulgent. The chicken is first marinated with spices and lemon juice, then cooked in butter to achieve a succulent and flavorful base. This is followed by the preparation of a vibrant tomato gravy, enriched with cream and aromatic spices like garam masala, which gives Butter Chicken its distinctive taste and smooth consistency. This step-by-step guide will help you recreate this classic dish in your own kitchen, ensuring you capture the authentic flavors and textures that make Butter Chicken a favorite for many. Whether you\'re serving it with naan, roti, or steamed rice, this dish is sure to impress and satisfy.',
+    1,  
+    JSON_ARRAY(
+        '500g boneless chicken, cut into bite-sized pieces',
+        '2 tbsp butter',
+        '1 tbsp lemon juice (for marinade)',
+        '1 tbsp lemon juice (for cooking)',
+        '1 tsp red chili powder (divided, for marinade)',
+        '1/2 tsp red chili powder (for cooking)',
+        '1 tsp salt (for marinade)',
+        'Salt to taste',
+        '1 cup tomato puree',
+        '1 cup fresh cream',
+        '1 tsp garam masala',
+        'Fresh coriander leaves, chopped (for garnish)'
+    ),
+    3,
+    60,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Marinate the Chicken',
+            'description', 'In a large bowl, combine the chicken pieces with 1 tsp salt, 1/2 tsp red chili powder, and 1 tbsp lemon juice. Mix well to ensure all chicken pieces are evenly coated with the marinade. Cover the bowl and let the chicken marinate for at least 30 minutes, preferably 1-2 hours, to allow the flavors to penetrate the meat. This step is crucial as it enhances the flavor of the chicken and makes it tender.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Cook the Chicken',
+            'description', 'Heat 2 tbsp butter in a large pan over medium heat. Once the butter has melted and is hot, add the marinated chicken pieces to the pan. Cook the chicken, stirring occasionally, until it is fully cooked and has a nice golden brown color on the outside. This should take about 10-12 minutes. Ensure the chicken pieces are cooked through and no longer pink in the center. Remove the chicken from the pan and set it aside.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Prepare the Gravy',
+            'description', 'In the same pan, add the tomato puree. Add 1/2 tsp red chili powder and salt to taste. Cook the tomato puree over medium heat for about 10 minutes, stirring occasionally. The tomato puree should thicken and lose its raw taste. Cooking the tomatoes thoroughly is essential for a rich and flavorful gravy.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Combine Chicken and Gravy',
+            'description', 'Once the tomato puree is ready, add the cooked chicken pieces back into the pan. Stir well to coat the chicken pieces with the tomato gravy. Make sure the chicken is fully submerged in the gravy for even flavor distribution.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Add Cream and Garam Masala',
+            'description', 'Pour in 1 cup of fresh cream and stir to combine. The cream will give the gravy a rich and creamy texture. Add 1 tsp garam masala and mix well. Let the butter chicken simmer on low heat for about 10-15 minutes. This simmering allows the flavors to meld together and creates a luscious, creamy sauce.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Garnish and Serve',
+            'description', 'Garnish the butter chicken with freshly chopped coriander leaves. Serve hot with naan, roti, or steamed rice. The fresh coriander adds a burst of color and a hint of freshness to the dish.'
+        )
+    )
+),
+
+-- Biryani
+(
+    'Biryani', 
+    1,
+    'Biryani is a fragrant and flavorful rice dish that is a staple in Indian and Middle Eastern cuisine. This dish is known for its aromatic spices, tender meat, and fluffy rice, all cooked together to create a symphony of flavors. The preparation of biryani involves marinating the meat in a blend of yogurt and spices, then layering it with partially cooked basmati rice, fried onions, and fresh herbs. The dish is then cooked slowly on low heat, allowing the flavors to meld and the rice to absorb the rich juices from the meat. Biryani can be made with chicken, lamb, beef, or even vegetables, making it a versatile dish that caters to various dietary preferences. The key to a perfect biryani lies in the quality of the ingredients and the patience to cook it slowly, ensuring that each grain of rice is perfectly cooked and infused with the aromatic spices. Serve biryani with raita and enjoy a feast of flavors that is both comforting and exotic.',
+    1,  
+    JSON_ARRAY(
+        '500g basmati rice',
+        '1 kg chicken, cut into pieces',
+        '1 cup yogurt',
+        '2 large onions, thinly sliced',
+        '2 tomatoes, chopped',
+        '4 green chilies, slit',
+        '1/2 cup fresh coriander leaves, chopped',
+        '1/2 cup fresh mint leaves, chopped',
+        '2 tbsp ginger-garlic paste',
+        '1/2 cup ghee or oil',
+        '1 tbsp biryani masala',
+        'Salt to taste',
+        'Whole spices (bay leaves, cloves, cinnamon, cardamom)',
+        'Saffron soaked in warm milk'
+    ),
+    4,
+    120,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Marinate the Chicken',
+            'description', 'In a large bowl, combine the chicken pieces with yogurt, ginger-garlic paste, biryani masala, and salt. Mix well to coat the chicken evenly. Cover and let it marinate for at least 1 hour.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Prepare the Rice',
+            'description', 'Rinse the basmati rice thoroughly under cold water until the water runs clear. Soak the rice in water for 30 minutes, then drain. In a large pot, bring water to a boil, add whole spices, and cook the rice until it is 70% cooked. Drain and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Fry the Onions',
+            'description', 'Heat ghee or oil in a large pan. Add the sliced onions and fry until they are golden brown and crispy. Remove and set aside on paper towels to drain excess oil.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Cook the Chicken',
+            'description', 'In the same pan, add the marinated chicken and cook until it is partially cooked and the oil separates from the masala. Add chopped tomatoes and green chilies, and cook for another 5 minutes.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Layer the Biryani',
+            'description', 'In a large heavy-bottomed pot, spread a layer of the partially cooked rice. Add a layer of the chicken mixture, followed by a sprinkle of fried onions, chopped coriander, and mint leaves. Repeat the layers, finishing with a layer of rice on top. Drizzle the saffron milk over the top layer.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Dum Cooking',
+            'description', 'Cover the pot with a tight-fitting lid and cook on low heat for 30-40 minutes. Alternatively, you can place the pot in a preheated oven at 180°C (350°F) for 30 minutes. This slow cooking process, known as dum, helps the flavors to meld together.'
+        ),
+        JSON_OBJECT(
+            'step', 7,
+            'title', 'Serve',
+            'description', 'Gently fluff the biryani with a fork to mix the layers before serving. Garnish with remaining fried onions and fresh herbs. Serve hot with raita.'
+        )
+    )
+),
+
+-- Chole
+(
+    'Chole', 
+    1,
+    'Chole, also known as Chana Masala, is a popular North Indian dish made with chickpeas simmered in a spicy, tangy tomato-based sauce. This vegetarian dish is rich in flavors, combining a variety of aromatic spices like cumin, coriander, turmeric, and garam masala. The chickpeas are first soaked overnight and then cooked until tender. They are then simmered in a gravy made from onions, tomatoes, ginger, garlic, and a blend of spices, creating a robust and hearty meal. Chole is often served with bhature (deep-fried bread), but it also pairs well with rice, naan, or roti. This
+
+ dish is not only delicious but also nutritious, providing a good source of protein and fiber. Chole is a staple in many Indian households and is enjoyed during special occasions and festivals. The key to a perfect chole lies in the balance of spices and the slow simmering process that allows the flavors to meld together, resulting in a rich and flavorful dish that is sure to satisfy.',
+    2,  
+    JSON_ARRAY(
+        '2 cups chickpeas (chole), soaked overnight',
+        '2 large onions, finely chopped',
+        '3 tomatoes, pureed',
+        '2 tbsp ginger-garlic paste',
+        '2 green chilies, slit',
+        '1 tbsp cumin seeds',
+        '2 tbsp coriander powder',
+        '1 tsp turmeric powder',
+        '1 tbsp garam masala',
+        '1 tsp red chili powder',
+        'Salt to taste',
+        '2 tbsp oil',
+        'Fresh coriander leaves, chopped (for garnish)'
+    ),
+    2,
+    60,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Cook the Chickpeas',
+            'description', 'Drain and rinse the soaked chickpeas. In a pressure cooker, add the chickpeas with enough water and a pinch of salt. Cook until the chickpeas are tender. If using a regular pot, simmer the chickpeas until they are soft and cooked through.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Prepare the Masala',
+            'description', 'Heat oil in a large pan over medium heat. Add cumin seeds and let them splutter. Add the finely chopped onions and sauté until they are golden brown. Add ginger-garlic paste and green chilies, and sauté for another 2 minutes.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Add Tomatoes and Spices',
+            'description', 'Add the tomato puree to the pan and cook until the oil separates from the masala. Add coriander powder, turmeric powder, red chili powder, and salt. Cook the mixture for 5-7 minutes, stirring occasionally.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Simmer with Chickpeas',
+            'description', 'Add the cooked chickpeas to the masala and mix well. Add a cup of water to achieve the desired consistency. Let the chole simmer on low heat for 15-20 minutes, allowing the flavors to meld together. Adjust the seasoning as needed.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Finish with Garam Masala',
+            'description', 'Sprinkle garam masala over the chole and mix well. Let it simmer for another 2-3 minutes. Garnish with freshly chopped coriander leaves before serving.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Serve hot chole with bhature, rice, naan, or roti. Enjoy this flavorful and hearty dish with a side of pickles and onions.'
+        )
+    )
+),
+
+-- Masala Dosa
+(
+    'Masala Dosa', 
+    1,
+    'Masala Dosa is a popular South Indian dish that is cherished for its crisp texture and flavorful potato filling. This savory crepe is made from a fermented batter of rice and urad dal (black gram), which is spread thin on a hot griddle to achieve a crispy exterior. The dosa is filled with a spiced potato mixture made with boiled potatoes, onions, green chilies, mustard seeds, turmeric, and curry leaves. The combination of the crispy dosa and the soft, spicy filling creates a delightful contrast in textures and flavors. Masala Dosa is traditionally served with coconut chutney and sambar, a lentil-based vegetable stew. This dish is a staple in South Indian cuisine and is enjoyed as a breakfast item, snack, or even a light meal. The key to a perfect masala dosa lies in the fermentation of the batter and the balance of spices in the potato filling, resulting in a delicious and satisfying dish that is loved by many.',
+    2,  
+    JSON_ARRAY(
+        '2 cups rice',
+        '1 cup urad dal (black gram)',
+        '1/2 tsp fenugreek seeds',
+        'Salt to taste',
+        '4 large potatoes, boiled and mashed',
+        '2 onions, finely chopped',
+        '2 green chilies, finely chopped',
+        '1 tbsp mustard seeds',
+        '1/2 tsp turmeric powder',
+        'A few curry leaves',
+        '2 tbsp oil',
+        'Fresh coriander leaves, chopped (for garnish)'
+    ),
+    3,
+    90,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Batter',
+            'description', 'Rinse the rice, urad dal, and fenugreek seeds thoroughly. Soak them separately in water for at least 6 hours or overnight. Drain the water and grind them together to form a smooth batter. Add salt and mix well. Cover and let the batter ferment in a warm place for 8-12 hours or until it doubles in volume.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Prepare the Potato Filling',
+            'description', 'Heat oil in a pan and add mustard seeds. Once they splutter, add curry leaves, chopped onions, and green chilies. Sauté until the onions are golden brown. Add turmeric powder and the mashed potatoes. Mix well and cook for 5-7 minutes. Garnish with fresh coriander leaves and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Make the Dosa',
+            'description', 'Heat a non-stick griddle or tawa over medium heat. Pour a ladleful of the fermented batter onto the griddle and spread it thinly in a circular motion. Drizzle a few drops of oil around the edges. Cook until the dosa is crispy and golden brown on the bottom. No need to flip.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Add the Filling',
+            'description', 'Place a portion of the potato filling in the center of the dosa. Fold the dosa over the filling to create a semi-circular shape. Gently press down to seal.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Serve',
+            'description', 'Serve the masala dosa hot with coconut chutney and sambar. Enjoy the crispy dosa with the flavorful potato filling.'
+        )
+    )
+),
+
+-- Kung Pao Chicken
+(
+    'Kung Pao Chicken', 
+    2,
+    'Kung Pao Chicken is a classic Sichuan dish that is known for its bold flavors and a perfect balance of spicy, sweet, and savory elements. This dish features bite-sized pieces of chicken, stir-fried with peanuts, dried chili peppers, and vegetables like bell peppers and scallions. The chicken is marinated in a mixture of soy sauce, Shaoxing wine, and cornstarch to achieve a tender and flavorful result. The stir-fry sauce, made with soy sauce, vinegar, sugar, and Sichuan peppercorns, adds a unique and complex flavor profile to the dish. Kung Pao Chicken is characterized by its combination of crispy peanuts, tender chicken, and the numbing heat from the Sichuan peppercorns, making it a favorite among those who enjoy spicy food. This dish is quick to prepare and is best served hot with steamed rice. The key to a successful Kung Pao Chicken is in the high-heat stir-frying technique that ensures the ingredients are cooked quickly while retaining their texture and flavor.',
+    1,  
+    JSON_ARRAY(
+        '500g boneless chicken breast, cut into bite-sized pieces',
+        '1/2 cup peanuts, roasted',
+        '8-10 dried red chilies',
+        '1 red bell pepper, diced',
+        '1 green bell pepper, diced',
+        '4 scallions, chopped',
+        '2 tbsp soy sauce',
+        '1 tbsp Shaoxing wine',
+        '1 tbsp cornstarch',
+        '2 tbsp oil',
+        '1 tbsp Sichuan peppercorns',
+        '2 tbsp vinegar',
+        '2 tbsp sugar',
+        '2 tbsp water'
+    ),
+    3,
+    30,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Marinate the Chicken',
+            'description', 'In a bowl, combine the chicken pieces with soy sauce, Shaoxing wine, and cornstarch. Mix well to coat the chicken evenly. Let it marinate for 15-20 minutes.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Prepare the Sauce',
+            'description', 'In a small bowl, mix together soy sauce, vinegar, sugar, and water. Set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Stir-Fry the Chicken',
+            'description', 'Heat oil in a large wok or skillet over high heat. Add the marinated chicken and stir-fry until it is cooked through and slightly browned. Remove the chicken from the wok and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Stir-Fry the Vegetables',
+            'description', 'In the same wok, add more oil if needed. Add the dried red chilies and Sichuan peppercorns. Stir-fry for a few seconds until they release their aroma. Add the bell peppers and scallions, and stir-fry for 2-3 minutes until they are slightly tender.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            '
+
+title', 'Combine Everything',
+            'description', 'Return the chicken to the wok. Pour the sauce over the chicken and vegetables. Add the roasted peanuts. Stir-fry everything together for 1-2 minutes until the sauce has thickened and evenly coats the chicken and vegetables.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Serve Kung Pao Chicken hot with steamed rice. Enjoy the bold and spicy flavors of this classic dish.'
+        )
+    )
+),
+
+-- Sweet and Sour Pork
+(
+    'Sweet and Sour Pork', 
+    2,
+    'Sweet and Sour Pork is a beloved Chinese dish that is known for its vibrant flavors and striking balance between sweetness and tanginess. This dish features bite-sized pieces of pork, which are first marinated and then coated in a light batter before being deep-fried to a crispy perfection. The crispy pork pieces are then stir-fried with a colorful array of vegetables such as bell peppers, onions, and pineapples. The signature sweet and sour sauce, made from a combination of vinegar, ketchup, soy sauce, and sugar, is poured over the pork and vegetables, creating a glossy and flavorful coating. The result is a delightful medley of textures and flavors, where the crunchy pork and fresh vegetables are perfectly complemented by the tangy and sweet sauce. Sweet and Sour Pork is a crowd-pleaser that is often served as part of a larger Chinese meal, accompanied by steamed rice. The key to this dish is achieving the perfect balance of flavors and the crispiness of the pork, making it a delicious and satisfying dish that is loved by many.',
+    1,  
+    JSON_ARRAY(
+        '500g pork shoulder, cut into bite-sized pieces',
+        '1 red bell pepper, diced',
+        '1 green bell pepper, diced',
+        '1 onion, cut into chunks',
+        '1 cup pineapple chunks',
+        '2 tbsp soy sauce',
+        '1 tbsp Shaoxing wine',
+        '1 tbsp cornstarch',
+        '2 tbsp flour',
+        '1 egg, beaten',
+        'Oil for deep frying',
+        '1/4 cup vinegar',
+        '1/4 cup ketchup',
+        '1/4 cup sugar',
+        '2 tbsp soy sauce',
+        '1/4 cup water'
+    ),
+    3,
+    45,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Marinate the Pork',
+            'description', 'In a bowl, combine the pork pieces with soy sauce, Shaoxing wine, and cornstarch. Mix well and let it marinate for 15-20 minutes.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Prepare the Batter',
+            'description', 'In another bowl, mix together the flour and beaten egg. Dip the marinated pork pieces into the batter, ensuring they are evenly coated.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Deep Fry the Pork',
+            'description', 'Heat oil in a deep-fryer or large saucepan to 180°C (350°F). Fry the battered pork pieces in batches until they are golden brown and crispy. Remove and drain on paper towels.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Make the Sauce',
+            'description', 'In a small bowl, mix together vinegar, ketchup, sugar, soy sauce, and water. Set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Stir-Fry the Vegetables',
+            'description', 'In a large wok or skillet, heat a little oil over medium-high heat. Add the bell peppers, onion, and pineapple chunks. Stir-fry for 2-3 minutes until they are tender-crisp.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Combine Everything',
+            'description', 'Add the fried pork pieces to the wok with the vegetables. Pour the sweet and sour sauce over the pork and vegetables. Stir-fry everything together for 1-2 minutes until the sauce thickens and coats everything evenly.'
+        ),
+        JSON_OBJECT(
+            'step', 7,
+            'title', 'Serve',
+            'description', 'Serve Sweet and Sour Pork hot with steamed rice. Enjoy the harmonious blend of sweet and tangy flavors.'
+        )
+    )
+),
+
+-- Mapo Tofu
+(
+    'Mapo Tofu', 
+    2,
+    'Mapo Tofu is a famous Sichuan dish known for its bold, spicy flavors and numbing sensation. This dish features soft tofu cubes cooked in a rich and spicy sauce made with ground pork, fermented black beans, and a generous amount of Sichuan peppercorns. The tofu absorbs the spicy, savory flavors of the sauce, creating a delicious contrast between the silky texture of the tofu and the hearty meat sauce. The dish is typically garnished with green onions and served hot with steamed rice. Mapo Tofu is beloved for its complex flavors and its ability to showcase the unique characteristics of Sichuan cuisine. The key to making authentic Mapo Tofu is using high-quality Sichuan peppercorns and balancing the heat with the savory umami flavors of the fermented beans and ground pork. This dish is a true representation of Sichuan cooking and is sure to satisfy those who enjoy spicy and flavorful meals.',
+    2,  
+    JSON_ARRAY(
+        '400g soft tofu, cut into cubes',
+        '200g ground pork',
+        '2 tbsp fermented black beans, rinsed and mashed',
+        '1 tbsp Sichuan peppercorns',
+        '3 tbsp doubanjiang (spicy bean paste)',
+        '2 cloves garlic, minced',
+        '1 tbsp ginger, minced',
+        '2 scallions, chopped',
+        '1 cup chicken broth',
+        '2 tbsp soy sauce',
+        '1 tbsp cornstarch mixed with 2 tbsp water',
+        '2 tbsp oil',
+        'Salt to taste'
+    ),
+    3,
+    30,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Ingredients',
+            'description', 'Cut the tofu into cubes and set aside. Rinse and mash the fermented black beans. Chop the garlic, ginger, and scallions. Mix the cornstarch with water to make a slurry.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Cook the Pork',
+            'description', 'Heat oil in a large wok or skillet over medium heat. Add the ground pork and cook until it is browned and cooked through. Remove the pork from the wok and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Make the Sauce',
+            'description', 'In the same wok, add a little more oil if needed. Add the minced garlic, ginger, and Sichuan peppercorns. Stir-fry for a few seconds until fragrant. Add the doubanjiang and fermented black beans, and cook for another 1-2 minutes.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Simmer the Tofu',
+            'description', 'Add the chicken broth and soy sauce to the wok. Bring to a boil, then add the tofu cubes. Gently simmer for 5-7 minutes, allowing the tofu to absorb the flavors of the sauce.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Thicken the Sauce',
+            'description', 'Add the cooked ground pork back to the wok. Pour in the cornstarch slurry and stir gently until the sauce thickens. Adjust the seasoning with salt if needed.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Garnish Mapo Tofu with chopped scallions and serve hot with steamed rice. Enjoy the bold and spicy flavors of this classic Sichuan dish.'
+        )
+    )
+),
+
+-- Peking Duck
+(
+    'Peking Duck', 
+    2,
+    'Peking Duck is a famous Chinese dish known for its crispy skin and tender meat. The preparation of this dish is an art form that involves several steps to achieve the perfect texture and flavor. The duck is first marinated with a mixture of spices and then air-dried to allow the skin to become crispy when roasted. It is then roasted until the skin is golden brown and crispy. The duck is traditionally served with thin pancakes, hoisin sauce, and sliced scallions. The meat is carved at the table, and diners wrap the crispy skin and tender meat in the pancakes, along with the sauce and scallions, creating a delicious combination of flavors and textures. Peking Duck is a dish that is often reserved for special occasions and is a true delicacy in Chinese cuisine. The key to a perfect Peking Duck lies in the meticulous preparation and roasting process, which ensures that the skin is crispy and the meat is succulent and flavorful.',
+    1,  
+    JSON_ARRAY(
+        '1 whole duck',
+        '2 tbsp soy sauce',
+        '1 tbsp Shaoxing wine',
+        '1 tbsp honey',
+        '1 tbsp five-spice powder',
+        '2 tbsp hoisin sauce',
+        '1 cucumber, julienned',
+        '4 scallions, julienned',
+        'Thin pancakes (store-bought or homemade)',
+        'Salt to taste'
+    ),
+    4,
+    180,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Duck',
+            'description', 'Rinse the duck thoroughly and pat dry. Mix soy sauce, Shaoxing wine, honey, and five-spice powder in a bowl. Rub the mixture all over the duck, including the
+
+ cavity. Let it marinate in the refrigerator for at least 4 hours or overnight.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Dry the Duck',
+            'description', 'Hang the duck in a cool, well-ventilated place to dry for several hours. This step helps to achieve the crispy skin when roasting.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Roast the Duck',
+            'description', 'Preheat the oven to 220°C (425°F). Place the duck on a roasting rack in a roasting pan. Roast for about 1 hour, basting occasionally with the drippings, until the skin is golden brown and crispy. Reduce the oven temperature to 180°C (350°F) and continue roasting for another 30-45 minutes until the duck is cooked through.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Prepare the Pancakes and Garnishes',
+            'description', 'While the duck is roasting, prepare the thin pancakes according to package instructions or make them from scratch. Julienne the cucumber and scallions and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Carve the Duck',
+            'description', 'Once the duck is done, let it rest for a few minutes before carving. Use a sharp knife to carefully carve the crispy skin and meat into thin slices.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Serve the Peking Duck slices with thin pancakes, hoisin sauce, cucumber, and scallions. To eat, spread some hoisin sauce on a pancake, add a few slices of duck, cucumber, and scallions, and roll up the pancake. Enjoy this classic Chinese delicacy.'
+        )
+    )
+),
+
+-- Dumplings (Jiaozi)
+(
+    'Dumplings (Jiaozi)', 
+    2,
+    'Dumplings, or Jiaozi, are a beloved Chinese dish that can be enjoyed as a snack, appetizer, or main course. These dumplings are made with a thin dough wrapper filled with a savory mixture of ground meat (usually pork, chicken, or beef) and vegetables such as cabbage, scallions, and ginger. The filling is seasoned with soy sauce, sesame oil, and other spices to create a delicious and aromatic taste. Dumplings can be prepared in various ways, including boiling, steaming, or pan-frying, each method offering a unique texture and flavor. Boiled dumplings are soft and tender, steamed dumplings are delicate and light, while pan-fried dumplings have a crispy bottom and a juicy filling. Dumplings are often served with a dipping sauce made from soy sauce, vinegar, and chili oil. Making dumplings is a fun and interactive process that can be enjoyed with family and friends. The key to perfect dumplings lies in the quality of the dough and the balance of flavors in the filling.',
+    1,  
+    JSON_ARRAY(
+        '300g ground pork',
+        '1 cup cabbage, finely chopped',
+        '2 scallions, finely chopped',
+        '1 tbsp ginger, minced',
+        '2 cloves garlic, minced',
+        '2 tbsp soy sauce',
+        '1 tbsp sesame oil',
+        '1 tsp salt',
+        '1 tsp white pepper',
+        'Dumpling wrappers (store-bought or homemade)',
+        'Water for sealing',
+        'Oil for frying (optional)',
+        'Dipping sauce (soy sauce, vinegar, chili oil)'
+    ),
+    3,
+    60,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Filling',
+            'description', 'In a large bowl, combine ground pork, chopped cabbage, scallions, ginger, and garlic. Add soy sauce, sesame oil, salt, and white pepper. Mix well until all ingredients are evenly combined.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Fill the Dumplings',
+            'description', 'Place a small spoonful of filling in the center of a dumpling wrapper. Moisten the edges with water, fold the wrapper in half, and press to seal. You can pleat the edges for a traditional look.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Cook the Dumplings',
+            'description', 'To boil, bring a large pot of water to a boil. Add the dumplings and cook until they float to the surface and are fully cooked, about 5-7 minutes. To steam, place the dumplings in a steamer basket and steam for 10-12 minutes. To pan-fry, heat oil in a non-stick pan, add the dumplings, and cook until the bottoms are golden brown. Add water to the pan, cover, and steam until the water evaporates and the dumplings are cooked through.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Serve',
+            'description', 'Serve the dumplings hot with a dipping sauce made from soy sauce, vinegar, and chili oil. Enjoy these delicious and versatile dumplings with family and friends.'
+        )
+    )
+),
+
+-- Spaghetti Carbonara
+(
+    'Spaghetti Carbonara', 
+    3,
+    'Spaghetti Carbonara is a classic Italian pasta dish that is known for its creamy texture and rich flavor. This dish is made with spaghetti, eggs, Parmesan cheese, pancetta, and black pepper. The key to a perfect Carbonara is the creamy sauce, which is made by combining beaten eggs and grated cheese, and then tossing it with hot pasta to create a smooth and velvety consistency. The pancetta is cooked until crispy and adds a savory, salty flavor to the dish. The black pepper adds a subtle heat and enhances the overall flavor. Spaghetti Carbonara is a simple yet indulgent dish that can be made in just a few minutes, making it perfect for a quick weeknight dinner or a special occasion. The key to achieving the perfect texture is to work quickly and combine the ingredients while they are still hot, ensuring that the eggs cook just enough to create a creamy sauce without scrambling.',
+    1,  
+    JSON_ARRAY(
+        '400g spaghetti',
+        '150g pancetta, diced',
+        '2 large eggs',
+        '1 cup grated Parmesan cheese',
+        '2 cloves garlic, minced',
+        '1 tbsp olive oil',
+        'Salt to taste',
+        'Freshly ground black pepper'
+    ),
+    2,
+    20,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Cook the Spaghetti',
+            'description', 'Bring a large pot of salted water to a boil. Add the spaghetti and cook according to the package instructions until al dente. Reserve 1 cup of pasta water, then drain the pasta.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Cook the Pancetta',
+            'description', 'In a large skillet, heat olive oil over medium heat. Add the diced pancetta and cook until it is crispy and golden brown. Add minced garlic and cook for another 1-2 minutes until fragrant. Remove from heat.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Prepare the Sauce',
+            'description', 'In a bowl, whisk together the eggs and grated Parmesan cheese until well combined. Season with a generous amount of freshly ground black pepper.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Combine Pasta and Sauce',
+            'description', 'Return the skillet with pancetta to low heat. Add the drained spaghetti and toss to combine. Remove from heat and quickly add the egg and cheese mixture, tossing continuously to coat the pasta. Add reserved pasta water as needed to achieve a creamy consistency.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Serve',
+            'description', 'Serve the Spaghetti Carbonara immediately, garnished with additional grated Parmesan cheese and freshly ground black pepper. Enjoy this rich and creamy Italian classic.'
+        )
+    )
+),
+
+-- Margherita Pizza
+(
+    'Margherita Pizza', 
+    3,
+    'Margherita Pizza is a classic Italian pizza known for its simplicity and fresh flavors. This pizza is made with a thin and crispy crust, topped with tomato sauce, fresh mozzarella cheese, and basil leaves. The key to a perfect Margherita Pizza lies in the quality of the ingredients and the balance of flavors. The tomato sauce is made from ripe tomatoes, seasoned with a touch of salt and olive oil. The fresh mozzarella cheese melts beautifully, creating a creamy and gooey texture. The basil leaves add a burst of freshness and aroma, complementing the rich flavors of the tomato and cheese. Margherita Pizza is a true representation of Italian cuisine, highlighting the use of fresh and high-quality ingredients. It is a simple yet delicious dish that can be enjoyed as a main course or as a part of a larger meal. The pizza is traditionally baked in a wood-fired oven, but it can also be made in a regular oven, resulting in a crispy and flavorful pizza that is loved by many.',
+    2,  
+    JSON_ARRAY(
+        '1 pizza dough (store-bought or homemade)',
+        '1 cup tomato sauce',
+        '200g fresh mozzarella cheese, sliced',
+        'Fresh basil leaves',
+        '2 tbsp olive oil',
+        'Salt to taste'
+    ),
+    2,
+    30,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Dough',
+            'description', 'Preheat your oven to the highest temperature (usually around 250°C or 475°F). If using a
+
+ pizza stone, place it in the oven to preheat. Roll out the pizza dough on a lightly floured surface to your desired thickness.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Assemble the Pizza',
+            'description', 'Spread a thin layer of tomato sauce over the rolled-out dough, leaving a small border around the edges. Arrange the sliced mozzarella cheese evenly over the sauce. Drizzle with olive oil and season with a pinch of salt.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Bake the Pizza',
+            'description', 'Transfer the pizza to the preheated oven (or onto the pizza stone). Bake for 10-12 minutes, or until the crust is golden brown and the cheese is melted and bubbly.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Add Fresh Basil',
+            'description', 'Once the pizza is done baking, remove it from the oven and immediately scatter fresh basil leaves over the top. The heat from the pizza will slightly wilt the basil, releasing its aroma.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Serve',
+            'description', 'Slice the Margherita Pizza and serve hot. Enjoy the simple yet delicious flavors of this classic Italian pizza.'
+        )
+    )
+),
+
+-- Lasagna
+(
+    'Lasagna', 
+    3,
+    'Lasagna is a classic Italian dish known for its layers of pasta, rich meat sauce, creamy béchamel, and melted cheese. This hearty and comforting dish is perfect for family dinners and special occasions. The meat sauce is made with ground beef, tomatoes, onions, garlic, and a blend of Italian herbs, simmered to develop deep flavors. The béchamel sauce, made with butter, flour, and milk, adds a creamy and smooth texture to the dish. The lasagna noodles are layered with the meat sauce, béchamel, and a generous amount of mozzarella and Parmesan cheese. Baked until bubbly and golden, Lasagna is a satisfying and delicious meal that is loved by many. The key to a perfect lasagna lies in the quality of the ingredients and the balance of flavors in each layer. This dish can be prepared in advance and baked just before serving, making it a convenient and impressive option for entertaining guests.',
+    1,  
+    JSON_ARRAY(
+        '12 lasagna noodles',
+        '500g ground beef',
+        '1 onion, finely chopped',
+        '2 cloves garlic, minced',
+        '800g canned tomatoes',
+        '2 tbsp tomato paste',
+        '1 tsp dried oregano',
+        '1 tsp dried basil',
+        'Salt and pepper to taste',
+        '3 cups béchamel sauce',
+        '2 cups shredded mozzarella cheese',
+        '1 cup grated Parmesan cheese',
+        '2 tbsp olive oil'
+    ),
+    4,
+    90,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Meat Sauce',
+            'description', 'In a large skillet, heat olive oil over medium heat. Add the chopped onion and minced garlic, and sauté until they are soft and fragrant. Add the ground beef and cook until browned. Stir in the canned tomatoes, tomato paste, dried oregano, dried basil, salt, and pepper. Simmer the sauce for 30 minutes to allow the flavors to develop.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Prepare the Béchamel Sauce',
+            'description', 'In a separate saucepan, melt butter over medium heat. Stir in flour and cook for 1-2 minutes. Gradually whisk in milk and cook until the sauce thickens. Season with salt and nutmeg. Remove from heat and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Cook the Lasagna Noodles',
+            'description', 'Bring a large pot of salted water to a boil. Add the lasagna noodles and cook according to package instructions until al dente. Drain and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Assemble the Lasagna',
+            'description', 'Preheat your oven to 180°C (350°F). Spread a thin layer of meat sauce on the bottom of a baking dish. Arrange a layer of lasagna noodles on top. Spread a layer of béchamel sauce over the noodles, followed by a layer of meat sauce. Sprinkle with mozzarella and Parmesan cheese. Repeat the layers, finishing with a layer of béchamel sauce and a generous amount of cheese on top.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Bake the Lasagna',
+            'description', 'Cover the baking dish with aluminum foil and bake for 30 minutes. Remove the foil and bake for an additional 15-20 minutes, or until the cheese is golden and bubbly.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Let the lasagna rest for 10 minutes before slicing. Serve hot and enjoy the layers of deliciousness in this classic Italian dish.'
+        )
+    )
+),
+
+-- Risotto
+(
+    'Risotto', 
+    3,
+    'Risotto is a classic Italian dish known for its creamy texture and rich flavors. This dish is made with Arborio rice, which is cooked slowly in broth until it reaches a creamy consistency. The rice is first toasted in butter or oil, then cooked with onions and garlic, and gradually infused with warm broth, stirring continuously to release the starch and create a velvety texture. Risotto can be flavored with a variety of ingredients, including mushrooms, seafood, or vegetables, making it a versatile and delicious dish. The addition of Parmesan cheese and a touch of cream at the end adds richness and depth of flavor. Risotto is often served as a main course or as a side dish, and it is a perfect example of Italian comfort food. The key to a perfect risotto lies in the constant stirring and gradual addition of broth, ensuring that the rice is cooked evenly and achieves the desired creamy texture.',
+    2,  
+    JSON_ARRAY(
+        '1 1/2 cups Arborio rice',
+        '1 onion, finely chopped',
+        '2 cloves garlic, minced',
+        '4 cups chicken or vegetable broth, warmed',
+        '1/2 cup dry white wine',
+        '1 cup mushrooms, sliced (optional)',
+        '1/2 cup grated Parmesan cheese',
+        '2 tbsp butter',
+        '2 tbsp olive oil',
+        'Salt and pepper to taste',
+        'Fresh parsley, chopped (for garnish)'
+    ),
+    3,
+    40,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Ingredients',
+            'description', 'Warm the chicken or vegetable broth in a saucepan and keep it on low heat. Chop the onion and garlic, and slice the mushrooms if using.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Toast the Rice',
+            'description', 'In a large skillet, heat olive oil and butter over medium heat. Add the chopped onion and garlic, and sauté until they are soft and fragrant. Add the Arborio rice and toast it for 2-3 minutes, stirring constantly, until the edges of the rice are translucent.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Add Wine and Broth',
+            'description', 'Pour in the white wine and stir until it is mostly absorbed by the rice. Begin adding the warm broth, one ladleful at a time, stirring constantly and allowing each addition to be absorbed before adding the next. Continue this process until the rice is creamy and tender, but still al dente.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Add Mushrooms (Optional)',
+            'description', 'If using mushrooms, add them to the skillet midway through the broth addition process, allowing them to cook and infuse their flavor into the risotto.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Finish with Cheese and Butter',
+            'description', 'Once the rice is cooked to your desired consistency, remove the skillet from heat. Stir in the grated Parmesan cheese and an additional tablespoon of butter. Season with salt and pepper to taste.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Garnish the risotto with freshly chopped parsley and serve hot. Enjoy the creamy and comforting flavors of this classic Italian dish.'
+        )
+    )
+),
+
+-- Tiramisu
+(
+    'Tiramisu', 
+    3,
+    'Tiramisu is a classic Italian dessert known for its layers of coffee-soaked ladyfingers and rich mascarpone cream. This no-bake dessert is both elegant and indulgent, making it a perfect end to any meal. The ladyfingers are dipped in strong espresso and layered with a creamy mixture of mascarpone cheese, eggs, and sugar. A touch of liqueur, such as Marsala or coffee liqueur, is often added to enhance the flavor. Each layer is sprinkled with cocoa powder, adding a slight bitterness that balances the sweetness of the cream. The dessert is chilled in the refrigerator for several hours or overnight, allowing the flavors to meld together and the texture to become wonderfully creamy. Tiramisu is typically served in individual portions or sliced from a larger dish, and it is often garnished with additional cocoa powder or chocolate shavings. The key to a perfect Tiramisu lies in the quality of the ingredients and the careful layering process, resulting in a dessert that is both sophisticated and delicious.',
+    2,  
+    JSON_ARRAY
+
+(
+        '24 ladyfingers',
+        '2 cups strong brewed coffee, cooled',
+        '1/2 cup Marsala wine or coffee liqueur (optional)',
+        '4 large eggs, separated',
+        '1 cup sugar',
+        '500g mascarpone cheese',
+        '1 cup heavy cream',
+        'Unsweetened cocoa powder (for dusting)',
+        'Chocolate shavings (optional, for garnish)'
+    ),
+    2,
+    240,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Coffee Mixture',
+            'description', 'Brew strong coffee and allow it to cool. Mix the cooled coffee with Marsala wine or coffee liqueur, if using. Set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Whip the Egg Yolks and Sugar',
+            'description', 'In a large bowl, beat the egg yolks and sugar together until the mixture is pale and creamy. Add the mascarpone cheese and beat until smooth and well combined.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Whip the Egg Whites and Cream',
+            'description', 'In separate bowls, beat the egg whites until stiff peaks form, and whip the heavy cream until it holds soft peaks. Gently fold the whipped egg whites and whipped cream into the mascarpone mixture until well combined and smooth.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Assemble the Tiramisu',
+            'description', 'Quickly dip each ladyfinger into the coffee mixture and arrange them in a single layer in a rectangular dish. Spread half of the mascarpone mixture over the ladyfingers. Repeat with another layer of dipped ladyfingers and the remaining mascarpone mixture.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Chill and Serve',
+            'description', 'Cover the dish with plastic wrap and refrigerate for at least 4 hours, preferably overnight. Before serving, dust the top with unsweetened cocoa powder and garnish with chocolate shavings if desired. Slice into portions and enjoy this creamy and indulgent Italian dessert.'
+        )
+    )
+),
+
+-- Coq au Vin
+(
+    'Coq au Vin', 
+    4,
+    'Coq au Vin is a classic French dish that features chicken braised in red wine with mushrooms, onions, and bacon. This hearty and flavorful dish is perfect for special occasions and cozy dinners. The chicken is first marinated in red wine with garlic, thyme, and bay leaves, allowing it to absorb the rich flavors. It is then seared and slow-cooked in the wine marinade along with mushrooms, pearl onions, and crispy bacon, creating a deeply savory and aromatic sauce. The long, slow cooking process ensures that the chicken is tender and the flavors are fully developed. Coq au Vin is traditionally served with crusty bread or creamy mashed potatoes, which help to soak up the delicious sauce. The key to a perfect Coq au Vin lies in the quality of the wine and the patience to let the dish cook slowly, allowing the flavors to meld together. This dish is a true representation of French cuisine, showcasing the art of slow-cooked, flavorful meals.',
+    1,  
+    JSON_ARRAY(
+        '1 whole chicken, cut into pieces',
+        '1 bottle red wine',
+        '100g bacon, diced',
+        '200g mushrooms, sliced',
+        '12 pearl onions, peeled',
+        '4 cloves garlic, minced',
+        '2 tbsp tomato paste',
+        '2 cups chicken broth',
+        '2 tbsp flour',
+        '2 tbsp butter',
+        '2 tbsp olive oil',
+        '2 bay leaves',
+        '4 sprigs thyme',
+        'Salt and pepper to taste',
+        'Fresh parsley, chopped (for garnish)'
+    ),
+    4,
+    180,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Marinate the Chicken',
+            'description', 'In a large bowl, combine the chicken pieces with red wine, minced garlic, bay leaves, and thyme. Cover and refrigerate for at least 4 hours or overnight to marinate.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Prepare the Ingredients',
+            'description', 'Remove the chicken from the marinade and pat dry. Strain the marinade and set aside. In a large Dutch oven or heavy-bottomed pot, cook the diced bacon over medium heat until crispy. Remove the bacon and set aside, leaving the fat in the pot.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Brown the Chicken',
+            'description', 'In the same pot, add olive oil and butter. Brown the chicken pieces on all sides until golden brown. Remove the chicken and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Cook the Vegetables',
+            'description', 'Add the pearl onions and mushrooms to the pot and cook until they are golden brown. Stir in the tomato paste and flour, cooking for another 2 minutes.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Braise the Chicken',
+            'description', 'Return the chicken and bacon to the pot. Pour in the reserved marinade and chicken broth. Bring to a boil, then reduce the heat to low and simmer for 1.5 to 2 hours, or until the chicken is tender and the sauce has thickened.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Remove the bay leaves and thyme sprigs. Garnish with freshly chopped parsley and serve Coq au Vin hot with crusty bread or creamy mashed potatoes. Enjoy the rich and savory flavors of this classic French dish.'
+        )
+    )
+),
+
+-- Ratatouille
+(
+    'Ratatouille', 
+    4,
+    'Ratatouille is a classic French vegetable stew that showcases the flavors of summer vegetables. This dish is made with a colorful array of vegetables, including eggplant, zucchini, bell peppers, tomatoes, and onions, all simmered together in a rich tomato sauce. The vegetables are sliced thinly and layered in a baking dish, then drizzled with olive oil and seasoned with herbs like thyme and basil. The dish is baked until the vegetables are tender and infused with the flavors of the sauce. Ratatouille is a versatile dish that can be served as a main course, side dish, or even as a topping for crusty bread. It is a healthy and flavorful option that celebrates the bounty of summer produce. The key to a perfect Ratatouille lies in the quality and freshness of the vegetables, as well as the slow cooking process that allows the flavors to meld together beautifully. This dish is a true representation of Provençal cuisine and is loved for its simplicity and deliciousness.',
+    2,  
+    JSON_ARRAY(
+        '1 eggplant, thinly sliced',
+        '2 zucchinis, thinly sliced',
+        '1 red bell pepper, thinly sliced',
+        '1 yellow bell pepper, thinly sliced',
+        '4 tomatoes, thinly sliced',
+        '1 onion, finely chopped',
+        '4 cloves garlic, minced',
+        '2 cups tomato sauce',
+        '1/4 cup olive oil',
+        '1 tsp dried thyme',
+        '1 tsp dried basil',
+        'Salt and pepper to taste',
+        'Fresh basil leaves (for garnish)'
+    ),
+    3,
+    90,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Sauce',
+            'description', 'Preheat your oven to 180°C (350°F). In a large skillet, heat olive oil over medium heat. Add the chopped onion and minced garlic, and sauté until they are soft and fragrant. Stir in the tomato sauce, dried thyme, dried basil, salt, and pepper. Simmer for 10 minutes, then spread the sauce in the bottom of a baking dish.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Layer the Vegetables',
+            'description', 'Arrange the sliced eggplant, zucchini, bell peppers, and tomatoes in a circular pattern over the tomato sauce, overlapping the slices slightly. Drizzle with olive oil and season with salt and pepper.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Bake the Ratatouille',
+            'description', 'Cover the baking dish with parchment paper or foil and bake for 40 minutes. Remove the cover and bake for an additional 20 minutes, or until the vegetables are tender and slightly browned.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Serve',
+            'description', 'Garnish the Ratatouille with fresh basil leaves and serve hot. Enjoy this healthy and flavorful vegetable stew as a main course or side dish.'
+        )
+    )
+),
+
+-- Boeuf Bourguignon
+(
+    'Boeuf Bourguignon', 
+    4,
+    'Boeuf Bourguignon is a classic French stew made with beef braised in red wine, along with mushrooms, onions, and bacon. This rich and hearty dish is a perfect example of French comfort food and is often served with potatoes or crusty bread. The beef is first seared to develop a deep flavor, then slow-cooked with red wine, beef broth, and aromatic herbs until it is tender and succulent. The addition of mushrooms and pearl onions adds depth and complexity to the dish, while the bacon provides a smoky, savory note. Boeuf Bourguignon is a dish that benefits from slow cooking, allowing the flavors to meld together beautifully. The key to a perfect
+
+ Boeuf Bourguignon lies in the quality of the beef and wine, as well as the patience to let the dish cook slowly. This stew is a true representation of French cuisine, showcasing the art of braising and the use of simple, high-quality ingredients to create a delicious and satisfying meal.',
+    1,  
+    JSON_ARRAY(
+        '1 kg beef chuck, cut into large cubes',
+        '1 bottle red wine',
+        '200g bacon, diced',
+        '200g mushrooms, sliced',
+        '12 pearl onions, peeled',
+        '4 cloves garlic, minced',
+        '2 cups beef broth',
+        '2 tbsp tomato paste',
+        '2 tbsp flour',
+        '2 tbsp butter',
+        '2 tbsp olive oil',
+        '2 bay leaves',
+        '4 sprigs thyme',
+        'Salt and pepper to taste',
+        'Fresh parsley, chopped (for garnish)'
+    ),
+    4,
+    180,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Marinate the Beef',
+            'description', 'In a large bowl, combine the beef cubes with red wine, minced garlic, bay leaves, and thyme. Cover and refrigerate for at least 4 hours or overnight to marinate.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Prepare the Ingredients',
+            'description', 'Remove the beef from the marinade and pat dry. Strain the marinade and set aside. In a large Dutch oven or heavy-bottomed pot, cook the diced bacon over medium heat until crispy. Remove the bacon and set aside, leaving the fat in the pot.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Brown the Beef',
+            'description', 'In the same pot, add olive oil and butter. Brown the beef cubes on all sides until golden brown. Remove the beef and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Cook the Vegetables',
+            'description', 'Add the pearl onions and mushrooms to the pot and cook until they are golden brown. Stir in the tomato paste and flour, cooking for another 2 minutes.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Braise the Beef',
+            'description', 'Return the beef and bacon to the pot. Pour in the reserved marinade and beef broth. Bring to a boil, then reduce the heat to low and simmer for 2 to 3 hours, or until the beef is tender and the sauce has thickened.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Remove the bay leaves and thyme sprigs. Garnish with freshly chopped parsley and serve Boeuf Bourguignon hot with potatoes or crusty bread. Enjoy the rich and savory flavors of this classic French stew.'
+        )
+    )
+),
+
+-- Quiche Lorraine
+(
+    'Quiche Lorraine', 
+    4,
+    'Quiche Lorraine is a classic French tart that is known for its rich, savory filling and flaky crust. This dish is made with a buttery pastry crust filled with a mixture of eggs, cream, bacon, and cheese. The combination of crispy bacon, creamy custard, and melted cheese creates a deliciously satisfying tart that can be enjoyed for breakfast, brunch, or lunch. The crust is pre-baked to ensure it stays crisp, and the filling is baked until it is set and golden brown. Quiche Lorraine is a versatile dish that can be served warm or at room temperature, making it perfect for entertaining or as a make-ahead meal. The key to a perfect Quiche Lorraine lies in the quality of the ingredients and the balance of flavors in the filling. This dish is a true representation of French cuisine, showcasing the use of simple, high-quality ingredients to create a delicious and elegant meal.',
+    1,  
+    JSON_ARRAY(
+        '1 pie crust (store-bought or homemade)',
+        '6 slices bacon, diced',
+        '1 cup grated Gruyère cheese',
+        '4 large eggs',
+        '1 1/2 cups heavy cream',
+        '1/4 tsp nutmeg',
+        'Salt and pepper to taste'
+    ),
+    2,
+    60,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Crust',
+            'description', 'Preheat your oven to 180°C (350°F). Roll out the pie crust and fit it into a tart pan. Prick the bottom with a fork and bake for 10 minutes. Remove from the oven and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Cook the Bacon',
+            'description', 'In a skillet, cook the diced bacon over medium heat until it is crispy. Remove from the skillet and drain on paper towels.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Prepare the Filling',
+            'description', 'In a bowl, whisk together the eggs, heavy cream, nutmeg, salt, and pepper. Stir in the grated Gruyère cheese and the cooked bacon.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Assemble the Quiche',
+            'description', 'Pour the filling into the pre-baked crust. Spread it out evenly and smooth the top.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Bake the Quiche',
+            'description', 'Bake the quiche in the preheated oven for 30-35 minutes, or until the filling is set and the top is golden brown. Remove from the oven and let it cool slightly before slicing.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Serve Quiche Lorraine warm or at room temperature. Enjoy this rich and savory tart as a delightful meal or snack.'
+        )
+    )
+),
+
+-- Creme Brulee
+(
+    'Creme Brulee', 
+    4,
+    'Creme Brulee is a classic French dessert known for its creamy custard base and crisp caramelized sugar topping. This elegant dessert is made with simple ingredients, including cream, egg yolks, sugar, and vanilla, but the result is a rich and luxurious treat. The custard is baked gently in a water bath to achieve a smooth and silky texture, then chilled until set. Just before serving, a layer of sugar is sprinkled on top and caramelized with a torch or under a broiler, creating a thin, crisp shell that contrasts beautifully with the creamy custard underneath. The key to a perfect Creme Brulee lies in the careful baking of the custard and the precise caramelization of the sugar topping. This dessert is often served in individual ramekins and is a perfect ending to a special meal, offering a delightful combination of textures and flavors.',
+    2,  
+    JSON_ARRAY(
+        '2 cups heavy cream',
+        '5 large egg yolks',
+        '1/2 cup granulated sugar (divided)',
+        '1 tsp vanilla extract',
+        'Extra sugar for caramelizing'
+    ),
+    2,
+    60,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Custard',
+            'description', 'Preheat your oven to 150°C (300°F). In a saucepan, heat the heavy cream until it is hot but not boiling. In a bowl, whisk together the egg yolks, 1/4 cup of sugar, and vanilla extract until pale and creamy. Slowly pour the hot cream into the egg mixture, whisking constantly to combine.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Bake the Custard',
+            'description', 'Pour the custard mixture into individual ramekins. Place the ramekins in a baking dish and fill the dish with hot water until it reaches halfway up the sides of the ramekins. Bake for 30-35 minutes, or until the custard is set but still slightly jiggly in the center. Remove the ramekins from the water bath and let them cool to room temperature, then refrigerate for at least 2 hours or until thoroughly chilled.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Caramelize the Sugar',
+            'description', 'Before serving, sprinkle a thin, even layer of sugar over the top of each custard. Use a kitchen torch to caramelize the sugar until it is golden brown and crisp. Alternatively, you can place the ramekins under a broiler to caramelize the sugar, watching closely to prevent burning.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Serve',
+            'description', 'Let the caramelized sugar harden for a few minutes before serving. Enjoy the Creme Brulee with its contrasting textures of creamy custard and crisp caramelized sugar.'
+        )
+    )
+),
+
+-- Borscht
+(
+    'Borscht', 
+    5,
+    'Borscht is a traditional Eastern European soup that is known for its vibrant red color and rich, hearty flavor. This soup is made with beets, which give it its distinctive color, as well as a variety of other vegetables such as cabbage, carrots, potatoes, and onions. Borscht can be made with or without meat, and it is often flavored with garlic, dill, and a touch of vinegar to balance the sweetness of the beets. The soup is typically served hot, with a dollop of sour cream and a sprinkle of fresh dill on top. Borscht is a comforting and nutritious dish that is enjoyed in many Eastern European countries, including Russia, Ukraine, and Poland. The
+
+ key to a perfect Borscht lies in the slow cooking process, which allows the flavors to meld together and the beets to fully cook, resulting in a rich and flavorful soup. This dish is often made in large batches and can be enjoyed over several days, as the flavors continue to develop and improve.',
+    2,  
+    JSON_ARRAY(
+        '4 medium beets, peeled and grated',
+        '2 carrots, peeled and grated',
+        '1 onion, finely chopped',
+        '2 cloves garlic, minced',
+        '4 cups beef or vegetable broth',
+        '2 cups shredded cabbage',
+        '2 potatoes, peeled and diced',
+        '1 tbsp tomato paste',
+        '1 tbsp vinegar',
+        'Salt and pepper to taste',
+        'Fresh dill, chopped (for garnish)',
+        'Sour cream (for serving)',
+        '2 tbsp oil'
+    ),
+    3,
+    90,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Vegetables',
+            'description', 'Peel and grate the beets and carrots. Finely chop the onion and mince the garlic. Peel and dice the potatoes. Shred the cabbage.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Cook the Vegetables',
+            'description', 'In a large pot, heat oil over medium heat. Add the chopped onion and minced garlic, and sauté until they are soft and fragrant. Add the grated beets and carrots, and cook for 5-7 minutes until they are slightly tender.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Add Broth and Potatoes',
+            'description', 'Pour in the beef or vegetable broth. Add the diced potatoes and shredded cabbage. Stir in the tomato paste and vinegar. Bring the soup to a boil, then reduce the heat and simmer for 30-40 minutes, or until the vegetables are tender.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Season the Soup',
+            'description', 'Season the Borscht with salt and pepper to taste. Adjust the seasoning as needed. Let the soup simmer for an additional 10-15 minutes to allow the flavors to meld together.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Serve',
+            'description', 'Ladle the Borscht into bowls and garnish with freshly chopped dill. Serve hot with a dollop of sour cream on top. Enjoy this vibrant and hearty Eastern European soup.'
+        )
+    )
+),
+
+-- Beef Stroganoff
+(
+    'Beef Stroganoff', 
+    5,
+    'Beef Stroganoff is a classic Russian dish known for its rich, creamy sauce and tender strips of beef. This comforting dish is made with sautéed beef, mushrooms, and onions, all simmered in a creamy sauce made from sour cream and beef broth. The dish is typically flavored with mustard, Worcestershire sauce, and a touch of paprika, adding depth and complexity to the sauce. Beef Stroganoff is traditionally served over egg noodles or rice, making it a hearty and satisfying meal. The key to a perfect Beef Stroganoff lies in the quality of the beef and the careful preparation of the sauce, ensuring that it is both rich and flavorful. This dish is a true representation of Russian cuisine, showcasing the use of simple, high-quality ingredients to create a delicious and comforting meal that is loved by many.',
+    1,  
+    JSON_ARRAY(
+        '500g beef sirloin, thinly sliced',
+        '200g mushrooms, sliced',
+        '1 onion, finely chopped',
+        '2 cloves garlic, minced',
+        '1 cup sour cream',
+        '1 cup beef broth',
+        '1 tbsp Dijon mustard',
+        '1 tbsp Worcestershire sauce',
+        '1 tsp paprika',
+        'Salt and pepper to taste',
+        '2 tbsp butter',
+        '2 tbsp olive oil',
+        'Fresh parsley, chopped (for garnish)',
+        'Egg noodles or rice (for serving)'
+    ),
+    3,
+    45,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Ingredients',
+            'description', 'Thinly slice the beef sirloin. Slice the mushrooms and finely chop the onion. Mince the garlic.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Cook the Beef',
+            'description', 'In a large skillet, heat olive oil and butter over medium-high heat. Add the sliced beef and cook until browned on all sides. Remove the beef from the skillet and set aside.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Cook the Vegetables',
+            'description', 'In the same skillet, add the chopped onion and minced garlic. Sauté until they are soft and fragrant. Add the sliced mushrooms and cook until they are tender and browned.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Make the Sauce',
+            'description', 'Reduce the heat to medium. Stir in the beef broth, Dijon mustard, Worcestershire sauce, and paprika. Simmer for 5 minutes to allow the flavors to meld together. Stir in the sour cream and mix well until the sauce is creamy and smooth.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Combine Beef and Sauce',
+            'description', 'Return the cooked beef to the skillet and stir to combine. Let it simmer for an additional 5-10 minutes, or until the beef is heated through and the sauce has thickened. Season with salt and pepper to taste.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Serve the Beef Stroganoff hot over egg noodles or rice. Garnish with freshly chopped parsley. Enjoy this rich and creamy Russian classic.'
+        )
+    )
+),
+
+-- Pelmeni
+(
+    'Pelmeni', 
+    5,
+    'Pelmeni are traditional Russian dumplings that are filled with a savory mixture of meat, typically a combination of beef, pork, and sometimes lamb. These dumplings are known for their thin dough and juicy filling, making them a beloved comfort food in Russia and other Eastern European countries. The dough is made from flour, water, and eggs, and the filling is seasoned with onions, garlic, and spices. Pelmeni are usually boiled until they float to the surface and are then served with sour cream or melted butter. They can also be fried after boiling for a crispy exterior. Pelmeni are often enjoyed as a main course or a hearty appetizer, and they are a staple in Russian cuisine. The key to perfect Pelmeni lies in the thinness of the dough and the balance of flavors in the filling, resulting in a delicious and satisfying dumpling that is loved by many.',
+    1,  
+    JSON_ARRAY(
+        '2 cups flour',
+        '1/2 cup water',
+        '1 large egg',
+        '1/2 tsp salt',
+        '250g ground beef',
+        '250g ground pork',
+        '1 onion, finely chopped',
+        '2 cloves garlic, minced',
+        'Salt and pepper to taste',
+        'Sour cream or melted butter (for serving)'
+    ),
+    3,
+    90,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Dough',
+            'description', 'In a large bowl, combine flour, water, egg, and salt. Mix until a dough forms. Knead the dough on a floured surface until it is smooth and elastic. Cover and let it rest for 30 minutes.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Prepare the Filling',
+            'description', 'In a bowl, combine ground beef, ground pork, chopped onion, minced garlic, salt, and pepper. Mix well until all ingredients are evenly combined.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Roll out the Dough',
+            'description', 'Divide the dough into small portions. Roll each portion out on a floured surface until it is very thin. Cut out circles using a round cutter or a glass.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Fill the Dumplings',
+            'description', 'Place a small spoonful of filling in the center of each dough circle. Fold the dough over the filling and pinch the edges to seal. You can crimp the edges for a decorative look.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Cook the Pelmeni',
+            'description', 'Bring a large pot of salted water to a boil. Add the Pelmeni and cook until they float to the surface, about 5-7 minutes. Remove with a slotted spoon and drain.'
+        ),
+        JSON_OBJECT(
+            'step', 6,
+            'title', 'Serve',
+            'description', 'Serve the Pelmeni hot with sour cream or melted butter. Enjoy these delicious Russian dumplings as a comforting meal or appetizer.'
+        )
+    )
+),
+
+-- Olivier Salad
+(
+    'Olivier Salad', 
+    5,
+    'Olivier Salad, also known as Russian Salad, is a popular Russian dish that is often enjoyed during celebrations and holidays. This hearty and flavorful salad is made with a variety of ingredients, including boiled potatoes, carrots, peas, pickles, eggs, and either chicken or ham. The salad is typically dressed with mayonnaise, giving it a creamy and satisfying texture. Olivier Salad is known for its combination of sweet, salty, and tangy flavors, making it a beloved dish in Russian cuisine. The salad is often garnished with fresh herbs and
+
+ served chilled. It is a versatile dish that can be enjoyed as a side dish or a main course. The key to a perfect Olivier Salad lies in the balance of ingredients and the quality of the mayonnaise, resulting in a delicious and comforting salad that is loved by many.',
+    1,  
+    JSON_ARRAY(
+        '4 large potatoes, boiled and diced',
+        '2 carrots, boiled and diced',
+        '1 cup peas, boiled',
+        '4 pickles, diced',
+        '4 hard-boiled eggs, diced',
+        '1 cup cooked chicken or ham, diced',
+        '1 cup mayonnaise',
+        'Salt and pepper to taste',
+        'Fresh dill or parsley (for garnish)'
+    ),
+    2,
+    30,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Vegetables',
+            'description', 'Boil the potatoes, carrots, and peas until tender. Allow them to cool, then dice the potatoes and carrots. Dice the pickles and hard-boiled eggs as well.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Combine the Ingredients',
+            'description', 'In a large bowl, combine the diced potatoes, carrots, peas, pickles, eggs, and diced chicken or ham. Mix well to combine.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Add the Mayonnaise',
+            'description', 'Add the mayonnaise to the bowl and mix until all ingredients are evenly coated. Season with salt and pepper to taste.'
+        ),
+        JSON_OBJECT(
+            'step', 4,
+            'title', 'Chill the Salad',
+            'description', 'Cover the salad and refrigerate for at least 1 hour before serving. This allows the flavors to meld together and the salad to chill.'
+        ),
+        JSON_OBJECT(
+            'step', 5,
+            'title', 'Serve',
+            'description', 'Garnish the Olivier Salad with fresh dill or parsley before serving. Enjoy this classic Russian salad as a delicious and comforting dish.'
+        )
+    )
+),
+
+-- Blini
+(
+    'Blini', 
+    5,
+    'Blini are traditional Russian pancakes that are enjoyed as a versatile and delicious dish. These thin and tender pancakes are made from a simple batter of flour, milk, eggs, and yeast, which gives them a light and airy texture. Blini can be served with a variety of toppings, both sweet and savory, making them a popular choice for breakfast, brunch, or even as an appetizer. Traditional toppings include sour cream, caviar, smoked salmon, honey, and fresh berries. Blini are often associated with celebrations and holidays, particularly during Maslenitsa, a Russian festival that marks the end of winter. The key to perfect Blini lies in the consistency of the batter and the even cooking, resulting in a stack of golden and delicious pancakes that are sure to please. Whether enjoyed with sweet or savory toppings, Blini are a beloved part of Russian cuisine and a delightful treat for any occasion.',
+    2,  
+    JSON_ARRAY(
+        '2 cups flour',
+        '2 cups milk, warmed',
+        '3 large eggs',
+        '1 tbsp sugar',
+        '1 tsp salt',
+        '1 tbsp yeast',
+        '2 tbsp butter, melted',
+        'Oil for frying',
+        'Sour cream, caviar, smoked salmon, honey, fresh berries (for serving)'
+    ),
+    2,
+    90,
+    JSON_ARRAY(
+        JSON_OBJECT(
+            'step', 1,
+            'title', 'Prepare the Batter',
+            'description', 'In a large bowl, combine the warm milk and yeast. Let it sit for 5 minutes until frothy. Add the flour, eggs, sugar, salt, and melted butter. Mix until a smooth batter forms. Cover and let it rest for 1 hour until it doubles in volume.'
+        ),
+        JSON_OBJECT(
+            'step', 2,
+            'title', 'Cook the Blini',
+            'description', 'Heat a non-stick skillet or griddle over medium heat and lightly grease with oil. Pour a small ladleful of batter onto the skillet and spread it out into a thin circle. Cook for 1-2 minutes until bubbles form on the surface, then flip and cook for another 1-2 minutes until golden brown. Repeat with the remaining batter.'
+        ),
+        JSON_OBJECT(
+            'step', 3,
+            'title', 'Serve',
+            'description', 'Serve the Blini warm with your choice of toppings, such as sour cream, caviar, smoked salmon, honey, or fresh berries. Enjoy these versatile and delicious Russian pancakes.'
+        )
+    )
+)
+
+
+
+
+
+
+
+
+
+
+INSERT INTO `recipes` VALUES 
+(183,'Mamaliga',6,'Mamaliga is a traditional Moldovan dish made from cornmeal, similar to polenta. This simple and hearty dish is a staple in Moldovan cuisine and is often enjoyed as a side dish or main course. Mamaliga is made by cooking cornmeal in water or milk until it thickens into a creamy and smooth consistency. It is often flavoured with salt and sometimes butter or cheese for added richness. Mamaliga can be served in various ways, including with sour cream, cheese, or alongside meat dishes such as sausages or stews. It can also be cooled and sliced, then grilled or fried for a different texture. Mamaliga is a comforting and versatile dish that is loved for its simplicity and ability to complement a wide range of flavours. The key to perfect Mamaliga lies in the constant stirring during cooking, which ensures a smooth and creamy texture. This dish is a true representation of Moldovan comfort food and is enjoyed by many.',2,'[\"2 cups cornmeal\", \"6 cups water or milk\", \"1 tsp salt\", \"2 tbsp butter (optional)\", \"Grated cheese (for serving)\", \"Sour cream (for serving)\"]',2,30,NULL,'2024-06-08 13:45:48',0.00,'[{\"step\": 1, \"title\": \"Boil the Liquid\", \"description\": \"In a large pot, bring water or milk to a boil. Add salt and reduce the heat to medium.\"}, {\"step\": 2, \"title\": \"Cook the Cornmeal\", \"description\": \"Gradually add the cornmeal to the boiling liquid, stirring constantly to prevent lumps. Continue to stir and cook for about 20-30 minutes until the mixture thickens and pulls away from the sides of the pot.\"}, {\"step\": 3, \"title\": \"Add Butter (Optional)\", \"description\": \"If desired, stir in butter for added richness. Mix well until the butter is fully incorporated.\"}, {\"step\": 4, \"title\": \"Serve\", \"description\": \"Spoon the Mamăligă onto plates and serve hot with grated cheese and sour cream. Enjoy this simple and comforting Romanian dish.\"}]',0),
+(184,'Sarmale',6,'Sarmale is a traditional Moldovan dish consisting of cabbage rolls stuffed with a flavourful mixture of ground meat, rice, and spices. These rolls are typically made with pickled cabbage leaves, which add a tangy flavour to the dish. The filling is made with ground pork, beef, or a combination of both, mixed with rice, onions, garlic, and herbs such as dill and thyme. The cabbage rolls are then simmered in a tomato sauce until they are tender and infused with the rich flavours of the filling and sauce. Sarmale is often served with sour cream and polenta (mamaliga), making it a hearty and satisfying meal. This dish is commonly enjoyed during holidays and special occasions in Moldova, and it is loved for its comforting and delicious flavours. The key to perfect Sarmale lies in the balance of flavours in the filling and the slow cooking process that allows the rolls to become tender and flavourful. This dish is a true representation of Moldovan cuisine and is enjoyed by many.',1,'[\"1 large head of pickled cabbage\", \"500g ground pork\", \"500g ground beef\", \"1 cup rice\", \"2 onions, finely chopped\", \"4 cloves garlic, minced\", \"2 tbsp fresh dill, chopped\", \"1 tsp dried thyme\", \"Salt and pepper to taste\", \"1 cup tomato paste\", \"4 cups water or broth\", \"Sour cream (for serving)\"]',4,120,NULL,'2024-06-08 13:45:48',0.00,'[{\"step\": 1, \"title\": \"Prepare the Cabbage Leaves\", \"description\": \"Carefully separate the cabbage leaves and trim the thick veins. Rinse the leaves if they are too salty.\"}, {\"step\": 2, \"title\": \"Prepare the Filling\", \"description\": \"In a large bowl, combine the ground pork, ground beef, rice, chopped onions, minced garlic, dill, thyme, salt, and pepper. Mix well until all ingredients are evenly combined.\"}, {\"step\": 3, \"title\": \"Stuff the Cabbage Leaves\", \"description\": \"Place a small amount of filling in the center of each cabbage leaf. Fold the sides over the filling and roll tightly to form a neat roll. Repeat with the remaining leaves and filling.\"}, {\"step\": 4, \"title\": \"Cook the Sarmale\", \"description\": \"In a large pot, layer some cabbage leaves on the bottom. Arrange the cabbage rolls in the pot, seam side down. Pour the tomato paste and water or broth over the rolls. Cover and simmer on low heat for about 2 hours, or until the rolls are tender and the flavors are well developed.\"}, {\"step\": 5, \"title\": \"Serve\", \"description\": \"Serve the Sarmale hot with sour cream and polenta (mamăligă). Enjoy this comforting and flavorful Romanian dish.\"}]',0),
+(185,'Placinta',6,'Placinta is a traditional Moldovan pastry that can be either savoury or sweet. This versatile pastry is made from a simple dough that is filled with various ingredients such as cheese, potatoes, apples, or pumpkin. The dough is rolled out thin and filled with the chosen ingredients, then folded and baked until golden brown and crispy. Placinta is often enjoyed as a snack, breakfast, or dessert, depending on the filling. The savoury versions are typically filled with a mixture of cheese and herbs, while the sweet versions are filled with fruit and sometimes flavoured with cinnamon and sugar. Placinta is a beloved part of Moldovan cuisine and is enjoyed during holidays and special occasions. The key to perfect Placinta lies in the thinness of the dough and the quality of the filling, resulting in a delicious and satisfying pastry that is loved by many.',2,'[\"2 cups flour\", \"1 cup water\", \"1 tsp salt\", \"2 tbsp oil\", \"2 cups cheese, mashed potatoes, apples, or pumpkin (for filling)\", \"Sugar and cinnamon (for sweet filling)\", \"Oil or butter for brushing\"]',3,60,NULL,'2024-06-08 13:45:48',0.00,'[{\"step\": 1, \"title\": \"Prepare the Dough\", \"description\": \"In a large bowl, combine flour, water, salt, and oil. Mix until a dough forms. Knead the dough on a floured surface until it is smooth and elastic. Cover and let it rest for 30 minutes.\"}, {\"step\": 2, \"title\": \"Prepare the Filling\", \"description\": \"If using a savory filling, prepare the cheese or mashed potatoes. If using a sweet filling, prepare the apples or pumpkin and mix with sugar and cinnamon.\"}, {\"step\": 3, \"title\": \"Roll out the Dough\", \"description\": \"Divide the dough into small portions. Roll each portion out on a floured surface until it is very thin.\"}, {\"step\": 4, \"title\": \"Fill the Plăcintă\", \"description\": \"Place a portion of filling in the center of each rolled-out dough. Fold the dough over the filling and seal the edges. Brush with oil or butter.\"}, {\"step\": 5, \"title\": \"Bake the Plăcintă\", \"description\": \"Preheat your oven to 180°C (350°F). Arrange the filled Plăcintă on a baking sheet and bake for 20-25 minutes, or until golden brown and crispy.\"}, {\"step\": 6, \"title\": \"Serve\", \"description\": \"Serve the Plăcintă warm or at room temperature. Enjoy this delicious and versatile Romanian pastry.\"}]',0),
+(186,'Zeama',6,'Zeama is a traditional Moldovan chicken soup that is known for its rich and comforting flavours. This soup is made with chicken, vegetables, and herbs, and is often flavoured with a touch of vinegar or lemon juice for a tangy taste. The chicken is first boiled to create a flavourful broth, then the vegetables such as carrots, potatoes, and onions are added. Fresh herbs like dill and parsley are used to enhance the flavour of the soup. Zeama is often served with a dollop of sour cream and a sprinkle of fresh herbs, making it a comforting and satisfying dish. This soup is a staple in Moldovan cuisine and is often enjoyed during cold weather or as a remedy for colds and flu. The key to a perfect Zeama lies in the quality of the chicken and the freshness of the herbs, resulting in a rich and flavourful soup that is loved by many.',1,'[\"1 whole chicken, cut into pieces\", \"4 cups water\", \"2 carrots, diced\", \"2 potatoes, diced\", \"1 onion, chopped\", \"2 cloves garlic, minced\", \"1 cup sour cream\", \"2 tbsp vinegar or lemon juice\", \"Fresh dill and parsley, chopped\", \"Salt and pepper to taste\", \"2 tbsp oil\"]',3,90,NULL,'2024-06-08 13:45:48',0.00,'[{\"step\": 1, \"title\": \"Prepare the Chicken\", \"description\": \"In a large pot, bring water to a boil. Add the chicken pieces and simmer for 30 minutes, skimming off any foam that rises to the surface.\"}, {\"step\": 2, \"title\": \"Cook the Vegetables\", \"description\": \"Add the diced carrots, potatoes, chopped onion, and minced garlic to the pot. Cook for another 20-30 minutes until the vegetables are tender.\"}, {\"step\": 3, \"title\": \"Season the Soup\", \"description\": \"Season the soup with salt, pepper, and vinegar or lemon juice. Stir in the chopped dill and parsley. Let the soup simmer for an additional 10 minutes to allow the flavors to meld together.\"}, {\"step\": 4, \"title\": \"Serve\", \"description\": \"Serve the Zeamă hot with a dollop of sour cream and a sprinkle of fresh herbs. Enjoy this comforting and flavorful Moldovan chicken soup.\"}]',0),
+(187,'Coltunasi',6,'Coltunasi are traditional Moldovan dumplings that can be filled with either sweet or savory ingredients. These dumplings are made from a simple dough of flour, eggs, and water, which is rolled out and filled with a variety of fillings such as cheese, potatoes, meat, or fruit. The dough is folded over the filling and sealed, then boiled until tender. Sweet versions of Coltunasi are often filled with fruit preserves or sweet cheese and are served with a sprinkle of sugar or a dollop of sour cream. Savoury versions are filled with ingredients like cheese or meat and are served with melted butter or sour cream. Coltunasi are a beloved part of Moldovan cuisine and are enjoyed during holidays and special occasions. The key to perfect Coltunasi lies in the thinness of the dough and the quality of the filling, resulting in tender and delicious dumplings that are loved by many.',2,'[\"2 cups flour\", \"1 large egg\", \"1/2 cup water\", \"1/2 tsp salt\", \"2 cups cheese, potatoes, meat, or fruit preserves (for filling)\", \"Sugar or sour cream (for serving)\", \"Butter (for serving)\"]',3,60,NULL,'2024-06-08 13:45:48',5.00,'[{\"step\": 1, \"title\": \"Prepare the Dough\", \"description\": \"In a large bowl, combine flour, egg, water, and salt. Mix until a dough forms. Knead the dough on a floured surface until it is smooth and elastic. Cover and let it rest for 30 minutes.\"}, {\"step\": 2, \"title\": \"Prepare the Filling\", \"description\": \"Prepare the filling of your choice. If using cheese or potatoes, season to taste. If using fruit preserves, ensure they are not too runny.\"}, {\"step\": 3, \"title\": \"Roll out the Dough\", \"description\": \"Divide the dough into small portions. Roll each portion out on a floured surface until it is very thin. Cut out circles using a round cutter or a glass.\"}, {\"step\": 4, \"title\": \"Fill the Dumplings\", \"description\": \"Place a small spoonful of filling in the center of each dough circle. Fold the dough over the filling and pinch the edges to seal. You can crimp the edges for a decorative look.\"}, {\"step\": 5, \"title\": \"Cook the Colțunași\", \"description\": \"Bring a large pot of salted water to a boil. Add the Colțunași and cook until they float to the surface, about 5-7 minutes. Remove with a slotted spoon and drain.\"}, {\"step\": 6, \"title\": \"Serve\", \"description\": \"Serve the Colțunași hot with butter and sour cream for savory fillings, or with a sprinkle of sugar and sour cream for sweet fillings. Enjoy these delicious Romanian dumplings as a comforting meal or dessert.\"}]',0),
+(188,'Friptura',6,'Friptura is a traditional Moldovan dish that consists of roasted or grilled meat, typically pork, beef, or lamb. This dish is known for its rich and savoury flavours, and it is often served with a variety of side dishes such as potatoes, polenta, or vegetables. The meat is usually marinated with garlic, herbs, and spices before being roasted or grilled to perfection. Friptura is a popular dish during holidays and special occasions, and it is loved for its simplicity and deliciousness. The key to a perfect Friptura lies in the quality of the meat and the marinade, as well as the cooking method, which ensures the meat is tender and flavourful. This dish is a true representation of Moldovan cuisine, showcasing the use of simple ingredients to create a hearty and satisfying meal that is enjoyed by many.',1,'[\"1 kg pork, beef, or lamb\", \"4 cloves garlic, minced\", \"2 tbsp olive oil\", \"2 tbsp fresh rosemary, chopped\", \"1 tbsp paprika\", \"Salt and pepper to taste\", \"Potatoes, polenta, or vegetables (for serving)\"]',3,90,NULL,'2024-06-08 13:45:48',0.00,'[{\"step\": 1, \"title\": \"Marinate the Meat\", \"description\": \"In a bowl, combine minced garlic, olive oil, chopped rosemary, paprika, salt, and pepper. Rub the mixture all over the meat. Cover and refrigerate for at least 1 hour, preferably overnight.\"}, {\"step\": 2, \"title\": \"Prepare for Cooking\", \"description\": \"Preheat your oven to 200°C (400°F) if roasting, or preheat your grill if grilling. Remove the meat from the refrigerator and let it come to room temperature.\"}, {\"step\": 3, \"title\": \"Roast or Grill the Meat\", \"description\": \"If roasting, place the meat on a roasting pan and roast in the preheated oven for 45-60 minutes, or until the meat reaches your desired level of doneness. If grilling, place the meat on the grill and cook, turning occasionally, until the meat is cooked through and has a nice char on the outside.\"}, {\"step\": 4, \"title\": \"Rest the Meat\", \"description\": \"Remove the meat from the oven or grill and let it rest for 10-15 minutes before slicing. This allows the juices to redistribute and the meat to become more tender.\"}, {\"step\": 5, \"title\": \"Serve\", \"description\": \"Slice the Friptura and serve hot with your choice of side dishes such as potatoes, polenta, or vegetables. Enjoy this hearty and flavorful Romanian dish.\"}]',0);
