@@ -360,6 +360,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Setting the position of the notification to the middle of the screen
         const messsageNotification = document.getElementById('messsageNotification');
 
+
         // Calculate the center position
         const left = (window.innerWidth / 2) - (messsageNotification.offsetWidth / 2);
         const top = (window.innerHeight / 2) - (messsageNotification.offsetHeight / 2);
@@ -370,7 +371,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         messsageNotification.style.top = top + 'px';
 
 
-        // Changing adding CSS class to notification
+        // Adding CSS class to notification
         messsageNotification.classList.add('show');
 
 

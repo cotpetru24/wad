@@ -347,7 +347,6 @@ document.getElementById('closeEditPopup')?.addEventListener('click', () => {
     document.getElementById('overlay')?.classList.remove('active');
 });
 
-
 document.getElementById('closeEditUserPopup')?.addEventListener('click', () => {
     document.getElementById('editUserPopup')?.classList.remove('active');
     document.getElementById('overlay')?.classList.remove('active');
@@ -1103,33 +1102,7 @@ function resetAddRecipeForm() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Filter users function + event listener
+// Function to filter users based on users type / role
 async function filterUsers() {
     try {
         const userRole = document.getElementById('userRoleFilter').value;
@@ -1137,9 +1110,17 @@ async function filterUsers() {
 
 
         if (userRole && usersList) {
+
+
+            // Clear the current rows    
             usersList.innerHTML = "";
+
+
+            // Calling filterUsers() to retrieve filtered results
             const filterResults = await apiCalls.filterUsers(userRole);
 
+
+            // Displaying No Users found if there are no filter results
             if (filterResults.length === 0) {
                 const noUsersRow = document.createElement('tr');
                 noUsersRow.classList.add('noResultsRow');
@@ -1150,10 +1131,15 @@ async function filterUsers() {
                 noUsersCell.textContent = 'No Users found';
                 noUsersRow.appendChild(noUsersCell);
                 usersList.appendChild(noUsersRow);
-            } else {
+            } 
+            
+            
+            //Appending the results to users list 
+            else {
                 filterResults.forEach(result => addUserRow(result));
             }
-        } else if (!userRole) {
+        }         
+        else if (!userRole) {
             await listUsers();
         }
         else {
@@ -1163,33 +1149,39 @@ async function filterUsers() {
         console.error("Error fetching users:", error);
     }
 }
+
+
+// Event listeners for filter users button
 document.getElementById('adminUsersFilter')?.addEventListener('click', () => {
     filterUsers();
 });
 
 
-
-
-
-// list all users and clear search input
+// Event listener for show all button - users tab
 const showAllUsers = document.getElementById("showAllUsers");
 if (showAllUsers) {
     showAllUsers.addEventListener('click', async () => {
         const usersSearchInput = document.getElementById("userSearchBox");
         const usersRoleFilter = document.getElementById("userRoleFilter");
+        
+        
+        // Resetting filter to default value
         usersRoleFilter.value = ""; // Clear the input box
+        
+        
+        // Clearing search input
         if (usersSearchInput) {
             usersSearchInput.value = ""; // Clear the input box
         }
+
+
+        //Listing all users
         listUsers();
     });
 }
 
 
-
-
-
-
+// Event listener for users search button
 document.addEventListener("DOMContentLoaded", () => {
     const searchButton = document.getElementById('adminUsersSearch');
     const searchInput = document.getElementById('userSearchBox');
@@ -1197,6 +1189,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (searchButton) {
         searchButton.addEventListener('click', () => {
             const searchCriteria = searchInput.value;
+
+
+            //Calling handleUserSearch() to search users and list the results
             handleUserSearch(searchCriteria);
         });
     }
@@ -1205,6 +1200,9 @@ document.addEventListener("DOMContentLoaded", () => {
         searchInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 const searchCriteria = searchInput.value;
+
+
+                //Calling handleUserSearch() to search users and list the results
                 handleUserSearch(searchCriteria);
             }
         });
@@ -1212,20 +1210,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
-
-
-// Function to handle the search
+// Function to handle user search functionality
 async function handleUserSearch(searchCriteria) {
-
     try {
         const usersList = document.getElementById("usersList");
+
+
+        // Calling searchUsers() to get search results
         const users = await apiCalls.searchUsers(searchCriteria);
-
-
-
-
         if (users && usersList) {
             usersList.innerHTML = "";
             if (users.length === 0) {
@@ -1234,11 +1226,15 @@ async function handleUserSearch(searchCriteria) {
                 const noUsersCell = document.createElement('td');
                 noUsersCell.classList.add('noResultsFound');
 
-                noUsersCell.colSpan = 4; // Adjust based on the number of columns in your table
+                noUsersCell.colSpan = 4;
                 noUsersCell.textContent = 'No Users found';
                 noUsersRow.appendChild(noUsersCell);
                 usersList.appendChild(noUsersRow);
-            } else {
+            } 
+            
+            
+            // Calling addUserRow() to display the results
+            else {
                 users.forEach(user => addUserRow(user));
             }
         } else if (!users) {
@@ -1250,10 +1246,7 @@ async function handleUserSearch(searchCriteria) {
     } catch (error) {
         console.error("Error fetching users:", error);
     }
-
 }
-
-
 
 
 // Function to edit user
@@ -1261,88 +1254,62 @@ function editUser(user) {
     const editPopup = document.getElementById('editUserPopup');
     const overlay = document.getElementById('overlay');
 
+
+    // Filling the edit user form with user data stored in DB
     document.getElementById('editUserId').value = user.user_id;
     document.getElementById('editUserName').value = user.user_name;
     document.getElementById('editUserSurname').value = user.user_surname;
-
     document.getElementById('editUserEmail').value = user.user_email;
     document.getElementById('editUserPassword').value = "";
     document.getElementById('editUserRole').value = user.user_type;
 
+
+
+    // Changing visibility for overlay and edit user popup
     editPopup.classList.add('active');
     overlay.classList.add('active');
 }
 
 
-
-
-// // Save changes button event listener for users
-// document.getElementById('saveUserChangesButton').addEventListener('click', updateUser);
-
-
-
-
-
-
-
-// Save changes button event listener
+// Event listener for Save changes button 
 document.getElementById('saveUserChangesButton').addEventListener('click', () => {
+
+
+    // Notification to prompt user that user details have been saved / updated
+    // Setting the position of the notification to the middle of the screen
     const changesSavedNotification = document.getElementById('changesSavedNotification');
+
 
     // Calculate the center position
     const left = (window.innerWidth / 2) - (changesSavedNotification.offsetWidth / 2);
     const top = (window.innerHeight / 2) - (changesSavedNotification.offsetHeight / 2);
 
+
     // Set the position
     changesSavedNotification.style.left = left + 'px';
     changesSavedNotification.style.top = top + 'px';
 
+
+    // Adding CSS class to notification
     changesSavedNotification.classList.add('show');
 
+
+    // Notification timeout
     setTimeout(() => {
         changesSavedNotification.classList.remove('show');
     }, 1000); // 1 second
 
-    // Call updateRecipe function
+
+    // Call updateUser() to store user's details
     updateUser();
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Function to amend/update user details
 async function updateUser() {
+
+
+    // Getting field values / user details
     const userId = document.getElementById('editUserId').value;
     const userName = document.getElementById('editUserName').value;
     const userSurname = document.getElementById('editUserSurname').value;
@@ -1351,6 +1318,7 @@ async function updateUser() {
     const userRole = document.getElementById('editUserRole').value;
 
 
+    // Storing user data into JSON 
     const jsonData = {
         function: 'editUser',
         userId: userId,
@@ -1362,22 +1330,37 @@ async function updateUser() {
     };
 
     try {
+
+
+        // Calling editUser() and passing user data to update the user in DB
         await apiCalls.editUser(jsonData);
+
+
+        // Closing Edit User popup and removing overlay
         document.getElementById('editUserPopup').classList.remove('active');
         document.getElementById('overlay').classList.remove('active');
-        listUsers(); // Refresh the user list
+
+
+        // Calling listUsers() to refresh the users list
+        listUsers();
     } catch (error) {
         console.error('Error updating user:', error);
     }
 }
 
 
+// Function to append a row to adminPage.php users table
 function addUserRow(user) {
     const userList = document.getElementById('usersList');
-    const row = document.createElement('tr');
-    row.id = user.user_id;
 
-    // Create a unique ID for the button and image
+
+    // Creating table row for user
+    const row = document.createElement('tr');
+
+
+    // Assigning user_Id to the row 
+    // so that later it can be used to edit or delete the user
+    row.id = user.user_id;
 
     row.innerHTML = `
         <td>${user.user_name} ${user.user_surname}</td>
@@ -1389,32 +1372,39 @@ function addUserRow(user) {
         </td>
     `;
 
-    // Append the new row to the messages list
+
+    // Appending the new row to the messages list
     userList.appendChild(row);
 
 
-
-
-    // Set event handlers for the buttons
-
+    // Event listeners for Edit and Delete buttons
     row.querySelector('.delete-btn').addEventListener('click', () => {
         confirmAction('Delete User?', 'deleteUser', user.user_id, () => {
-            listUsers();  // Refresh the users list after deleting the user
+
+            //Refresh users list after deleting user
+            listUsers();
         });
     });
     row.querySelector('.edit-btn').addEventListener('click', () => editUser(user));
-
 }
 
 
-
-
+// Function to list users on adminPage.php users table
 async function listUsers() {
     try {
         const usersList = document.getElementById("usersList");
         if (usersList) {
+
+
+            // Clear the current rows    
             usersList.innerHTML = "";
+
+
+            // Calling getUsersList() to retrieve users from DB 
             const users = await apiCalls.getUsersList();
+
+
+            // Calling addUserRow() to append each user
             users.forEach(user => addUserRow(user));
         } else {
             console.error("Element with ID 'usersList' not found.");
@@ -1425,7 +1415,7 @@ async function listUsers() {
 }
 
 
-// Listing messages in the messages tab/admin page
+// Calling listUsers() when user selects the users tab
 const usersTab = document.getElementById("usersTab");
 if (usersTab) {
     usersTab.addEventListener('click', async () => {
@@ -1434,14 +1424,12 @@ if (usersTab) {
 }
 
 
-
-// Calling getRecipes() and tabsController() once all the necessary DOM elements 
-// Have been created to listing all the recommended recipes - Recomended Recipes Tab
-// And toggling tabs CSS classes 
+// Calling addRecipeRows() and tabsController() once all the necessary DOM elements 
+// Have been created to listing all the recipes - Recipes Tab
+// And calling tabsController() to toggle tabs CSS classes 
 if (window.location.pathname.includes('adminPage.php')) {
     addRecipeRows();
     commonController.tabsController();
-
 }
 
 
